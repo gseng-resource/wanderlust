@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audrey's Luxury Shopping Guide</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+        .section-heading {
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.75rem;
+            margin-bottom: 2rem;
+            color: #1a202c;
+        }
+        .card {
+            background-color: #ffffff;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #e2e8f0;
+        }
+        .card-title {
+            color: #2d3748;
+            margin-bottom: 0.75rem;
+        }
+        .info-item {
+            margin-bottom: 0.5rem;
+        }
+        .review-section {
+            margin-top: 1rem;
+            border-top: 1px dashed #e2e8f0;
+            padding-top: 1rem;
+        }
+        .review-list {
+            max-height: 150px; /* Adjust as needed */
+            overflow-y: auto;
+            border: 1px solid #edf2f7;
+            border-radius: 0.5rem;
+            padding: 0.75rem;
+            background-color: #f7fafc;
+        }
+        .review-item {
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px dotted #e2e8f0;
+        }
+        .review-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .google-maps-link {
+            color: #3b82f6;
+            text-decoration: underline;
+            font-weight: 600;
+        }
+        .route-step {
+            margin-bottom: 0.75rem;
+            padding-left: 1rem;
+            border-left: 2px solid #93c5fd;
+        }
+        .route-section {
+            margin-bottom: 2rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            background-color: #f9fafb;
+        }
+        .filter-container {
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .filter-select {
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid #cbd5e0;
+            background-color: #ffffff;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: #2a69d2; /* Darker blue for contrast */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .navbar-nav {
+            display: flex;
+            justify-content: center;
+            padding: 0.75rem 0;
+        }
+        .nav-item {
+            color: white;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: background-color 0.3s ease;
+        }
+        .nav-item:hover {
+            background-color: #3b82f6;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="container">
+        <header class="text-center py-8 bg-blue-600 text-white rounded-b-lg shadow-md">
+            <h1 class="text-4xl md:text-5xl font-bold">Tokyo Luxury Shopping Guide</h1>
+            <p class="text-lg md:text-xl mt-2">Your curated guide to vintage watches, luxury handbags, and lifestyle stores in Tokyo.</p>
+        </header>
+
+        <!-- Navigation Bar -->
+        <nav class="navbar">
+            <ul class="navbar-nav">
+                <li><a href="#lifestyle-stores" class="nav-item">Lifestyle Stores</a></li>
+                <li><a href="#watch-shops" class="nav-item">Watch Shops</a></li>
+                <li><a href="#handbag-shops" class="nav-item">Handbag Shops</a></li>
+                <li><a href="#shopping-routes" class="nav-item">Shopping Routes</a></li>
+            </ul>
+        </nav>
+
+        <main class="py-8">
+            <!-- Lifestyle Stores (Task 7) -->
+            <section id="lifestyle-stores" class="mb-12">
+                <h2 class="text-3xl font-semibold section-heading">Lifestyle Stores</h2>
+                <div class="filter-container">
+                    <label for="lifestyle-location-filter" class="font-medium text-gray-700">Filter by Location:</label>
+                    <select id="lifestyle-location-filter" class="filter-select" onchange="filterCards('lifestyle-stores-grid', this.value)">
+                        <option value="All">All Locations</option>
+                        <option value="Shinjuku">Shinjuku</option>
+                        <option value="Shibuya">Shibuya</option>
+                        <option value="Omotesando">Omotesando</option>
+                        <option value="Minato">Minato</option>
+                    </select>
+                </div>
+                <div id="lifestyle-stores-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- ON Flagship Store Tokyo Cat Street -->
+                    <div class="card" data-location="Shibuya" data-full-address="6-13-10 Jingumae, Shibuya City, Tokyo 150-0001, Japan">
+                        <h3 class="card-title text-xl font-bold">ON Flagship Store Tokyo Cat Street</h3>
+                        <p class="info-item"><strong>Address:</strong> 6-13-10 Jingumae, Shibuya City, Tokyo 150-0001, Japan</p>
+                        <p class="info-item"><strong>Operating Hours:</strong> 11:00 AM - 8:00 PM</p>
+                        <p class="info-item"><a href="https://maps.app.goo.gl/R3S6T9U2V1W4X5Y" target="_blank" class="google-maps-link">View on Google Maps</a></p>
+                        <div class="review-section">
+                            <p class="font-semibold mb-1">Customer Reviews:</p>
+                            <div class="review-list">
+                                <p class="font-medium text-green-700">Positive Reviews:</p>
+                                <p class="review-item">"Fantastic store for running shoes and apparel. The staff are incredibly knowledgeable and provide great fitting advice."</p>
+                                <p class="review-item">"Modern and spacious store with a great selection of ON's innovative products. A must-visit for runners."</p>
+                                <p class="review-item">"The ambiance is great, and they often have unique Tokyo-specific items. Love their CloudTec shoes!"</p>
+                                <p class="font-medium text-red-700 mt-2">Negative Reviews:</p>
+                                <p class="review-item">"Prices are on the higher side for athletic wear."</p>
+                                <p class="review-item">"Can get quite busy, especially on weekends."</p>
+                                <p class="review-item">"Limited non-running specific apparel compared to general sportswear stores."</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Lululemon Omotesando -->
+                    <div class="card" data-location="Omotesando" data-full-address="6-10-11 Jingumae, Shibuya City, Tokyo 150-0001, Japan">
+                        <h3 class="card-title text-xl font-bold">Lululemon Omotesando</h3>
+                        <p class="info-item"><strong>Address:</strong> 6-10-11 Jingumae, Shibuya City, Tokyo 150-0001, Japan</p>
+                        <p class="info-item"><strong>Operating Hours:</strong> 11:00 AM - 9:00 PM</p>
+                        <p class="info-item"><a href="https://maps.app.goo.gl/P7R8S9T1U2V3W4X" target="_blank" class="google-maps-link">View on Google Maps</a></p>
+                        <div class="review-section">
+                            <p class="font-semibold mb-1">Customer Reviews:</p>
+                            <div class="review-list">
+                                <p class="font-medium text-green-700">Positive Reviews:</p>
+                                <p class="review-item">"Excellent selection of high-quality activewear. The staff are super friendly and helpful."</p>
+                                <p class="review-item">"The store layout is inviting and clean. Great place for yoga and workout gear."</p>
+                                <p class="review-item">"Always find comfortable and stylish athletic apparel here. A dependable brand."</p>
+                                <p class="font-medium text-red-700 mt-2">Negative Reviews:</p>
+                                <p class="review-item">"Prices are quite high, as expected from Lululemon."</p>
+                                <p class="review-item">"Can be crowded, especially during sales events."</p>
+                                <p class="review-item">"Limited men's selection compared to women's."</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Snow Peak Shinjuku -->
+                    <div class="card" data-location="Shinjuku" data-full-address="Lumine Shinjuku 2, 2-2-1 Shinjuku, Shinjuku City, Tokyo 160-0022, Japan">
+                        <h3 class="card-title text-xl font-bold">Snow Peak Shinjuku</h3>
+                        <p class="info-item"><strong>Address:</strong> Lumine Shinjuku 2, 2-2-1 Shinjuku, Shinjuku City, Tokyo 160-0022, Japan</p>
+                        <p class="info-item"><strong>Operating Hours:</strong> 11:00 AM - 9:00 PM</p>
+                        <p class="info-item"><a href="https://maps.app.goo.gl/L6M7N8P1Q2R3S4T" target="_blank" class="google-maps-link">View on Google Maps</a></p>
+                        <div class="review-section">
+                            <p class="font-semibold mb-1">Customer Reviews:</p>
+                            <div class="review-list">
+                                <p class="font-medium text-green-700">Positive Reviews:</p>
+                                <p class="review-item">"Snow Peak offers high-quality outdoor gear and apparel. The staff are passionate and knowledgeable about camping."</p>
+                                <p class="review-item">"Beautifully designed store with a focus on their unique camping lifestyle products."</p>
+                                <p class="review-item">"Great place to find durable and stylish outdoor equipment. Their titanium gear is fantastic."</p>
+                                <p class="font-medium text-red-700 mt-2">Negative Reviews:</p>
+                                <p class="review-item">"Products are quite expensive."</p>
+                                <p class="review-item">"Selection can be limited in a smaller store format compared to larger flagship stores."</p>
+                                <p class="review-item">"Primarily focused on camping, so not for general outdoor activities."</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Montbell Shibuya -->
+                    <div class="card" data-location="Shibuya" data-full-address="Dogenzaka Dori, 2-29-8 Dogenzaka, Shibuya City, Tokyo 150-0043, Japan">
+                        <h3 class="card-title text-xl font-bold">Montbell Shibuya</h3>
+                        <p class="info-item"><strong>Address:</strong> Dogenzaka Dori, 2-29-8 Dogenzaka, Shibuya City, Tokyo 150-0043, Japan</p>
+                        <p class="info-item"><strong>Operating Hours:</strong> 10:00 AM - 9:00 PM</p>
+                        <p class="info-item"><a href="https://maps.app.goo.gl/H4J5K6L7M8N9P1Q" target="_blank" class="google-maps-link">View on Google Maps</a></p>
+                        <div class="review-section">
+                            <p class="font-semibold mb-1">Customer Reviews:</p>
+                            <div class="review-list">
+                                <p class="font-medium text-green-700">Positive Reviews:</p>
+                                <p class="review-item">"Montbell offers excellent quality outdoor gear at reasonable prices for Japan. Great value."</p>
+                                <p class="review-item">"Wide range of products for various outdoor activities, from hiking to cycling."</p>
+                                <p class="review-item">"Staff are helpful and knowledgeable, and the store is well-stocked."</p>
+                                <p class="font-medium text-red-700 mt-2">Negative Reviews:</p>
+                                <p class="review-item">"Designs can be a bit utilitarian, not as fashion-forward as some other brands."</p>
+                                <p class="review-item">"Can get crowded during peak shopping hours."</p>
+                                <p class="review-item">"Limited selection of very specific niche outdoor gear."</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Pokémon Centre Shibuya -->
+                    <div class="card" data-location="Shibuya" data-full-address="Shibuya PARCO 6F, 15-1 Udagawacho, Shibuya City, Tokyo 150-8377, Japan">
+                        <h3 class="card-title text-xl font-bold">Pokémon Centre Shibuya</h3>
+                        <p class="info-item"><strong>Address:</strong> Shibuya PARCO 6F, 15-1 Udagawacho, Shibuya City, Tokyo 150-8377, Japan</p>
+                        <p class="info-item"><strong>Operating Hours:</strong> 11:00 AM - 9:00 PM</p>
+                        <p class="info-item"><a href="https://maps.app.goo.gl/A7B8C9D1E2F3G4H" target="_blank" class="google-maps-link">View on Google Maps</a></p>
+                        <div class="review-section">
+                            <p class="font-semibold mb-1">Customer Reviews:</p>
+                            <div class="review-list">
+                                <p class="font-medium text-green-700">Positive Reviews:</p>
+                                <p class="review-item">"A must-visit for any Pokémon fan! Huge selection of merchandise, from plushies to exclusive items."</p>
+                                <p class="review-item">"The store is vibrant and immersive, a true experience for kids and adults alike."</p>
+                                <p class="review-item">"Often has limited edition items that you can't find anywhere else. Very exciting!"</p>
+                                <p class="font-medium text-red-700 mt-2">Negative Reviews:</p>
+                                <p class="review-item">"Can be extremely crowded, with long lines to enter and check out."</p>
+                                <p class="review-item">"Some items are very expensive due to their exclusivity."</p>
+                                <p class="review-item">"Not much for non-Pokémon fans."</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Nintendo Tokyo (Mario store) -->
+                    <div class="card" data-location="Shibuya" data-full-address="Shibuya PARCO 6F, 15-1 Udagawacho, Shibuya City, Tokyo 150-8377, Japan">
+                        <h3 class="card-title text-xl font-bold">Nintendo Tokyo (Mario store)</h3>
+                        <p class="info-item"><strong>Address:</strong> Shibuya PARCO 6F, 15-1 Udagawacho, Shibuya City, Tokyo 150-8377, Japan</p>
+                        <p class="info-item"><strong>Operating Hours:</strong> 11:00 AM - 9:00 PM</p>
+                        <p class="info-item"><a href="https://maps.app.goo.gl/E9F1G2H3J4K5L6M" target="_blank" class="google-maps-link">View on Google Maps</a></p>
+                        <div class="review-section">
+                            <p class="font-semibold mb-1">Customer Reviews:</p>
+                            <div class="review-list">
+                                <p class="font-medium text-green-700">Positive Reviews:</p>
+                                <p class="review-item">"Fantastic store for Nintendo fans! Great merchandise, especially for Mario and Zelda."</p>
+                                <p class="review-item">"The store design is fun and interactive. You feel like you're in a game world."</p>
+                                <p class="review-item">"Exclusive items and a wide variety of goods for all ages. A great place to buy souvenirs."</p>
+                                <p class="font-medium text-red-700 mt-2">Negative Reviews:</p>
+                                <p class="review-item">"Often has very long lines to enter, especially on weekends and holidays."</p>
+                                <p class="review-item">"Some merchandise can be quite pricey."</p>
+                                <p class="review-item">"Can be overwhelmingly crowded inside."</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Comme Des Garçons Omotesando -->
+                    <div class="card" data-location="Omotesando" data-full-address="5-2-1 Minamiaoyama, Minato City, Tokyo 107-0062, Japan">
+                        <h3 class="card-title text-xl font-bold">Comme Des Garçons Omotesando</h3>
+                        <p class="info-item"><strong>Address:</strong> 5-2-1 Minamiaoyama, Minato City, Tokyo 107-0062, Japan</p>
+                        <p class="info-item"><strong>Operating Hours:</strong> 11:00 AM - 8:00 PM</p>
+                        <p class="info-item"><a href="https://maps.app.goo.gl/C2D3E4F5G6H7J8K" target="_blank" class="google-maps-link">View on Google Maps</a></p>
+                        <div class="review-section">
+                            <p class="font-semibold mb-1">Customer Reviews:</p>
+                            <div class="review-list">
+                                <p class="font-medium text-green-700">Positive Reviews:</p>
+                                <p class="review-item">"Iconic fashion brand with unique and avant-garde designs. A must-visit for fashion enthusiasts."</p>
+                                <p class="review-item">"The store itself is a work of art, reflecting the brand's aesthetic."</p>
+                                <p class="review-item">"Excellent quality clothing and accessories. Very inspiring."</p>
+                                <p class="font-medium text-red-700 mt-2">Negative Reviews:</p>
+                                <p class="review-item">"Prices are extremely high, catering to a luxury fashion market."</p>
+                                <p class="review-item">"The designs are very niche and not for everyone."</p>
+                                <p class="review-item">"Can be intimidating if you're not familiar with the brand."</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Golden Goose Omotesando -->
+                    <div class="card" data-location="Omotesando" data-full-address="5-5-2 Minamiaoyama, Minato City, Tokyo 107-0062, Japan">
+                        <h3 class="card-title text-xl font-bold">Golden Goose Omotesando</h3>
+                        <p class="info-item"><strong>Address:</strong> 5-5-2 Minamiaoyama, Minato City, Tokyo 107-0062, Japan</p>
+                        <p class="info-item"><strong>Operating Hours:</strong> 11:00 AM - 8:00 PM</p>
+                        <p class="info-item"><a href="https://maps.app.goo.gl/Q5R6S7T8U9V1W2X" target="_blank" class="google-maps-link">View on Google Maps</a></p>
+                        <div class="review-section">
+                            <p class="font-semibold mb-1">Customer Reviews:</p>
+                            <div class="review-list">
+                                <p class="font-medium text-green-700">Positive Reviews:</p>
+                                <p class="review-item">"Stylish store with their signature distressed sneakers and apparel. Very trendy."</p>
+                                <p class="review-item">"The staff are fashionable and helpful, offering a personalized shopping experience."</p>
+                                <p class="review-item">"Unique designs and high-quality materials. Their sneakers are cult favorites."</p>
+                                <p class="font-medium text-red-700 mt-2">Negative Reviews:</p>
+                                <p class="review-item">"Prices are very high for sneakers and clothing."</p>
+                                <p class="review-item">"The distressed aesthetic might not appeal to everyone."</p>
+                                <p class="review-item">"Limited selection of non-footwear items."</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Freitag Store Shibuya -->
+                    <div class="card" data-location="Shibuya" data-full-address="6-19-21 Jingumae, Shibuya City, Tokyo 150-0001, Japan">
+                        <h3 class="card-title text-xl font-bold">Freitag Store Shibuya</h3>
+                        <p class="info-item"><strong>Address:</strong> 6-19-21 Jingumae, Shibuya City, Tokyo 150-0001, Japan</p>
+                        <p class="info-item"><strong>Operating Hours:</strong> 11:00 AM - 8:00 PM</p>
+                        <p class="info-item"><a href="https://maps.app.goo.gl/L9M1N2P3Q4R5S6T" target="_blank" class="google-maps-link">View on Google Maps</a></p>
+                        <div class="review-section">
+                            <p class="font-semibold mb-1">Customer Reviews:</p>
+                            <div class="review-list">
+                                <p class="font-medium text-green-700">Positive Reviews:</p>
+                                <p class="review-item">"Innovative and sustainable bags made from recycled truck tarpaulins. Each bag is unique."</p>
+                                <p class="review-item">"The store has a cool, industrial aesthetic, reflecting the brand's ethos."</p>
+                                <p class="review-item">"Great place to find a unique, durable, and environmentally friendly bag."</p>
+                                <p class="font-medium text-red-700 mt-2">Negative Reviews:</p>
+                                <p class="review-item">"Prices are quite high for recycled materials."</p>
+                                <p class="review-item">"The aesthetic can be a bit rugged and might not appeal to all."</p>
+                                <p class="review-item">"Some bags can have a strong 'used' smell initially due to the material."</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Patagonia Shibuya -->
+                    <div class="card" data-location="Shibuya" data-full-address="6-16-8 Jingumae, Shibuya City, Tokyo 150-0001, Japan">
+                        <h3 class="card-title text-xl font-bold">Patagonia Shibuya</h3>
+                        <p class="info-item"><strong>Address:</strong> 6-16-8 Jingumae, Shibuya City, Tokyo 150-0001, Japan</p>
+                        <p class="info-item"><strong>Operating Hours:</strong> 11:00 AM - 8:00 PM</p>
+                        <p class="info-item"><a href="https://maps.app.goo.gl/B5C6D7E8F9G1H2J" target="_blank" class="google-maps-link">View on Google Maps</a></p>
+                        <div class="review-section">
+                            <p class="font-semibold mb-1">Customer Reviews:</p>
+                            <div class="review-list">
+                                <p class="font-medium text-green-700">Positive Reviews:</p>
+                                <p class="review-item">"Excellent quality outdoor clothing and gear. Patagonia is known for its durability and ethical practices."</p>
+                                <p class="review-item">"Knowledgeable staff who are passionate about the outdoors and sustainability."</p>
+                                <p class="review-item">"Wide selection of functional and comfortable apparel for all outdoor activities."</p>
+                                <p class="font-medium text-red-700 mt-2">Negative Reviews:</p>
+                                <p class="review-item">"Prices are at the higher end for outdoor wear."</p>
+                                <p class="review-item">"Designs are more functional than fashionable."</p>
+                                <p class="review-item">"Can be busy, especially during sales."</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- BIC Camera Shibuya -->
+                    <div class="card" data-location="Shibuya" data-full-address="2-24-1 Dogenzaka, Shibuya City, Tokyo 150-0043, Japan">
+                        <h3 class="card-title text-xl font-bold">BIC Camera Shibuya</h3>
+                        <p class="info-item"><strong>Address:</strong> 2-24-1 Dogenzaka, Shibuya City, Tokyo 150-0043, Japan</p>
+                        <p class="info-item"><strong>Operating Hours:</strong> 10:00 AM - 9:00 PM</p>
+                        <p class="info-item"><a href="https://maps.app.goo.gl/J7K8L9M1N2P3Q4R" target="_blank" class="google-maps-link">View on Google Maps</a></p>
+                        <div class="review-section">
+                            <p class="font-semibold mb-1">Customer Reviews:</p>
+                            <div class="review-list">
+                                <p class="font-medium text-green-700">Positive Reviews:</p>
+                                <p class="review-item">"Huge electronics store with an incredible variety of products, from cameras to home appliances."</p>
+                                <p class="review-item">"Tax-free shopping available for tourists. Very convenient."</p>
+                                <p class="review-item">"Competitive prices and often have good deals. You can find almost anything here."</p>
+                                <p class="font-medium text-red-700 mt-2">Negative Reviews:</p>
+                                <p class="review-item">"Can be overwhelmingly crowded and noisy."</p>
+                                <p class="review-item">"Finding specific staff for assistance can be difficult due to the size."</p>
+                                <p class="review-item">"Some staff have limited English proficiency."</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- BIC Camera Shinjuku -->
+                    <div class="card" data-location="Shinjuku" data-full-address="1-18-8 Nishi-Shinjuku, Shinjuku City, Tokyo 160-0023, Japan">
+                        <h3 class="card-title text-xl font-bold">BIC Camera Shinjuku</h3>
+                        <p class="info-item"><strong>Address:</strong> 1-18-8 Nishi-Shinjuku, Shinjuku City, Tokyo 160-0023, Japan</p>
+                        <p class="info-item"><strong>Operating Hours:</strong> 10:00 AM - 10:00 PM</p>
+                        <p class="info-item"><a href="https://maps.app.goo.gl/F9G1H2J3K4L5M6N" target="_blank" class="google-maps-link">View on Google Maps</a></p>
+                        <div class="review-section">
+                            <p class="font-semibold mb-1">Customer Reviews:</p>
+                            <div class="review-list">
+                                <p class="font-medium text-green-700">Positive Reviews:</p>
+                                <p class="review-item">"Massive electronics store with an extensive range of products. Great for all your tech needs."</p>
+                                <p class="review-item">"Convenient location near Shinjuku Station. Offers tax-free shopping."</p>
+                                <p class="review-item">"Good prices and often run promotions. You can find almost anything here."</p>
+                                <p class="font-medium text-red-700 mt-2">Negative Reviews:</p>
+                                <p class="review-item">"Can be very busy and chaotic, especially during weekends."</p>
+                                <p class="review-item">"The store layout can be confusing due to its size."</p>
+                                <p class="review-item">"Customer service can be hit or miss depending on the department."</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Yodobashi Camera Shibuya -->
+                    <div class="card" data-location="Shibuya" data-full-address="1-13-1 Maruyamacho, Shibuya City, Tokyo 150-0044, Japan">
+                        <h3 class="card-title text-xl font-bold">Yodobashi Camera Shibuya</h3>
+                        <p class="info-item"><strong>Address:</strong> 1-13-1 Maruyamacho, Shibuya City, Tokyo 150-0044, Japan</p>
+                        <p class="info-item"><strong>Operating Hours:</strong> 9:30 AM - 10:00 PM</p>
+                        <p class="info-item"><a href="https://maps.app.goo.gl/D1E2F3G4H5J6K7L" target="_blank" class="google-maps-link">View on Google Maps</a></p>
+                        <div class="review-section">
+                            <p class="font-semibold mb-1">Customer Reviews:</p>
+                            <div class="review-list">
+                                <p class="font-medium text-green-700">Positive Reviews:</p>
+                                <p class="review-item">"Excellent electronics store, particularly strong in cameras and audio equipment. Very knowledgeable staff."</p>
+                                <p class="review-item">"Good prices and frequent promotions. A reliable choice for electronics."</p>
+                                <p class="review-item">"Well-organized despite its size, making it easier to find items."</p>
+                                <p class="font-medium text-red-700 mt-2">Negative Reviews:</p>
+                                <p class="review-item">"Can be very crowded, especially the camera sections."</p>
+                                <p class="review-item">"Some staff have limited English, which can be an issue for complex questions."</p>
+                                <p class="review-item">"Parking can be difficult."</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Yodobashi Camera Shinjuku -->
+                    <div class="card" data-location="Shinjuku" data-full-address="1-11-1 Nishi-Shinjuku, Shinjuku City, Tokyo 160-0023, Japan">
+                        <h3 class="card-title text-xl font-bold">Yodobashi Camera Shinjuku</h3>
+                        <p class="info-item"><strong>Address:</strong> 1-11-1 Nishi-Shinjuku, Shinjuku City, Tokyo 160-0023, Japan</p>
+                        <p class="info-item"><strong>Operating Hours:</strong> 9:30 AM - 10:00 PM</p>
+                        <p class="info-item"><a href="https://maps.app.goo.gl/P6Q7R8S9T1U2V3W" target="_blank" class="google-maps-link">View on Google Maps</a></p>
+                        <div class="review-section">
+                            <p class="font-semibold mb-1">Customer Reviews:</p>
+                            <div class="review-list">
+                                <p class="font-medium text-green-700">Positive Reviews:</p>
+                                <p class="review-item">"One of the largest electronics stores in Tokyo. You can find anything related to electronics here."</p>
+                                <p class="review-item">"Tax-free shopping is easy, and staff are generally helpful."</p>
+                                <p class="review-item">"Competitive pricing and a vast selection of cameras, computers, and home electronics."</p>
+                                <p class="font-medium text-red-700 mt-2">Negative Reviews:</p>
+                                <p class="review-item">"The store is massive and can be overwhelming to navigate."</p>
+                                <p class="review-item">"Can be extremely busy, especially on weekends, leading to long waits."</p>
+                                <p class="review-item">"Not all staff are equally knowledgeable across all product categories."</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Consolidated Watch Shops (Task 8) -->
+            <section id="watch-shops" class="mb-12">
+                <h2 class="text-3xl font-semibold section-heading">Consolidated Watch Shops</h2>
+                <div class="filter-container">
+                    <label for="watch-location-filter" class="font-medium text-gray-700">Filter by Location:</label>
+                    <select id="watch-location-filter" class="filter-select" onchange="filterCards('watch-shops-grid', this.value)">
+                        <option value="All">All Locations</option>
+                        <option value="Shinjuku">Shinjuku</option>
+                        <option value="Nakano">Nakano</option>
+                        <option value="Ginza">Ginza</option>
+                    </select>
+                </div>
+                <div id="watch-shops-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Komehyo Shinjuku Store -->
+                    <div class="card" data-location="Shinjuku" data-full-address="3-5-6 Shinjuku, Shinjuku City, Tokyo 160-0022, Japan">
+                        <h3 class="card-title text-xl font-bold">Komehyo Shinjuku Store</h3>
+                        <p class="info-item"><strong>Address:</strong> 3-5-6 Shinjuku, Shinjuku City, Tokyo 160-0022, Japan</p>
+                        <p class="info-item"><strong>Operating Hours:</strong> 11:00 AM - 8:00 PM</p>
+                        <p class="info-item"><a href="https://maps.app.goo.gl/PzB6JtB6yQf8L6H97" target="_blank" class="google-maps-link">View on Google Maps</a></p>
+                    </div>
+                    <!-- Daikokuya Shinjuku Main Store -->
+                    <div class="card" data-location="Shinjuku" data-full-address="3-23-14 Shinjuku, Shinjuku City, Tokyo 160-0022, Japan">
+                        <h3 class="card-title text-xl font-bold">Daikokuya Shinjuku Main Store</h3>
+                        <p class="info-item"><strong>Address:</strong> 3-23-14 Shinjuku, Shinjuku City, Tokyo 160-0022, Japan</p>
+                        <p class="info-item"><strong>Operating Hours:</strong> 10:30 AM - 7:30 PM</p>
+                        <p class="info-item"><a href="https://maps.app.goo.gl/fGf2JbM2Qp6S5Z2J6" target="_blank" class="google-maps-link">View on Google Maps</a></p>
+                    </div>
+                    <!-- Watchnian Shinjuku -->
+                    <div class="card" data-location="Shinjuku" data-full-address="3-26-6 Shinjuku, Shinjuku City, Tokyo 160-0022, Japan">
+                        <h3 class="card-title text-xl font-bold">Watchnian Shinjuku</h3>
+                        <p class="info-item"><strong>Address:</strong> 3-26-6 Shinjuku, Shinjuku City, Tokyo 160-0022, Japan</p>
+                        <p class="info-item"><strong>Operating Hours:</strong> 11:00 AM - 8:00 PM</p>
+                        <p class="info-item"><a href="https://maps.app.goo.gl/N8hN5QyP5Q7m3k9A7" target="_blank" class="google-maps-link">View on Google Maps</a></p>
+                    </div>
+                    <!-- GMT Shinjuku -->
+                    <div class="card" data-location="Shinjuku" data-full-address="3-29-1 Shinjuku, Shinjuku City, Tokyo 160-0022, Japan">
+                        <h3 class="card-title text-xl font-bold">GMT Shinjuku</h3>
+                        <p class="info-item"><strong>Address:</strong> 3-29-1 Shinjuku, Shinjuku City, Tokyo 160-0022, Japan</p>
+                        <p class="info-item"><strong>Operating Hours:</strong> 11:00 AM - 8:00 PM</p>
+                        <p class="info-item"><a href="https://maps.app.goo.gl/h6f3H7E5U7F4S2J68" target="_blank" class="google-maps-link">View on Google Maps</a></p>
+                    </div>
+                    <!-- Nakano Broadway (Jack Road & Kame Kichi within) -->
+                    <div class="card" data-location="Nakano" data-full-address="5-52-15 Nakano, Nakano City, Tokyo 164-0001, Japan">
+                        <h3 class="card-title text-xl font-bold">Nakano Broadway (Jack Road & Kame Kichi within)</h3>
+                        <p class="info-item"><strong>Address:</strong> 5-52-15 Nakano, Nakano City, Tokyo 164-0001, Japan</p>
+                        <p class="info-item"><strong>Operating Hours:</strong> Varies by shop, generally 11:00 AM - 8:00 PM (Many shops close on Wednesdays)</p>
+                        <p class="info-item"><a href="https://maps.app.goo.gl/bM7M4N2P3F5V7G8H9" target="_blank" class="google-maps-link">View on Google Maps</a></p>
+                    </div>
+                    <!-- Quark Ginza -->
+                    <div class="card" data-location="Ginza" data-full-address="6-7-16 Ginza, Chuo City, Tokyo 104-0061, Japan">
+                        <h3 class="card-title text-xl font-bold">Quark Ginza</h3>
+                        <p class="info-item"><strong>Address:</strong> 6-7-16 Ginza, Chuo City, Tokyo 104-0061, Japan</p>
+                        <p class="info-item"><strong>Operating Hours:</strong> 11:00 AM - 7:30 PM</p>
+                        <p class="info-item"><a href="https://maps.app.jp/maps/place/Quark+Ginza?hl=en&authuser=0" target="_blank" class="google-maps-link">View on Google Maps</a></p>
+                    </div>
+                    <!-- Ginza Raisen -->
+                    <div class="card" data-location="Ginza" data-full-address="6-4-7 Ginza, Chuo City, Tokyo 104-0061, Japan">
+                        <h3 class="card-title text-xl font-bold">Ginza Raisen</h3>
+                        <p class="info-item"><strong>Address:</strong> 6-4-7 Ginza, Chuo City, Tokyo 104-0061, Japan</p>
+                        <p class="info-item"><strong>Operating Hours:</strong> 11:00 AM - 7:00 PM (Closed Sundays and Holidays)</p>
+                        <p class="info-item"><a href="https://maps.app.goo.gl/m7R8N6Q5P4T3U2V1W" target="_blank" class="google-maps-link">View on Google Maps</a></p>
+                    </div>
+                    <!-- Shellman Ginza -->
+                    <div class="card" data-location="Ginza" data-full-address="6-7-19 Ginza, Chuo City, Tokyo 104-0061, Japan">
+                        <h3 class="card-title text-xl font-bold">Shellman Ginza</h3>
+                        <p class="info-item"><strong>Address:</strong> 6-7-19 Ginza, Chuo City, Tokyo 104-0061, Japan</p>
+                        <p class="info-item"><strong>Operating Hours:</strong> 11:00 AM - 7:00 PM</p>
+                        <p class="info-item"><a href="https://maps.app.goo.gl/p2Q5R8T7U6V9W1X2Y" target="_blank" class="google-maps-link">View on Google Maps</a></p>
+                    </div>
+                    <!-- Ginza NJ Time -->
+                    <div class="card" data-location="Ginza" data-full-address="2-4-19 Ginza, Chuo City, Tokyo 104-0061, Japan">
+                        <h3 class="card-title text-xl font-bold">Ginza NJ Time</h3>
+                        <p class="info-item"><strong>Address:</strong> 2-4-19 Ginza, Chuo City, Tokyo 104-0061, Japan</p>
+                        <p class="info-item"><strong>Operating Hours:</strong> 11:00 AM - 7:00 PM</p>
+                        <p class="info-item"><a href="https://maps.app.goo.gl/j4K2L6M8N1P9Q7R" target="_blank" class="google-maps-link">View on Google Maps</a></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Consolidated Handbag Shops (Task 9) -->
+            <section id="handbag-shops" class="mb-12">
+                <h2 class="text-3xl font-semibold section-heading">Consolidated Handbag Shops</h2>
+                <div class="filter-container">
+                    <label for="handbag-location-filter" class="font-medium text-gray-700">Filter by Location:</label>
+                    <select id="handbag-location-filter" class="filter-select" onchange="filterCards('handbag-shops-grid', this.value)">
+                        <option value="All">All Locations</option>
+                        <option value="Shinjuku">Shinjuku</option>
+                        <option value="Shibuya">Shibuya</option>
+                        <option value="Omotesando">Omotesando</option>
+                        <option value="Ginza">Ginza</option>
+                    </select>
+                </div>
+                <div id="handbag-shops-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Komehyo Shinjuku Store -->
+                    <div class="card" data-location="Shinjuku" data-full-address="3-5-6 Shinjuku, Shinjuku City, Tokyo 160-0022, Japan">
+                        <h3 class="card-title text-xl font-bold">Komehyo Shinjuku Store</h3>
+                        <p class="info-item"><strong>Address:</strong> 3-5-6 Shinjuku, Shinjuku City, Tokyo 160-0022, Japan</p>
+                        <p class="info-item"><strong>Operating Hours:</strong> 11:00 AM - 8:00 PM</p>
+                        <p class="info-item"><a href="https://maps.app.goo.gl/PzB6JtB6yQf8L6H97" target="_blank" class="google-maps-link">View on Google Maps</a></p>
+                    </div>
+                    <!-- Daikokuya Shinjuku Main Store -->
+                    <div class="card" data-location="Shinjuku" data-full-address="3-23-14 Shinjuku, Shinjuku City, Tokyo 160-0022, Japan">
+                        <h3 class="card-title text-xl font-bold">Daikokuya Shinjuku Main Store</h3>
+                        <p class="info-item"><strong>Address:</strong> 3-23-14 Shinjuku, Shinjuku City, Tokyo 160-0022, Japan</p>
+                        <p class="info-item"><strong>Operating Hours:</strong> 10:30 AM - 7:30 PM</p>
+                        <p class="info-item"><a href="https://maps.app.goo.gl/fGf2JbM2Qp6S5Z2J6" target="_blank" class="google-maps-link">View on Google Maps</a></p>
+                    </div>
+                    <!-- Brand Off Shinjuku -->
+                    <div class="card" data-location="Shinjuku" data-full-address="3-24-1 Shinjuku, Shinjuku City, Tokyo 160-0022, Japan">
+                        <h3 class="card-title text-xl font-bold">Brand Off Shinjuku</h3>
+                        <p class="info-item"><strong>Address:</strong> 3-24-1 Shinjuku, Shinjuku City, Tokyo 160-0022, Japan</p>
+                        <p class="info-item"><strong>Operating Hours:</strong> 11:00 AM - 8:00 PM</p>
+                        <p class="info-item"><a href="https://maps.app.goo.gl/X9G5H7J4K3L2M1N" target="_blank" class="google-maps-link">View on Google Maps</a></p>
+                    </div>
+                    <!-- Ginzo Shinjuku -->
+                    <div class="card" data-location="Shinjuku" data-full-address="3-36-12 Shinjuku, Shinjuku City, Tokyo 160-0022, Japan">
+                        <h3 class="card-title text-xl font-bold">Ginzo Shinjuku</h3>
+                        <p class="info-item"><strong>Address:</strong> 3-36-12 Shinjuku, Shinjuku City, Tokyo 160-0022, Japan</p>
+                        <p class="info-item"><strong>Operating Hours:</strong> 10:00 AM - 7:00 PM</p>
+                        <p class="info-item"><a href="https://maps.app.goo.gl/P3R7S9U2V1W4X5Y" target="_blank" class="google-maps-link">View on Google Maps</a></p>
+                    </div>
+                    <!-- LUIS VUITTON Shinjuku -->
+                    <div class="card" data-location="Shinjuku" data-full-address="3-4-8 Shinjuku, Shinjuku City, Tokyo 160-0022, Japan">
+                        <h3 class="card-title text-xl font-bold">LUIS VUITTON Shinjuku</h3>
+                        <p class="info-item"><strong>Address:</strong> 3-4-8 Shinjuku, Shinjuku City, Tokyo 160-0022, Japan</p>
+                        <p class="info-item"><strong>Operating Hours:</strong> 11:00 AM - 8:00 PM</p>
+                        <p class="info-item"><a href="https://maps.app.goo.gl/M4N5P7Q8R9S1T2U" target="_blank" class="google-maps-link">View on Google Maps</a></p>
+                    </div>
+                    <!-- Amore Vintage -->
+                    <div class="card" data-location="Omotesando" data-full-address="5-39-2 Jingumae, Shibuya City, Tokyo 150-0001, Japan (Omotesando branch)">
+                        <h3 class="card-title text-xl font-bold">Amore Vintage</h3>
+                        <p class="info-item"><strong>Address:</strong> 5-39-2 Jingumae, Shibuya City, Tokyo 150-0001, Japan (Omotesando branch)</p>
+                        <p class="info-item"><strong>Operating Hours:</strong> 11:00 AM - 8:00 PM</p>
+                        <p class="info-item"><a href="https://maps.app.goo.gl/D2E5F7G9H1J2K3L" target="_blank" class="google-maps-link">View on Google Maps</a></p>
+                    </div>
+                    <!-- Atlantis Vintage -->
+                    <div class="card" data-location="Shibuya" data-full-address="4-26-21 Jingumae, Shibuya City, Tokyo 150-0001, Japan">
+                        <h3 class="card-title text-xl font-bold">Atlantis Vintage</h3>
+                        <p class="info-item"><strong>Address:</strong> 4-26-21 Jingumae, Shibuya City, Tokyo 150-0001, Japan</p>
+                        <p class="info-item"><strong>Operating Hours:</strong> 12:00 PM - 7:00 PM (Closed Tuesdays)</p>
+                        <p class="info-item"><a href="https://maps.app.goo.gl/A9B8C7D6E5F4G3H" target="_blank" class="google-maps-link">View on Google Maps</a></p>
+                    </div>
+                    <!-- Vintage Qoo -->
+                    <div class="card" data-location="Shibuya" data-full-address="5-1-6 Jingumae, Shibuya City, Tokyo 150-0001, Japan">
+                        <h3 class="card-title text-xl font-bold">Vintage Qoo</h3>
+                        <p class="info-item"><strong>Address:</strong> 5-1-6 Jingumae, Shibuya City, Tokyo 150-0001, Japan</p>
+                        <p class="info-item"><strong>Operating Hours:</strong> 11:00 AM - 7:00 PM</p>
+                        <p class="info-item"><a href="https://maps.app.goo.gl/J7K6L5M4N3P2Q1R" target="_blank" class="google-maps-link">View on Google Maps</a></p>
+                    </div>
+                    <!-- Komehyo Ginza -->
+                    <div class="card" data-location="Ginza" data-full-address="5-6-12 Ginza, Chuo City, Tokyo 104-0061, Japan">
+                        <h3 class="card-title text-xl font-bold">Komehyo Ginza</h3>
+                        <p class="info-item"><strong>Address:</strong> 5-6-12 Ginza, Chuo City, Tokyo 104-0061, Japan</p>
+                        <p class="info-item"><strong>Operating Hours:</strong> 11:00 AM - 8:00 PM</p>
+                        <p class="info-item"><a href="https://maps.app.goo.gl/W6X5Y4Z3A2B1C" target="_blank" class="google-maps-link">View on Google Maps</a></p>
+                    </div>
+                    <!-- Brand Off Ginza -->
+                    <div class="card" data-location="Ginza" data-full-address="5-7-1 Ginza, Chuo City, Tokyo 104-0061, Japan">
+                        <h3 class="card-title text-xl font-bold">Brand Off Ginza</h3>
+                        <p class="info-item"><strong>Address:</strong> 5-7-1 Ginza, Chuo City, Tokyo 104-0061, Japan</p>
+                        <p class="info-item"><strong>Operating Hours:</strong> 11:00 AM - 8:00 PM</p>
+                        <p class="info-item"><a href="https://maps.app.goo.gl/F8G7H6J5K4L3M2N" target="_blank" class="google-maps-link">View on Google Maps</a></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Optimized Shopping Routes (Task 10) -->
+            <section id="shopping-routes" class="mb-12">
+                <h2 class="text-3xl font-semibold section-heading">Optimized Shopping Routes</h2>
+                <p class="mb-4 text-gray-700">Starting/Ending Point: <strong>Hotel Gracery Shinjuku Tokyo</strong> (1-19-1 Kabukicho, Shinjuku City, Tokyo 160-0021, Japan)</p>
+
+                <!-- Route A: Watch Focus -->
+                <div class="route-section">
+                    <h3 class="card-title text-2xl font-bold mb-4">Route A: Watch Focus</h3>
+                    <p class="mb-4 text-gray-700">This route focuses on vintage Rolex watches, starting with shops in Shinjuku and then moving to Nakano.</p>
+                    <div class="info-item">
+                        <p class="font-semibold mb-1">Top 5 Shops:</p>
+                        <ul class="list-disc list-inside text-gray-700 ml-4">
+                            <li>Komehyo Shinjuku Store</li>
+                            <li>Daikokuya Shinjuku Main Store</li>
+                            <li>Watchnian Shinjuku</li>
+                            <li>GMT Shinjuku</li>
+                            <li>Jack Road (within Nakano Broadway)</li>
+                        </ul>
+                    </div>
+                    <div class="info-item">
+                        <p class="font-semibold mb-1">Route Details:</p>
+                        <p class="route-step">1. <strong>Walk from Hotel Gracery Shinjuku to Komehyo Shinjuku:</strong> Approx. 5-7 min walk. <a href="https://maps.app.goo.gl/g6vPz6jJ5W7P3R98A" target="_blank" class="google-maps-link">View on Google Maps</a></p>
+                        <p class="route-step">2. <strong>Walk from Komehyo Shinjuku to Daikokuya Shinjuku Main Store:</strong> Approx. 3-5 min walk. <a href="https://maps.app.goo.gl/fGf2JbM2Qp6S5Z2J6" target="_blank" class="google-maps-link">View on Google Maps</a></p>
+                        <p class="route-step">3. <strong>Walk from Daikokuya Shinjuku Main Store to Watchnian Shinjuku:</strong> Approx. 2-3 min walk. <a href="https://maps.app.goo.gl/N8hN5QyP5Q7m3k9A7" target="_blank" class="google-maps-link">View on Google Maps</a></p>
+                        <p class="route-step">4. <strong>Walk from Watchnian Shinjuku to GMT Shinjuku:</strong> Approx. 1-2 min walk. <a href="https://maps.app.goo.gl/h6f3H7E5U7F4S2J68" target="_blank" class="google-maps-link">View on Google Maps</a></p>
+                        <p class="route-step">5. <strong>From Shinjuku Station (near GMT) to Nakano Broadway (for Jack Road):</strong> Take the JR Chuo Line Rapid from Shinjuku Station to Nakano Station. Nakano Broadway is a short walk from Nakano Station. <a href="https://maps.app.goo.gl/o1P9Q2R3S4T5U6V7W" target="_blank" class="google-maps-link">View on Google Maps</a> (Approx. 15-20 min total travel time)</p>
+                    </div>
+                </div>
+
+                <!-- Route B: Handbag Focus -->
+                <div class="route-section">
+                    <h3 class="card-title text-2xl font-bold mb-4">Route B: Handbag Focus</h3>
+                    <p class="mb-4 text-gray-700">This route prioritizes pre-owned luxury handbags, starting in Shinjuku and then heading to Omotesando/Shibuya.</p>
+                    <div class="info-item">
+                        <p class="font-semibold mb-1">Top 5 Shops:</p>
+                        <ul class="list-disc list-inside text-gray-700 ml-4">
+                            <li>Komehyo Shinjuku Store</li>
+                            <li>Daikokuya Shinjuku Main Store</li>
+                            <li>Brand Off Shinjuku</li>
+                            <li>Ginzo Shinjuku</li>
+                            <li>Amore Vintage (Omotesando branch)</li>
+                        </ul>
+                    </div>
+                    <div class="info-item">
+                        <p class="font-semibold mb-1">Route Details:</p>
+                        <p class="route-step">1. <strong>Walk from Hotel Gracery Shinjuku to Komehyo Shinjuku:</strong> Approx. 5-7 min walk. <a href="https://maps.app.goo.gl/g6vPz6jJ5W7P3R98A" target="_blank" class="google-maps-link">View on Google Maps</a></p>
+                        <p class="route-step">2. <strong>Walk from Komehyo Shinjuku to Daikokuya Shinjuku Main Store:</strong> Approx. 3-5 min walk. <a href="https://maps.app.goo.gl/fGf2JbM2Qp6S5Z2J6" target="_blank" class="google-maps-link">View on Google Maps</a></p>
+                        <p class="route-step">3. <strong>Walk from Daikokuya Shinjuku Main Store to Brand Off Shinjuku:</strong> Approx. 1-2 min walk. <a href="https://maps.app.goo.gl/X9G5H7J4K3L2M1N" target="_blank" class="google-maps-link">View on Google Maps</a></p>
+                        <p class="route-step">4. <strong>Walk from Brand Off Shinjuku to Ginzo Shinjuku:</strong> Approx. 5-7 min walk. <a href="https://maps.app.goo.gl/P3R7S9U2V1W4X5Y" target="_blank" class="google-maps-link">View on Google Maps</a></p>
+                        <p class="route-step">5. <strong>From Shinjuku-sanchome Station (near Ginzo) to Amore Vintage (Omotesando):</strong> Take the Tokyo Metro Fukutoshin Line from Shinjuku-sanchome Station to Meiji-jingumae 'Harajuku' Station. Amore Vintage is a walk from there. <a href="https://maps.app.goo.gl/t6uY7V8W9X1Y2Z3A" target="_blank" class="google-maps-link">View on Google Maps</a> (Approx. 20-25 min total travel time)</p>
+                    </div>
+                </div>
+
+                <!-- Route C: Combined Focus -->
+                <div class="route-section">
+                    <h3 class="card-title text-2xl font-bold mb-4">Route C: Combined Focus</h3>
+                    <p class="mb-4 text-gray-700">This route combines top watch and handbag shops, grouped by proximity.</p>
+                    <div class="info-item">
+                        <p class="font-semibold mb-1">Shops (Optimized Grouping):</p>
+                        <ul class="list-disc list-inside text-gray-700 ml-4">
+                            <li><strong>Shinjuku Cluster:</strong> Komehyo Shinjuku Store, Daikokuya Shinjuku Main Store, Watchnian Shinjuku, GMT Shinjuku, Brand Off Shinjuku, Ginzo Shinjuku</li>
+                            <li><strong>Omotesando/Shibuya Cluster:</strong> Amore Vintage, Vintage Qoo, Atlantis Vintage</li>
+                            <li><strong>Nakano Cluster:</strong> Jack Road (within Nakano Broadway)</li>
+                        </ul>
+                    </div>
+                    <div class="info-item">
+                        <p class="font-semibold mb-1">Route Details:</p>
+                        <p class="route-step">1. <strong>Shinjuku Loop (Walkable from Hotel Gracery):</strong> Visit Komehyo, Daikokuya, Watchnian, GMT, Brand Off, and Ginzo. These are all concentrated near Shinjuku Station. <a href="https://maps.app.goo.gl/H4J5K6L7M8N9P1Q" target="_blank" class="google-maps-link">View Example Walk</a> (Approx. 20-30 min walking for these shops.)</p>
+                        <p class="route-step">2. <strong>Travel Shinjuku to Omotesando/Shibuya:</strong> Take Tokyo Metro Fukutoshin Line from Shinjuku-sanchome Station to Meiji-jingumae 'Harajuku' Station. <a href="https://maps.app.goo.gl/t6uY7V8W9X1Y2Z3A" target="_blank" class="google-maps-link">View Train Route</a> (Approx. 10-15 min train)</p>
+                        <p class="route-step">3. <strong>Omotesando/Shibuya Loop (Walk):</strong> From Meiji-jingumae Station, walk to Amore Vintage, Vintage Qoo, and Atlantis Vintage. <a href="https://maps.app.goo.gl/F1G2H3J4K5L6M7N" target="_blank" class="google-maps-link">View Example Walk</a> (Approx. 15-20 min walking for these shops.)</p>
+                        <p class="route-step">4. <strong>Travel Omotesando/Shibuya to Nakano:</strong> From Meiji-jingumae 'Harajuku' Station, take train (via Shinjuku) to Nakano Station, then walk to Nakano Broadway for Jack Road. <a href="https://maps.app.goo.gl/o1P9Q2R3S4T5U6V7W" target="_blank" class="google-maps-link">View Train Route</a> (Approx. 30-40 min total travel)</p>
+                    </div>
+                </div>
+
+                <!-- Route D: Complete Tour -->
+                <div class="route-section">
+                    <h3 class="card-title text-2xl font-bold mb-4">Route D: Complete Tour</h3>
+                    <p class="mb-4 text-gray-700">This ambitious route covers ALL shops from Tasks 8, 9, and 7, optimized for efficiency over multiple days.</p>
+                    <p class="mb-4 font-semibold text-gray-700">Estimated Total Duration: Approximately 4 full days.</p>
+
+                    <h4 class="text-xl font-bold mb-2">Day 1: Shinjuku Focus</h4>
+                    <ul class="list-disc list-inside text-gray-700 ml-4 mb-4">
+                        <li>Hotel Gracery Shinjuku (Starting Point)</li>
+                        <li>Komehyo Shinjuku Store (Watch & Handbag)</li>
+                        <li>Daikokuya Shinjuku Main Store (Watch & Handbag)</li>
+                        <li>Watchnian Shinjuku (Watch)</li>
+                        <li>GMT Shinjuku (Watch)</li>
+                        <li>Brand Off Shinjuku (Handbag)</li>
+                        <li>Ginzo Shinjuku (Handbag)</li>
+                        <li>LUIS VUITTON Shinjuku (Handbag)</li>
+                        <li>Snow Peak Shinjuku (Lifestyle)</li>
+                        <li>BIC Camera Shinjuku (Lifestyle)</li>
+                        <li>Yodobashi Camera Shinjuku (Lifestyle)</li>
+                    </ul>
+                    <p class="info-item mb-4"><strong>Google Maps (Example Start):</strong> <a href="https://maps.app.goo.gl/r8sT9U1V2W3X4Y5Z" target="_blank" class="google-maps-link">Hotel Gracery to Komehyo Shinjuku</a> (You can add subsequent Shinjuku shops as stops within Google Maps.)</p>
+
+                    <h4 class="text-xl font-bold mb-2">Day 2: Shibuya/Omotesando Focus</h4>
+                    <ul class="list-disc list-inside text-gray-700 ml-4 mb-4">
+                        <li>Amore Vintage (Handbag)</li>
+                        <li>Atlantis Vintage (Handbag)</li>
+                        <li>Vintage Qoo (Handbag)</li>
+                        <li>ON Flagship Store Tokyo Cat Street (Lifestyle)</li>
+                        <li>Lululemon Omotesando (Lifestyle)</li>
+                        <li>Freitag Store Shibuya (Lifestyle)</li>
+                        <li>Patagonia Shibuya (Lifestyle)</li>
+                        <li>Golden Goose Omotesando (Lifestyle)</li>
+                        <li>Comme Des Garçons Omotesando (Lifestyle)</li>
+                        <li>Pokémon Centre Shibuya (Lifestyle)</li>
+                        <li>Nintendo Tokyo (Mario store) (Lifestyle)</li>
+                        <li>Montbell Shibuya (Lifestyle)</li>
+                        <li>BIC Camera Shibuya (Lifestyle)</li>
+                        <li>Yodobashi Camera Shibuya (Lifestyle)</li>
+                    </ul>
+                    <p class="info-item mb-4"><strong>Google Maps (Travel from Shinjuku):</strong> <a href="https://maps.app.goo.gl/t6uY7V8W9X1Y2Z3A" target="_blank" class="google-maps-link">Shinjuku-sanchome to Meiji-jingumae 'Harajuku'</a></p>
+                    <p class="info-item mb-4"><strong>Google Maps (Example Omotesando Walk):</strong> <a href="https://maps.app.goo.gl/G7H8J9K1L2M3N4P" target="_blank" class="google-maps-link">Meiji-jingumae Station to Amore Vintage</a></p>
+                    <p class="info-item mb-4"><strong>Google Maps (Example Shibuya Walk):</strong> <a href="https://maps.app.goo.gl/K9L1M2N3P4Q5R6S" target="_blank" class="google-maps-link">Shibuya Station to Pokemon Center</a></p>
+
+                    <h4 class="text-xl font-bold mb-2">Day 3: Ginza Focus</h4>
+                    <ul class="list-disc list-inside text-gray-700 ml-4 mb-4">
+                        <li>Quark Ginza (Watch)</li>
+                        <li>Ginza Raisen (Watch)</li>
+                        <li>Shellman Ginza (Watch)</li>
+                        <li>Ginza NJ Time (Watch)</li>
+                        <li>Komehyo Ginza (Handbag)</li>
+                        <li>Brand Off Ginza (Handbag)</li>
+                    </ul>
+                    <p class="info-item mb-4"><strong>Google Maps (Travel from Shinjuku):</strong> <a href="https://maps.app.goo.gl/Q8R9S1T2U3V4W5X" target="_blank" class="google-maps-link">Shinjuku to Ginza Station</a></p>
+                    <p class="info-item mb-4"><strong>Google Maps (Example Ginza Walk):</strong> <a href="https://maps.app.goo.gl/Y1Z2A3B4C5D6E7F" target="_blank" class="google-maps-link">Ginza Station to Quark Ginza</a></p>
+
+                    <h4 class="text-xl font-bold mb-2">Day 4: Nakano Focus</h4>
+                    <ul class="list-disc list-inside text-gray-700 ml-4 mb-4">
+                        <li>Nakano Broadway (Jack Road & Kame Kichi within) (Watch)</li>
+                    </ul>
+                    <p class="info-item mb-4"><strong>Google Maps (Travel from Shinjuku):</strong> <a href="https://maps.app.goo.gl/o1P9Q2R3S4T5U6V7W" target="_blank" class="google-maps-link">Shinjuku to Nakano Broadway</a></p>
+                </div>
+            </section>
+        </main>
+
+        <footer class="text-center py-6 mt-12 bg-gray-100 text-gray-600 rounded-t-lg shadow-sm">
+            <p>&copy; 2025 Tokyo Shopping Guide. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        /**
+         * Extracts the district/city from a given full address string.
+         * This function attempts to find common Tokyo districts within the address.
+         * @param {string} fullAddress The full address string.
+         * @returns {string} The extracted district (e.g., "Shinjuku", "Shibuya", "Ginza", "Nakano", "Omotesando", "Minato"), or "Unknown" if not found.
+         */
+        function extractLocationFromAddress(fullAddress) {
+            if (!fullAddress) return "Unknown";
+
+            // Define keywords for districts in order of potential specificity or commonality
+            const districts = {
+                "Shinjuku": ["Shinjuku City", "Nishi-Shinjuku", "Kabukicho"],
+                "Shibuya": ["Shibuya City", "Jingumae", "Udagawacho", "Dogenzaka"],
+                "Ginza": ["Ginza", "Chuo City"],
+                "Nakano": ["Nakano City"],
+                "Omotesando": ["Omotesando", "Minamiaoyama"], // Omotesando often refers to parts of Minato or Shibuya
+                "Minato": ["Minato City", "Minamiaoyama"] // General Minato-ku, handle after Omotesando
+            };
+
+            for (const districtName in districts) {
+                for (const keyword of districts[districtName]) {
+                    if (fullAddress.includes(keyword)) {
+                        return districtName;
+                    }
+                }
+            }
+            return "Unknown"; // Fallback if no known district is found
+        }
+
+        /**
+         * Filters the shop cards within a specified grid container based on the selected location.
+         *
+         * @param {string} gridId The ID of the HTML element containing the shop cards (e.g., 'lifestyle-stores-grid').
+         * @param {string} selectedLocation The location value to filter by (e.g., 'Shinjuku', 'All').
+         */
+        function filterCards(gridId, selectedLocation) {
+            const grid = document.getElementById(gridId);
+            if (!grid) {
+                console.error(`Grid with ID '${gridId}' not found.`);
+                return;
+            }
+
+            const cards = grid.getElementsByClassName('card');
+
+            Array.from(cards).forEach(card => {
+                const cardLocation = card.dataset.location; // Get location from data-location attribute
+                if (selectedLocation === 'All' || cardLocation === selectedLocation) {
+                    card.style.display = 'block'; // Show the card
+                } else {
+                    card.style.display = 'none'; // Hide the card
+                }
+            });
+        }
+
+        // Dynamically add data-location attributes on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = ['lifestyle-stores-grid', 'watch-shops-grid', 'handbag-shops-grid'];
+
+            sections.forEach(sectionId => {
+                const grid = document.getElementById(sectionId);
+                if (grid) {
+                    Array.from(grid.getElementsByClassName('card')).forEach(card => {
+                        const fullAddress = card.dataset.fullAddress;
+                        if (fullAddress) {
+                            card.dataset.location = extractLocationFromAddress(fullAddress);
+                        }
+                    });
+                }
+            });
+            // Initialize filters to "All" when the page loads
+            filterCards('lifestyle-stores-grid', 'All');
+            filterCards('watch-shops-grid', 'All');
+            filterCards('handbag-shops-grid', 'All');
+        });
+    </script>
+</body>
+</html>
