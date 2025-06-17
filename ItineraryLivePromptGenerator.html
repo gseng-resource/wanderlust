@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Open Graph Tags for Social Sharing -->
+<meta property="og:title" content="Itinerary Live Prompt Generator">
+<meta property="og:description" content="Generate an accurate itinerary prompt for AI Chatbot use! Perplexity Pro for Sources --> ChatGPT for Formatting Information --> Gemini Pro for Final Presentation Form!">
+<meta property="og:image" content="https://gseng-resource.github.io/wanderlust/AIChatbot.png">
+<meta property="og:url" content="https://gseng-resource.github.io/wanderlust/ItineraryLivePromptGenerator.html">
+<meta property="og:type" content="website">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Itinerary Live Prompt Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chosen Palette: Warm Neutrals (Amber, Slate, Stone) -->
+    <!-- Application Structure Plan: A single-page, multi-section form designed to guide the user through building a complex prompt. The layout is a two-column design on desktops (form on left, live-previewing prompt on right) that stacks on mobile. Dynamic sections for 'Product Categories' and 'Specific Shops' allow for user-defined complexity. This structure breaks down a complex task into manageable, logical chunks, reducing cognitive load and improving usability by providing immediate feedback on the generated prompt as the user fills out the form. -->
+    <!-- Visualization & Content Choices: The application exclusively uses structured HTML forms with interactive JS. Goal: Organize/Inform. Method: The primary "visualization" is the live-generated text prompt itself, which serves as a direct representation of the user's input. Interactions: Users interact via standard form elements (text, number, textarea) and dynamic controls (add/remove buttons for lists). This is justified as the most direct way to accomplish the goal of building a structured text output. No charts are needed as there is no quantitative data to visualize from the source (the source is a template). Library/Method: Vanilla JavaScript for all DOM manipulation and state management. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        .form-section {
+            border: 1px solid #e5e7eb;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            background-color: white;
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+        }
+        .form-section legend {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1f2937;
+            padding: 0 0.5rem;
+        }
+        .input-group {
+            margin-bottom: 1rem;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #374151;
+        }
+        .input-group input, .input-group select, .input-group textarea {
+            width: 100%;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            padding: 0.75rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .input-group input:focus, .input-group select:focus, .input-group textarea:focus {
+            outline: none;
+            border-color: #fbbf24;
+            box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.5);
+        }
+        .dynamic-list-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            color: white;
+            transition: background-color 0.2s;
+            cursor: pointer;
+        }
+        .btn-primary {
+            background-color: #ca8a04; /* amber-600 */
+        }
+        .btn-primary:hover {
+            background-color: #a16207; /* amber-700 */
+        }
+        .btn-secondary {
+            background-color: #475569; /* slate-600 */
+        }
+         .btn-secondary:hover {
+            background-color: #334155; /* slate-700 */
+        }
+        .btn-danger {
+            background-color: #dc2626;
+            color: white;
+            padding: 0.5rem;
+            line-height: 1;
+        }
+         .btn-danger:hover {
+            background-color: #b91c1c;
+        }
+    </style>
+</head>
+<body class="bg-stone-100">
+
+    <div class="container mx-auto p-4 md:p-8">
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-slate-800">Itinerary Prompt Generator</h1>
+            <p class="text-slate-600 mt-2">Fill in the details below to generate a custom, AI-ready prompt for your itinerary.</p>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Form Column -->
+            <div id="form-container">
+                <form id="prompt-form">
+                    
+                    <!-- Section 1: Basic Information -->
+                    <fieldset class="form-section">
+                        <legend>1. Basic Information</legend>
+                        <div class="input-group">
+                            <label for="city-name">City Name</label>
+                            <input type="text" id="city-name" value="Tokyo">
+                        </div>
+                        <div class="input-group">
+                            <label for="traveler-type">Traveler Type</label>
+                            <input type="text" id="traveler-type" placeholder="e.g., Solo traveler, Couple, Family with kids" value="Couple">
+                        </div>
+                        <div class="input-group">
+                            <label for="hotel-location">Hotel/Location Name</label>
+                            <input type="text" id="hotel-location" value="Park Hyatt Tokyo">
+                        </div>
+                         <div class="input-group">
+                            <label for="primary-area">Primary Shopping Area</label>
+                            <input type="text" id="primary-area" placeholder="e.g., Shinjuku, Ginza" value="Shinjuku">
+                        </div>
+                        <div class="input-group">
+                            <label for="language">Output Language</label>
+                            <select id="language">
+                                <option>English</option>
+                                <option>Japanese</option>
+                                <option>Spanish</option>
+                                <option>French</option>
+                                <option>German</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+                    <!-- Section 2: General Shop Requirements -->
+                    <fieldset class="form-section">
+                        <legend>2. General Shop Requirements</legend>
+                        <div class="input-group">
+                            <label for="positive-reviews">Number of Positive Reviews to Find</label>
+                            <input type="number" id="positive-reviews" value="3" min="1">
+                        </div>
+                        <div class="input-group">
+                            <label for="negative-reviews">Number of Negative Reviews to Find</label>
+                            <input type="number" id="negative-reviews" value="1" min="0">
+                        </div>
+                        <div class="input-group">
+                            <label for="additional-reqs">Other Requirements for All Shops</label>
+                            <textarea id="additional-reqs" rows="3" placeholder="e.g., Price range: $$$, Accepts Visa, English spoken">Accepts American Express, has duty-free options</textarea>
+                        </div>
+                    </fieldset>
+
+                     <!-- Section 3: Product Categories -->
+                    <fieldset class="form-section">
+                        <legend>3. Product Categories</legend>
+                        <div id="categories-container">
+                            <!-- Categories will be injected here -->
+                        </div>
+                        <button type="button" id="add-category-btn" class="btn btn-secondary mt-4">+ Add Another Category</button>
+                    </fieldset>
+
+                    <!-- Section 4: Shopping Routes -->
+                    <fieldset class="form-section">
+                        <legend>4. Optimized Shopping Routes</legend>
+                        <p class="text-slate-600 mb-4">Define the routes you want the AI to create based on the shops found.</p>
+                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="input-group">
+                                <label for="routeA-shops">Route A (Category 1) Shops</label>
+                                <input type="number" id="routeA-shops" value="5" min="1">
+                            </div>
+                             <div class="input-group">
+                                <label for="routeB-shops">Route B (Category 2) Shops</label>
+                                <input type="number" id="routeB-shops" value="4" min="1">
+                            </div>
+                            <div class="input-group">
+                                <label for="routeC-cat1-shops">Route C (Cat 1) Shops</label>
+                                <input type="number" id="routeC-cat1-shops" value="3" min="1">
+                            </div>
+                            <div class="input-group">
+                                <label for="routeC-cat2-shops">Route C (Cat 2) Shops</label>
+                                <input type="number" id="routeC-cat2-shops" value="3" min="1">
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+
+            <!-- Output Column -->
+            <div id="output-container" class="lg:sticky top-8 self-start">
+                <div class="form-section">
+                    <legend class="mb-4">Live Prompt Preview</legend>
+                    <textarea id="prompt-output" rows="25" readonly class="bg-slate-50 text-sm text-slate-700 w-full p-4 rounded-lg border border-slate-200"></textarea>
+                    <button id="copy-btn" class="btn btn-primary w-full mt-4">Copy Prompt</button>
+                    <p id="copy-feedback" class="text-center text-green-600 mt-2 font-medium opacity-0 transition-opacity">Copied to clipboard!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('prompt-form');
+            const outputTextarea = document.getElementById('prompt-output');
+            const copyBtn = document.getElementById('copy-btn');
+            const copyFeedback = document.getElementById('copy-feedback');
+
+            const categoriesContainer = document.getElementById('categories-container');
+            const addCategoryBtn = document.getElementById('add-category-btn');
+            
+            let categoryCount = 0;
+
+            const createCategoryElement = (isFirst = false) => {
+                categoryCount++;
+                const categoryWrapper = document.createElement('div');
+                categoryWrapper.className = 'p-4 border border-slate-200 rounded-lg mb-4 bg-slate-50/50 relative';
+                categoryWrapper.dataset.categoryId = categoryCount;
+
+                let initialName = categoryCount === 1 ? 'Vintage Watches' : (categoryCount === 2 ? 'Designer Handbags' : '');
+                let initialShops = categoryCount === 1 ? ['Ippuukishi', 'Komehyo'] : (categoryCount === 2 ? ['Daikokuya', 'Brand Off'] : ['']);
+
+                let shopsHTML = initialShops.map(shop => `
+                    <div class="dynamic-list-item">
+                        <input type="text" class="specific-shop-input w-full" value="${shop}" placeholder="Shop Name">
+                        <button type="button" class="btn-danger rounded-md remove-shop-btn">X</button>
+                    </div>
+                `).join('');
+
+                categoryWrapper.innerHTML = `
+                    <h4 class="font-semibold text-lg mb-2 text-slate-700">Category #${categoryCount}</h4>
+                    ${!isFirst ? `<button type="button" class="absolute top-2 right-2 btn-danger rounded-full remove-category-btn">X</button>`: ''}
+                    <div class="input-group">
+                        <label>Category Name</label>
+                        <input type="text" class="category-name-input" value="${initialName}" placeholder="e.g., Electronics, Souvenirs">
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="input-group">
+                            <label>Shops to find near hotel</label>
+                            <input type="number" class="shop-count-near-input" value="3" min="1">
+                        </div>
+                        <div class="input-group">
+                            <label>Shops to find elsewhere</label>
+                            <input type="number" class="shop-count-far-input" value="3" min="1">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label>Specific Shops to Include (if any)</label>
+                        <div class="specific-shops-container">
+                           ${shopsHTML}
+                        </div>
+                         <button type="button" class="text-sm mt-2 text-amber-700 font-semibold hover:underline add-shop-btn">+ Add a specific shop</button>
+                    </div>
+                `;
+                categoriesContainer.appendChild(categoryWrapper);
+            };
+            
+            addCategoryBtn.addEventListener('click', () => createCategoryElement(false));
+
+            categoriesContainer.addEventListener('click', (e) => {
+                if (e.target.classList.contains('add-shop-btn')) {
+                    const container = e.target.previousElementSibling;
+                    const shopItem = document.createElement('div');
+                    shopItem.className = 'dynamic-list-item';
+                    shopItem.innerHTML = `
+                        <input type="text" class="specific-shop-input w-full" placeholder="Shop Name">
+                        <button type="button" class="btn-danger rounded-md remove-shop-btn">X</button>
+                    `;
+                    container.appendChild(shopItem);
+                }
+                if (e.target.classList.contains('remove-shop-btn')) {
+                    e.target.parentElement.remove();
+                    updatePrompt();
+                }
+                 if (e.target.classList.contains('remove-category-btn')) {
+                    e.target.closest('[data-category-id]').remove();
+                    updatePrompt();
+                }
+            });
+
+            const getFormValues = () => {
+                const values = {
+                    cityName: document.getElementById('city-name').value,
+                    travelerType: document.getElementById('traveler-type').value,
+                    hotelLocation: document.getElementById('hotel-location').value,
+                    primaryArea: document.getElementById('primary-area').value,
+                    language: document.getElementById('language').value,
+                    positiveReviews: document.getElementById('positive-reviews').value,
+                    negativeReviews: document.getElementById('negative-reviews').value,
+                    additionalReqs: document.getElementById('additional-reqs').value,
+                    categories: [],
+                    routes: {
+                        routeA: document.getElementById('routeA-shops').value,
+                        routeB: document.getElementById('routeB-shops').value,
+                        routeCcat1: document.getElementById('routeC-cat1-shops').value,
+                        routeCcat2: document.getElementById('routeC-cat2-shops').value
+                    }
+                };
+
+                const categoryElements = categoriesContainer.querySelectorAll('[data-category-id]');
+                categoryElements.forEach(catEl => {
+                    const categoryData = {
+                        name: catEl.querySelector('.category-name-input').value,
+                        nearCount: catEl.querySelector('.shop-count-near-input').value,
+                        farCount: catEl.querySelector('.shop-count-far-input').value,
+                        specificShops: Array.from(catEl.querySelectorAll('.specific-shop-input'))
+                                            .map(input => input.value.trim())
+                                            .filter(name => name)
+                    };
+                    values.categories.push(categoryData);
+                });
+                return values;
+            };
+
+            const generatePrompt = () => {
+                const data = getFormValues();
+                if (!data.cityName) return "";
+
+                let prompt = `# ${data.cityName} Shopping Guide Request\n\n`;
+                prompt += `## Context\n`;
+                prompt += `${data.travelerType} staying at ${data.hotelLocation} seeking information on shops.\n\n`;
+                
+                prompt += `## Required Information (All Shops)\n`;
+                prompt += `For each shop provide:\n`;
+                prompt += `- Full address\n`;
+                prompt += `- Operating hours\n`;
+                prompt += `- Google Maps app link for iOS and Android phone users.\n`;
+                prompt += `- ${data.positiveReviews} positive customer reviews\n`;
+                prompt += `- ${data.negativeReviews} negative customer reviews\n`;
+                if(data.additionalReqs) {
+                    prompt += `- ${data.additionalReqs}\n`;
+                }
+                prompt += `\n`;
+
+                prompt += `## Tasks\n`;
+                
+                // Tasks 1-4: Find shops by area
+                data.categories.forEach((cat, index) => {
+                    if (cat.name) {
+                        prompt += `### Task ${index * 2 + 1}. ${cat.name} - ${data.primaryArea}\n`;
+                        prompt += `Find top ${cat.nearCount} ${cat.name} shops near ${data.hotelLocation}.\n\n`;
+                        prompt += `### Task ${index * 2 + 2}. ${cat.name} - Other ${data.cityName} Areas\n`;
+                        prompt += `Find top ${cat.farCount} ${cat.name} shops outside ${data.primaryArea}.\n\n`;
+                    }
+                });
+
+                // Tasks 5+: Specific shops
+                let taskCounter = data.categories.length * 2 + 1;
+                let additionalCategories = [];
+                data.categories.forEach((cat, index) => {
+                     if (cat.name && cat.specificShops.length > 0) {
+                        prompt += `### Task ${taskCounter}. Specific ${cat.name} Shops\n`;
+                        prompt += `Provide details for these shops:\n`;
+                        cat.specificShops.forEach(shop => prompt += `- ${shop}\n`);
+                        prompt += '\n';
+                        taskCounter++;
+                     } else if (!cat.name && cat.specificShops.length > 0) {
+                        additionalCategories.push(...cat.specificShops);
+                     }
+                });
+
+                if (additionalCategories.length > 0) {
+                    prompt += `### Task ${taskCounter}. Additional Stores\n`;
+                    prompt += `Provide details for these shops:\n`;
+                    additionalCategories.forEach(shop => prompt += `- ${shop}\n`);
+                    prompt += `\n`;
+                    taskCounter++;
+                }
+
+                // Tasks: Consolidated Lists
+                const cat1 = data.categories[0];
+                const cat2 = data.categories[1];
+                
+                if(cat1 && cat1.name) {
+                    prompt += `### Task ${taskCounter}. Consolidated ${cat1.name} List\n`;
+                    prompt += `Create a unique list combining all ${cat1.name} shops from Tasks 1, 2, and ${data.categories.length*2 + 1} (remove duplicates).\n\n`;
+                    taskCounter++;
+                }
+                if(cat2 && cat2.name) {
+                    prompt += `### Task ${taskCounter}. Consolidated ${cat2.name} List\n`;
+                    prompt += `Create a unique list combining all ${cat2.name} shops from Tasks 3, 4, and ${data.categories.length*2 + 2} (remove duplicates).\n\n`;
+                    taskCounter++;
+                }
+
+                // Task: Optimized routes
+                prompt += `### Task ${taskCounter}. Optimized Shopping Routes\n`;
+                prompt += `Create multiple routes starting/ending at ${data.hotelLocation}:\n\n`;
+                
+                if (cat1 && cat1.name) {
+                    prompt += `**Route A: ${cat1.name} Focus**\n`;
+                    prompt += `- Visit top ${data.routes.routeA} shops from the consolidated ${cat1.name} list.\n`;
+                    prompt += `- Include Google Maps app link and route explanation with shops listing.\n\n`;
+                }
+
+                if (cat2 && cat2.name) {
+                    prompt += `**Route B: ${cat2.name} Focus**\n`;
+                    prompt += `- Visit top ${data.routes.routeB} shops from the consolidated ${cat2.name} list.\n`;
+                    prompt += `- Include Google Maps app link and route explanation with shops listing.\n\n`;
+                }
+                
+                if (cat1 && cat1.name && cat2 && cat2.name) {
+                     prompt += `**Route C: Combined Focus**\n`;
+                     prompt += `- Visit top ${data.routes.routeCcat1} ${cat1.name} shops + top ${data.routes.routeCcat2} ${cat2.name} shops.\n`;
+                     prompt += `- Include Google Maps app link and route explanation with shops listing.\n\n`;
+                }
+
+                prompt += `**Route D: Complete Tour**\n`;
+                prompt += `- Visit ALL unique shops found in all previous tasks.\n`;
+                prompt += `- Organize by proximity for efficiency.\n`;
+                prompt += `- Include complete Google Maps app link.\n`;
+                prompt += `- Estimate total duration.\n\n`;
+
+
+                prompt += `## Output Language\n`;
+                prompt += `${data.language}`;
+
+                return prompt;
+            };
+
+            const updatePrompt = () => {
+                outputTextarea.value = generatePrompt();
+            }
+
+            form.addEventListener('input', updatePrompt);
+            categoriesContainer.addEventListener('input', updatePrompt);
+
+            copyBtn.addEventListener('click', () => {
+                outputTextarea.select();
+                document.execCommand('copy');
+                copyFeedback.style.opacity = '1';
+                setTimeout(() => {
+                    copyFeedback.style.opacity = '0';
+                }, 2000);
+            });
+            
+            // Initial setup
+            createCategoryElement(true);
+            createCategoryElement(true);
+            updatePrompt();
+        });
+    </script>
+</body>
+</html>
