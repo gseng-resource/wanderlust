@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Tokyo Shopping Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- 
+      Chosen Palette: Warm Neutrals. Using a base of slate and stone colors (Tailwind's slate and stone palettes) for a calm, sophisticated feel. The accent color is amber for interactive elements, providing a warm, inviting highlight without being distracting. This creates a supportive, minimalist, and harmonious visual experience.
+    -->
+    <!-- 
+      Application Structure Plan: The application is designed as a single-page interactive dashboard. The structure prioritizes user-driven exploration over the linear format of the source report.
+      1. **Header & Title:** Clear and concise branding.
+      2. **Primary Filters (Category & District):** The most critical interaction. Placed at the top for immediate access, allowing users to instantly slice the data according to their primary interest (what they want to buy) and location (where they are). This is more intuitive than scrolling through a long, pre-categorized list.
+      3. **Interactive Charts:** Two summary charts (by District, by Category) provide a high-level visual overview of the shopping landscape. They also act as secondary navigation, as clicking a chart segment filters the main list. This dashboard approach helps users understand the data's composition before diving into details.
+      4. **Shop Grid:** A responsive card-based grid displays the filtered results. This visual format is scannable and mobile-friendly.
+      5. **Modal for Details:** Clicking a card opens a modal with comprehensive information (address, hours, reviews). This keeps the main grid clean and uncluttered while providing deep information on demand.
+      6. **Routes Section:** A dedicated section for the pre-planned routes, recognizing this as a distinct and valuable piece of content from the report.
+      This dashboard structure was chosen because it transforms a static report into a dynamic tool, empowering users to find relevant information quickly based on their specific needs and context.
+    -->
+    <!-- 
+      Visualization & Content Choices:
+      - Report Info: List of all shops with categories and districts. -> Goal: Show geographic and categorical distribution. -> Viz: Two charts (Bar for District, Doughnut for Category). -> Interaction: Clicking a chart segment filters the main shop list. -> Justification: Provides an immediate, high-level understanding of the data and serves as a visual filtering mechanism. -> Library: Chart.js.
+      - Report Info: Detailed shop information (address, hours, reviews). -> Goal: Present detailed information for a selected shop without cluttering the UI. -> Presentation: A modal dialog. -> Interaction: Triggered by clicking a shop card. -> Justification: Focuses user attention and presents extensive details in a structured way upon request. -> Library/Method: Custom JS with Tailwind CSS.
+      - Report Info: Positive and negative reviews. -> Goal: Compare pros and cons. -> Presentation: Side-by-side lists within the modal, using '👍' and '👎' icons for quick visual association. -> Justification: Makes comparison easy and scannable. -> Library/Method: HTML/CSS.
+      - Report Info: Pre-planned shopping routes. -> Goal: Provide actionable itineraries. -> Presentation: A list of route cards with descriptions and map links. -> Interaction: Clickable link to open Google Maps. -> Justification: Directly translates report data into a practical, mobile-friendly tool for travelers. -> Library/Method: HTML `<a>` tags.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            max-height: 40vh;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .modal-active {
+            display: flex;
+        }
+        .filter-btn.active {
+            background-color: #f59e0b; /* amber-500 */
+            color: white;
+            border-color: #f59e0b; /* amber-500 */
+        }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <div id="app" class="container mx-auto px-4 py-8">
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-slate-900">Audrey's Tokyo Vintage Watch & Pre-loved Luxury Handbags Shopping Guide</h1>
+            <p class="text-slate-600 mt-2">Your interactive guide to finding the best watches, handbags, and more in Tokyo.</p>
+            <p class="text-slate-600 mt-2">Made with LOTS OF LOVE!!!</p>
+        </header>
+
+        <main>
+            <!-- Filters -->
+            <div class="bg-white p-4 rounded-lg shadow-sm mb-8">
+                <div id="category-filters" class="mb-4">
+                    <h3 class="font-semibold text-lg mb-2 text-slate-700">Filter by Category:</h3>
+                    <div id="category-buttons" class="flex flex-wrap gap-2"></div>
+                </div>
+                <div id="district-filters">
+                    <h3 class="font-semibold text-lg mb-2 text-slate-700">Filter by District:</h3>
+                    <div id="district-buttons" class="flex flex-wrap gap-2"></div>
+                </div>
+            </div>
+
+            <!-- Charts -->
+            <section id="charts-section" class="mb-8">
+                 <h2 class="text-2xl font-bold text-center mb-6 text-slate-800">Shopping Landscape Overview</h2>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="bg-white p-4 rounded-lg shadow-sm">
+                        <h3 class="text-xl font-semibold text-center mb-2">Shops by District</h3>
+                        <div class="chart-container">
+                            <canvas id="districtChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm">
+                        <h3 class="text-xl font-semibold text-center mb-2">Shops by Category</h3>
+                        <div class="chart-container">
+                            <canvas id="categoryChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Shop List -->
+            <section id="shop-list-section">
+                <h2 class="text-2xl font-bold text-center mb-6 text-slate-800">Shop Directory</h2>
+                <div id="shop-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                </div>
+            </section>
+
+             <!-- Routes -->
+            <section id="routes-section" class="mt-12">
+                <h2 class="text-2xl font-bold text-center mb-6 text-slate-800">Optimized Shopping Routes</h2>
+                <div id="routes-container" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal -->
+    <div id="shop-modal" class="fixed inset-0 bg-black bg-opacity-60 items-center justify-center p-4 hidden z-50">
+        <div class="bg-white rounded-lg shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h2 id="modal-title" class="text-2xl font-bold text-slate-900"></h2>
+                        <p id="modal-category-district" class="text-slate-500"></p>
+                    </div>
+                    <button id="modal-close" class="text-2xl font-bold text-slate-500 hover:text-slate-800">&times;</button>
+                </div>
+                
+                <div class="space-y-4 text-slate-700">
+                    <div>
+                        <h4 class="font-semibold">📍 Address</h4>
+                        <p id="modal-address"></p>
+                    </div>
+                     <div>
+                        <h4 class="font-semibold">⏰ Hours</h4>
+                        <p id="modal-hours"></p>
+                    </div>
+                    <div>
+                         <a id="modal-map-link" href="#" target="_blank" class="inline-block bg-amber-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-amber-600 transition-colors">
+                            View on Google Maps
+                         </a>
+                    </div>
+                </div>
+
+                <div class="mt-6 border-t pt-4">
+                    <h3 class="text-xl font-semibold mb-4 text-center">Curated Customer Feedback</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-semibold text-lg text-green-600 mb-2">👍 Positives</h4>
+                            <ul id="modal-positives" class="list-disc list-inside space-y-2 text-slate-600"></ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-lg text-red-600 mb-2">👎 Negatives</h4>
+                            <ul id="modal-negatives" class="list-disc list-inside space-y-2 text-slate-600"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const shops = [
+                {
+                    name: 'Best Vintage (Best Ishida Tokyo)',
+                    category: 'Vintage Watches',
+                    district: 'Shinjuku',
+                    address: 'B1F, 3‑17‑12 Shinjuku, Shinjuku‑ku, Tokyo 160‑0022',
+                    hours: 'Mon–Fri 12:00–20:00 | Sat/Sun/Holidays 11:00–20:00',
+                    mapLink: 'https://www.google.com/maps/search/?api=1&query=Best+Vintage+Shinjuku',
+                    positives: ['Huge collection of Rolex—including rarer, older pieces.', 'Multilingual staff and tax-free was seamless.', 'Well‑organized and easy to browse.'],
+                    negatives: ['Prices may not beat grey‑market dealers elsewhere.', 'Service can be "very cold."', 'Limited popular sporty models in stock.'],
+                },
+                {
+                    name: 'Quark Shinjuku',
+                    category: 'Vintage Watches',
+                    district: 'Shinjuku',
+                    address: '3‑30‑11 Shinjuku, Shinjuku‑ku, Tokyo',
+                    hours: '~11:00–19:30',
+                    mapLink: 'https://www.google.com/maps/search/?api=1&query=Quark+Shinjuku',
+                    positives: ['Insane inventory with reasonable prices.', 'Praised for never selling a bad watch.', 'Highly praised for multilingual support and tax‑free service.'],
+                    negatives: ['Grey‑market prices can be higher than true bargains.', 'No guarantee of AD‑level pricing or inventory.', 'Some sporty models may still be hard to find.'],
+                },
+                {
+                    name: 'Rolex Boutique Lexia Shinjuku',
+                    category: 'Vintage Watches',
+                    district: 'Shinjuku',
+                    address: '3‑30‑11 Shinjuku, Shinjuku‑ku, Tokyo 160‑0022',
+                    hours: '~10:00–19:00',
+                    mapLink: 'https://www.google.com/maps/search/?api=1&query=Rolex+Boutique+Lexia+Shinjuku',
+                    positives: ['Official authorized Rolex retailer with full brand service.', 'Rolex-trained technicians guarantee authenticity.', 'Offers multilingual staff and strict anti-counterfeit controls.'],
+                    negatives: ['Inventory scarcity and early‑morning queues.', 'Service attitude may feel cold or impersonal.', 'Could lack high-demand models like Submariner or Daytona.'],
+                },
+                {
+                    name: 'Rolex Boutique Keio Shinjuku',
+                    category: 'Vintage Watches',
+                    district: 'Shinjuku',
+                    address: '1F, 1‑1‑4 Nishishinjuku, Shinjuku‑ku, Tokyo 160‑8321',
+                    hours: 'Mon–Sat 10:00–20:30; Sun 10:00–20:00',
+                    mapLink: 'https://www.google.com/maps/search/?api=1&query=Rolex+Boutique+Keio+Shinjuku',
+                    positives: ['Rolex-only boutique with extensive selection.', 'Official servicing and Rolex-trained craftsmanship.', 'High-end interior and premium purchase experience.'],
+                    negatives: ['One review notes "bad service".', 'Early‑morning queuing, no digital or phone waitlist.', 'Limited availability of popular sport models.'],
+                },
+                {
+                    name: 'Rolex Boutique Takashimaya Shinjuku',
+                    category: 'Vintage Watches',
+                    district: 'Shinjuku',
+                    address: '1F, Takashimaya Shinjuku, 5‑24‑2 Sendagaya, Shibuya‑ku, Tokyo 151‑8580',
+                    hours: '10:00–20:00',
+                    mapLink: 'https://www.google.com/maps/search/?api=1&query=Rolex+Boutique+Takashimaya+Shinjuku',
+                    positives: ['Offers both Professional and Classic Rolex models.', 'Geneva-inspired boutique ambiance and official service.', 'Rolex-trained watchmakers ensure full brand support.'],
+                    negatives: ['Likely requires early queuing with no reservation system.', 'May miss out on high-demand sport models.', 'Appearance‑only visits possible with no guarantee of purchase.'],
+                },
+                {
+                    name: 'Jack Road — Nakano Broadway',
+                    category: 'Vintage Watches',
+                    district: 'Nakano',
+                    address: '3F, Nakano Broadway, 5‑52‑15 Nakano, Nakano‑ku, Tokyo 164‑0001',
+                    hours: '11:00–20:30 daily',
+                    mapLink: 'https://www.google.com/maps/search/?api=1&query=Jack+Road+Nakano+Broadway',
+                    positives: ['One of the best places to buy the watch of your heart’s desire.', 'Multilingual staff, 100% authentic.', 'Many users praise selection, solid business.'],
+                    negatives: ['Prices aren’t the best, but very legit.', 'You have to know your stuff; gray market is a minefield.', 'No real discount even for multiple buys.'],
+                },
+                {
+                    name: 'Watchnian — Nakano Broadway',
+                    category: 'Vintage Watches',
+                    district: 'Nakano',
+                    address: 'Nakano Broadway 3F, 5‑52‑15 Nakano, Nakano‑ku, Tokyo 164‑0001',
+                    hours: '11:00–20:00 daily',
+                    mapLink: 'https://www.google.com/maps/search/?api=1&query=Watchnian+Nakano+Broadway',
+                    positives: ['Had most vintage along with Jack Road.', 'Immaculate space with friendly, detail-oriented staff.', 'Highly rated and trustworthy; strong Chrono24 reputation.'],
+                    negatives: ['If you don’t know your stuff, risk buying fake.', 'Slightly higher prices given premium shop environment.', 'Requires scrutiny for polish/restoration.'],
+                },
+                {
+                    name: 'Quark Ginza 888 Store',
+                    category: 'Vintage Watches',
+                    district: 'Ginza',
+                    address: 'Central Ginza (flagship “888” store)',
+                    hours: '~11:00–19:00',
+                    mapLink: 'https://www.google.com/maps/search/?api=1&query=Quark+Ginza+888+Store',
+                    positives: ['Largest selection in Japan (~200 items).', 'Favored by enthusiasts as the place to look for Rolex.', 'High-stock mix of vintage and parallel imports.'],
+                    negatives: ['Prices are "in line" or maybe higher than overseas.', 'Grey dealers rarely offer big discounts.', 'Risk of paint or aftermarket restoration.'],
+                },
+                {
+                    name: 'Ginza Rasin',
+                    category: 'Vintage Watches',
+                    district: 'Ginza',
+                    address: 'Soirée de Ginza Yayoi Bldg. 1F, 8‑7‑11 Ginza, Chuo‑ku, Tokyo',
+                    hours: 'Weekdays & Sat 11:00–19:30, Sun/Holidays 11:00–19:00',
+                    mapLink: 'https://www.google.com/maps/search/?api=1&query=Ginza+Rasin',
+                    positives: ['Very good selection, respectful service.', 'Offers tax-free and box/papers options.', 'Transparent about restoration work like repainting bezels.'],
+                    negatives: ['Some buyers felt uneasy due to painted bezels.', 'Prices comparable or higher than US prices.', 'Limited haggling—grey-market prices are firm.'],
+                },
+                {
+                    name: 'Shellman Ginza',
+                    category: 'Vintage Watches',
+                    district: 'Ginza',
+                    address: 'Matsuzawa 11th Bldg., 3‑4‑17 Ginza, Chūō‑ku, Tokyo',
+                    hours: '11:00–19:30, Closed Wednesdays',
+                    mapLink: 'https://www.google.com/maps/search/?api=1&query=Shellman+Ginza',
+                    positives: ['Offers 500+ vintage watches, including Rolex.', 'Spacious showroom with knowledgeable staff.', 'Great "low-threshold" environment for first-time buyers.'],
+                    negatives: ['Shops are still grey—prices reflect that.', 'Need knowledge to avoid repainted/polished cases.', 'Fewer major sport models; focus on vintage dress pieces.'],
+                },
+                {
+                    name: 'Daikokuya Shinjuku',
+                    category: 'Luxury Handbags',
+                    district: 'Shinjuku',
+                    address: '1‑7‑2 Nishi‑Shinjuku, Shinjuku‑ku, Tokyo',
+                    hours: '10:00–20:00',
+                    mapLink: 'https://www.google.com/maps/search/?api=1&query=Daikokuya+Shinjuku',
+                    positives: ['Longstanding reputation since 1947.', 'Good condition luxury items; well-curated stock.', 'Tax-free shopping for tourists.'],
+                    negatives: ['Pricing can be high.', 'Limited Chanel/Hermès stock in Shinjuku branch.', 'Mixed assortment crowds bag selections.'],
+                },
+                {
+                    name: 'OKURA Tokyo',
+                    category: 'Luxury Handbags',
+                    district: 'Shinjuku',
+                    address: 'Shinjuku area (exact location varies)',
+                    hours: '11:00–19:00',
+                    mapLink: 'https://www.google.com/maps/search/?api=1&query=OKURA+Tokyo+Preloved+Luxury+Shop',
+                    positives: ['Carries Chanel, Hermès, LV, Prada.', 'High-quality items in a convenient location.', 'Trusted for authenticity.'],
+                    negatives: ['Exact location can be unclear.', 'Pricing on re-sale standard, no significant discount.', 'Limited online feedback on staff/service.'],
+                },
+                 {
+                    name: 'Brand Off Ginza (Shinjuku branch)',
+                    category: 'Luxury Handbags',
+                    district: 'Shinjuku',
+                    address: 'Near Shinjuku Station',
+                    hours: '10:00-20:00',
+                    mapLink: 'https://www.google.com/maps/search/?api=1&query=Brand+Off+Shinjuku',
+                    positives: ['Specializes in high-value authenticated items.', 'Free warranty with purchases.', 'Trust-worthy pedigree.'],
+                    negatives: ['High pricing across the chain.', 'Less unique boutique experience.', 'May feel "generic".'],
+                },
+                {
+                    name: 'Amore Vintage',
+                    category: 'Luxury Handbags',
+                    district: 'Omotesando',
+                    address: '5‑1‑15 Jingumae, Shibuya‑ku, Tokyo (Omotesando)',
+                    hours: '11:00–19:00',
+                    mapLink: 'https://www.google.com/maps/search/?api=1&query=Amore+Vintage+Omotesando',
+                    positives: ['Celebrity-favorite, top-tier vintage Chanel & Hermès.', 'Museum-like display.', 'Offers appointment bookings.'],
+                    negatives: ['Prices considered "crazy"/premium.', 'Some complaints of overpricing or manipulated items.', 'Can be overhyped, lacking true value.'],
+                },
+                {
+                    name: 'Vintage Qoo',
+                    category: 'Luxury Handbags',
+                    district: 'Omotesando',
+                    address: '4‑6‑12 Jingumae, Shibuya‑ku, Tokyo (3 floors)',
+                    hours: '~11:00–20:00',
+                    mapLink: 'https://www.google.com/maps/search/?api=1&query=Vintage+Qoo+Omotesando',
+                    positives: ['Massive inventory (6,000+ items), strong Chanel & Hermès stock.', 'Tax-free for tourists.', 'Very Instagrammable interiors.'],
+                    negatives: ['Higher price point.', 'Often crowded, recommend visiting before 14:00.', 'Selection might be more touristic than niche.'],
+                },
+                 {
+                    name: 'Atlantis Vintage',
+                    category: 'Luxury Handbags',
+                    district: 'Ginza',
+                    address: 'Branches in Ginza, Koenji, Hiroo',
+                    hours: 'Varies by branch',
+                    mapLink: 'https://www.google.com/maps/search/?api=1&query=Atlantis+Vintage+Ginza',
+                    positives: ['Curated, high-quality selection.', 'Personalized service, especially by owner.', 'Open during holidays.'],
+                    negatives: ['Premium pricing.', 'Smaller locations may feel cramped.', 'Gray-market, careful authentication advised.'],
+                },
+                {
+                    name: 'Casanova Vintage',
+                    category: 'Luxury Handbags',
+                    district: 'Ginza',
+                    address: 'Stores in Ginza, Harajuku, Omotesando',
+                    hours: '11:00-19:00',
+                    mapLink: 'https://www.google.com/maps/search/?api=1&query=Casanova+Vintage+Ginza',
+                    positives: ['Celebrity-loved (Kylie Jenner, Rihanna).', 'Curated high-end selection.', 'Stylish, immersive atmosphere.'],
+                    negatives: ['Price tags generally high.', 'Smaller store size can limit variety.', 'Minor gray-market risk.'],
+                },
+                 {
+                    name: 'Komehyo',
+                    category: 'Luxury Handbags',
+                    district: 'Shibuya',
+                    address: '25‑5 Udagawachō, Shibuya‑ku, Tokyo (4 floors)',
+                    hours: '~11:00–20:00 daily',
+                    mapLink: 'https://www.google.com/maps/search/?api=1&query=Komehyo+Shibuya',
+                    positives: ['Huge, varied luxury stock.', 'AACD member—rigorous authenticity checks.', 'Tourist-friendly with tax-free and warranty.'],
+                    negatives: ['Prices align with upscale market, no deep discounts.', 'Store size can be overwhelming.', 'More department-store feel.'],
+                },
+                { name: 'ON Flagship Store Tokyo', category: 'Lifestyle', district: 'Shibuya', address: 'Cat Street, Harajuku/Shibuya', hours: '11:00-20:00', mapLink: 'https://www.google.com/maps/search/?api=1&query=ON+Flagship+Store+Tokyo+Cat+Street' },
+                { name: 'Lululemon Omotesando', category: 'Lifestyle', district: 'Omotesando', address: 'On Omotesandō, Minato-ku, Tokyo', hours: '~11:00–20:00', mapLink: 'https://www.google.com/maps/search/?api=1&query=Lululemon+Omotesando' },
+                { name: 'Snow Peak Shinjuku', category: 'Lifestyle', district: 'Shinjuku', address: 'Lumine 1, 5F, 1-1-5 Nishi-Shinjuku', hours: '11:00-21:00', mapLink: 'https://www.google.com/maps/search/?api=1&query=Snow+Peak+Shinjuku' },
+                { name: 'Montbell Shibuya', category: 'Lifestyle', district: 'Shibuya', address: '11-5 Udagawacho, Shibuya-ku, Tokyo', hours: '10:30-21:00', mapLink: 'https://www.google.com/maps/search/?api=1&query=Montbell+Shibuya' },
+                { name: 'Pokémon Center Shibuya', category: 'Lifestyle', district: 'Shibuya', address: '6F, Shibuya PARCO, 15‑1 Udagawa‑cho, Shibuya‑ku', hours: '10:00–21:00', mapLink: 'https://www.google.com/maps/search/?api=1&query=Pokémon+Center+Shibuya' },
+                { name: 'Nintendo Tokyo (Mario store)', category: 'Lifestyle', district: 'Shibuya', address: '6F, Shibuya PARCO, 15‑1 Udagawa‑cho, Shibuya‑ku', hours: '10:00–21:00', mapLink: 'https://www.google.com/maps/search/?api=1&query=Nintendo+Tokyo+Shibuya' },
+                { name: 'Comme des Garçons Omotesando', category: 'Lifestyle', district: 'Omotesando', address: 'Omotesandō Avenue', hours: '~11:00–19:00', mapLink: 'https://www.google.com/maps/search/?api=1&query=Comme+des+Garçons+Omotesando' },
+                { name: 'Golden Goose Omotesando', category: 'Lifestyle', district: 'Omotesando', address: 'On Omotesandō', hours: '~11:00–20:00', mapLink: 'https://www.google.com/maps/search/?api=1&query=Golden+Goose+Omotesando' },
+                { name: 'Freitag Store Shibuya', category: 'Lifestyle', district: 'Shibuya', address: '6‑19‑18 Jingumae, Shibuya‑ku', hours: '11:00–20:00', mapLink: 'https://www.google.com/maps/search/?api=1&query=Freitag+Store+Shibuya' },
+                { name: 'Patagonia Shibuya', category: 'Lifestyle', district: 'Shibuya', address: '6‑16‑8 Jingumae, Shibuya‑ku', hours: '11:00–19:00 daily; closed 3rd Wed', mapLink: 'https://www.google.com/maps/search/?api=1&query=Patagonia+Shibuya' },
+                { name: 'BIC Camera Shibuya', category: 'Lifestyle', district: 'Shibuya', address: 'Shibuya Station complex', hours: '10:00–22:00', mapLink: 'https://www.google.com/maps/search/?api=1&query=BIC+Camera+Shibuya' },
+                { name: 'BIC Camera Shinjuku', category: 'Lifestyle', district: 'Shinjuku', address: 'Nishishinjuku 1‑5‑1, Shinjuku‑ku', hours: '10:00–20:30', mapLink: 'https://www.google.com/maps/search/?api=1&query=BIC+Camera+Shinjuku' },
+                { name: 'Yodobashi Camera Shinjuku', category: 'Lifestyle', district: 'Shinjuku', address: '1-11-1 Nishishinjuku, Shinjuku‑ku', hours: '9:30–22:00', mapLink: 'https://www.google.com/maps/search/?api=1&query=Yodobashi+Camera+Shinjuku' }
+            ];
+
+             const routes = [
+                {
+                    name: 'Route A: Vintage Watch Focus (Shinjuku)',
+                    description: 'Stops: Best Vintage, Quark Shinjuku, Rolex Boutique Lexia, Rolex Boutique Keio, Rolex Boutique Takashimaya',
+                    stops: ['Best Vintage', 'Quark Shinjuku', 'Rolex Boutique Lexia', 'Rolex Boutique Keio', 'Rolex Boutique Takashimaya'],
+                    mapLink: 'https://www.google.com/maps/dir/Hotel+Gracery+Shinjuku/Best+Vintage+Shinjuku/Quark+Shinjuku/Rolex+Boutique+Lexia+Shinjuku/Rolex+Boutique+Keio+Shinjuku/Takashimaya+Shinjuku/Hotel+Gracery+Shinjuku'
+                },
+                {
+                    name: 'Route B: Used Luxury Handbags Focus (Shinjuku & Omotesando)',
+                    description: 'Stops: Daikokuya Shinjuku, OKURA Tokyo, Amore Vintage, Vintage Qoo, Brand Off',
+                    stops: ['Daikokuya Shinjuku', 'OKURA Tokyo', 'Amore Vintage', 'Vintage Qoo', 'Brand Off'],
+                    mapLink: 'https://www.google.com/maps/dir/Hotel+Gracery+Shinjuku/Daikokuya+Shinjuku/OKURA+Shinjuku/Amore+Vintage+Omotesando/Vintage+Qoo+Omotesando/Brand+Off+Ginza/Hotel+Gracery+Shinjuku'
+                },
+                {
+                    name: 'Route C: Hybrid (Watch + Handbags, Shinjuku & Omotesando)',
+                    description: 'Stops: Best Vintage, Quark Shinjuku, Lexia Shinjuku, Keio Shinjuku, Takashimaya Shinjuku, Daikokuya, OKURA, Amore Vintage, Vintage Qoo',
+                    stops: ['Best Vintage', 'Quark Shinjuku', 'Lexia Shinjuku', 'Keio Shinjuku', 'Takashimaya Shinjuku', 'Daikokuya', 'OKURA', 'Amore Vintage', 'Vintage Qoo'],
+                    mapLink: 'https://www.google.com/maps/dir/Hotel+Gracery+Shinjuku/Best+Vintage/Quark+Shinjuku/Lexia+Shinjuku/Keio+Shinjuku/Takashimaya+Shinjuku/Daikokuya+Shinjuku/OKURA+Shinjuku/Amore+Vintage+Omotesando/Vintage+Qoo+Omotesando/Hotel+Gracery+Shinjuku'
+                },
+                {
+                    name: 'Route D: The Complete Tour',
+                    description: 'An ambitious 10-11 hour tour covering all 33 listed shops across Shinjuku, Shibuya, Omotesando, and Ginza. For the dedicated shopper!',
+                    stops: ['All shops'],
+                    mapLink: 'https://www.google.com/maps/dir/' // This would be too long for a single URL
+                }
+            ];
+
+            const shopList = document.getElementById('shop-list');
+            const categoryButtonsContainer = document.getElementById('category-buttons');
+            const districtButtonsContainer = document.getElementById('district-buttons');
+            const routesContainer = document.getElementById('routes-container');
+            const modal = document.getElementById('shop-modal');
+            const modalClose = document.getElementById('modal-close');
+
+            let districtChartInstance, categoryChartInstance;
+            let activeCategory = 'All';
+            let activeDistrict = 'All';
+
+            const uniqueCategories = ['All', ...new Set(shops.map(s => s.category))];
+            const uniqueDistricts = ['All', ...new Set(shops.map(s => s.district))];
+
+            function renderFilters() {
+                categoryButtonsContainer.innerHTML = uniqueCategories.map(cat =>
+                    `<button class="filter-btn px-4 py-2 border rounded-full text-sm font-medium transition-colors ${cat === 'All' ? 'active' : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-100'}" data-category="${cat}">${cat}</button>`
+                ).join('');
+
+                districtButtonsContainer.innerHTML = uniqueDistricts.map(dist =>
+                    `<button class="filter-btn px-4 py-2 border rounded-full text-sm font-medium transition-colors ${dist === 'All' ? 'active' : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-100'}" data-district="${dist}">${dist}</button>`
+                ).join('');
+            }
+            
+            function renderShops() {
+                shopList.innerHTML = '';
+                const filteredShops = shops.filter(shop =>
+                    (activeCategory === 'All' || shop.category === activeCategory) &&
+                    (activeDistrict === 'All' || shop.district === activeDistrict)
+                );
+
+                if (filteredShops.length === 0) {
+                    shopList.innerHTML = `<p class="text-slate-500 col-span-full text-center">No shops match the current filters.</p>`;
+                    return;
+                }
+
+                filteredShops.forEach(shop => {
+                    const shopCard = document.createElement('div');
+                    shopCard.className = 'bg-white rounded-lg shadow-md p-4 flex flex-col justify-between cursor-pointer transform hover:-translate-y-1 transition-transform duration-300';
+                    shopCard.innerHTML = `
+                        <div>
+                            <h3 class="font-bold text-lg text-slate-800">${shop.name}</h3>
+                            <p class="text-sm text-amber-600 font-medium">${shop.category}</p>
+                            <p class="text-sm text-slate-500">${shop.district}</p>
+                        </div>
+                        <button class="mt-4 text-sm text-slate-600 font-semibold text-right">View Details &rarr;</button>
+                    `;
+                    shopCard.addEventListener('click', () => openModal(shop));
+                    shopList.appendChild(shopCard);
+                });
+            }
+
+            function openModal(shop) {
+                document.getElementById('modal-title').textContent = shop.name;
+                document.getElementById('modal-category-district').textContent = `${shop.category} in ${shop.district}`;
+                document.getElementById('modal-address').textContent = shop.address;
+                document.getElementById('modal-hours').textContent = shop.hours;
+                document.getElementById('modal-map-link').href = shop.mapLink || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(shop.name)}`;
+                
+                const positivesList = document.getElementById('modal-positives');
+                const negativesList = document.getElementById('modal-negatives');
+                positivesList.innerHTML = shop.positives ? shop.positives.map(p => `<li>${p}</li>`).join('') : '<li>No positive reviews listed.</li>';
+                negativesList.innerHTML = shop.negatives ? shop.negatives.map(n => `<li>${n}</li>`).join('') : '<li>No negative reviews listed.</li>';
+
+                modal.classList.remove('hidden');
+                modal.classList.add('modal-active');
+            }
+
+            function renderRoutes() {
+                routesContainer.innerHTML = routes.map(route => `
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="font-bold text-xl mb-2">${route.name}</h3>
+                        <p class="text-slate-600 mb-4">${route.description}</p>
+                        <a href="${route.mapLink}" target="_blank" class="inline-block bg-slate-800 text-white font-bold py-2 px-4 rounded-lg hover:bg-slate-700 transition-colors">
+                            Open Route in Maps
+                        </a>
+                    </div>
+                `).join('');
+            }
+
+            function renderCharts() {
+                const districtData = uniqueDistricts.slice(1).map(district => ({
+                    district: district,
+                    count: shops.filter(s => s.district === district).length
+                }));
+                const categoryData = uniqueCategories.slice(1).map(category => ({
+                    category: category,
+                    count: shops.filter(s => s.category === category).length
+                }));
+
+                const chartColors = [
+                    '#f59e0b', '#10b981', '#3b82f6', '#8b5cf6', '#ec4899', '#f43f5e', '#64748b'
+                ];
+
+                const districtCtx = document.getElementById('districtChart').getContext('2d');
+                if (districtChartInstance) districtChartInstance.destroy();
+                districtChartInstance = new Chart(districtCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: districtData.map(d => d.district),
+                        datasets: [{
+                            label: 'Number of Shops',
+                            data: districtData.map(d => d.count),
+                            backgroundColor: chartColors,
+                            borderColor: '#ffffff',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        indexAxis: 'y',
+                        plugins: { legend: { display: false } },
+                        onClick: (e, elements) => {
+                            if (elements.length > 0) {
+                                const district = districtData[elements[0].index].district;
+                                applyFilter('district', district);
+                            }
+                        }
+                    }
+                });
+
+                const categoryCtx = document.getElementById('categoryChart').getContext('2d');
+                if (categoryChartInstance) categoryChartInstance.destroy();
+                categoryChartInstance = new Chart(categoryCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: categoryData.map(d => d.category),
+                        datasets: [{
+                            label: 'Number of Shops',
+                            data: categoryData.map(d => d.count),
+                            backgroundColor: chartColors,
+                            hoverOffset: 4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { position: 'top' } },
+                        onClick: (e, elements) => {
+                             if (elements.length > 0) {
+                                const category = categoryData[elements[0].index].category;
+                                applyFilter('category', category);
+                            }
+                        }
+                    }
+                });
+            }
+
+            function applyFilter(type, value) {
+                if (type === 'category') {
+                    activeCategory = value;
+                } else if (type === 'district') {
+                    activeDistrict = value;
+                }
+
+                document.querySelectorAll('.filter-btn').forEach(btn => {
+                    if ((btn.dataset.category && btn.dataset.category === activeCategory) ||
+                        (btn.dataset.district && btn.dataset.district === activeDistrict)) {
+                        btn.classList.add('active');
+                    } else if ( (btn.dataset.category && btn.dataset.category !== activeCategory && activeCategory !== 'All') ||
+                                (btn.dataset.district && btn.dataset.district !== activeDistrict && activeDistrict !== 'All') ){
+                        // No change if other filter type is selected
+                    } else {
+                        if ( (btn.dataset.category && activeCategory === 'All') || (btn.dataset.district && activeDistrict === 'All') ) {
+                           // keep it active if it is an All button
+                           if ( (btn.dataset.category === 'All' && activeCategory === 'All') || (btn.dataset.district === 'All' && activeDistrict === 'All') ) {
+                              btn.classList.add('active');
+                           } else {
+                              btn.classList.remove('active');
+                           }
+                        } else {
+                           btn.classList.remove('active');
+                        }
+                    }
+                });
+
+                 document.querySelectorAll('.filter-btn[data-category]').forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.category === activeCategory);
+                 });
+                 document.querySelectorAll('.filter-btn[data-district]').forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.district === activeDistrict);
+                 });
+
+                renderShops();
+            }
+
+            categoryButtonsContainer.addEventListener('click', e => {
+                if (e.target.matches('.filter-btn[data-category]')) {
+                    applyFilter('category', e.target.dataset.category);
+                }
+            });
+
+            districtButtonsContainer.addEventListener('click', e => {
+                if (e.target.matches('.filter-btn[data-district]')) {
+                    applyFilter('district', e.target.dataset.district);
+                }
+            });
+
+            modalClose.addEventListener('click', () => {
+                modal.classList.add('hidden');
+                modal.classList.remove('modal-active');
+            });
+            modal.addEventListener('click', (e) => {
+                if(e.target === modal) {
+                    modal.classList.add('hidden');
+                    modal.classList.remove('modal-active');
+                }
+            })
+
+            renderFilters();
+            renderShops();
+            renderRoutes();
+            renderCharts();
+        });
+    </script>
+</body>
+</html>
