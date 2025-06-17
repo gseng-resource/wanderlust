@@ -2,442 +2,529 @@
 <html lang="en">
 <!-- Open Graph Tags for Social Sharing -->
 <meta property="og:title" content="Itinerary Prompt Generator">
-<meta property="og:description" content="Generate an accurate itinerary prompt for AI Chatbot use! Perplexity Pro for Sources --> ChatGPT for Formatting Information --> Gemini Pro for Final Presentation Form!">
+<meta property="og:description" content="Generate an accurate itinerary prompt for ChatGPT use!">
 <meta property="og:image" content="https://gseng-resource.github.io/wanderlust/AIChatbot.png">
 <meta property="og:url" content="https://gseng-resource.github.io/wanderlust/ItineraryPromptGenerator.html">
 <meta property="og:type" content="website">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shopping Itinerary Prompt Generator</title>
+    <title>Itinerary Prompt Generator</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Chosen Palette: Warm Neutrals (Amber, Slate, Stone) -->
-    <!-- Application Structure Plan: A single-page, multi-section form designed to guide the user through building a complex prompt. The layout is a two-column design on desktops (form on left, live-previewing prompt on right) that stacks on mobile. Dynamic sections for 'Product Categories' and 'Specific Shops' allow for user-defined complexity. This structure breaks down a complex task into manageable, logical chunks, reducing cognitive load and improving usability by providing immediate feedback on the generated prompt as the user fills out the form. -->
-    <!-- Visualization & Content Choices: The application exclusively uses structured HTML forms with interactive JS. Goal: Organize/Inform. Method: The primary "visualization" is the live-generated text prompt itself, which serves as a direct representation of the user's input. Interactions: Users interact via standard form elements (text, number, textarea) and dynamic controls (add/remove buttons for lists). This is justified as the most direct way to accomplish the goal of building a structured text output. No charts are needed as there is no quantitative data to visualize from the source (the source is a template). Library/Method: Vanilla JavaScript for all DOM manipulation and state management. -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
+        /* Custom font for Inter */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         body {
             font-family: 'Inter', sans-serif;
         }
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-        .form-section {
-            border: 1px solid #e5e7eb;
-            border-radius: 0.75rem;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            background-color: white;
-            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+        /* Hide numbers for input type number */
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
         }
-        .form-section legend {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: #1f2937;
-            padding: 0 0.5rem;
-        }
-        .input-group {
-            margin-bottom: 1rem;
-        }
-        .input-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: #374151;
-        }
-        .input-group input, .input-group select, .input-group textarea {
-            width: 100%;
-            border: 1px solid #d1d5db;
-            border-radius: 0.5rem;
-            padding: 0.75rem;
-            transition: border-color 0.2s, box-shadow 0.2s;
-        }
-        .input-group input:focus, .input-group select:focus, .input-group textarea:focus {
-            outline: none;
-            border-color: #fbbf24;
-            box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.5);
-        }
-        .dynamic-list-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 0.5rem;
-        }
-        .btn {
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            color: white;
-            transition: background-color 0.2s;
-            cursor: pointer;
-        }
-        .btn-primary {
-            background-color: #ca8a04; /* amber-600 */
-        }
-        .btn-primary:hover {
-            background-color: #a16207; /* amber-700 */
-        }
-        .btn-secondary {
-            background-color: #475569; /* slate-600 */
-        }
-         .btn-secondary:hover {
-            background-color: #334155; /* slate-700 */
-        }
-        .btn-danger {
-            background-color: #dc2626;
-            color: white;
-            padding: 0.5rem;
-            line-height: 1;
-        }
-         .btn-danger:hover {
-            background-color: #b91c1c;
+        input[type="number"] {
+            -moz-appearance: textfield;
         }
     </style>
 </head>
-<body class="bg-stone-100">
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen flex items-center justify-center py-10 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl w-full bg-white p-8 rounded-2xl shadow-xl space-y-8">
+        <h1 class="text-4xl font-extrabold text-center text-gray-900 mb-6">
+            Generate Your Itinerary Guide Prompt
+        </h1>
+        <p class="text-center text-gray-600 mb-8">
+            Fill in the details below to create a personalized AI prompt for your itinerary.
+        </p>
 
-    <div class="container mx-auto p-4 md:p-8">
-        <header class="text-center mb-8">
-            <h1 class="text-4xl font-bold text-slate-800">Itinerary Prompt Generator</h1>
-            <p class="text-slate-600 mt-2">Fill in the details below to generate a custom, AI-ready prompt for your itinerary.</p>
-        </header>
-
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <!-- Form Column -->
-            <div id="form-container">
-                <form id="prompt-form">
-                    
-                    <!-- Section 1: Basic Information -->
-                    <fieldset class="form-section">
-                        <legend>1. Basic Information</legend>
-                        <div class="input-group">
-                            <label for="city-name">City Name</label>
-                            <input type="text" id="city-name" value="Tokyo">
-                        </div>
-                        <div class="input-group">
-                            <label for="traveler-type">Traveler Type</label>
-                            <input type="text" id="traveler-type" placeholder="e.g., Solo traveler, Couple, Family with kids" value="Couple">
-                        </div>
-                        <div class="input-group">
-                            <label for="hotel-location">Hotel/Location Name</label>
-                            <input type="text" id="hotel-location" value="Park Hyatt Tokyo">
-                        </div>
-                         <div class="input-group">
-                            <label for="primary-area">Primary Shopping Area</label>
-                            <input type="text" id="primary-area" placeholder="e.g., Shinjuku, Ginza" value="Shinjuku">
-                        </div>
-                        <div class="input-group">
-                            <label for="language">Output Language</label>
-                            <select id="language">
-                                <option>English</option>
-                                <option>Japanese</option>
-                                <option>Spanish</option>
-                                <option>French</option>
-                                <option>German</option>
-                            </select>
-                        </div>
-                    </fieldset>
-
-                    <!-- Section 2: General Shop Requirements -->
-                    <fieldset class="form-section">
-                        <legend>2. General Shop Requirements</legend>
-                        <div class="input-group">
-                            <label for="positive-reviews">Number of Positive Reviews to Find</label>
-                            <input type="number" id="positive-reviews" value="3" min="1">
-                        </div>
-                        <div class="input-group">
-                            <label for="negative-reviews">Number of Negative Reviews to Find</label>
-                            <input type="number" id="negative-reviews" value="1" min="0">
-                        </div>
-                        <div class="input-group">
-                            <label for="additional-reqs">Other Requirements for All Shops</label>
-                            <textarea id="additional-reqs" rows="3" placeholder="e.g., Price range: $$$, Accepts Visa, English spoken">Accepts American Express, has duty-free options</textarea>
-                        </div>
-                    </fieldset>
-
-                     <!-- Section 3: Product Categories -->
-                    <fieldset class="form-section">
-                        <legend>3. Product Categories</legend>
-                        <div id="categories-container">
-                            <!-- Categories will be injected here -->
-                        </div>
-                        <button type="button" id="add-category-btn" class="btn btn-secondary mt-4">+ Add Another Category</button>
-                    </fieldset>
-
-                    <!-- Section 4: Shopping Routes -->
-                    <fieldset class="form-section">
-                        <legend>4. Optimized Shopping Routes</legend>
-                        <p class="text-slate-600 mb-4">Define the routes you want the AI to create based on the shops found.</p>
-                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div class="input-group">
-                                <label for="routeA-shops">Route A (Category 1) Shops</label>
-                                <input type="number" id="routeA-shops" value="5" min="1">
-                            </div>
-                             <div class="input-group">
-                                <label for="routeB-shops">Route B (Category 2) Shops</label>
-                                <input type="number" id="routeB-shops" value="4" min="1">
-                            </div>
-                            <div class="input-group">
-                                <label for="routeC-cat1-shops">Route C (Cat 1) Shops</label>
-                                <input type="number" id="routeC-cat1-shops" value="3" min="1">
-                            </div>
-                            <div class="input-group">
-                                <label for="routeC-cat2-shops">Route C (Cat 2) Shops</label>
-                                <input type="number" id="routeC-cat2-shops" value="3" min="1">
-                            </div>
-                        </div>
-                    </fieldset>
-                </form>
-            </div>
-
-            <!-- Output Column -->
-            <div id="output-container" class="lg:sticky top-8 self-start">
-                <div class="form-section">
-                    <legend class="mb-4">Live Prompt Preview</legend>
-                    <textarea id="prompt-output" rows="25" readonly class="bg-slate-50 text-sm text-slate-700 w-full p-4 rounded-lg border border-slate-200"></textarea>
-                    <button id="copy-btn" class="btn btn-primary w-full mt-4">Copy Prompt</button>
-                    <p id="copy-feedback" class="text-center text-green-600 mt-2 font-medium opacity-0 transition-opacity">Copied to clipboard!</p>
+        <form id="promptForm" class="space-y-6">
+            <!-- General Information -->
+            <div class="p-6 bg-blue-50 rounded-xl shadow-inner border border-blue-200">
+                <h2 class="text-2xl font-semibold text-blue-800 mb-4">1. General Information</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="cityName" class="block text-sm font-medium text-gray-700 mb-1">City Name:</label>
+                        <input type="text" id="cityName" placeholder="e.g., Tokyo, Paris, Singapore" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" required>
+                    </div>
+                    <div>
+                        <label for="travelerType" class="block text-sm font-medium text-gray-700 mb-1">Traveler Type:</label>
+                        <select id="travelerType" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" required>
+                            <option value="">Select a type</option>
+                            <option value="Luxury Shopper">Luxury Shopper</option>
+                            <option value="Budget Traveler">Budget Traveler</option>
+                            <option value="Tech Enthusiast">Tech Enthusiast</option>
+                            <option value="Fashionista">Fashionista</option>
+                            <option value="Collector">Collector</option>
+                            <option value="General Tourist">General Tourist</option>
+                            <option value="Family with Kids">Family with Kids</option>
+                            <option value="Business Traveler">Business Traveler</option>
+                            <option value="Foodie">Foodie</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <label for="hotelLocation" class="block text-sm font-medium text-gray-700 mb-1">Hotel/Location Name:</label>
+                    <input type="text" id="hotelLocation" placeholder="e.g., The Fullerton Hotel, near Shinjuku Station" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" required>
                 </div>
             </div>
+
+            <!-- Desired Shopping Categories & Specifics -->
+            <div class="p-6 bg-purple-50 rounded-xl shadow-inner border border-purple-200">
+                <h2 class="text-2xl font-semibold text-purple-800 mb-4">2. Shopping Interests & Requirements</h2>
+                <div>
+                    <label for="specificProducts" class="block text-sm font-medium text-gray-700 mb-1">Specific Products/Categories of Interest:</label>
+                    <textarea id="specificProducts" rows="3" placeholder="e.g., vintage watches, designer handbags, limited edition sneakers, local artisanal crafts" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm" required></textarea>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                    <div>
+                        <label for="numPositiveReviews" class="block text-sm font-medium text-gray-700 mb-1">Number of Positive Reviews to Include (per shop):</label>
+                        <input type="number" id="numPositiveReviews" value="3" min="0" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm">
+                    </div>
+                    <div>
+                        <label for="numNegativeReviews" class="block text-sm font-medium text-gray-700 mb-1">Number of Negative Reviews to Include (per shop):</label>
+                        <input type="number" id="numNegativeReviews" value="1" min="0" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm">
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <label for="additionalRequirements" class="block text-sm font-medium text-gray-700 mb-1">Additional Shop Requirements (price range, payment, languages, etc.):</label>
+                    <textarea id="additionalRequirements" rows="2" placeholder="e.g., Must accept WeChat Pay, English speaking staff preferred, mid-range prices, wheelchair accessible" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"></textarea>
+                </div>
+            </div>
+
+            <!-- Primary Product Categories -->
+            <div class="p-6 bg-green-50 rounded-xl shadow-inner border border-green-200">
+                <h2 class="text-2xl font-semibold text-green-800 mb-4">3. Primary Product Categories</h2>
+                <div id="category1Fields" class="category-group mb-6 p-4 border border-green-300 rounded-md bg-green-100">
+                    <h3 class="text-xl font-medium text-green-700 mb-3">Product Category 1:</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label for="productCategory1" class="block text-sm font-medium text-gray-700 mb-1">Category Name:</label>
+                            <input type="text" id="productCategory1" placeholder="e.g., Luxury Watches" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm" required>
+                        </div>
+                        <div>
+                            <label for="primaryArea1" class="block text-sm font-medium text-gray-700 mb-1">Primary Area:</label>
+                            <input type="text" id="primaryArea1" placeholder="e.g., Ginza, Champs-Élysées" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm" required>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                        <div>
+                            <label for="numShopsNearHotel1" class="block text-sm font-medium text-gray-700 mb-1">Number of shops near hotel:</label>
+                            <input type="number" id="numShopsNearHotel1" value="5" min="0" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                        </div>
+                        <div>
+                            <label for="numShopsOtherAreas1" class="block text-sm font-medium text-gray-700 mb-1">Number of shops in other city areas:</label>
+                            <input type="number" id="numShopsOtherAreas1" value="5" min="0" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="category2Container"></div>
+                <button type="button" id="addCategory2" class="mt-4 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors duration-200">
+                    Add Second Product Category
+                </button>
+            </div>
+
+            <!-- Specific Shops to Include -->
+            <div class="p-6 bg-yellow-50 rounded-xl shadow-inner border border-yellow-200">
+                <h2 class="text-2xl font-semibold text-yellow-800 mb-4">4. Specific Shops to Include (Optional)</h2>
+                <div class="mb-4">
+                    <label for="specificCategory1Shops" class="block text-sm font-medium text-gray-700 mb-1">Specific <span id="cat1NameSpan" class="font-semibold text-yellow-700">[Category 1]</span> Shops (comma-separated):</label>
+                    <textarea id="specificCategory1Shops" rows="2" placeholder="e.g., Shop Name 1, Shop Name 2, Shop Name 3" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"></textarea>
+                </div>
+                <div id="specificCategory2ShopsContainer" class="hidden">
+                    <label for="specificCategory2Shops" class="block text-sm font-medium text-gray-700 mb-1">Specific <span id="cat2NameSpan" class="font-semibold text-yellow-700">[Category 2]</span> Shops (comma-separated):</label>
+                    <textarea id="specificCategory2Shops" rows="2" placeholder="e.g., Shop Name 1, Shop Name 2, Shop Name 3" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"></textarea>
+                </div>
+                <div id="additionalCategoryShopsContainer"></div>
+                <button type="button" id="addAdditionalCategory" class="mt-4 px-4 py-2 bg-yellow-600 text-white rounded-md hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 transition-colors duration-200">
+                    Add Additional Category Shops
+                </button>
+            </div>
+
+            <!-- Route Customization -->
+            <div class="p-6 bg-indigo-50 rounded-xl shadow-inner border border-indigo-200">
+                <h2 class="text-2xl font-semibold text-indigo-800 mb-4">5. Route Customization</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="numRouteA" class="block text-sm font-medium text-gray-700 mb-1">Top shops for Route A (<span id="routeACatNameSpan" class="font-semibold text-indigo-700">[Category 1]</span> Focus):</label>
+                        <input type="number" id="numRouteA" value="5" min="0" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    </div>
+                    <div id="routeBCustomization" class="hidden">
+                        <label for="numRouteB" class="block text-sm font-medium text-gray-700 mb-1">Top shops for Route B (<span id="routeBCatNameSpan" class="font-semibold text-indigo-700">[Category 2]</span> Focus):</label>
+                        <input type="number" id="numRouteB" value="5" min="0" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    </div>
+                </div>
+                <div id="routeCCustomization" class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 hidden">
+                    <div>
+                        <label for="numRouteC1" class="block text-sm font-medium text-gray-700 mb-1">Top <span id="routeCCat1NameSpan" class="font-semibold text-indigo-700">[Category 1]</span> shops for Route C (Combined Focus):</label>
+                        <input type="number" id="numRouteC1" value="3" min="0" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    </div>
+                    <div>
+                        <label for="numRouteC2" class="block text-sm font-medium text-gray-700 mb-1">Top <span id="routeCCat2NameSpan" class="font-semibold text-indigo-700">[Category 2]</span> shops for Route C (Combined Focus):</label>
+                        <input type="number" id="numRouteC2" value="3" min="0" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    </div>
+                </div>
+                <div class="mt-4 flex items-center">
+                    <input type="checkbox" id="includeRouteD" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+                    <label for="includeRouteD" class="ml-2 block text-sm font-medium text-gray-700">Include Route D (Complete Tour)?</label>
+                </div>
+            </div>
+
+            <!-- Output Language -->
+            <div class="p-6 bg-red-50 rounded-xl shadow-inner border border-red-200">
+                <h2 class="text-2xl font-semibold text-red-800 mb-4">6. Output Language</h2>
+                <div>
+                    <label for="outputLanguage" class="block text-sm font-medium text-gray-700 mb-1">Language Preference:</label>
+                    <select id="outputLanguage" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm" required>
+                        <option value="English">English</option>
+                        <option value="Spanish">Spanish</option>
+                        <option value="French">French</option>
+                        <option value="German">German</option>
+                        <option value="Japanese">Japanese</option>
+                        <option value="Mandarin">Mandarin</option>
+                        <option value="Korean">Korean</option>
+                        <option value="Italian">Italian</option>
+                        <option value="Portuguese">Portuguese</option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">
+                Generate Prompt
+            </button>
+        </form>
+
+        <div id="generatedPromptContainer" class="hidden mt-8 p-6 bg-gray-50 rounded-xl shadow-lg border border-gray-200">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Your Generated Prompt:</h2>
+            <textarea id="generatedPrompt" rows="20" class="w-full p-4 border border-gray-300 rounded-md resize-y font-mono text-sm bg-gray-100" readonly></textarea>
+            <div class="flex justify-center mt-4 space-x-4">
+                <button id="copyPrompt" class="px-5 py-2 bg-teal-600 text-white rounded-md hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 transition-colors duration-200">
+                    Copy to Clipboard
+                </button>
+                <button id="downloadPrompt" class="px-5 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors duration-200">
+                    Download Prompt
+                </button>
+            </div>
+            <div id="copyMessage" class="mt-3 text-center text-green-700 font-medium hidden">Copied to clipboard!</div>
         </div>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const form = document.getElementById('prompt-form');
-            const outputTextarea = document.getElementById('prompt-output');
-            const copyBtn = document.getElementById('copy-btn');
-            const copyFeedback = document.getElementById('copy-feedback');
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('promptForm');
+            const generatedPromptContainer = document.getElementById('generatedPromptContainer');
+            const generatedPrompt = document.getElementById('generatedPrompt');
+            const copyPromptBtn = document.getElementById('copyPrompt');
+            const downloadPromptBtn = document.getElementById('downloadPrompt');
+            const copyMessage = document.getElementById('copyMessage');
 
-            const categoriesContainer = document.getElementById('categories-container');
-            const addCategoryBtn = document.getElementById('add-category-btn');
-            
-            let categoryCount = 0;
+            const addCategory2Btn = document.getElementById('addCategory2');
+            const category2Container = document.getElementById('category2Container');
+            const addAdditionalCategoryBtn = document.getElementById('addAdditionalCategory');
+            const additionalCategoryShopsContainer = document.getElementById('additionalCategoryShopsContainer');
 
-            const createCategoryElement = (isFirst = false) => {
-                categoryCount++;
-                const categoryWrapper = document.createElement('div');
-                categoryWrapper.className = 'p-4 border border-slate-200 rounded-lg mb-4 bg-slate-50/50 relative';
-                categoryWrapper.dataset.categoryId = categoryCount;
+            const specificCategory2ShopsContainer = document.getElementById('specificCategory2ShopsContainer');
+            const routeBCustomization = document.getElementById('routeBCustomization');
+            const routeCCustomization = document.getElementById('routeCCustomization');
 
-                let initialName = categoryCount === 1 ? 'Vintage Watches' : (categoryCount === 2 ? 'Designer Handbags' : '');
-                let initialShops = categoryCount === 1 ? ['Ippuukishi', 'Komehyo'] : (categoryCount === 2 ? ['Daikokuya', 'Brand Off'] : ['']);
+            const productCategory1Input = document.getElementById('productCategory1');
+            const productCategory2Input = document.getElementById('productCategory2'); // Will be created dynamically
+            const cat1NameSpan = document.getElementById('cat1NameSpan');
+            const cat2NameSpan = document.getElementById('cat2NameSpan');
+            const routeACatNameSpan = document.getElementById('routeACatNameSpan');
+            const routeBCatNameSpan = document.getElementById('routeBCatNameSpan');
+            const routeCCat1NameSpan = document.getElementById('routeCCat1NameSpan');
+            const routeCCat2NameSpan = document.getElementById('routeCCat2NameSpan');
 
-                let shopsHTML = initialShops.map(shop => `
-                    <div class="dynamic-list-item">
-                        <input type="text" class="specific-shop-input w-full" value="${shop}" placeholder="Shop Name">
-                        <button type="button" class="btn-danger rounded-md remove-shop-btn">X</button>
-                    </div>
-                `).join('');
+            let hasCategory2 = false;
+            let hasAdditionalCategory = false;
 
-                categoryWrapper.innerHTML = `
-                    <h4 class="font-semibold text-lg mb-2 text-slate-700">Category #${categoryCount}</h4>
-                    ${!isFirst ? `<button type="button" class="absolute top-2 right-2 btn-danger rounded-full remove-category-btn">X</button>`: ''}
-                    <div class="input-group">
-                        <label>Category Name</label>
-                        <input type="text" class="category-name-input" value="${initialName}" placeholder="e.g., Electronics, Souvenirs">
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="input-group">
-                            <label>Shops to find near hotel</label>
-                            <input type="number" class="shop-count-near-input" value="3" min="1">
+            // Update category names dynamically
+            function updateCategoryNames() {
+                const cat1Name = productCategory1Input.value || '[Category 1]';
+                cat1NameSpan.textContent = cat1Name;
+                routeACatNameSpan.textContent = cat1Name;
+                routeCCat1NameSpan.textContent = cat1Name;
+
+                if (hasCategory2 && productCategory2Input) {
+                    const cat2Name = productCategory2Input.value || '[Category 2]';
+                    cat2NameSpan.textContent = cat2Name;
+                    routeBCatNameSpan.textContent = cat2Name;
+                    routeCCat2NameSpan.textContent = cat2Name;
+                } else {
+                    cat2NameSpan.textContent = '[Category 2]';
+                    routeBCatNameSpan.textContent = '[Category 2]';
+                    routeCCat2NameSpan.textContent = '[Category 2]';
+                }
+            }
+
+            productCategory1Input.addEventListener('input', updateCategoryNames);
+
+            addCategory2Btn.addEventListener('click', function() {
+                if (hasCategory2) return; // Prevent adding multiple times
+
+                const cat2Html = `
+                    <div id="category2Fields" class="category-group mt-6 p-4 border border-green-300 rounded-md bg-green-100 relative">
+                        <h3 class="text-xl font-medium text-green-700 mb-3">Product Category 2:</h3>
+                        <button type="button" id="removeCategory2" class="absolute top-4 right-4 text-red-600 hover:text-red-800 transition-colors duration-200">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </button>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="productCategory2" class="block text-sm font-medium text-gray-700 mb-1">Category Name:</label>
+                                <input type="text" id="productCategory2" placeholder="e.g., Local Crafts" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm" required>
+                            </div>
+                            <div>
+                                <label for="primaryArea2" class="block text-sm font-medium text-gray-700 mb-1">Primary Area:</label>
+                                <input type="text" id="primaryArea2" placeholder="e.g., Old Town, Night Markets" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm" required>
+                            </div>
                         </div>
-                        <div class="input-group">
-                            <label>Shops to find elsewhere</label>
-                            <input type="number" class="shop-count-far-input" value="3" min="1">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                            <div>
+                                <label for="numShopsNearHotel2" class="block text-sm font-medium text-gray-700 mb-1">Number of shops near hotel:</label>
+                                <input type="number" id="numShopsNearHotel2" value="5" min="0" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                            </div>
+                            <div>
+                                <label for="numShopsOtherAreas2" class="block text-sm font-medium text-gray-700 mb-1">Number of shops in other city areas:</label>
+                                <input type="number" id="numShopsOtherAreas2" value="5" min="0" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                            </div>
                         </div>
-                    </div>
-                    <div class="input-group">
-                        <label>Specific Shops to Include (if any)</label>
-                        <div class="specific-shops-container">
-                           ${shopsHTML}
-                        </div>
-                         <button type="button" class="text-sm mt-2 text-amber-700 font-semibold hover:underline add-shop-btn">+ Add a specific shop</button>
                     </div>
                 `;
-                categoriesContainer.appendChild(categoryWrapper);
-            };
-            
-            addCategoryBtn.addEventListener('click', () => createCategoryElement(false));
+                category2Container.innerHTML = cat2Html;
+                hasCategory2 = true;
+                addCategory2Btn.style.display = 'none';
 
-            categoriesContainer.addEventListener('click', (e) => {
-                if (e.target.classList.contains('add-shop-btn')) {
-                    const container = e.target.previousElementSibling;
-                    const shopItem = document.createElement('div');
-                    shopItem.className = 'dynamic-list-item';
-                    shopItem.innerHTML = `
-                        <input type="text" class="specific-shop-input w-full" placeholder="Shop Name">
-                        <button type="button" class="btn-danger rounded-md remove-shop-btn">X</button>
-                    `;
-                    container.appendChild(shopItem);
-                }
-                if (e.target.classList.contains('remove-shop-btn')) {
-                    e.target.parentElement.remove();
-                    updatePrompt();
-                }
-                 if (e.target.classList.contains('remove-category-btn')) {
-                    e.target.closest('[data-category-id]').remove();
-                    updatePrompt();
-                }
+                // Show related optional sections
+                specificCategory2ShopsContainer.classList.remove('hidden');
+                routeBCustomization.classList.remove('hidden');
+                routeCCustomization.classList.remove('hidden');
+
+                document.getElementById('productCategory2').addEventListener('input', updateCategoryNames);
+
+                document.getElementById('removeCategory2').addEventListener('click', function() {
+                    category2Container.innerHTML = '';
+                    hasCategory2 = false;
+                    addCategory2Btn.style.display = 'block';
+                    specificCategory2ShopsContainer.classList.add('hidden');
+                    routeBCustomization.classList.add('hidden');
+                    routeCCustomization.classList.add('hidden');
+                    updateCategoryNames(); // Reset category 2 names in spans
+                });
+                updateCategoryNames();
             });
 
-            const getFormValues = () => {
-                const values = {
-                    cityName: document.getElementById('city-name').value,
-                    travelerType: document.getElementById('traveler-type').value,
-                    hotelLocation: document.getElementById('hotel-location').value,
-                    primaryArea: document.getElementById('primary-area').value,
-                    language: document.getElementById('language').value,
-                    positiveReviews: document.getElementById('positive-reviews').value,
-                    negativeReviews: document.getElementById('negative-reviews').value,
-                    additionalReqs: document.getElementById('additional-reqs').value,
-                    categories: [],
-                    routes: {
-                        routeA: document.getElementById('routeA-shops').value,
-                        routeB: document.getElementById('routeB-shops').value,
-                        routeCcat1: document.getElementById('routeC-cat1-shops').value,
-                        routeCcat2: document.getElementById('routeC-cat2-shops').value
-                    }
-                };
+            addAdditionalCategoryBtn.addEventListener('click', function() {
+                if (hasAdditionalCategory) return;
 
-                const categoryElements = categoriesContainer.querySelectorAll('[data-category-id]');
-                categoryElements.forEach(catEl => {
-                    const categoryData = {
-                        name: catEl.querySelector('.category-name-input').value,
-                        nearCount: catEl.querySelector('.shop-count-near-input').value,
-                        farCount: catEl.querySelector('.shop-count-far-input').value,
-                        specificShops: Array.from(catEl.querySelectorAll('.specific-shop-input'))
-                                            .map(input => input.value.trim())
-                                            .filter(name => name)
-                    };
-                    values.categories.push(categoryData);
+                const addCatHtml = `
+                    <div id="additionalCategoryFields" class="mb-4 p-4 border border-yellow-300 rounded-md bg-yellow-100 relative">
+                        <h3 class="text-xl font-medium text-yellow-700 mb-3">Additional Category:</h3>
+                        <button type="button" id="removeAdditionalCategory" class="absolute top-4 right-4 text-red-600 hover:text-red-800 transition-colors duration-200">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </button>
+                        <div>
+                            <label for="additionalCategoryName" class="block text-sm font-medium text-gray-700 mb-1">Additional Category Name:</label>
+                            <input type="text" id="additionalCategoryName" placeholder="e.g., Souvenirs, Books" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm" required>
+                        </div>
+                        <div class="mt-4">
+                            <label for="specificAdditionalCategoryShops" class="block text-sm font-medium text-gray-700 mb-1">Specific Shops (comma-separated):</label>
+                            <textarea id="specificAdditionalCategoryShops" rows="2" placeholder="e.g., Shop Name A, Shop Name B, Shop Name C" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"></textarea>
+                        </div>
+                    </div>
+                `;
+                additionalCategoryShopsContainer.innerHTML = addCatHtml;
+                hasAdditionalCategory = true;
+                addAdditionalCategoryBtn.style.display = 'none';
+
+                document.getElementById('removeAdditionalCategory').addEventListener('click', function() {
+                    additionalCategoryShopsContainer.innerHTML = '';
+                    hasAdditionalCategory = false;
+                    addAdditionalCategoryBtn.style.display = 'block';
                 });
-                return values;
-            };
+            });
 
-            const generatePrompt = () => {
-                const data = getFormValues();
-                if (!data.cityName) return "";
+            form.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent default form submission
 
-                let prompt = `# ${data.cityName} Shopping Guide Request\n\n`;
+                const cityName = document.getElementById('cityName').value.trim();
+                const travelerType = document.getElementById('travelerType').value.trim();
+                const hotelLocation = document.getElementById('hotelLocation').value.trim();
+                const specificProducts = document.getElementById('specificProducts').value.trim();
+                const numPositiveReviews = document.getElementById('numPositiveReviews').value.trim();
+                const numNegativeReviews = document.getElementById('numNegativeReviews').value.trim();
+                const additionalRequirements = document.getElementById('additionalRequirements').value.trim();
+
+                const productCategory1 = document.getElementById('productCategory1').value.trim();
+                const primaryArea1 = document.getElementById('primaryArea1').value.trim();
+                const numShopsNearHotel1 = document.getElementById('numShopsNearHotel1').value.trim();
+                const numShopsOtherAreas1 = document.getElementById('numShopsOtherAreas1').value.trim();
+
+                let productCategory2 = '';
+                let primaryArea2 = '';
+                let numShopsNearHotel2 = '';
+                let numShopsOtherAreas2 = '';
+                if (hasCategory2) {
+                    productCategory2 = document.getElementById('productCategory2').value.trim();
+                    primaryArea2 = document.getElementById('primaryArea2').value.trim();
+                    numShopsNearHotel2 = document.getElementById('numShopsNearHotel2').value.trim();
+                    numShopsOtherAreas2 = document.getElementById('numShopsOtherAreas2').value.trim();
+                }
+
+                const specificCategory1Shops = document.getElementById('specificCategory1Shops').value.trim();
+                let specificCategory2Shops = '';
+                if (hasCategory2) {
+                    specificCategory2Shops = document.getElementById('specificCategory2Shops').value.trim();
+                }
+
+                let additionalCategoryName = '';
+                let specificAdditionalCategoryShops = '';
+                if (hasAdditionalCategory) {
+                    additionalCategoryName = document.getElementById('additionalCategoryName').value.trim();
+                    specificAdditionalCategoryShops = document.getElementById('specificAdditionalCategoryShops').value.trim();
+                }
+
+                const numRouteA = document.getElementById('numRouteA').value.trim();
+                let numRouteB = '';
+                let numRouteC1 = '';
+                let numRouteC2 = '';
+                if (hasCategory2) {
+                    numRouteB = document.getElementById('numRouteB').value.trim();
+                    numRouteC1 = document.getElementById('numRouteC1').value.trim();
+                    numRouteC2 = document.getElementById('numRouteC2').value.trim();
+                }
+                const includeRouteD = document.getElementById('includeRouteD').checked;
+                const outputLanguage = document.getElementById('outputLanguage').value.trim();
+
+                let prompt = `# ${cityName} Shopping Guide Request\n`;
                 prompt += `## Context\n`;
-                prompt += `${data.travelerType} staying at ${data.hotelLocation} seeking information on shops.\n\n`;
-                
+                prompt += `${travelerType} staying at ${hotelLocation} seeking ${specificProducts}.\n`;
                 prompt += `## Required Information (All Shops)\n`;
                 prompt += `For each shop provide:\n`;
                 prompt += `- Full address\n`;
-                prompt += `- Operating hours\n`;
-                prompt += `- Google Maps app link for iOS and Android phone users.\n`;
-                prompt += `- ${data.positiveReviews} positive customer reviews\n`;
-                prompt += `- ${data.negativeReviews} negative customer reviews\n`;
-                if(data.additionalReqs) {
-                    prompt += `- ${data.additionalReqs}\n`;
+                prompt += `- Operating hours \n`;
+                prompt += `- A direct Google Maps app link.\n`;
+                prompt += `- ${numPositiveReviews} positive customer reviews\n`;
+                prompt += `- ${numNegativeReviews} negative customer reviews\n`;
+                if (additionalRequirements) {
+                    prompt += `- ${additionalRequirements}\n`;
                 }
-                prompt += `\n`;
 
                 prompt += `## Tasks\n`;
-                
-                // Tasks 1-4: Find shops by area
-                data.categories.forEach((cat, index) => {
-                    if (cat.name) {
-                        prompt += `### Task ${index * 2 + 1}. ${cat.name} - ${data.primaryArea}\n`;
-                        prompt += `Find top ${cat.nearCount} ${cat.name} shops near ${data.hotelLocation}.\n\n`;
-                        prompt += `### Task ${index * 2 + 2}. ${cat.name} - Other ${data.cityName} Areas\n`;
-                        prompt += `Find top ${cat.farCount} ${cat.name} shops outside ${data.primaryArea}.\n\n`;
-                    }
-                });
+                prompt += `### 1. ${productCategory1} - ${primaryArea1}\n`;
+                prompt += `Find top ${numShopsNearHotel1} ${productCategory1} shops near ${hotelLocation}.\n`;
+                prompt += `### 2. ${productCategory1} - Other ${cityName} Areas \n`;
+                prompt += `Find top ${numShopsOtherAreas1} ${productCategory1} shops outside ${primaryArea1}.\n`;
 
-                // Tasks 5+: Specific shops
-                let taskCounter = data.categories.length * 2 + 1;
-                let additionalCategories = [];
-                data.categories.forEach((cat, index) => {
-                     if (cat.name && cat.specificShops.length > 0) {
-                        prompt += `### Task ${taskCounter}. Specific ${cat.name} Shops\n`;
-                        prompt += `Provide details for these shops:\n`;
-                        cat.specificShops.forEach(shop => prompt += `- ${shop}\n`);
-                        prompt += '\n';
-                        taskCounter++;
-                     } else if (!cat.name && cat.specificShops.length > 0) {
-                        additionalCategories.push(...cat.specificShops);
-                     }
-                });
+                if (hasCategory2) {
+                    prompt += `### 3. ${productCategory2} - ${primaryArea2}\n`;
+                    prompt += `Find top ${numShopsNearHotel2} ${productCategory2} shops near ${hotelLocation}.\n`;
+                    prompt += `### 4. ${productCategory2} - Other ${cityName} Areas\n`;
+                    prompt += `Find top ${numShopsOtherAreas2} ${productCategory2} shops outside ${primaryArea2}.\n`;
+                }
 
-                if (additionalCategories.length > 0) {
-                    prompt += `### Task ${taskCounter}. Additional Stores\n`;
+                if (specificCategory1Shops) {
+                    prompt += `### 5. Specific ${productCategory1} Shops\n`;
                     prompt += `Provide details for these shops:\n`;
-                    additionalCategories.forEach(shop => prompt += `- ${shop}\n`);
+                    specificCategory1Shops.split(',').map(s => s.trim()).filter(s => s).forEach(shop => {
+                        prompt += `- ${shop}\n`;
+                    });
+                }
+
+                if (hasCategory2 && specificCategory2Shops) {
+                    prompt += `### 6. Specific ${productCategory2} Shops\n`;
+                    prompt += `Provide details for these shops:\n`;
+                    specificCategory2Shops.split(',').map(s => s.trim()).filter(s => s).forEach(shop => {
+                        prompt += `- ${shop}\n`;
+                    });
+                }
+
+                if (hasAdditionalCategory && additionalCategoryName && specificAdditionalCategoryShops) {
+                    prompt += `### 7. ${additionalCategoryName} Stores\n`;
+                    prompt += `Provide details for these shops:\n`;
+                    specificAdditionalCategoryShops.split(',').map(s => s.trim()).filter(s => s).forEach(shop => {
+                        prompt += `- ${shop}\n`;
+                    });
+                    prompt += `- [Add more as needed]\n`;
+                }
+
+                prompt += `### 8. Consolidated ${productCategory1} List\n`;
+                prompt += `Create a unique list combining all ${productCategory1} shops from Tasks 1, 2, and 5 (remove duplicates).\n`;
+
+                if (hasCategory2) {
+                    prompt += `### 9. Consolidated ${productCategory2} List \n`;
+                    prompt += `Create a unique list combining all ${productCategory2} shops from Tasks 3, 4, and 6 (remove duplicates).\n`;
+                }
+
+                prompt += `### 10. Optimized Shopping Routes\n`;
+                prompt += `Create X routes starting/ending at ${hotelLocation}:\n`;
+                prompt += `**Route A: ${productCategory1} Focus**\n`;
+                prompt += `- Visit top ${numRouteA} shops from Task 8\n`;
+                prompt += `- Include a direct Google Maps app link and route explanation with shops listing.\n`;
+
+                if (hasCategory2) {
+                    prompt += `**Route B: ${productCategory2} Focus** \n`;
+                    prompt += `- Visit top ${numRouteB} shops from Task 9\n`;
+                    prompt += `- Include a direct Google Maps app link and route explanation with shops listing.\n`;
+                    prompt += `**Route C: Combined Focus**\n`;
+                    prompt += `- Visit top ${numRouteC1} ${productCategory1} shops (Task 8) + top ${numRouteC2} ${productCategory2} shops (Task 9)\n`;
+                    prompt += `- Include a direct Google Maps app link and route explanation with shops listing.\n`;
+                }
+
+                if (includeRouteD) {
+                    prompt += `**Route D: Complete Tour**\n`;
+                    prompt += `- Visit ALL shops from Tasks 8, 9`;
+                    if (hasAdditionalCategory) {
+                        prompt += `, and 7`;
+                    }
                     prompt += `\n`;
-                    taskCounter++;
+                    prompt += `- Organize by proximity for efficiency\n`;
+                    prompt += `- Include complete Google Maps app link\n`;
+                    prompt += `- Estimate total duration\n`;
                 }
 
-                // Tasks: Consolidated Lists
-                const cat1 = data.categories[0];
-                const cat2 = data.categories[1];
-                
-                if(cat1 && cat1.name) {
-                    prompt += `### Task ${taskCounter}. Consolidated ${cat1.name} List\n`;
-                    prompt += `Create a unique list combining all ${cat1.name} shops from Tasks 1, 2, and ${data.categories.length*2 + 1} (remove duplicates).\n\n`;
-                    taskCounter++;
-                }
-                if(cat2 && cat2.name) {
-                    prompt += `### Task ${taskCounter}. Consolidated ${cat2.name} List\n`;
-                    prompt += `Create a unique list combining all ${cat2.name} shops from Tasks 3, 4, and ${data.categories.length*2 + 2} (remove duplicates).\n\n`;
-                    taskCounter++;
-                }
-
-                // Task: Optimized routes
-                prompt += `### Task ${taskCounter}. Optimized Shopping Routes\n`;
-                prompt += `Create multiple routes starting/ending at ${data.hotelLocation}:\n\n`;
-                
-                if (cat1 && cat1.name) {
-                    prompt += `**Route A: ${cat1.name} Focus**\n`;
-                    prompt += `- Visit top ${data.routes.routeA} shops from the consolidated ${cat1.name} list.\n`;
-                    prompt += `- Include Google Maps app link and route explanation with shops listing.\n\n`;
-                }
-
-                if (cat2 && cat2.name) {
-                    prompt += `**Route B: ${cat2.name} Focus**\n`;
-                    prompt += `- Visit top ${data.routes.routeB} shops from the consolidated ${cat2.name} list.\n`;
-                    prompt += `- Include Google Maps app link and route explanation with shops listing.\n\n`;
-                }
-                
-                if (cat1 && cat1.name && cat2 && cat2.name) {
-                     prompt += `**Route C: Combined Focus**\n`;
-                     prompt += `- Visit top ${data.routes.routeCcat1} ${cat1.name} shops + top ${data.routes.routeCcat2} ${cat2.name} shops.\n`;
-                     prompt += `- Include Google Maps app link and route explanation with shops listing.\n\n`;
-                }
-
-                prompt += `**Route D: Complete Tour**\n`;
-                prompt += `- Visit ALL unique shops found in all previous tasks.\n`;
-                prompt += `- Organize by proximity for efficiency.\n`;
-                prompt += `- Include complete Google Maps app link.\n`;
-                prompt += `- Estimate total duration.\n\n`;
-
-
+                prompt += `[Optional: Add Route E, F, etc. for additional specialized routes]\n`;
                 prompt += `## Output Language\n`;
-                prompt += `${data.language}`;
+                prompt += `${outputLanguage}\n`;
 
-                return prompt;
-            };
-
-            const updatePrompt = () => {
-                outputTextarea.value = generatePrompt();
-            }
-
-            form.addEventListener('input', updatePrompt);
-            categoriesContainer.addEventListener('input', updatePrompt);
-
-            copyBtn.addEventListener('click', () => {
-                outputTextarea.select();
-                document.execCommand('copy');
-                copyFeedback.style.opacity = '1';
-                setTimeout(() => {
-                    copyFeedback.style.opacity = '0';
-                }, 2000);
+                generatedPrompt.value = prompt;
+                generatedPromptContainer.classList.remove('hidden');
+                generatedPrompt.focus();
+                generatedPrompt.select(); // Select text for easy copying
             });
-            
-            // Initial setup
-            createCategoryElement(true);
-            createCategoryElement(true);
-            updatePrompt();
+
+            copyPromptBtn.addEventListener('click', function() {
+                generatedPrompt.select();
+                try {
+                    const successful = document.execCommand('copy');
+                    if (successful) {
+                        copyMessage.classList.remove('hidden');
+                        setTimeout(() => {
+                            copyMessage.classList.add('hidden');
+                        }, 2000);
+                    } else {
+                        console.error('Copy command was unsuccessful');
+                    }
+                } catch (err) {
+                    console.error('Oops, unable to copy', err);
+                }
+            });
+
+            downloadPromptBtn.addEventListener('click', function() {
+                const text = generatedPrompt.value;
+                const filename = "travel_shopping_prompt.txt";
+                const element = document.createElement('a');
+                element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+                element.setAttribute('download', filename);
+                element.style.display = 'none';
+                document.body.appendChild(element);
+                element.click();
+                document.body.removeChild(element);
+            });
+
+            // Initial update for category names
+            updateCategoryNames();
         });
     </script>
 </body>
