@@ -131,7 +131,7 @@
             <!-- Traveler & Context -->
             <div class="input-group">
                 <label for="travelerType">Traveler Type:</label>
-                <input type="text" id="travelerType" placeholder="e.g., Solo explorer, Family with kids">
+                <input type="text" id="travelerType" placeholder="e.g., Solo, Couple, Family with 2 kids">
             </div>
             <div class="input-group">
                 <label for="hotelLocationName">Hotel/Location Name:</label>
@@ -143,7 +143,7 @@
             </div>
             <div class="input-group col-span-1 md:col-span-2">
                 <label for="additionalRequirements">Additional Requirements (Optional):</label>
-                <textarea id="additionalRequirements" placeholder="e.g., Must be wheelchair accessible, open late, pet-friendly"></textarea>
+                <textarea id="additionalRequirements" placeholder="e.g., Must be wheelchair accessible, opens late, pet-friendly"></textarea>
             </div>
 
             <!-- Review Quantity -->
@@ -153,7 +153,7 @@
             </div>
             <div class="input-group">
                 <label for="negativeReviewsX">Number of negative customer reviews to include:</label>
-                <input type="number" id="negativeReviewsX" value="1" min="0">
+                <input type="number" id="negativeReviewsX" value="3" min="0">
             </div>
 
             <!-- Product/Service Categories & Quantities -->
@@ -163,7 +163,7 @@
             </div>
             <div class="input-group">
                 <label for="prodServiceCat1X">Number of Category 1 shops to find:</label>
-                <input type="number" id="prodServiceCat1X" value="5" min="1">
+                <input type="number" id="prodServiceCat1X" value="3" min="1">
             </div>
             <div class="input-group">
                 <label for="prodServiceCat2">Product/Services Category 2 (e.g., 'Bookstores'):</label>
@@ -186,19 +186,19 @@
 
             <!-- Specific Shops (Optional) -->
             <div class="input-group col-span-1 md:col-span-2">
-                <label for="specificShopsCat1">Specific Category 1 Shops (one per line, optional):</label>
+                <label for="specificShopsCat1">Specific Category 1 Shops (one per line, else type NONE):</label>
                 <textarea id="specificShopsCat1" placeholder="e.g.,
 Starbucks Reserve Roastery Tokyo
 Blue Bottle Coffee Shinjuku"></textarea>
             </div>
             <div class="input-group col-span-1 md:col-span-2">
-                <label for="specificShopsCat2">Specific Category 2 Shops (one per line, optional):</label>
+                <label for="specificShopsCat2">Specific Category 2 Shops (one per line, else type NONE):</label>
                 <textarea id="specificShopsCat2" placeholder="e.g.,
 Tsutaya Books Daikanyama
 Kinokuniya Shinjuku"></textarea>
             </div>
             <div class="input-group col-span-1 md:col-span-2">
-                <label for="specificShopsAdditional">Specific Additional Category Shops (one per line, optional):</label>
+                <label for="specificShopsAdditional">Specific Additional Category Shops (one per line, type else NONE):</label>
                 <textarea id="specificShopsAdditional" placeholder="e.g.,
 Mori Art Museum
 Tokyo National Museum"></textarea>
@@ -206,11 +206,11 @@ Tokyo National Museum"></textarea>
 
             <!-- Route Quantities -->
             <div class="input-group">
-                <label for="routeATopX">Number of Category 1 shops for Route A (for Category 1 specific listings ONLY)</label>
+                <label for="routeATopX">Number of Category 1 shops for Route A (for Category 1 listings ONLY)</label>
                 <input type="number" id="routeATopX" value="3" min="1">
             </div>
             <div class="input-group">
-                <label for="routeBTopX">Number of Category 2 shops for Route B (for Category 2 specific listings ONLY)</label>
+                <label for="routeBTopX">Number of Category 2 shops for Route B (for Category 2 listings ONLY)</label>
                 <input type="number" id="routeBTopX" value="3" min="1">
             </div>
             <div class="input-group">
