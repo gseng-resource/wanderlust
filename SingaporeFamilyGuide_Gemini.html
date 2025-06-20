@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Open Graph Tags for Social Sharing -->
+<meta property="og:title" content="Itinerary Prompt Generator">
+<meta property="og:description" content="Singapore Family Guide for 19A!">
+<meta property="og:image" content="https://gseng-resource.github.io/wanderlust/SGIcon.png">
+<meta property="og:url" content="https://gseng-resource.github.io/wanderlust/SingaporeFamilyGuide_Gemini.html">
+<meta property="og:type" content="website">
+<head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Singapore Family Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chosen Palette: Slate & Teal -->
+    <!-- Application Structure Plan: A single-page application with a sticky navigation bar for filtering locations by category and distance. The main content area displays locations as cards in a responsive grid. Each card contains detailed information, including a 'View Reviews' button that toggles a modal display for positive and negative feedback. A dedicated section at the bottom presents an optimized route for nearby locations. This structure was chosen for its user-friendliness, allowing users to instantly filter a large amount of information on a single page without reloads, and to access both broad exploration (all locations) and a specific, curated plan (optimized route) easily. -->
+    <!-- Visualization & Content Choices: The primary goal is to present organized, filterable information. A card-based layout is used for each location (Goal: Inform/Organize). Each card contains structured text, an external link to Google Maps, and a button-triggered modal for reviews (Interaction: Click to reveal). A table is used to present the optimized route for clarity (Goal: Organize). A bar chart visualizes the distribution of locations by distance (Goal: Compare), providing a quick overview of what's nearby versus what's further away. All implemented using HTML/Tailwind and vanilla JS. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        .active-filter {
+            background-color: #14B8A6; /* Teal-500 */
+            color: white;
+            font-weight: 600;
+        }
+        .modal {
+            transition: opacity 0.25s ease;
+        }
+        .modal-content {
+            transition: transform 0.25s ease;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-slate-50 font-sans">
+
+    <div id="app" class="container mx-auto p-4 md:p-8">
+        
+        <header class="text-center mb-8">
+            <h1 class="text-4xl md:text-5xl font-bold text-slate-800">Singapore Seng Family Guide</h1>
+            <p class="text-slate-600 mt-2">Your interactive guide to attractions near <strong>19A Lorong H Telok Kurau</strong>.</p>
+        </header>
+
+        <nav class="sticky top-0 bg-white/80 backdrop-blur-md z-10 p-4 rounded-xl shadow-md mb-8">
+            <div id="filters">
+                <div class="mb-4">
+                    <p class="font-semibold text-slate-700 mb-2">Filter by Category:</p>
+                    <div class="flex flex-wrap gap-2">
+                        <button data-filter-type="category" data-filter="all" class="filter-btn-category px-4 py-2 text-sm bg-white border border-slate-300 rounded-full hover:bg-slate-100 active-filter">All</button>
+                        <button data-filter-type="category" data-filter="hawker" class="filter-btn-category px-4 py-2 text-sm bg-white border border-slate-300 rounded-full hover:bg-slate-100">🍽️ Hawker Centres</button>
+                        <button data-filter-type="category" data-filter="mall" class="filter-btn-category px-4 py-2 text-sm bg-white border border-slate-300 rounded-full hover:bg-slate-100">🛍️ Shopping Malls</button>
+                        <button data-filter-type="category" data-filter="park" class="filter-btn-category px-4 py-2 text-sm bg-white border border-slate-300 rounded-full hover:bg-slate-100">🌳 Parks & Playgrounds</button>
+                    </div>
+                </div>
+                <div>
+                    <p class="font-semibold text-slate-700 mb-2">Filter by Distance:</p>
+                    <div class="flex flex-wrap gap-2">
+                        <button data-filter-type="distance" data-filter="all" class="filter-btn-distance px-4 py-2 text-sm bg-white border border-slate-300 rounded-full hover:bg-slate-100 active-filter">All</button>
+                        <button data-filter-type="distance" data-filter="<1km" class="filter-btn-distance px-4 py-2 text-sm bg-white border border-slate-300 rounded-full hover:bg-slate-100">&lt; 1 km</button>
+                        <button data-filter-type="distance" data-filter="1-2km" class="filter-btn-distance px-4 py-2 text-sm bg-white border border-slate-300 rounded-full hover:bg-slate-100">1-2 km</button>
+                        <button data-filter-type="distance" data-filter="2-3km" class="filter-btn-distance px-4 py-2 text-sm bg-white border border-slate-300 rounded-full hover:bg-slate-100">2-3 km</button>
+                        <button data-filter-type="distance" data-filter=">3km" class="filter-btn-distance px-4 py-2 text-sm bg-white border border-slate-300 rounded-full hover:bg-slate-100">&gt; 3 km</button>
+                    </div>
+                </div>
+                 <div class="mt-4 text-center">
+                    <a href="#optimized-route-section" class="inline-block px-6 py-3 bg-teal-500 text-white font-semibold rounded-lg shadow-md hover:bg-teal-600 transition-colors">Jump to Optimized Route</a>
+                </div>
+            </div>
+        </nav>
+        
+        <section id="locations-overview" class="mb-12 p-6 bg-white rounded-xl shadow-md">
+             <h2 class="text-2xl font-bold text-slate-800 mb-4 text-center">Locations Overview</h2>
+             <p class="text-slate-600 text-center mb-6">Here's a quick look at the number of recommended spots by distance. Use the filters above to explore them in detail.</p>
+             <div class="chart-container relative h-64 md:h-80 w-full max-w-3xl mx-auto">
+                <canvas id="locationsChart"></canvas>
+            </div>
+        </section>
+
+        <main id="locations-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Location cards will be dynamically inserted here -->
+        </main>
+        
+        <section id="optimized-route-section" class="mt-16 pt-8 border-t border-slate-200">
+             <h2 class="text-3xl font-bold text-slate-800 text-center mb-4">Optimized Route Plan</h2>
+             <p class="text-slate-600 text-center max-w-3xl mx-auto mb-8">For a fun-filled day out, here’s an efficient route covering all recommended locations within 2km. The route starts and ends at your accommodation and is designed to minimize travel time. Estimated driving times are provided, but can vary with traffic.</p>
+             
+             <div class="text-center mb-8">
+                 <a href="https://www.google.com/maps/dir/19A+Lorong+H+Telok+Kurau,_Singapore/Joo+Chiat+Terrace+Park/Dunman+Food+Centre/Katong+Square/i12+Katong/Marine+Cove/East+Coast+Park/Parkway+Parade/Marine+Parade+Central+Market+%26+Food+Centre/19A+Lorong+H+Telok+Kurau,
++Singapore" target="_blank" class="inline-block px-8 py-4 bg-blue-600 text-white font-bold rounded-lg shadow-lg hover:bg-blue-700 transition-transform transform hover:scale-105">
+                     Open Route in Google Maps
+                 </a>
+                 <p class="text-sm text-slate-500 mt-2">Total Estimated Driving Time: Approx. 35-45 minutes (excluding time at stops)</p>
+             </div>
+             
+             <div class="bg-white rounded-xl shadow-md overflow-hidden max-w-4xl mx-auto">
+                 <div class="overflow-x-auto">
+                     <table class="w-full text-left">
+                         <thead class="bg-slate-100">
+                             <tr>
+                                 <th class="p-4 font-semibold text-slate-700">Stop</th>
+                                 <th class="p-4 font-semibold text-slate-700">Leg</th>
+                                 <th class="p-4 font-semibold text-slate-700">Est. Driving Time</th>
+                             </tr>
+                         </thead>
+                         <tbody class="divide-y divide-slate-200">
+                             <tr class="hover:bg-slate-50">
+                                <td class="p-4 font-bold text-teal-600">1</td>
+                                <td class="p-4">19A Lorong H Telok Kurau ➔ Joo Chiat Terrace Park</td>
+                                <td class="p-4">~2-3 mins</td>
+                             </tr>
+                              <tr class="hover:bg-slate-50">
+                                <td class="p-4 font-bold text-teal-600">2</td>
+                                <td class="p-4">Joo Chiat Terrace Park ➔ Dunman Food Centre</td>
+                                <td class="p-4">~3-4 mins</td>
+                             </tr>
+                              <tr class="hover:bg-slate-50">
+                                <td class="p-4 font-bold text-teal-600">3</td>
+                                <td class="p-4">Dunman Food Centre ➔ Katong Square</td>
+                                <td class="p-4">~4-5 mins</td>
+                             </tr>
+                             <tr class="hover:bg-slate-50">
+                                <td class="p-4 font-bold text-teal-600">4</td>
+                                <td class="p-4">Katong Square ➔ i12 Katong</td>
+                                <td class="p-4">&lt; 1 min</td>
+                             </tr>
+                             <tr class="hover:bg-slate-50">
+                                <td class="p-4 font-bold text-teal-600">5</td>
+                                <td class="p-4">i12 Katong ➔ Marine Cove Playground</td>
+                                <td class="p-4">~5-7 mins</td>
+                             </tr>
+                             <tr class="hover:bg-slate-50">
+                                <td class="p-4 font-bold text-teal-600">6</td>
+                                <td class="p-4">Marine Cove ➔ East Coast Park (general area)</td>
+                                <td class="p-4">~2-3 mins</td>
+                             </tr>
+                              <tr class="hover:bg-slate-50">
+                                <td class="p-4 font-bold text-teal-600">7</td>
+                                <td class="p-4">East Coast Park ➔ Parkway Parade</td>
+                                <td class="p-4">~5-6 mins</td>
+                             </tr>
+                             <tr class="hover:bg-slate-50">
+                                <td class="p-4 font-bold text-teal-600">8</td>
+                                <td class="p-4">Parkway Parade ➔ Marine Parade Central Market</td>
+                                <td class="p-4">~2-3 mins</td>
+                             </tr>
+                             <tr class="hover:bg-slate-50">
+                                <td class="p-4 font-bold text-teal-600">9</td>
+                                <td class="p-4">Marine Parade Central Market ➔ 19A Lorong H Telok Kurau</td>
+                                <td class="p-4">~6-8 mins</td>
+                             </tr>
+                         </tbody>
+                     </table>
+                 </div>
+             </div>
+        </section>
+
+    </div>
+
+    <!-- Modal Structure -->
+    <div id="reviewModal" class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 opacity-0 pointer-events-none">
+        <div class="modal-content bg-white rounded-xl shadow-2xl w-full max-w-2xl max-h-full overflow-y-auto transform scale-95">
+            <div class="sticky top-0 bg-white p-4 border-b border-slate-200 flex justify-between items-center">
+                <h3 id="modalTitle" class="text-xl font-bold text-slate-800">Reviews</h3>
+                <button id="closeModal" class="text-slate-500 hover:text-slate-800">&times;</button>
+            </div>
+            <div id="modalBody" class="p-6">
+                <!-- Review content will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const locations = [
+            {
+                name: 'Dunman Food Centre',
+                category: 'hawker',
+                distance: '<1km',
+                distanceValue: 0.9,
+                address: '271 Onan Rd, Singapore 424768',
+                hours: 'Most stalls open daily, approx. 7:00 AM - 10:00 PM',
+                mapLink: 'https://maps.app.goo.gl/qLwG3Tf7c4t5E8C98',
+                reviews: {
+                    positive: [
+                        'A fantastic collection of local food gems. The wanton mee is a must-try, and the duck rice is legendary.',
+                        'Small, but packs a punch. It feels very local and authentic, less touristy than other big hawker centres.',
+                        'I love the variety here. You can get great rojak, tau kwa pau, and a comforting bowl of porridge all in one place.'
+                    ],
+                    negative: [
+                        'Parking is extremely limited, which can be a real headache during peak hours.',
+                        'The famous wanton mee stall can have a very long queue, and the chilli is seriously spicy, maybe too much for some.',
+                        'It can get quite warm as it\'s not air-conditioned, and finding a table can be tough during lunch.'
+                    ]
+                }
+            },
+            {
+                name: 'Joo Chiat Terrace Park',
+                category: 'park',
+                distance: '<1km',
+                distanceValue: 0.5,
+                address: 'Joo Chiat Terrace, Singapore 427253',
+                hours: 'Open 24 hours',
+                mapLink: 'https://maps.app.goo.gl/mPjW9F6r4C7XyR5y5',
+                reviews: {
+                    positive: [
+                        'A lovely little green space in a beautiful neighborhood. Perfect for a quiet morning walk.',
+                        'The playground is simple but good enough to keep the young kids entertained for a while.',
+                        'It\'s clean, well-maintained, and feels very safe. A nice spot for local residents.'
+                    ],
+                    negative: [
+                        'It\'s quite small, so not really a place for a long run or extensive activities.',
+                        'There are no toilet facilities directly in the park.',
+                        'Can get a bit crowded with dog walkers in the evenings.'
+                    ]
+                },
+            },
+            {
+                name: 'i12 Katong',
+                category: 'mall',
+                distance: '1-2km',
+                distanceValue: 1.1,
+                address: '112 East Coast Rd, Singapore 428802',
+                hours: '10:00 AM - 10:00 PM',
+                mapLink: 'https://maps.app.goo.gl/g2Z3oQz3yA7p6bBq6',
+                reviews: {
+                    positive: [
+                        'Newly renovated and looks great. Has a good mix of shops, restaurants, and a nice cinema.',
+                        'The dining options are fantastic, from cafes like PS.Cafe to the Malaysia Boleh food court.',
+                        'It feels very modern and is a great family-friendly mall with activities like a climbing gym.'
+                    ],
+                    negative: [
+                        'Can get very crowded, especially on weekends, making it hard to walk around.',
+                        'Parking can be expensive and fills up quickly.',
+                        'Some of the shops are quite high-end, missing some more budget-friendly options.'
+                    ]
+                }
+            },
+            {
+                name: 'Katong Square',
+                category: 'mall',
+                distance: '1-2km',
+                distanceValue: 1.2,
+                address: '88 East Coast Rd, Singapore 428788',
+                hours: '10:00 AM - 10:00 PM',
+                mapLink: 'https://maps.app.goo.gl/PzS8nFhG3tKq6e9V7',
+                reviews: {
+                    positive: [
+                        'A charming, smaller mall with a heritage feel. Great selection of restaurants.',
+                        'Less crowded than the bigger malls nearby, making for a more relaxed shopping experience.',
+                        'The FairPrice Finest here is excellent and there are some unique specialty shops.'
+                    ],
+                    negative: [
+                        'The variety of retail shops is quite limited compared to a full-sized mall.',
+                        'It can feel a bit quiet or empty at times, especially on weekdays.',
+                        'Parking is shared with the hotel and can be confusing to access.'
+                    ]
+                },
+            },
+            {
+                name: 'Marine Cove Playground',
+                category: 'park',
+                distance: '1-2km',
+                distanceValue: 1.8,
+                address: '1000 East Coast Park, Singapore 449876 (Area C)',
+                hours: 'Open 24 hours',
+                mapLink: 'https://maps.app.goo.gl/N4vTq3k4v1xY6wQj6',
+                reviews: {
+                    positive: [
+                        'An amazing playground for kids of all ages. The 8-meter tower with slides is a huge hit.',
+                        'Lots of space for kids to run around, with varied play equipment including swings and climbing nets.',
+                        'Great location right by the beach with plenty of family-friendly restaurants right next to it.'
+                    ],
+                    negative: [
+                        'Extremely crowded on weekends and public holidays. It can be hard to keep an eye on your kids.',
+                        'The play structures can get very hot in the afternoon sun.',
+                        'Parking is a nightmare on weekends; you have to come very early or be very lucky.'
+                    ]
+                }
+            },
+            {
+                name: 'East Coast Park',
+                category: 'park',
+                distance: '1-2km',
+                distanceValue: 1.5,
+                address: 'East Coast Park Service Rd, Singapore',
+                hours: 'Open 24 hours',
+                mapLink: 'https://maps.app.goo.gl/bJg5y8E2e8x5rF2f8',
+                reviews: {
+                    positive: [
+                        'A fantastic place for all sorts of recreational activities: cycling, skating, picnics, or just relaxing by the sea.',
+                        'The park is huge and well-maintained, with beautiful scenery and a constant sea breeze.',
+                        'Lots of food options available, from hawker fare at East Coast Lagoon to nice cafes and restaurants.'
+                    ],
+                    negative: [
+                        'Can get incredibly crowded, especially the cycling paths on weekends.',
+                        'Some areas are currently under construction, which can be disruptive.',
+                        'The water isn\'t the cleanest for swimming, better for sand play and enjoying the view.'
+                    ]
+                }
+            },
+            {
+                name: 'Parkway Parade',
+                category: 'mall',
+                distance: '1-2km',
+                distanceValue: 1.9,
+                address: '80 Marine Parade Rd, Singapore 449269',
+                hours: '10:00 AM - 10:00 PM',
+                mapLink: 'https://maps.app.goo.gl/x8G2f5tW2pY8qYy79',
+                reviews: {
+                    positive: [
+                        'A huge mall with a massive selection of stores. You can find almost anything you need here.',
+                        'Very family-friendly with lots of kid-focused shops and a great food court.',
+                        'Connected to the Marine Parade MRT station, making it very convenient to get to.'
+                    ],
+                    negative: [
+                        'The layout can be a bit confusing and it\'s easy to get lost.',
+                        'It\'s always busy, which can be overwhelming. The queues for food can be long.',
+                        'Parking is expensive and the car park is often full.'
+                    ]
+                }
+            },
+            {
+                name: 'Marine Parade Central Market & Food Centre',
+                category: 'hawker',
+                distance: '1-2km',
+                distanceValue: 1.9,
+                address: '84 Marine Parade Central, Singapore 440084',
+                hours: 'Approx. 6:00 AM - 9:00 PM',
+                mapLink: 'https://maps.app.goo.gl/3A3qgA6Zk8tH5fGq6',
+                reviews: {
+                    positive: [
+                        'Recently renovated, so it\'s clean and well-ventilated for a hawker centre.',
+                        'Many famous stalls with great food, like the Apollo Fresh Cockle Fried Kway Teow and Kun Ji Duck Rice.',
+                        'A true heartland hawker experience with reasonable prices and delicious, authentic food.'
+                    ],
+                    negative: [
+                        'It gets very crowded during lunch and dinner, making it hard to find a seat.',
+                        'Some of the popular stalls sell out early, so you have to go before the peak meal times.',
+                        'The quality of some stalls can be inconsistent at times.'
+                    ]
+                }
+            },
+            {
+                name: 'Old Airport Road Food Centre',
+                category: 'hawker',
+                distance: '2-3km',
+                distanceValue: 2.8,
+                address: '51 Old Airport Rd, Singapore 390051',
+                hours: 'Approx. 6:00 AM - 11:00 PM',
+                mapLink: 'https://maps.app.goo.gl/iXoUfB4g5R6w4eN4A',
+                reviews: {
+                    positive: [
+                        'One of the best and most famous hawker centres in Singapore. The sheer number of legendary stalls is incredible.',
+                        'You can find amazing versions of almost every local dish here: lor mee, satay, char kway teow, rojak, you name it.',
+                        'Despite being famous, the prices are still very reasonable. A must-visit for any foodie.'
+                    ],
+                    negative: [
+                        'Can be very overwhelming for a first-timer due to the size and number of choices.',
+                        'Extremely crowded, and finding a seat is a competitive sport. Queues for famous stalls can be 30-45 minutes long.',
+                        'The ventilation could be better; it can get quite hot and smoky.'
+                    ]
+                }
+            },
+            {
+                name: 'Kinex',
+                category: 'mall',
+                distance: '2-3km',
+                distanceValue: 2.1,
+                address: '11 Tanjong Katong Rd, Singapore 437157',
+                hours: '10:30 AM - 9:30 PM',
+                mapLink: 'https://maps.app.goo.gl/kXh4eYpG8q4E3Fq79',
+                reviews: {
+                    positive: [
+                        'A great mall for activities, with a large rock climbing gym and various enrichment centres.',
+                        'It\'s usually not too crowded, which makes for a pleasant shopping experience.',
+                        'Good selection of eateries and a nice supermarket in the basement.'
+                    ],
+                    negative: [
+                        'The retail selection is not as extensive as other nearby malls.',
+                        'It can feel a bit quiet and some areas seem to have high tenant turnover.',
+                        'The layout is a little bit odd and takes some getting used to.'
+                    ]
+                }
+            },
+            {
+                name: 'Coastal PlayGrove',
+                category: 'park',
+                distance: '2-3km',
+                distanceValue: 2.5,
+                address: '902 East Coast Park Service Rd, Singapore 449874 (Area B)',
+                hours: 'Play Tower: Tue-Sun 8am-8pm, Water Play: Tue-Sun 8am-8pm',
+                mapLink: 'https://maps.app.goo.gl/iHwB2B7u3w5T7A8j9',
+                reviews: {
+                    positive: [
+                        'The play tower is incredible! The tallest outdoor play feature in Singapore with amazing slides.',
+                        'The water play area is fantastic for cooling off and provides hours of fun for the kids.',
+                        'Great adaptive reuse of the old Big Splash site. A fantastic family destination.'
+                    ],
+                    negative: [
+                        'The tall slides can be scary for younger children, and it\'s a long climb up.',
+                        'Gets extremely crowded, especially the water play area. Changing rooms are often packed.',
+                        'Limited food options directly at the playground, you have to walk a bit.'
+                    ]
+                }
+            },
+            {
+                name: 'Gardens by the Bay',
+                category: 'park',
+                distance: '>3km',
+                distanceValue: 8.5,
+                address: '18 Marina Gardens Dr, Singapore 018953',
+                hours: 'Outdoor Gardens: 5:00 AM - 2:00 AM; Cooled Conservatories: 9:00 AM - 9:00 PM',
+                mapLink: 'https://maps.app.goo.gl/n7eW3vY9b1s8f4fUA',
+                reviews: {
+                    positive: [
+                        'Absolutely breathtaking and a world-class attraction. The Cloud Forest and Flower Dome are masterpieces.',
+                        'The Supertree Grove light and sound show at night is magical and a must-see.',
+                        'The Far East Organization Children\'s Garden with its water play area is fantastic for families and is free to enter.'
+                    ],
+                    negative: [
+                        'Tickets for the conservatories are quite expensive, especially for a family.',
+                        'It gets incredibly crowded, which can detract from the serene experience.',
+                        'The park is huge, so be prepared for a lot of walking. It can be tiring for young children.'
+                    ]
+                }
+            },
+             {
+                name: 'Newton Food Centre',
+                category: 'hawker',
+                distance: '>3km',
+                distanceValue: 9.5,
+                address: '500 Clemenceau Ave N, Singapore 229495',
+                hours: 'Approx. 12:00 PM - 2:00 AM',
+                mapLink: 'https://maps.app.goo.gl/3e5s2w5e4d9r6Y4n9',
+                reviews: {
+                    positive: [
+                        'A vibrant and atmospheric place to eat, especially at night. Great for seafood and satay.',
+                        'Featured in "Crazy Rich Asians," so it\'s a fun spot for tourists to visit.',
+                        'The open-air setting is lovely on a cool evening, and there are many famous stalls.'
+                    ],
+                    negative: [
+                        'Known for being a "tourist trap." Prices are generally higher than other hawker centres.',
+                        'Some stall owners can be quite pushy in trying to get you to order from them.',
+                        'The quality can be hit-or-miss depending on the stall; it pays to know which ones are good.'
+                    ]
+                }
+            },
+             {
+                name: 'VivoCity',
+                category: 'mall',
+                distance: '>3km',
+                distanceValue: 10.5,
+                address: '1 HarbourFront Walk, Singapore 098585',
+                hours: '10:00 AM - 10:00 PM',
+                mapLink: 'https://maps.app.goo.gl/R5wB5f5B2d6b3SgG8',
+                reviews: {
+                    positive: [
+                        'Singapore\'s largest mall with an unparalleled selection of shops and restaurants.',
+                        'The rooftop water feature and playground are amazing for kids, offering great views.',
+                        'Serves as the gateway to Sentosa Island, making it a perfect pre-adventure stop.'
+                    ],
+                    negative: [
+                        'It is enormous and can be very tiring to navigate. You can easily spend hours just walking.',
+                        'Constantly crowded, especially on weekends when it feels like the whole of Singapore is there.',
+                        'The food court is always packed, and finding a seat is a major challenge.'
+                    ]
+                }
+            },
+
+        ];
+        
+        const locationsGrid = document.getElementById('locations-grid');
+        const modal = document.getElementById('reviewModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalBody = document.getElementById('modalBody');
+        const closeModalBtn = document.getElementById('closeModal');
+        let activeFilters = {
+            category: 'all',
+            distance: 'all'
+        };
+
+        function renderLocations() {
+            locationsGrid.innerHTML = '';
+            locations.filter(location => {
+                const categoryMatch = activeFilters.category === 'all' || location.category === activeFilters.category;
+                const distanceMatch = activeFilters.distance === 'all' || location.distance === activeFilters.distance;
+                return categoryMatch && distanceMatch;
+            }).forEach(location => {
+                const categoryIcons = {
+                    hawker: '🍽️',
+                    mall: '🛍️',
+                    park: '🌳'
+                };
+                
+                const card = document.createElement('div');
+                card.className = 'location-card bg-white rounded-xl shadow-md overflow-hidden transform hover:-translate-y-1 transition-transform duration-300';
+                card.dataset.category = location.category;
+                card.dataset.distance = location.distance;
+
+                card.innerHTML = `
+                    <div class="p-6">
+                        <div class="flex justify-between items-start">
+                            <h3 class="text-xl font-bold text-slate-800 mb-2">${location.name}</h3>
+                            <span class="text-3xl">${categoryIcons[location.category] || '📍'}</span>
+                        </div>
+                        <div class="mb-4">
+                           <span class="inline-block bg-teal-100 text-teal-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">${location.distance} (~${location.distanceValue} km)</span>
+                        </div>
+                        <div class="text-slate-600 text-sm space-y-2">
+                            <p><strong>Address:</strong> ${location.address}</p>
+                            <p><strong>Hours:</strong> ${location.hours}</p>
+                        </div>
+                        <div class="mt-6 flex flex-wrap gap-2">
+                            <a href="${location.mapLink}" target="_blank" class="flex-1 text-center px-4 py-2 bg-blue-500 text-white text-sm font-semibold rounded-lg hover:bg-blue-600 transition-colors">View on Map</a>
+                            <button class="review-btn flex-1 text-center px-4 py-2 bg-slate-200 text-slate-700 text-sm font-semibold rounded-lg hover:bg-slate-300 transition-colors">View Reviews</button>
+                        </div>
+                    </div>
+                `;
+                
+                card.querySelector('.review-btn').addEventListener('click', () => openModal(location));
+                locationsGrid.appendChild(card);
+            });
+        }
+        
+        function setupFilters() {
+            const filterButtons = document.querySelectorAll('[data-filter-type]');
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const filterType = button.dataset.filterType;
+                    const filterValue = button.dataset.filter;
+                    
+                    activeFilters[filterType] = filterValue;
+                    
+                    document.querySelectorAll(`.filter-btn-${filterType}`).forEach(btn => btn.classList.remove('active-filter'));
+                    button.classList.add('active-filter');
+                    
+                    renderLocations();
+                });
+            });
+        }
+        
+        function openModal(location) {
+            modalTitle.textContent = `${location.name} - Reviews`;
+            
+            let reviewsHTML = `
+                <div class="mb-6">
+                    <h4 class="text-lg font-semibold text-green-600 mb-2">Positive Reviews 👍</h4>
+                    <ul class="list-disc list-inside space-y-2 text-slate-700">
+                        ${location.reviews.positive.map(r => `<li>${r}</li>`).join('')}
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold text-red-600 mb-2">Negative Reviews 👎</h4>
+                    <ul class="list-disc list-inside space-y-2 text-slate-700">
+                         ${location.reviews.negative.map(r => `<li>${r}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+            
+            modalBody.innerHTML = reviewsHTML;
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.querySelector('.modal-content').classList.remove('scale-95');
+        }
+
+        function closeModal() {
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modal.querySelector('.modal-content').classList.add('scale-95');
+        }
+        
+        closeModalBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+        
+        function renderChart() {
+            const ctx = document.getElementById('locationsChart').getContext('2d');
+            const distanceCounts = locations.reduce((acc, loc) => {
+                acc[loc.distance] = (acc[loc.distance] || 0) + 1;
+                return acc;
+            }, {});
+
+            const labels = ['<1km', '1-2km', '2-3km', '>3km'];
+            const data = labels.map(label => distanceCounts[label] || 0);
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: '# of Locations',
+                        data: data,
+                        backgroundColor: [
+                            'rgba(20, 184, 166, 0.6)',
+                            'rgba(14, 116, 144, 0.6)',
+                            'rgba(15, 23, 42, 0.6)',
+                            'rgba(71, 85, 105, 0.6)'
+                        ],
+                        borderColor: [
+                           'rgb(20, 184, 166)',
+                           'rgb(14, 116, 144)',
+                           'rgb(15, 23, 42)',
+                           'rgb(71, 85, 105)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 1
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        title: {
+                            display: true,
+                            text: 'Number of Locations by Distance'
+                        }
+                    }
+                }
+            });
+        }
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderLocations();
+            setupFilters();
+            renderChart();
+        });
+
+    </script>
+</body>
+</html>
