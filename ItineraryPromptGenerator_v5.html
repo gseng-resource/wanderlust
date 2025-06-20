@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Open Graph Tags for Social Sharing -->
+<meta property="og:title" content="Itinerary Prompt Generator">
+<meta property="og:description" content="Generate a concise itinerary prompt for ChatGPT!!!">
+<meta property="og:image" content="https://gseng-resource.github.io/wanderlust/AIPrompt.png">
+<meta property="og:url" content="https://gseng-resource.github.io/wanderlust/ItineraryPromptGenerator_v5.html">
+<meta property="og:type" content="website">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Itinerary Prompt Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chosen Palette: Warm Neutrals -->
+    <!-- Application Structure Plan: A multi-step wizard interface guides the user sequentially through filling out the prompt template. A two-column layout shows the input forms on the left and a live-updating preview of the generated prompt on the right. This structure breaks down the complex template into manageable sections, reducing cognitive load and preventing errors. The user flow is linear (Step 1 -> Step 2 -> ... -> Final), which is the most intuitive way to handle a form-based task. This was chosen because the source report is a template that requires sequential data entry to be completed correctly. -->
+    <!-- Visualization & Content Choices: The application exclusively uses structured HTML forms and text inputs to capture user data, as the source report is purely text-based and contains no quantitative data requiring charts. The key interactive feature is the real-time preview pane, which serves as a constant visual feedback mechanism. Report Info: [Placeholder Name] -> Goal: Collect user input -> Presentation: Labeled HTML input field -> Interaction: User types, preview updates -> Justification: The most direct and universally understood method for form data entry. The "Other Locations" section uses a dynamic list, allowing users to add/remove input fields, directly addressing the template's flexibility requirement. A final "Copy to Clipboard" button provides a crucial usability enhancement for the final output. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .step-active {
+            display: block;
+        }
+        .step-inactive {
+            display: none;
+        }
+        .form-input, .form-select {
+            @apply w-full px-4 py-2 mt-2 text-stone-700 bg-white border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 transition-shadow duration-200;
+        }
+        .btn {
+            @apply px-6 py-2 font-semibold text-white rounded-lg shadow-md transition-transform duration-200;
+        }
+        .btn-primary {
+            @apply bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500;
+        }
+        .btn-secondary {
+            @apply bg-stone-500 hover:bg-stone-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-stone-500;
+        }
+        .progress-bar-fill {
+            transition: width 0.5s ease-in-out;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800">
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold text-teal-800">Itinerary Prompt Generator</h1>
+            <p class="mt-2 text-stone-600 max-w-2xl mx-auto">Follow the steps to build a detailed and accurate request prompt. Your final prompt will update in real-time.</p>
+        </header>
+
+        <main class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+            
+            <!-- Form/Wizard Section -->
+            <div class="lg:col-span-3 bg-white p-6 sm:p-8 rounded-2xl shadow-lg">
+                <div id="wizard-header" class="mb-6">
+                    <div class="mb-2 flex justify-between items-center">
+                        <span class="text-sm font-medium text-teal-700">Step <span id="current-step-display">1</span> of 4</span>
+                        <span id="progress-text" class="text-sm font-medium text-teal-700">0% Complete</span>
+                    </div>
+                    <div class="w-full bg-stone-200 rounded-full h-2.5">
+                        <div id="progress-bar" class="bg-teal-600 h-2.5 rounded-full progress-bar-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <form id="prompt-form">
+                    <!-- Step 1: Core Details -->
+                    <section id="step-1" class="step-active fade-in">
+                        <h2 class="text-2xl font-semibold mb-1">Core Details</h2>
+                        <p class="text-stone-500 mb-6">Start with the essential information for your trip.</p>
+                        <div class="space-y-4">
+                            <div>
+                                <label for="city-location" class="font-medium text-stone-700">City / Location</label>
+                                <input type="text" id="city-location" class="form-input" placeholder="e.g., Tokyo, Japan">
+                            </div>
+                            <div>
+                                <label for="language" class="font-medium text-stone-700">Output Language</label>
+                                <input type="text" id="language" class="form-input" placeholder="e.g., English" value="English">
+                            </div>
+                            <div>
+                                <label for="traveler-type" class="font-medium text-stone-700">Traveler Type</label>
+                                <input type="text" id="traveler-type" class="form-input" placeholder="e.g., Solo traveler, Family with kids">
+                            </div>
+                            <div>
+                                <label for="hotel-location" class="font-medium text-stone-700">Hotel / Starting Location</label>
+                                <input type="text" id="hotel-location" class="form-input" placeholder="e.g., Shinjuku Gracery Hotel">
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Step 2: Search Categories -->
+                    <section id="step-2" class="step-inactive fade-in">
+                        <h2 class="text-2xl font-semibold mb-1">Search Categories</h2>
+                        <p class="text-stone-500 mb-6">Define the types of places you want to find.</p>
+                        <div class="space-y-4">
+                            <div>
+                                <label for="category-1" class="font-medium text-stone-700">Product/Service Category 1</label>
+                                <input type="text" id="category-1" class="form-input" placeholder="e.g., Ramen Restaurants">
+                            </div>
+                            <div>
+                                <label for="category-2" class="font-medium text-stone-700">Product/Service Category 2</label>
+                                <input type="text" id="category-2" class="form-input" placeholder="e.g., Coffee Shops">
+                            </div>
+                            <div>
+                                <label for="category-3" class="font-medium text-stone-700">Product/Service Category 3</label>
+                                <input type="text" id="category-3" class="form-input" placeholder="e.g., Bookstores">
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Step 3: Search Parameters -->
+                    <section id="step-3" class="step-inactive fade-in">
+                        <h2 class="text-2xl font-semibold mb-1">Search Parameters</h2>
+                        <p class="text-stone-500 mb-6">Specify how many results and reviews you need.</p>
+                        <div class="space-y-6">
+                             <div>
+                                <label for="top-x" class="font-medium text-stone-700">Number of Top Locations (X)</label>
+                                <input type="number" id="top-x" class="form-input" value="3" min="1">
+                             </div>
+                             <div>
+                                <label for="positive-reviews" class="font-medium text-stone-700">Number of Positive Reviews</label>
+                                <input type="number" id="positive-reviews" class="form-input" value="3" min="1">
+                             </div>
+                             <div>
+                                <label for="negative-reviews" class="font-medium text-stone-700">Number of Negative Reviews</label>
+                                <input type="number" id="negative-reviews" class="form-input" value="2" min="1">
+                             </div>
+                        </div>
+                    </section>
+                    
+                    <!-- Step 4: Other Locations -->
+                    <section id="step-4" class="step-inactive fade-in">
+                        <h2 class="text-2xl font-semibold mb-1">Other Specific Locations</h2>
+                        <p class="text-stone-500 mb-4">List any other specific places you want to include.</p>
+                        <div id="other-locations-container" class="space-y-3">
+                            <!-- Dynamic inputs will be added here -->
+                        </div>
+                        <button type="button" id="add-location-btn" class="mt-4 text-teal-600 font-semibold hover:text-teal-800 transition-colors">+ Add another location</button>
+                    </section>
+                </form>
+
+                <div id="navigation-controls" class="mt-8 pt-6 border-t border-stone-200 flex justify-between items-center">
+                    <button id="prev-btn" class="btn btn-secondary" style="visibility: hidden;">Previous</button>
+                    <button id="next-btn" class="btn btn-primary">Next Step</button>
+                    <button id="generate-btn" class="btn btn-primary" style="display: none;">Copy Prompt</button>
+                </div>
+            </div>
+
+            <!-- Preview Section -->
+            <div class="lg:col-span-2 relative">
+                 <div class="sticky top-8">
+                    <h3 class="text-xl font-semibold mb-2 text-stone-700">Live Prompt Preview</h3>
+                    <div id="prompt-output-container" class="bg-stone-800 text-stone-100 p-4 rounded-xl shadow-inner-lg h-[600px] overflow-y-auto">
+                        <pre id="prompt-output" class="text-sm whitespace-pre-wrap font-mono"></pre>
+                    </div>
+                    <div id="copy-success" class="absolute bottom-4 right-4 bg-green-500 text-white text-sm font-bold py-2 px-4 rounded-lg shadow-md" style="display: none; opacity: 0; transition: opacity 0.5s;">
+                        Copied to clipboard!
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const state = {
+                currentStep: 1,
+                values: {
+                    'city-location': '',
+                    'language': 'English',
+                    'traveler-type': '',
+                    'hotel-location': '',
+                    'category-1': '',
+                    'category-2': '',
+                    'category-3': '',
+                    'top-x': 3,
+                    'positive-reviews': 3,
+                    'negative-reviews': 2,
+                    'other-locations': [],
+                }
+            };
+
+            const totalSteps = 4;
+            const form = document.getElementById('prompt-form');
+            const inputs = form.querySelectorAll('input, select');
+            const otherLocationsContainer = document.getElementById('other-locations-container');
+            const addLocationBtn = document.getElementById('add-location-btn');
+            const promptOutput = document.getElementById('prompt-output');
+            
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const generateBtn = document.getElementById('generate-btn');
+            const copySuccess = document.getElementById('copy-success');
+
+            const progressBar = document.getElementById('progress-bar');
+            const progressText = document.getElementById('progress-text');
+            const currentStepDisplay = document.getElementById('current-step-display');
+
+            function updateProgress() {
+                const step = state.currentStep;
+                const progressPercentage = ((step -1) / totalSteps) * 100;
+                progressBar.style.width = `${progressPercentage}%`;
+                
+                let fieldsFilled = 0;
+                const totalFields = Object.keys(state.values).length -1 + state.values['other-locations'].length;
+                Object.values(state.values).forEach(value => {
+                    if (Array.isArray(value)) {
+                        if (value.length > 0 && value.every(v => v.trim() !== '')) fieldsFilled += value.length;
+                    } else if (String(value).trim() !== '') {
+                        fieldsFilled++;
+                    }
+                });
+                const completionPercentage = Math.round((fieldsFilled / totalFields) * 100);
+                progressText.textContent = `${completionPercentage}% Complete`;
+                
+                currentStepDisplay.textContent = step;
+            }
+
+            function generatePromptText() {
+                const v = state.values;
+                const categories = [v['category-1'], v['category-2'], v['category-3']].filter(Boolean);
+                const otherCategory = v['other-locations'].length > 0 ? ['Other Product/Service/Category'] : [];
+                const allCategories = [...categories, ...otherCategory];
+
+                let categoriesText = allCategories.map((c, i) => {
+                    if (i === allCategories.length - 1 && allCategories.length > 1) {
+                        return `and ${c}`;
+                    }
+                    return c;
+                }).join(', ').replace(/, and/, ' and');
+
+                let otherLocationsList = v['other-locations'].length > 0 
+                    ? v['other-locations'].map(loc => `- ${loc || '[Specify Location]'}`).join('\n')
+                    : '- default to NONE if blank';
+
+                return `# ${v['city-location'] || '[City/Location]'} Guide Request
+
+## Output Language
+${v['language'] || '[Language preference]'}
+
+## Context
+${v['traveler-type'] || '[Traveler Type]'} at ${v['hotel-location'] || '[Hotel/Location]'} seeking ${categoriesText || '[Product/Service/Category 1], [Product/Service/Category 2], [Product/Service/Category 3] and [Other Product/Service/Category]'} Locations.
+
+## Required Information (ALL)
+For each location in Task 5 provide:
+- Full address
+- Operating hours
+- Google Maps link
+- ${v['positive-reviews'] || '[X]'} positive customer reviews
+- ${v['negative-reviews'] || '[X]'} negative customer reviews
+
+## Tasks
+
+### 1. ${v['category-1'] || '[Product/Service/Category 1]'}
+Find top ${v['top-x'] || '[X]'} ${v['category-1'] || '[Product/Service/Category 1]'} within 1km of ${v['hotel-location'] || '[Hotel/Location]'}.
+Find top ${v['top-x'] || '[X]'} ${v['category-1'] || '[Product/Service/Category 1]'} within 1km to 2km of ${v['hotel-location'] || '[Hotel/Location]'}.
+Find top ${v['top-x'] || '[X]'} ${v['category-1'] || '[Product/Service/Category 1]'} within 2km to 3km of ${v['hotel-location'] || '[Hotel/Location]'}.
+Find top ${v['top-x'] || '[X]'} ${v['category-1'] || '[Product/Service/Category 1]'} beyond 3km of ${v['hotel-location'] || '[Hotel/Location]'}.
+
+### 2. ${v['category-2'] || '[Product/Service/Category 2]'}
+Find top ${v['top-x'] || '[X]'} ${v['category-2'] || '[Product/Service/Category 2]'} within 1km of ${v['hotel-location'] || '[Hotel/Location]'}.
+Find top ${v['top-x'] || '[X]'} ${v['category-2'] || '[Product/Service/Category 2]'} within 1km to 2km of ${v['hotel-location'] || '[Hotel/Location]'}.
+Find top ${v['top-x'] || '[X]'} ${v['category-2'] || '[Product/Service/Category 2]'} within 2km to 3km of ${v['hotel-location'] || '[Hotel/Location]'}.
+Find top ${v['top-x'] || '[X]'} ${v['category-2'] || '[Product/Service/Category 2]'} beyond 3km of ${v['hotel-location'] || '[Hotel/Location]'}.
+
+### 3. ${v['category-3'] || '[Product/Service/Category 3]'}
+Find top ${v['top-x'] || '[X]'} ${v['category-3'] || '[Product/Service/Category 3]'} within 1km of ${v['hotel-location'] || '[Hotel/Location]'}.
+Find top ${v['top-x'] || '[X]'} ${v['category-3'] || '[Product/Service/Category 3]'} within 1km to 2km of ${v['hotel-location'] || '[Hotel/Location]'}.
+Find top ${v['top-x'] || '[X]'} ${v['category-3'] || '[Product/Service/Category 3]'} within 2km to 3km of ${v['hotel-location'] || '[Hotel/Location]'}.
+Find top ${v['top-x'] || '[X]'} ${v['category-3'] || '[Product/Service/Category 3]'} beyond 3km of ${v['hotel-location'] || '[Hotel/Location]'}.
+
+### 4. Other Product/Service/Category Locations
+Provide details for these locations:
+${otherLocationsList}
+
+### 5. Consolidated List of ${categoriesText || '[Product/Service/Category 1], [Product/Service/Category 2], [Product/Service/Category 3], [Other Product/Service/Category]'} Locations
+Create a unique list combining all locations from Tasks 1, 2, 3, 4, (remove duplicates) and sorted according to:
+- Within 1km of ${v['hotel-location'] || '[Hotel/Location]'}
+- Between 1km to 2km of ${v['hotel-location'] || '[Hotel/Location]'}
+- Between 2km to 3km of ${v['hotel-location'] || '[Hotel/Location]'}
+- Beyond 3km of ${v['hotel-location'] || '[Hotel/Location]'}.
+
+### 6. Optimized Route
+Create route starting/ending at ${v['hotel-location'] || '[Hotel/Location]'} based on selecting all locations within 1km of ${v['hotel-location'] || '[Hotel/Location]'} and between 1km to 2km of ${v['hotel-location'] || '[Hotel/Location]'} listed in Task 5.
+- Organize locations by proximity for efficiency
+- Include Google Maps link for route
+- Provide a list selected locations in a table with estimated duration between each locations.
+- Estimate total duration of the route.`;
+            }
+
+            function render() {
+                promptOutput.textContent = generatePromptText();
+                updateProgress();
+            }
+            
+            function handleInputChange(event) {
+                const { id, value } = event.target;
+                if (state.values.hasOwnProperty(id)) {
+                    state.values[id] = value;
+                }
+                render();
+            }
+
+            function handleOtherLocationChange(index, value) {
+                state.values['other-locations'][index] = value;
+                render();
+            }
+
+            function removeOtherLocation(index) {
+                state.values['other-locations'].splice(index, 1);
+                renderOtherLocations();
+                render();
+            }
+
+            function renderOtherLocations() {
+                otherLocationsContainer.innerHTML = '';
+                if (state.values['other-locations'].length === 0) {
+                     otherLocationsContainer.innerHTML = '<p class="text-stone-500 italic">No specific locations added. Click the button below to add one.</p>';
+                } else {
+                    state.values['other-locations'].forEach((loc, index) => {
+                        const div = document.createElement('div');
+                        div.className = 'flex items-center space-x-2';
+                        const input = document.createElement('input');
+                        input.type = 'text';
+                        input.value = loc;
+                        input.className = 'form-input flex-grow';
+                        input.placeholder = `Location ${index + 1}`;
+                        input.addEventListener('input', (e) => handleOtherLocationChange(index, e.target.value));
+                        
+                        const button = document.createElement('button');
+                        button.type = 'button';
+                        button.innerHTML = '&times;';
+                        button.className = 'text-red-500 font-bold text-2xl hover:text-red-700 transition-colors';
+                        button.onclick = () => removeOtherLocation(index);
+
+                        div.appendChild(input);
+                        div.appendChild(button);
+                        otherLocationsContainer.appendChild(div);
+                    });
+                }
+            }
+
+            addLocationBtn.addEventListener('click', () => {
+                state.values['other-locations'].push('');
+                renderOtherLocations();
+                render();
+            });
+
+            inputs.forEach(input => {
+                input.addEventListener('input', handleInputChange);
+            });
+
+            function showStep(stepNumber) {
+                document.querySelectorAll('section').forEach(sec => {
+                    sec.classList.remove('step-active');
+                    sec.classList.add('step-inactive');
+                });
+                document.getElementById(`step-${stepNumber}`).classList.add('step-active');
+                document.getElementById(`step-${stepNumber}`).classList.remove('step-inactive');
+
+                prevBtn.style.visibility = (stepNumber === 1) ? 'hidden' : 'visible';
+                nextBtn.style.display = (stepNumber === totalSteps) ? 'none' : 'inline-block';
+                generateBtn.style.display = (stepNumber === totalSteps) ? 'inline-block' : 'none';
+            }
+
+            nextBtn.addEventListener('click', () => {
+                if (state.currentStep < totalSteps) {
+                    state.currentStep++;
+                    showStep(state.currentStep);
+                    updateProgress();
+                }
+            });
+
+            prevBtn.addEventListener('click', () => {
+                if (state.currentStep > 1) {
+                    state.currentStep--;
+                    showStep(state.currentStep);
+                    updateProgress();
+                }
+            });
+
+            generateBtn.addEventListener('click', () => {
+                navigator.clipboard.writeText(generatePromptText()).then(() => {
+                    copySuccess.style.display = 'block';
+                    copySuccess.style.opacity = 1;
+                    setTimeout(() => {
+                         copySuccess.style.opacity = 0;
+                         setTimeout(() => { copySuccess.style.display = 'none'; }, 500);
+                    }, 2000);
+                }).catch(err => {
+                    console.error('Failed to copy text: ', err);
+                });
+            });
+
+            // Initial render
+            render();
+            renderOtherLocations();
+        });
+    </script>
+</body>
+</html>
