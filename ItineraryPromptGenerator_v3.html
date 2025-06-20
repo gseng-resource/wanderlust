@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Open Graph Tags for Social Sharing -->
+<meta property="og:title" content="Itinerary Prompt Generator">
+<meta property="og:description" content="Generate a concise itinerary prompt for ChatGPT!!!">
+<meta property="og:image" content="https://gseng-resource.github.io/wanderlust/AIPrompt.png">
+<meta property="og:url" content="https://gseng-resource.github.io/wanderlust/ItineraryPromptGeneratorPastelTheme.html">
+<meta property="og:type" content="website">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Itinerary Prompt Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Times New Roman', serif; /* Changed to Times New Roman */
+            font-size: 9pt; /* Changed font size to 9pt */
+            background-color: #f0f8ff; /* AliceBlue - a light pastel blue */
+        }
+        .container {
+            max-width: 900px;
+            margin: 2.5rem auto;
+            padding: 2rem;
+            background-color: #ffffff; /* White for content area */
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); /* Slightly more visible shadow for depth */
+        }
+        .input-group {
+            margin-bottom: 1.25rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #778899; /* LightSlateGray - a soft gray for labels */
+            font-size: 9pt; /* Consistent font size */
+        }
+        input[type="text"],
+        input[type="number"],
+        textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #b0c4de; /* LightSteelBlue - soft blue border */
+            border-radius: 6px;
+            font-size: 9pt; /* Consistent font size */
+            color: #4682b4; /* SteelBlue - slightly darker text for readability */
+            box-sizing: border-box;
+            background-color: #fdfdfd; /* Off-white for inputs */
+            transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #a3d9e0; /* Pastel blue-green for focus */
+            box-shadow: 0 0 0 2px rgba(163, 217, 224, 0.5); /* Soft shadow on focus */
+        }
+        textarea {
+            min-height: 90px;
+            resize: vertical;
+        }
+        button {
+            padding: 0.85rem 1.6rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, color 0.2s ease-in-out;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle button shadow */
+        }
+        button.primary {
+            background-color: #add8e6; /* LightBlue - pastel blue primary */
+            color: #4682b4; /* SteelBlue - darker text for contrast */
+            border: 1px solid #add8e6;
+        }
+        button.primary:hover {
+            background-color: #a3d9e0; /* Slightly darker pastel blue on hover */
+            border-color: #a3d9e0;
+            color: #3f709d;
+        }
+        button.secondary {
+            background-color: #e6e6fa; /* Lavender - light pastel purple */
+            color: #7b68ee; /* MediumSlateBlue - purple text */
+            border: 1px solid #e6e6fa;
+        }
+        button.secondary:hover {
+            background-color: #d8bfd8; /* Thistle - slightly darker pastel purple on hover */
+            color: #6a5acd;
+            border-color: #d8bfd8;
+        }
+        .prompt-output {
+            background-color: #f8f8ff; /* GhostWhite - very light background for output */
+            border: 1px solid #dcdcdc; /* Gainsboro - light gray border */
+            border-radius: 6px;
+            padding: 1.25rem;
+            white-space: pre-wrap;
+            font-family: 'Times New Roman', serif; /* Consistent font */
+            font-size: 9pt; /* Consistent font size */
+            color: #696969; /* DimGray - soft gray for output text */
+            max-height: 500px;
+            overflow-y: auto;
+            position: relative;
+        }
+        h1, h2 {
+            font-family: 'Times New Roman', serif; /* Ensure headings also use Times New Roman */
+            color: #4682b4; /* SteelBlue for headings */
+        }
+        p {
+            font-family: 'Times New Roman', serif; /* Ensure paragraph text also uses Times New Roman */
+            color: #696969; /* DimGray for paragraph text */
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-6 md:p-8">
+
+    <div class="container">
+        <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">Itinerary Prompt Generator</h1>
+        <p class="text-gray-600 mb-8 text-center">Fill in the details below to generate your custom itinerary prompt for ChatGPT.</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 mb-8">
+            <!-- General Itinerary Details -->
+            <div class="input-group">
+                <label for="cityName">City Name:</label>
+                <input type="text" id="cityName" placeholder="e.g., Tokyo">
+            </div>
+            <div class="input-group">
+                <label for="languagePreference">Output Language:</label>
+                <input type="text" id="languagePreference" placeholder="e.g., English">
+            </div>
+
+            <!-- Traveler & Context -->
+            <div class="input-group">
+                <label for="travelerType">Traveler Type:</label>
+                <input type="text" id="travelerType" placeholder="e.g., Solo, Couple, Family with 2 kids">
+            </div>
+            <div class="input-group">
+                <label for="hotelLocationName">Hotel/Location Name:</label>
+                <input type="text" id="hotelLocationName" placeholder="e.g., Shibuya Excel Hotel Tokyu">
+            </div>
+            <div class="input-group col-span-1 md:col-span-2">
+                <label for="specificProductsServices">Specific Products/Services sought (e.g., "unique cafes, vintage clothing, board game stores"):</label>
+                <input type="text" id="specificProductsServices" placeholder="e.g., unique cafes, vintage clothing, board game stores">
+            </div>
+            <div class="input-group col-span-1 md:col-span-2">
+                <label for="additionalRequirements">Additional Requirements (Optional):</label>
+                <textarea id="additionalRequirements" placeholder="e.g., Must be wheelchair accessible, opens late, pet-friendly"></textarea>
+            </div>
+
+            <!-- Review Quantity -->
+            <div class="input-group">
+                <label for="positiveReviewsX">Number of positive customer reviews to include:</label>
+                <input type="number" id="positiveReviewsX" value="3" min="1">
+            </div>
+            <div class="input-group">
+                <label for="negativeReviewsX">Number of negative customer reviews to include:</label>
+                <input type="number" id="negativeReviewsX" value="3" min="0">
+            </div>
+
+            <!-- Product/Service Categories & Quantities -->
+            <div class="input-group">
+                <label for="prodServiceCat1">Product/Services Category 1 (e.g., 'Coffee Shops'):</label>
+                <input type="text" id="prodServiceCat1" placeholder="e.g., Coffee Shops">
+            </div>
+            <div class="input-group">
+                <label for="prodServiceCat1X">Number of Category 1 shops to find:</label>
+                <input type="number" id="prodServiceCat1X" value="3" min="1">
+            </div>
+            <div class="input-group">
+                <label for="prodServiceCat2">Product/Services Category 2 (e.g., 'Bookstores'):</label>
+                <input type="text" id="prodServiceCat2" placeholder="e.g., Bookstores">
+            </div>
+            <div class="input-group">
+                <label for="prodServiceCat2X">Number of Category 2 shops to find:</label>
+                <input type="number" id="prodServiceCat2X" value="3" min="1">
+            </div>
+            <div class="input-group col-span-1 md:col-span-2">
+                <label for="additionalProdServiceCat">Additional Products/Services/Category (e.g., 'Art Galleries'):</label>
+                <input type="text" id="additionalProdServiceCat" placeholder="e.g., Art Galleries">
+            </div>
+
+            <!-- Geographical Areas -->
+            <div class="input-group">
+                <label for="primaryArea">Primary Area (e.g., 'Shibuya'):</label>
+                <input type="text" id="primaryArea" placeholder="e.g., Shibuya">
+            </div>
+
+            <!-- Specific Shops (Optional) -->
+            <div class="input-group col-span-1 md:col-span-2">
+                <label for="specificShopsCat1">Specific Category 1 Shops (one per line, else type NONE):</label>
+                <textarea id="specificShopsCat1" placeholder="e.g.,
+Starbucks Reserve Roastery Tokyo
+Blue Bottle Coffee Shinjuku"></textarea>
+            </div>
+            <div class="input-group col-span-1 md:col-span-2">
+                <label for="specificShopsCat2">Specific Category 2 Shops (one per line, else type NONE):</label>
+                <textarea id="specificShopsCat2" placeholder="e.g.,
+Tsutaya Books Daikanyama
+Kinokuniya Shinjuku"></textarea>
+            </div>
+            <div class="input-group col-span-1 md:col-span-2">
+                <label for="specificShopsAdditional">Specific Additional Category Shops (one per line, type else NONE):</label>
+                <textarea id="specificShopsAdditional" placeholder="e.g.,
+Mori Art Museum
+Tokyo National Museum"></textarea>
+            </div>
+
+            <!-- Route Quantities -->
+            <div class="input-group">
+                <label for="routeATopX">Number of Category 1 shops for Route A (for Category 1 listings ONLY)</label>
+                <input type="number" id="routeATopX" value="3" min="1">
+            </div>
+            <div class="input-group">
+                <label for="routeBTopX">Number of Category 2 shops for Route B (for Category 2 listings ONLY)</label>
+                <input type="number" id="routeBTopX" value="3" min="1">
+            </div>
+            <div class="input-group">
+                <label for="routeCTopXCat1">Number of Category 1 shops for Route C (includes BOTH Category 1 & 2 listings)</label>
+                <input type="number" id="routeCTopXCat1" value="3" min="1">
+            </div>
+            <div class="input-group">
+                <label for="routeCTopXCat2">Number of Category 2 shops for Route C (includes BOTH Category 1 & 2 listings)</label>
+                <input type="number" id="routeCTopXCat2" value="3" min="1">
+            </div>
+        </div>
+
+        <div class="flex justify-center gap-4 mb-8">
+            <button id="generatePromptBtn" class="primary">Generate Prompt for ChatGPT</button>
+            <button id="copyPromptBtn" class="secondary" style="display: none;">Copy Prompt</button>
+        </div>
+
+        <div id="promptOutputContainer" class="hidden">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4 text-center">Generated Prompt:</h2>
+            <div id="generatedPrompt" class="prompt-output"></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const getById = (id) => document.getElementById(id);
+
+            const cityNameInput = getById('cityName');
+            const travelerTypeInput = getById('travelerType');
+            const hotelLocationNameInput = getById('hotelLocationName');
+            const specificProductsServicesInput = getById('specificProductsServices');
+            const positiveReviewsXInput = getById('positiveReviewsX');
+            const negativeReviewsXInput = getById('negativeReviewsX');
+            const additionalRequirementsInput = getById('additionalRequirements');
+            const prodServiceCat1Input = getById('prodServiceCat1');
+            const prodServiceCat1XInput = getById('prodServiceCat1X');
+            const prodServiceCat2Input = getById('prodServiceCat2');
+            const prodServiceCat2XInput = getById('prodServiceCat2X');
+            const additionalProdServiceCatInput = getById('additionalProdServiceCat');
+            const primaryAreaInput = getById('primaryArea');
+            const specificShopsCat1Input = getById('specificShopsCat1');
+            const specificShopsCat2Input = getById('specificShopsCat2');
+            const specificShopsAdditionalInput = getById('specificShopsAdditional');
+            const routeATopXInput = getById('routeATopX');
+            const routeBTopXInput = getById('routeBTopX');
+            const routeCTopXCat1Input = getById('routeCTopXCat1');
+            const routeCTopXCat2Input = getById('routeCTopXCat2');
+            const languagePreferenceInput = getById('languagePreference');
+
+            const generatePromptBtn = getById('generatePromptBtn');
+            const copyPromptBtn = getById('copyPromptBtn');
+            const promptOutputContainer = getById('promptOutputContainer');
+            const generatedPromptDiv = getById('generatedPrompt');
+
+            generatePromptBtn.addEventListener('click', () => {
+                const cityName = cityNameInput.value.trim() || '[City Name]';
+                const travelerType = travelerTypeInput.value.trim() || '[Traveler type]';
+                const hotelLocationName = hotelLocationNameInput.value.trim() || '[Hotel/Location Name]';
+                const specificProductsServices = specificProductsServicesInput.value.trim() || '[specific Products/Services, etc.]';
+                const positiveReviewsX = positiveReviewsXInput.value.trim() || '[X]';
+                const negativeReviewsX = negativeReviewsXInput.value.trim() || '[X]';
+                const additionalRequirements = additionalRequirementsInput.value.trim();
+                const prodServiceCat1 = prodServiceCat1Input.value.trim() || '[Products/Services Category 1]';
+                const prodServiceCat1X = prodServiceCat1XInput.value.trim() || '[X]';
+                const prodServiceCat2 = prodServiceCat2Input.value.trim() || '[Products/Services Category 2]';
+                const prodServiceCat2X = prodServiceCat2XInput.value.trim() || '[X]';
+                const additionalProdServiceCat = additionalProdServiceCatInput.value.trim();
+                const primaryArea = primaryAreaInput.value.trim() || '[Primary Area]';
+                const routeATopX = routeATopXInput.value.trim() || '[X]';
+                const routeBTopX = routeBTopXInput.value.trim() || '[X]';
+                const routeCTopXCat1 = routeCTopXCat1Input.value.trim() || '[X]';
+                const routeCTopXCat2 = routeCTopXCat2Input.value.trim() || '[X]';
+                const languagePreference = languagePreferenceInput.value.trim() || '[Language preference]';
+
+                const specificShopsCat1 = specificShopsCat1Input.value.trim().split('\n').map(s => s.trim()).filter(s => s);
+                const specificShopsCat2 = specificShopsCat2Input.value.trim().split('\n').map(s => s.trim()).filter(s => s);
+                const specificShopsAdditional = specificShopsAdditionalInput.value.trim().split('\n').map(s => s.trim()).filter(s => s);
+
+                let prompt = `Itinerary Template
+# ${cityName} Itinerary Guide Request
+## Context
+${travelerType} staying at ${hotelLocationName} seeking ${specificProductsServices}.
+## Required Information (All Shops)
+For each shop provide:
+- Full address
+- Operating hours 
+- Google Maps app link
+- ${positiveReviewsX} positive customer reviews
+- ${negativeReviewsX} negative customer reviews`;
+
+                if (additionalRequirements) {
+                    prompt += `\n- Additional requirements: ${additionalRequirements}`;
+                }
+
+                prompt += `
+## Tasks
+### 1. ${prodServiceCat1} - ${primaryArea}
+Find top ${prodServiceCat1X} ${prodServiceCat1} shops within 1km of ${primaryArea}.
+### 2. ${prodServiceCat1} - Other Areas (beyond 1km but within 5km radius) 
+Find top ${prodServiceCat1X} ${prodServiceCat1} shops outside 1km of ${primaryArea} but within 5km radius.
+### 3. ${prodServiceCat2} - ${primaryArea}
+Find top ${prodServiceCat2X} ${prodServiceCat2} shops within 1km of ${primaryArea}.
+### 4. ${prodServiceCat2} - Other Areas (beyond 1km but within 5km radius)
+Find top ${prodServiceCat2X} ${prodServiceCat2} shops outside 1km of ${primaryArea} but within 5km radius.`;
+
+                if (specificShopsCat1.length > 0) {
+                    prompt += `
+### 5. Specific ${prodServiceCat1} Shops
+Provide details for these shops, if any:`;
+                    specificShopsCat1.forEach(shop => {
+                        prompt += `\n- ${shop}`;
+                    });
+                } else {
+                     prompt += `
+### 5. Specific ${prodServiceCat1} Shops
+Provide details for these shops, if any:
+- [Shop Name 1]
+- [Shop Name 2]
+- [Shop Name 3]
+- [Add more as needed]`;
+                }
+
+                if (specificShopsCat2.length > 0) {
+                    prompt += `
+### 6. Specific ${prodServiceCat2} Shops
+Provide details for these shops, if any:`;
+                    specificShopsCat2.forEach(shop => {
+                        prompt += `\n- ${shop}`;
+                    });
+                } else {
+                     prompt += `
+### 6. Specific ${prodServiceCat2} Shops
+Provide details for these shops, if any:
+- [Shop Name 1]
+- [Shop Name 2]
+- [Shop Name 3]
+- [Add more as needed]`;
+                }
+
+                if (additionalProdServiceCat) {
+                    prompt += `
+### 7. ${additionalProdServiceCat} Stores
+Provide details for these shops, if any:`;
+                    if (specificShopsAdditional.length > 0) {
+                         specificShopsAdditional.forEach(shop => {
+                            prompt += `\n- ${shop}`;
+                        });
+                    } else {
+                        prompt += `
+- [Shop Name 1]
+- [Shop Name 2]
+- [Shop Name 3]
+- [Add more as needed]`;
+                    }
+                } else {
+                    prompt += `
+### 7. [Additional Products/Services/Category] Stores
+Provide details for these shops, if any:
+- [Shop Name 1]
+- [Shop Name 2]
+- [Shop Name 3]
+- [Add more as needed]`;
+                }
+
+                prompt += `
+### 8. Consolidated ${prodServiceCat1} List
+Create a unique list combining all ${prodServiceCat1} shops from Tasks 1, 2, and 5 (remove duplicates).
+### 9. Consolidated ${prodServiceCat2} List 
+Create a unique list combining all ${prodServiceCat2} shops from Tasks 3, 4, and 6 (remove duplicates).`;
+
+                if (additionalProdServiceCat) {
+                     prompt += `
+### 10. Selected ${additionalProdServiceCat} List 
+Create a manually selected list from ${additionalProdServiceCat} shops from Tasks 7 (remove duplicates).`;
+                } else {
+                    prompt += `
+### 10. Selected [Additional Products/Services/Category] List 
+Create a manually selected list from [Additional Products/Services/Category] shops from Tasks 7 (remove duplicates).`;
+                }
+
+                prompt += `
+### 11. Optimized Shopping Routes
+Route A: ${prodServiceCat1} Focus
+This route is designed for a concentrated exploration of ${prodServiceCat1} shops. It prioritizes visiting the top selected shops efficiently, starting and ending at your accommodation.
+- Create route starting/ending at ${hotelLocationName}
+- Visit top ${routeATopX} shops from Task 8
+- Organize by proximity for efficiency
+- Include Google Maps app link and route explanation with shop listing.
+
+Route B: ${prodServiceCat2} Focus
+This route offers a dedicated exploration of ${prodServiceCat2} establishments. It focuses on the most recommended shops for this category, optimized for convenience from your starting point.
+- Create route starting/ending at ${hotelLocationName}
+- Visit top ${routeBTopX} shops from Task 9
+- Organize by proximity for efficiency
+- Include Google Maps app link and route explanation with shop listing.
+
+Route C: Combined Focus
+This route provides a balanced shopping experience, combining key highlights from both ${prodServiceCat1} and ${prodServiceCat2} categories, along with any specific additional interests. The routing is optimized for a seamless journey.
+- Create route starting/ending at ${hotelLocationName}
+- Visit top ${routeCTopXCat1} ${prodServiceCat1} shops (Task 8) + top ${routeCTopXCat2} ${prodServiceCat2} shops (Task 9)`;
+
+                if (additionalProdServiceCat) {
+                    prompt += ` + manually selected ${additionalProdServiceCat} shops (Task 10)`;
+                } else {
+                    prompt += ` + manually selected [Additional Products/Services/Category] shops (Task 10)`;
+                }
+
+                prompt += `
+- Organize by proximity for efficiency
+- Include Google Maps app link and route explanation with shop listing.
+
+Route D: Complete Tour
+This comprehensive route is designed to maximize your exploration, covering all identified shops across all categories. It offers a full tour, organized for the most efficient travel time.
+- Create route starting/ending at ${hotelLocationName}
+- Visit ALL shops from Tasks 8, 9, and 7
+- Organize by proximity for efficiency
+- Include complete Google Maps app link
+- Estimate total duration
+## Output Language
+${languagePreference}`;
+
+                generatedPromptDiv.textContent = prompt;
+                promptOutputContainer.classList.remove('hidden');
+                copyPromptBtn.style.display = 'inline-block';
+            });
+
+            copyPromptBtn.addEventListener('click', () => {
+                const textToCopy = generatedPromptDiv.textContent;
+                // Using document.execCommand('copy') for better compatibility within iframes
+                const textArea = document.createElement('textarea');
+                textArea.value = textToCopy;
+                textArea.style.position = 'fixed'; // Prevents scrolling to bottom
+                textArea.style.left = '-9999px'; // Move off-screen
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    copyPromptBtn.textContent = 'Copied!';
+                    setTimeout(() => {
+                        copyPromptBtn.textContent = 'Copy Prompt';
+                    }, 2000);
+                } catch (err) {
+                    console.error('Failed to copy text: ', err);
+                    alert('Failed to copy prompt. Please copy manually.'); // Fallback if execCommand fails
+                } finally {
+                    document.body.removeChild(textArea);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
