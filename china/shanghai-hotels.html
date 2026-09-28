@@ -54,6 +54,10 @@
   .fstatus { margin-left:auto; font-size:.85rem; color:var(--mut); display:flex; align-items:center; gap:10px; }
   .fstatus button { font:inherit; font-size:.85rem; background:none; border:none; color:var(--accent); cursor:pointer; padding:0; text-decoration:underline; }
   .fstatus button[hidden] { display:none; }
+  .cur { display:inline-flex; border:1px solid var(--line); border-radius:999px; overflow:hidden; background:#fff; flex:none; }
+  .cur button { font:inherit; font-size:.85rem; border:none; background:none; padding:6px 12px; cursor:pointer; color:var(--ink); }
+  .cur button + button { border-left:1px solid var(--line); }
+  .cur button[aria-pressed="true"] { background:var(--ink); color:#fff; }
   .empty { background:#fff; border:1px dashed var(--line); border-radius:12px; padding:24px; text-align:center; color:var(--mut); margin-top:24px; }
   .jump { display:inline-block; margin-top:14px; color:#fff; font-weight:600; font-size:.9rem; text-decoration:none; border:1px solid rgba(255,255,255,.6); border-radius:999px; padding:6px 14px; }
   section[hidden], .card[hidden], nav.zones a[hidden] { display:none; }
@@ -69,7 +73,7 @@
 </div></header>
 <div class="wrap">
 
-<div class="note"><strong>Price caveat:</strong> nightly rates are date-dependent. Figures are typical base-room ranges estimated from brand tier, guest price mentions in reviews, and official listings. Hard anchors: <strong>Bvlgari</strong> ~HK$6,309/night (Expedia) and publicly discussed at ¥7,000/night; <strong>Shangri-La Qiantan</strong> from ¥1,417/night (official site); <strong>Amanyangyun</strong> from CNY 6,509/night (Trip.com, 9–11 Nov 2026). Hotels added on 28 Sep carry live Trip.com rates for 9–11 Nov 2026 where bookable; Waldorf Qiantan, Upper House, The PuLi and J Hotel were not bookable on Trip.com for those dates, so their prices are estimates from Kayak/momondo (≈¥7.1 per US$). Verify live rates on the Trip.com pages for your dates.</div>
+<div class="note"><strong>Price caveat:</strong> nightly rates are date-dependent. Figures are typical base-room ranges estimated from brand tier, guest price mentions in reviews, and official listings. Hard anchors: <strong>Bvlgari</strong> ≈¥5,400/night (Expedia) and publicly discussed at ¥7,000/night; <strong>Shangri-La Qiantan</strong> from ¥1,417/night (official site); <strong>Amanyangyun</strong> from CNY 6,509/night (Trip.com, 9–11 Nov 2026). Hotels added on 28 Sep carry live Trip.com rates for 9–11 Nov 2026 where bookable; Waldorf Qiantan, Upper House, The PuLi and J Hotel were not bookable on Trip.com for those dates, so their prices are estimates from Kayak/momondo. Verify live rates on the Trip.com pages for your dates. <span id="fxnote"></span></div>
 
 <h2>Zone overview</h2>
 <div class="tablewrap"><table class="summary">
@@ -93,9 +97,9 @@
 <div class="tablewrap"><table class="summary">
   <tr><th>Band (typical rate)</th><th>Hotels (estimated nightly range)</th></tr>
   <tr><td>Under ¥1,000</td><td>The Shàng by Artyzen Qiantan (¥500–800) · UrCove Xuhui West Riverside (¥600–900) · UrCove on the Bund (¥600–900) · Artyzen Habitat (¥700–1,100) · Shanghai Expo Riverside (¥700–1,200)</td></tr>
-  <tr><td>¥1,000–1,499</td><td>Donghu Collection (¥800–1,200) · SHANGYING CHAO (¥800–1,300) · Seclusive Wukang Mansion (¥900–1,300) · Artyzen NEW BUND 31 (¥900–1,400) · MUMIAN Expo (¥900–1,500) · Ascott Hengshan (¥1,000–1,500) · THE ONE Vignette (¥1,000–1,600) · Thompson Expo (¥1,000–1,600) · JINGYUAN AROMA GARDEN (¥1,100–1,700)</td></tr>
-  <tr><td>¥1,500–1,999</td><td>Andaz Xintiandi (¥1,300–1,900) · Kimpton Qiantan (¥1,400–2,200) · Shangri-La Qiantan (¥1,400–2,200, from ¥1,417) · Andaz Shanghai ITC (¥1,600–1,900)</td></tr>
-  <tr><td>¥2,000–4,999</td><td>IFC Residence (¥1,500–2,500) · MGM West Bund (¥1,800–2,800) · Sukhothai (¥2,300–2,450) · Upper House (¥1,800–3,300, est.) · The PuLi (¥2,000–3,100, est.) · Ahn Luh Zhujiajiao (¥2,600–3,000) · EDITION (¥2,650–3,100) · J Hotel (¥2,400–3,400, est.) · Waldorf Qiantan (¥2,400–3,500, est.)</td></tr>
+  <tr><td>¥1,000–1,500</td><td>Donghu Collection (¥800–1,200) · SHANGYING CHAO (¥800–1,300) · Seclusive Wukang Mansion (¥900–1,300) · Artyzen NEW BUND 31 (¥900–1,400) · MUMIAN Expo (¥900–1,500) · Ascott Hengshan (¥1,000–1,500) · THE ONE Vignette (¥1,000–1,600) · Thompson Expo (¥1,000–1,600) · JINGYUAN AROMA GARDEN (¥1,100–1,700)</td></tr>
+  <tr><td>¥1,500–2,000</td><td>Andaz Xintiandi (¥1,300–1,900) · Kimpton Qiantan (¥1,400–2,200) · Shangri-La Qiantan (¥1,400–2,200, from ¥1,417) · Andaz Shanghai ITC (¥1,600–1,900)</td></tr>
+  <tr><td>¥2,000–5,000</td><td>IFC Residence (¥1,500–2,500) · MGM West Bund (¥1,800–2,800) · Sukhothai (¥2,300–2,450) · Upper House (¥1,700–3,200, est.) · The PuLi (¥1,950–3,000, est.) · Ahn Luh Zhujiajiao (¥2,600–3,000) · EDITION (¥2,650–3,100) · J Hotel (¥2,250–3,200, est.) · Waldorf Qiantan (¥2,300–3,400, est.)</td></tr>
   <tr><td>¥5,000+</td><td>Bvlgari Hotel Shanghai (¥5,000–7,000+) · Amanyangyun (¥6,500–8,200)</td></tr>
 </table></div>
 
@@ -115,7 +119,7 @@
 
 <div class="filters" id="filters" role="region" aria-label="Filter hotels">
   <div class="frow">
-    <span class="flabel">Must have</span>
+    <span class="cur" role="group" aria-label="Currency"><button type="button" data-cur="SGD" aria-pressed="true">SGD</button><button type="button" data-cur="CNY" aria-pressed="false">CNY</button><button type="button" data-cur="USD" aria-pressed="false">USD</button></span>
     <button type="button" class="chip" data-toggle="pool" aria-pressed="false">Pool</button>
     <button type="button" class="chip" data-toggle="nodeposit" aria-pressed="false">No deposit</button>
     <span class="fstatus"><span id="fcount"></span><button type="button" id="freset" hidden>Clear filters</button></span>
@@ -156,7 +160,7 @@
       <header>
         <h3>Shangri-La Qiantan, Shanghai</h3>
         <div class="cn">上海前滩香格里拉酒店</div>
-        <span class="band" style="color:#bf6300;background:#fff1e0">¥1,500–1,999</span>
+        <span class="band" style="color:#bf6300;background:#fff1e0">¥1,500–2,000</span>
       </header>
       <div class="meta">Opened 2021 · 585 rooms · Check-in 14:00 · Breakfast ¥210 · Deposit ¥800/night · Pool: Yes · Pets: No</div>
       <p><strong>Price (est.):</strong> ¥1,400–2,200 (official from ¥1,417)</p>
@@ -169,7 +173,7 @@
       <header>
         <h3>Kimpton QIANTAN SHANGHAI by IHG</h3>
         <div class="cn">上海金普顿前滩酒店</div>
-        <span class="band" style="color:#bf6300;background:#fff1e0">¥1,500–1,999</span>
+        <span class="band" style="color:#bf6300;background:#fff1e0">¥1,500–2,000</span>
       </header>
       <div class="meta">Opened 2023 · 143 rooms · Check-in 16:00 (late) · Breakfast ¥248 · Deposit Required · Pool: Yes (rooftop, river view) · Pets: No</div>
       <p><strong>Price (est.):</strong> ¥1,400–2,200</p>
@@ -182,7 +186,7 @@
       <header>
         <h3>Artyzen NEW BUND 31 Shanghai (Qiantan)</h3>
         <div class="cn">上海前滩31雅辰酒店</div>
-        <span class="band" style="color:#9a6700;background:#fff8e6">¥1,000–1,499</span>
+        <span class="band" style="color:#9a6700;background:#fff8e6">¥1,000–1,500</span>
       </header>
       <div class="meta">Opened 2023 · 202 rooms · Check-in 15:00 · Breakfast ¥150 · Deposit ¥1,000/night · Pool: No · Pets: No</div>
       <p><strong>Price (est.):</strong> ¥900–1,400</p>
@@ -195,7 +199,7 @@
       <header>
         <h3>MUMIAN SHANGHAI EXPO, The Unbound Collection by Hyatt</h3>
         <div class="cn">上海世博木棉花凯悦臻选酒店</div>
-        <span class="band" style="color:#9a6700;background:#fff8e6">¥1,000–1,499</span>
+        <span class="band" style="color:#9a6700;background:#fff8e6">¥1,000–1,500</span>
       </header>
       <div class="meta">Opened 2025 · 329 rooms · Check-in 15:00 · Breakfast ¥218 · Deposit ¥1,000/night · Pool: No · Pets: No</div>
       <p><strong>Price (est.):</strong> ¥900–1,500</p>
@@ -221,7 +225,7 @@
       <header>
         <h3>Thompson Shanghai Expo, by Hyatt</h3>
         <div class="cn">上海世博桐森酒店</div>
-        <span class="band" style="color:#9a6700;background:#fff8e6">¥1,000–1,499</span>
+        <span class="band" style="color:#9a6700;background:#fff8e6">¥1,000–1,500</span>
       </header>
       <div class="meta">Opened 2025 · 254 rooms · Check-in 15:00 · Breakfast ¥198 · Deposit ¥1,000/night · Pool: Yes · Pets: No</div>
       <p><strong>Price (est.):</strong> ¥1,000–1,600</p>
@@ -234,10 +238,10 @@
       <header>
         <h3>Waldorf Astoria Shanghai Qiantan</h3>
         <div class="cn">上海前滩华尔道夫酒店</div>
-        <span class="band" style="color:#cf222e;background:#ffebe9">¥2,000–4,999</span>
+        <span class="band" style="color:#cf222e;background:#ffebe9">¥2,000–5,000</span>
       </header>
       <div class="meta">Opened 2025 · 204 rooms · Check-in 15:00 · Breakfast ¥446 · Deposit ¥2,000/night · Pool: Yes (indoor) · Pets: No</div>
-      <p><strong>Price (est.):</strong> ¥2,400–3,500 (estimate: from ~US$338 on momondo; brand-tier pricing). Not bookable on Trip.com for 9–11 Nov 2026 at time of check. </p>
+      <p><strong>Price (est.):</strong> ¥2,300–3,400 (estimate from momondo: from ≈¥2,270; brand-tier pricing). Not bookable on Trip.com for 9–11 Nov 2026 at time of check. </p>
       <p class="pros"><strong>+ Pros:</strong> 9.3/10 from 896 reviews; new riverfront hotel with Huangpu views; direct access to Qiantan Park and the river promenade; cleanliness scored 9.5; breakfast served until 3 PM; Aesop toiletries; spa and 4 restaurants; 61 straight positive reviews.</p>
       <p class="cons"><strong>− Cons:</strong> Service is its weakest score (8.9); air-quality and breakfast suggestions; most expensive breakfast on the list (¥446); no live price for your dates.</p>
       <p class="attr"><strong>Within 2 km:</strong> Qiantan Park &amp; riverfront promenade · Taikoo Li Qiantan · Oriental Sports Center (L6/8/11) · NEW BUND 31 · Mercedes-Benz Arena ~3 km</p>
@@ -247,7 +251,7 @@
       <header>
         <h3>MGM Shanghai West Bund</h3>
         <div class="cn">上海西岸美高梅酒店</div>
-        <span class="band" style="color:#cf222e;background:#ffebe9">¥2,000–4,999</span>
+        <span class="band" style="color:#cf222e;background:#ffebe9">¥2,000–5,000</span>
       </header>
       <div class="meta">Opened 2023 · 219 rooms · Check-in 15:00 · Breakfast ¥313 · Deposit ¥1,000/night · Pool: Yes (rooftop) · Pets: No</div>
       <p><strong>Price (est.):</strong> ¥1,800–2,800</p>
@@ -273,7 +277,7 @@
       <header>
         <h3>Donghu Collection Hotel</h3>
         <div class="cn">上海东湖宾馆·悠选</div>
-        <span class="band" style="color:#9a6700;background:#fff8e6">¥1,000–1,499</span>
+        <span class="band" style="color:#9a6700;background:#fff8e6">¥1,000–1,500</span>
       </header>
       <div class="meta">Opened 1990 / ren. 2023 · 109 rooms · Check-in 15:00 · Breakfast ¥158 · Deposit Required · Pool: Yes (heated indoor) · Pets: No</div>
       <p><strong>Price (est.):</strong> ¥800–1,200</p>
@@ -286,7 +290,7 @@
       <header>
         <h3>Metropolitan Seclusive Life In Wukang Rd Shanghai</h3>
         <div class="cn">上海隐居繁华武康路公馆</div>
-        <span class="band" style="color:#9a6700;background:#fff8e6">¥1,000–1,499</span>
+        <span class="band" style="color:#9a6700;background:#fff8e6">¥1,000–1,500</span>
       </header>
       <div class="meta">Opened 2019 · 19 rooms · Check-in 14:00 · Breakfast ¥128 (set menu) · Deposit — · Pool: No · Pets: No</div>
       <p><strong>Price (est.):</strong> ¥900–1,300</p>
@@ -299,7 +303,7 @@
       <header>
         <h3>SHANGYING CHAO</h3>
         <div class="cn">上海上影CHAO酒店</div>
-        <span class="band" style="color:#9a6700;background:#fff8e6">¥1,000–1,499</span>
+        <span class="band" style="color:#9a6700;background:#fff8e6">¥1,000–1,500</span>
       </header>
       <div class="meta">Opened 2025 · 72 rooms · Check-in 14:00 · Breakfast ¥280 · Deposit ¥1,000/night · Pool: No · Pets: No</div>
       <p><strong>Price (est.):</strong> ¥800–1,300</p>
@@ -312,7 +316,7 @@
       <header>
         <h3>JINGYUAN AROMA GARDEN HOTEL (Yu Garden)</h3>
         <div class="cn">上海豫园璟源露香园酒店</div>
-        <span class="band" style="color:#9a6700;background:#fff8e6">¥1,000–1,499</span>
+        <span class="band" style="color:#9a6700;background:#fff8e6">¥1,000–1,500</span>
       </header>
       <div class="meta">Opened 2024 · 30 rooms · Check-in 14:00 (call 1 day ahead) · Breakfast ¥228 · Deposit ¥1,000 fixed · Pool: No · Pets: No</div>
       <p><strong>Price (est.):</strong> ¥1,100–1,700</p>
@@ -338,7 +342,7 @@
       <header>
         <h3>The Shanghai EDITION</h3>
         <div class="cn">上海艾迪逊酒店</div>
-        <span class="band" style="color:#cf222e;background:#ffebe9">¥2,000–4,999</span>
+        <span class="band" style="color:#cf222e;background:#ffebe9">¥2,000–5,000</span>
       </header>
       <div class="meta">Opened 2018 · 145 rooms · Check-in 15:00 · Breakfast ¥298 · Deposit ¥2,000/night · Pool: Yes (indoor) · Pets: No</div>
       <p><strong>Price (est.):</strong> ¥2,650–3,100 (live Trip.com for 9–11 Nov 2026: from CNY 2,658/night; 2 nights CNY 6,198 incl. taxes)</p>
@@ -351,7 +355,7 @@
       <header>
         <h3>Andaz Xintiandi Shanghai, by Hyatt</h3>
         <div class="cn">上海新天地安达仕酒店</div>
-        <span class="band" style="color:#bf6300;background:#fff1e0">¥1,500–1,999</span>
+        <span class="band" style="color:#bf6300;background:#fff1e0">¥1,500–2,000</span>
       </header>
       <div class="meta">Opened 2011 / ren. 2018 · 306 rooms · Check-in 15:00 · Breakfast ¥276 · Deposit ¥1,000/night · Pool: Yes · Pets: No</div>
       <p><strong>Price (est.):</strong> ¥1,300–1,900</p>
@@ -364,7 +368,7 @@
       <header>
         <h3>THE ONE Shanghai Downtown, Vignette Collection by IHG</h3>
         <div class="cn">洲至奢选上海静安THE ONE套房酒店</div>
-        <span class="band" style="color:#9a6700;background:#fff8e6">¥1,000–1,499</span>
+        <span class="band" style="color:#9a6700;background:#fff8e6">¥1,000–1,500</span>
       </header>
       <div class="meta">Opened 2012 · 242 (all suites) rooms · Check-in 15:00 · Breakfast ¥198 · Deposit ¥1,000/night · Pool: Yes · Pets: No</div>
       <p><strong>Price (est.):</strong> ¥1,000–1,600</p>
@@ -377,7 +381,7 @@
       <header>
         <h3>The Sukhothai Shanghai</h3>
         <div class="cn">上海素凯泰酒店</div>
-        <span class="band" style="color:#cf222e;background:#ffebe9">¥2,000–4,999</span>
+        <span class="band" style="color:#cf222e;background:#ffebe9">¥2,000–5,000</span>
       </header>
       <div class="meta">Opened 2018 · 201 rooms · Check-in 15:00 · Breakfast ¥268 · Deposit ¥1,000/night · Pool: Yes (25 m heated indoor) · Pets: No (service animals ok)</div>
       <p><strong>Price (est.):</strong> ¥2,300–2,450 (live Trip.com for 9–11 Nov 2026: from CNY 2,299/night; 2 nights CNY 4,874 incl. taxes)</p>
@@ -390,10 +394,10 @@
       <header>
         <h3>Upper House Shanghai</h3>
         <div class="cn">上海居舍</div>
-        <span class="band" style="color:#cf222e;background:#ffebe9">¥2,000–4,999</span>
+        <span class="band" style="color:#cf222e;background:#ffebe9">¥2,000–5,000</span>
       </header>
       <div class="meta">Opened 2018 · 213 rooms (111 rooms + 102 serviced apartments) · Check-in 14:00 · Breakfast à la carte (priced per dish) · Deposit ¥1,500/night · Pool: Yes (heated indoor) · Pets: No</div>
-      <p><strong>Price (est.):</strong> ¥1,800–3,300 (estimate: from ~US$256, typically US$380–470 on Kayak). Not bookable on Trip.com for 9–11 Nov 2026 at time of check. </p>
+      <p><strong>Price (est.):</strong> ¥1,700–3,200 (estimate from Kayak: from ≈¥1,720, typically ¥2,550–3,150). Not bookable on Trip.com for 9–11 Nov 2026 at time of check. </p>
       <p class="pros"><strong>+ Pros:</strong> 9.3/10 from 1,679 reviews; Piero Lissoni design with large outdoor terraces; heated indoor pool, spa and 24-hour gym; à la carte breakfast highly rated; Bamford toiletries; serviced apartments for longer stays; quiet yet central next to Taikoo Hui.</p>
       <p class="cons"><strong>− Cons:</strong> 47 guest suggestions: service consistency and staff professionalism, lighting and noise in rooms, unclear hotel policies; no live price for your dates.</p>
       <p class="attr"><strong>Within 2 km:</strong> HKRI Taikoo Hui · West Nanjing Rd metro · Nanjing West Rd shopping · Zhangyuan · Jing&#x27;an Temple ~1.5 km</p>
@@ -403,10 +407,10 @@
       <header>
         <h3>The PuLi Hotel and Spa</h3>
         <div class="cn">上海璞丽</div>
-        <span class="band" style="color:#cf222e;background:#ffebe9">¥2,000–4,999</span>
+        <span class="band" style="color:#cf222e;background:#ffebe9">¥2,000–5,000</span>
       </header>
       <div class="meta">Opened 2009 / ren. 2016 · 229 rooms · Check-in 15:00 · Breakfast ¥301 · Deposit ¥1,000/night · Pool: Yes (25 m heated indoor) · Pets: No</div>
-      <p><strong>Price (est.):</strong> ¥2,000–3,100 (estimate: from ~US$289, typically US$400–440 on momondo/Kayak). Not bookable on Trip.com for 9–11 Nov 2026 at time of check. </p>
+      <p><strong>Price (est.):</strong> ¥1,950–3,000 (estimate from momondo/Kayak: from ≈¥1,950, typically ¥2,700–2,950). Not bookable on Trip.com for 9–11 Nov 2026 at time of check. </p>
       <p class="pros"><strong>+ Pros:</strong> Most-reviewed hotel on the list (9.2/10, 5,658 reviews); calm "urban resort" with zen design; 25 m heated pool, whirlpool, steam and spa; Michelin-recognised restaurant; spacious rooms, good soundproofing; baby essentials on request; next to Jing'an Park.</p>
       <p class="cons"><strong>− Cons:</strong> Oldest luxury building here (2009, refreshed 2016); no live price for your dates.</p>
       <p class="attr"><strong>Within 2 km:</strong> Jing&#x27;an Temple &amp; Park · Jing&#x27;an Temple metro (L2/7/14) · Kerry Centre · Nanjing West Rd · HKRI Taikoo Hui ~1 km</p>
@@ -419,7 +423,7 @@
         <span class="band" style="color:#8250df;background:#fbefff">¥5,000+</span>
       </header>
       <div class="meta">Opened 2018 · 82 rooms · Check-in 15:00 · Breakfast À la carte · Deposit — · Pool: Yes · Pets: No</div>
-      <p><strong>Price (est.):</strong> ¥5,000–7,000+ (Expedia ~HK$6,309)</p>
+      <p><strong>Price (est.):</strong> ¥5,000–7,000+ (Expedia ≈¥5,400)</p>
       <p class="pros"><strong>+ Pros:</strong> Shanghai&#x27;s ultra-luxury benchmark: butler team, 47F terrace bar, Il Ristorante – Niko Romito (Italian fine dining), 宝丽轩 Cantonese; legendary bedding/towels; complimentary soft drinks; discreet old-money ambiance; Suzhou Creek river views.</p>
       <p class="cons"><strong>− Cons:</strong> Facilities aging (opened 2018, scratches/wear); breakfast selection average; base city-view rooms have no river view; least central location of the luxury picks; no kids&#x27; club.</p>
       <p class="attr"><strong>Within 2 km:</strong> The Bund north section (~800 m) · Waibaidu Bridge · Shanghai Postal Museum · Broadway Mansions · Rockbund · North Bund ~1.5 km · Jade Buddha Temple ~2 km</p>
@@ -429,7 +433,7 @@
       <header>
         <h3>IFC Residence Shanghai</h3>
         <div class="cn">上海国金汇酒店公寓</div>
-        <span class="band" style="color:#cf222e;background:#ffebe9">¥2,000–4,999</span>
+        <span class="band" style="color:#cf222e;background:#ffebe9">¥2,000–5,000</span>
       </header>
       <div class="meta">Opened 2012 · 296 rooms · Check-in 14:00 · Breakfast ¥178 · Deposit ¥700/night · Pool: Yes · Pets: No</div>
       <p><strong>Price (est.):</strong> ¥1,500–2,500</p>
@@ -442,10 +446,10 @@
       <header>
         <h3>J Hotel Shanghai Tower</h3>
         <div class="cn">上海中心J酒店</div>
-        <span class="band" style="color:#cf222e;background:#ffebe9">¥2,000–4,999</span>
+        <span class="band" style="color:#cf222e;background:#ffebe9">¥2,000–5,000</span>
       </header>
       <div class="meta">Opened 2021 · 165 rooms · Check-in 15:00 · Breakfast ¥368 · Deposit ¥5,000 fixed · Pool: Yes (indoor) · Pets: No (service animals ok)</div>
-      <p><strong>Price (est.):</strong> ¥2,400–3,400 (estimate: US$333–477 on Kayak/momondo). Not bookable on Trip.com for 9–11 Nov 2026 at time of check. </p>
+      <p><strong>Price (est.):</strong> ¥2,250–3,200 (estimate from Kayak/momondo: ≈¥2,250–3,200). Not bookable on Trip.com for 9–11 Nov 2026 at time of check. </p>
       <p class="pros"><strong>+ Pros:</strong> 9.5/10 from 4,114 reviews; Trip.com Global 100 Luxury 2026; high-floor rooms inside Shanghai Tower with Bund and Pearl Tower views, sunrise a highlight; butler-style service praised (1,895 mentions); 8 restaurants; indoor pool; free parking.</p>
       <p class="cons"><strong>− Cons:</strong> Highest deposit on the list (¥5,000 fixed); reception friendliness, room readiness and noise flagged (59 suggestions); no live price for your dates.</p>
       <p class="attr"><strong>Within 2 km:</strong> Shanghai Tower (in the building) · Oriental Pearl Tower · IFC Mall · Lujiazui metro (L2) · Lujiazui riverside promenade · Jin Mao / SWFC</p>
@@ -455,7 +459,7 @@
       <header>
         <h3>Ascott Heng Shan Shanghai (serviced apartments)</h3>
         <div class="cn">上海雅诗阁衡山酒店服务公寓</div>
-        <span class="band" style="color:#9a6700;background:#fff8e6">¥1,000–1,499</span>
+        <span class="band" style="color:#9a6700;background:#fff8e6">¥1,000–1,500</span>
       </header>
       <div class="meta">Opened 2015 · 90 rooms · Check-in 14:00 · Breakfast ¥138 · Deposit None · Pool: Yes (indoor) · Pets: Yes (¥200/night)</div>
       <p><strong>Price (est.):</strong> ¥1,000–1,500</p>
@@ -470,7 +474,7 @@
       <header>
         <h3>Andaz Shanghai ITC, by Hyatt</h3>
         <div class="cn">上海徐家汇中心安达仕酒店</div>
-        <span class="band" style="color:#bf6300;background:#fff1e0">¥1,500–1,999</span>
+        <span class="band" style="color:#bf6300;background:#fff1e0">¥1,500–2,000</span>
       </header>
       <div class="meta">Opened 2026 · 267 rooms · Check-in 15:00 · Breakfast ¥268 · Deposit ¥1,000/night · Pool: Yes (indoor) · Pets: No (service animals ok)</div>
       <p><strong>Price (est.):</strong> ¥1,600–1,900 (live Trip.com for 9–11 Nov 2026: from CNY 1,615/night; 2 nights CNY 3,766 incl. taxes)</p>
@@ -483,7 +487,7 @@
       <header>
         <h3>Ahn Luh Zhujiajiao</h3>
         <div class="cn">上海朱家角安麓酒店</div>
-        <span class="band" style="color:#cf222e;background:#ffebe9">¥2,000–4,999</span>
+        <span class="band" style="color:#cf222e;background:#ffebe9">¥2,000–5,000</span>
       </header>
       <div class="meta">Opened 2017 · 35 rooms (villas) · Check-in 15:00 · Breakfast ¥199 · Deposit ¥2,000 per room · Pool: Yes (heated indoor; private pools in some villas) · Pets: No</div>
       <p><strong>Price (est.):</strong> ¥2,600–3,000 (live Trip.com for 9–11 Nov 2026: from CNY 2,641/night; 2 nights CNY 5,598 incl. taxes)</p>
@@ -521,6 +525,77 @@
 </footer>
 </div>
 <script>
+// Every price on the page is written in CNY. This wraps each amount ("¥1,234",
+// "CNY 1,234", "¥600–900") in a span and re-renders it in the chosen currency.
+// Rates are fixed at the date below; update them here when refreshing prices.
+(function () {
+  var FX = { date: '28 Sep 2026', SGD: 0.190259, USD: 0.148821, CNY: 1 };
+  var SYM = { SGD: 'S$', USD: 'US$', CNY: '¥' };
+  var re = /(?:CNY\s?|¥)(\d[\d,]*)(?:\s?[–-]\s?(?:CNY\s?|¥)?(\d[\d,]*))?(\+)?/g;
+
+  var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+    acceptNode: function (n) {
+      var tag = n.parentNode.nodeName;
+      if (tag === 'SCRIPT' || tag === 'STYLE') return NodeFilter.FILTER_REJECT;
+      re.lastIndex = 0;
+      return re.test(n.nodeValue) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP;
+    }
+  });
+  var nodes = [];
+  while (walker.nextNode()) nodes.push(walker.currentNode);
+  nodes.forEach(function (n) {
+    var frag = document.createDocumentFragment(), text = n.nodeValue, last = 0, m;
+    re.lastIndex = 0;
+    while ((m = re.exec(text))) {
+      frag.appendChild(document.createTextNode(text.slice(last, m.index)));
+      var sp = document.createElement('span');
+      sp.className = 'money';
+      sp.dataset.a = m[1].replace(/,/g, '');
+      if (m[2]) sp.dataset.b = m[2].replace(/,/g, '');
+      if (m[3]) sp.dataset.plus = '1';
+      sp.textContent = m[0];
+      frag.appendChild(sp);
+      last = re.lastIndex;
+    }
+    frag.appendChild(document.createTextNode(text.slice(last)));
+    n.parentNode.replaceChild(frag, n);
+  });
+
+  function fmt(cny, cur) {
+    var v = cny * FX[cur];
+    if (cur !== 'CNY') v = v >= 100 ? Math.round(v / 5) * 5 : Math.round(v);
+    return Math.round(v).toLocaleString('en-US');
+  }
+  function render(cur) {
+    [].forEach.call(document.querySelectorAll('.money'), function (sp) {
+      var out = SYM[cur] + fmt(+sp.dataset.a, cur);
+      if (sp.dataset.b) out += '–' + fmt(+sp.dataset.b, cur);
+      if (sp.dataset.plus) out += '+';
+      sp.textContent = out;
+    });
+    [].forEach.call(document.querySelectorAll('.cur button'), function (b) {
+      b.setAttribute('aria-pressed', b.dataset.cur === cur ? 'true' : 'false');
+    });
+    document.getElementById('fxnote').textContent = cur === 'CNY'
+      ? 'Prices shown in CNY as quoted.'
+      : 'Prices shown in ' + cur + ', converted from CNY at ' + SYM[cur] + '1 = ¥' + (1 / FX[cur]).toFixed(2) + ' (' + FX.date + ').';
+    try { localStorage.setItem('shanghai-hotels-currency', cur); } catch (e) {}
+  }
+  window.renderCurrency = render;
+
+  var saved = 'SGD';
+  try { saved = localStorage.getItem('shanghai-hotels-currency') || 'SGD'; } catch (e) {}
+  if (!FX[saved]) saved = 'SGD';
+
+  document.querySelector('.cur').addEventListener('click', function (e) {
+    var b = e.target.closest('button');
+    if (b) render(b.dataset.cur);
+  });
+  document.addEventListener('DOMContentLoaded', function () { render(saved); });
+  render(saved);
+})();
+</script>
+<script>
 // Filters read each card's own data: price band from data-band + its .band label,
 // pool and deposit from the .meta line ("Pool: Yes…", "Deposit None").
 (function () {
@@ -537,12 +612,12 @@
 
   // Build price chips from the bands actually present, cheapest first.
   var bands = {};
-  cards.forEach(function (c) { bands[c.dataset.band] = c.querySelector('.band').textContent.trim(); });
+  cards.forEach(function (c) { bands[c.dataset.band] = c.querySelector('.band').innerHTML.trim(); });
   var priceRow = document.getElementById('fprices');
   Object.keys(bands).sort().forEach(function (b) {
     var btn = document.createElement('button');
     btn.type = 'button'; btn.className = 'chip'; btn.dataset.band = b;
-    btn.setAttribute('aria-pressed', 'false'); btn.textContent = bands[b];
+    btn.setAttribute('aria-pressed', 'false'); btn.innerHTML = bands[b];
     priceRow.appendChild(btn);
   });
 
