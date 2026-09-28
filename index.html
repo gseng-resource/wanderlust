@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wanderlust</title>
+<meta property="og:title" content="Wanderlust">
+<meta property="og:description" content="Travel guides and tools, all in one place.">
+<meta property="og:image" content="https://gseng-resource.github.io/wanderlust/assets/TokyoTower.webp">
+<meta property="og:url" content="https://gseng-resource.github.io/wanderlust/">
+<style>
+  :root {
+    --bg: #f6f4ef;
+    --card: #ffffff;
+    --text: #1d1d1f;
+    --muted: #6b6b70;
+    --line: #e4e1d9;
+    --accent: #c2410c;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #141416;
+      --card: #1f1f22;
+      --text: #f2f2f3;
+      --muted: #a1a1a8;
+      --line: #2e2e33;
+      --accent: #fb923c;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  main { max-width: 640px; margin: 0 auto; padding: 32px 16px 48px; }
+  h1 { font-size: 2rem; margin: 0 0 4px; letter-spacing: -0.02em; }
+  .lede { color: var(--muted); margin: 0 0 32px; }
+  h2 {
+    font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--muted); margin: 28px 0 10px;
+  }
+  .list { display: grid; gap: 10px; }
+  a.card {
+    display: flex; align-items: center; gap: 14px;
+    padding: 12px; border-radius: 14px;
+    background: var(--card); border: 1px solid var(--line);
+    color: inherit; text-decoration: none;
+    transition: border-color .15s, transform .15s;
+  }
+  a.card:hover, a.card:focus-visible { border-color: var(--accent); }
+  a.card:active { transform: scale(0.99); }
+  a.card img {
+    width: 56px; height: 56px; flex: none;
+    border-radius: 10px; object-fit: cover; background: var(--line);
+  }
+  .title { font-weight: 600; }
+  .desc { color: var(--muted); font-size: 0.9rem; }
+  .arrow { margin-left: auto; color: var(--muted); font-size: 1.2rem; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Wanderlust</h1>
+  <p class="lede">Travel guides and tools, all in one place.</p>
+
+  <h2>Japan</h2>
+  <div class="list">
+    <a class="card" href="japan/tokyo-shopping.html">
+      <img src="assets/TokyoTower.webp" alt="">
+      <div><div class="title">Tokyo Shopping Guide</div><div class="desc">Shopping districts, routes and maps</div></div>
+      <span class="arrow">›</span>
+    </a>
+    <a class="card" href="japan/osaka.html">
+      <img src="assets/OsakaCastle.png" alt="">
+      <div><div class="title">Osaka Navigator</div><div class="desc">Interactive guide to Osaka</div></div>
+      <span class="arrow">›</span>
+    </a>
+  </div>
+
+  <h2>Singapore</h2>
+  <div class="list">
+    <a class="card" href="singapore/family-guide.html">
+      <img src="assets/SGIcon.png" alt="">
+      <div><div class="title">Singapore Family Guide</div><div class="desc">Places to go near 19A</div></div>
+      <span class="arrow">›</span>
+    </a>
+  </div>
+
+  <h2>Tools</h2>
+  <div class="list">
+    <a class="card" href="tools/itinerary-prompt-generator.html">
+      <img src="assets/AIPrompt.png" alt="">
+      <div><div class="title">Itinerary Prompt Generator</div><div class="desc">Build a trip-planning prompt for ChatGPT</div></div>
+      <span class="arrow">›</span>
+    </a>
+  </div>
+</main>
+</body>
+</html>
