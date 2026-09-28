@@ -39,6 +39,21 @@
   table.summary th { background:#eef2f6; }
   footer { margin-top:60px; color:var(--mut); font-size:.8rem; line-height:1.6; border-top:1px solid var(--line); padding-top:16px; }
   @media (max-width:600px) { .wrap { padding-left:16px; padding-right:16px; } h1 { font-size:1.5rem; } header.top { padding:32px 0 24px; } }
+  .filters { position:sticky; top:0; z-index:10; background:rgba(246,248,250,.96); backdrop-filter:blur(6px); border-bottom:1px solid var(--line); margin:28px -20px 0; padding:12px 20px; display:flex; flex-direction:column; gap:10px; scroll-margin-top:0; }
+  .frow { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+  .frow.prices { flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; }
+  .frow.prices::-webkit-scrollbar { display:none; }
+  .flabel { font-size:.75rem; font-weight:600; text-transform:uppercase; letter-spacing:.06em; color:var(--mut); flex:none; }
+  .chip { flex:none; font:inherit; font-size:.85rem; background:#fff; color:var(--ink); border:1px solid var(--line); border-radius:999px; padding:6px 14px; cursor:pointer; white-space:nowrap; }
+  .chip:hover { border-color:var(--accent); }
+  .chip[aria-pressed="true"] { background:var(--accent); border-color:var(--accent); color:#fff; }
+  .fstatus { margin-left:auto; font-size:.85rem; color:var(--mut); display:flex; align-items:center; gap:10px; }
+  .fstatus button { font:inherit; font-size:.85rem; background:none; border:none; color:var(--accent); cursor:pointer; padding:0; text-decoration:underline; }
+  .fstatus button[hidden] { display:none; }
+  .empty { background:#fff; border:1px dashed var(--line); border-radius:12px; padding:24px; text-align:center; color:var(--mut); margin-top:24px; }
+  .jump { display:inline-block; margin-top:14px; color:#fff; font-weight:600; font-size:.9rem; text-decoration:none; border:1px solid rgba(255,255,255,.6); border-radius:999px; padding:6px 14px; }
+  section[hidden], .card[hidden], nav.zones a[hidden] { display:none; }
+  @media (max-width:600px) { .filters { margin:24px -16px 0; padding:10px 16px; } .fstatus { margin-left:0; width:100%; } }
 </style>
 <base target="_blank">
 </head>
@@ -46,6 +61,7 @@
 <header class="top"><div class="wrap">
   <h1>Shanghai Hotel Research — 20 Properties</h1>
   <div class="sub">Session handover pack · Compiled 2026-09-28 · All details extracted from the linked Trip.com property pages (review feeds, policies, amenities) and standard Shanghai geography for the 2 km attraction radii.</div>
+  <a class="jump" href="#filters" target="_self">Filter hotels ↓</a>
 </div></header>
 <div class="wrap">
 
@@ -85,6 +101,16 @@
   <tr><td>No deposit</td><td>UrCove on the Bund · UrCove Xuhui Riverside · Ascott Hengshan</td></tr>
   <tr><td>Newest (2025)</td><td>MUMIAN Expo · Thompson Expo · UrCove on the Bund · UrCove Xuhui · SHANGYING CHAO</td></tr>
 </table></div>
+
+<div class="filters" id="filters" role="region" aria-label="Filter hotels">
+  <div class="frow">
+    <span class="flabel">Must have</span>
+    <button type="button" class="chip" data-toggle="pool" aria-pressed="false">Pool</button>
+    <button type="button" class="chip" data-toggle="nodeposit" aria-pressed="false">No deposit</button>
+    <span class="fstatus"><span id="fcount"></span><button type="button" id="freset" hidden>Clear filters</button></span>
+  </div>
+  <div class="frow prices" id="fprices"><span class="flabel">Price</span></div>
+</div>
 
 <nav class="zones"><a target="_self" href="#Qiantan--Expo">Qiantan / Expo (8)</a><a target="_self" href="#West-Bund">West Bund (2)</a><a target="_self" href="#French-Concession">French Concession (3)</a><a target="_self" href="#Yu-Garden--Bund--Old-Town">Yu Garden / Bund / Old Town (2)</a><a target="_self" href="#Xintiandi">Xintiandi (1)</a><a target="_self" href="#Peoples-Square--Jingan">People&#x27;s Square / Jing&#x27;an (1)</a><a target="_self" href="#Suzhou-Creek">Suzhou Creek (1)</a><a target="_self" href="#Lujiazui">Lujiazui (1)</a><a target="_self" href="#Hengshan-Rd">Hengshan Rd (1)</a></nav>
 
@@ -350,6 +376,8 @@
       <a class="linkbtn" href="https://www.trip.com/w/2RA77j55XW2" target="_blank" rel="noopener">Trip.com page ↗</a>
     </article></div></section>
 
+<div class="empty" id="fempty" hidden>No hotels match these filters. <a href="#filters" target="_self" id="fempty-reset">Clear filters</a></div>
+
 <footer>
   <p><strong>Handover notes:</strong></p>
   <ul>
@@ -360,5 +388,80 @@
   </ul>
 </footer>
 </div>
+<script>
+// Filters read each card's own data: price band from data-band + its .band label,
+// pool and deposit from the .meta line ("Pool: Yes…", "Deposit None").
+(function () {
+  var cards = [].slice.call(document.querySelectorAll('.card'));
+  var sections = [].slice.call(document.querySelectorAll('section[id]'));
+  var navLinks = [].slice.call(document.querySelectorAll('nav.zones a'));
+  var total = cards.length;
+
+  cards.forEach(function (c) {
+    var meta = c.querySelector('.meta').textContent;
+    c.dataset.pool = /Pool:\s*Yes/i.test(meta) ? '1' : '0';
+    c.dataset.nodeposit = /Deposit\s+None/i.test(meta) ? '1' : '0';
+  });
+
+  // Build price chips from the bands actually present, cheapest first.
+  var bands = {};
+  cards.forEach(function (c) { bands[c.dataset.band] = c.querySelector('.band').textContent.trim(); });
+  var priceRow = document.getElementById('fprices');
+  Object.keys(bands).sort().forEach(function (b) {
+    var btn = document.createElement('button');
+    btn.type = 'button'; btn.className = 'chip'; btn.dataset.band = b;
+    btn.setAttribute('aria-pressed', 'false'); btn.textContent = bands[b];
+    priceRow.appendChild(btn);
+  });
+
+  var state = { pool: false, nodeposit: false, bands: {} };
+
+  function apply() {
+    var picked = Object.keys(state.bands).filter(function (b) { return state.bands[b]; });
+    var shown = 0;
+    cards.forEach(function (c) {
+      var ok = (!state.pool || c.dataset.pool === '1') &&
+               (!state.nodeposit || c.dataset.nodeposit === '1') &&
+               (!picked.length || picked.indexOf(c.dataset.band) !== -1);
+      c.hidden = !ok; if (ok) shown++;
+    });
+    sections.forEach(function (sec) {
+      var n = sec.querySelectorAll('.card:not([hidden])').length;
+      var all = sec.querySelectorAll('.card').length;
+      sec.hidden = n === 0;
+      var count = sec.querySelector('.count');
+      if (count) count.textContent = (n === all ? n : n + ' of ' + all) + (all === 1 ? ' hotel' : ' hotels');
+      var link = navLinks.filter(function (a) { return a.getAttribute('href') === '#' + sec.id; })[0];
+      if (link) { link.hidden = n === 0; link.textContent = link.textContent.replace(/\(\d+\)$/, '(' + n + ')'); }
+    });
+    var filtered = state.pool || state.nodeposit || picked.length > 0;
+    document.getElementById('fcount').textContent = filtered ? 'Showing ' + shown + ' of ' + total : total + ' hotels';
+    document.getElementById('freset').hidden = !filtered;
+    document.getElementById('fempty').hidden = shown !== 0;
+  }
+
+  document.getElementById('filters').addEventListener('click', function (e) {
+    var btn = e.target.closest('.chip');
+    if (!btn) return;
+    var on = btn.getAttribute('aria-pressed') !== 'true';
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    if (btn.dataset.toggle) state[btn.dataset.toggle] = on;
+    else state.bands[btn.dataset.band] = on;
+    apply();
+  });
+
+  function reset(e) {
+    if (e) e.preventDefault();
+    state = { pool: false, nodeposit: false, bands: {} };
+    [].forEach.call(document.querySelectorAll('.chip'), function (b) { b.setAttribute('aria-pressed', 'false'); });
+    apply();
+    document.getElementById('filters').scrollIntoView({ block: 'start' });
+  }
+  document.getElementById('freset').addEventListener('click', function () { reset(); });
+  document.getElementById('fempty-reset').addEventListener('click', reset);
+
+  apply();
+})();
+</script>
 </body>
 </html>
