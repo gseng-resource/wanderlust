@@ -8,6 +8,7 @@ Personal travel guides and tools, published with GitHub Pages at
 ```
 index.html        Home page linking to everything below
 japan/            Tokyo shopping guide, Osaka navigator
+china/            Shanghai hotel research
 singapore/        Singapore family guide
 tools/            Itinerary prompt generator
 assets/           Images used for link previews and the home page
