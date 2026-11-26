@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wanderlust</title>
+<meta property="og:title" content="Wanderlust">
+<meta property="og:description" content="旅行指南与行程研究。">
+<meta property="og:url" content="https://gseng-resource.github.io/wanderlust/index.zh.html">
+<style>
+  :root { --bg: #f6f4ef; --card: #ffffff; --text: #1d1d1f; --muted: #6b6b70; --line: #e4e1d9; --accent: #c2410c; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #141416; --card: #1f1f22; --text: #f2f2f3; --muted: #a1a1a8; --line: #2e2e33; --accent: #fb923c; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 16px/1.6 -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 640px; margin: 0 auto; padding: 32px 16px 48px; }
+  h1 { font-size: 2rem; margin: 0 0 4px; letter-spacing: -0.02em; }
+  .lede { color: var(--muted); margin: 0 0 32px; }
+  h2 { font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 28px 0 10px; }
+  a.card { display: flex; justify-content: space-between; align-items: center; gap: 12px; text-decoration: none; color: inherit;
+           background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px; margin-bottom: 10px; }
+  a.card:hover { border-color: var(--accent); }
+  .t { font-weight: 600; }
+  .s { color: var(--muted); font-size: .92rem; }
+  .lang { float: right; font-size: .9rem; color: var(--muted); margin-top: 10px; }
+  .lang a { color: var(--accent); text-decoration: none; }
+  .lang b { color: var(--text); }
+  .chev { color: var(--muted); font-size: 1.4rem; }
+</style>
+</head>
+<body>
+<main>
+  <span class="lang"><a href="./" lang="en">EN</a> | <b>中文</b></span>
+  <h1>Wanderlust</h1>
+  <p class="lede">旅行指南与行程研究。</p>
+
+  <h2>日本</h2>
+  <a class="card" href="japan/oita-road-trip.zh.html">
+    <div><div class="t">大分自驾游</div><div class="s">从福冈出发，自驾由布院、国东半岛、别府与臼杵</div></div>
+    <span class="chev">›</span>
+  </a>
+</main>
+</body>
+</html>
