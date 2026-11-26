@@ -4,200 +4,181 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>大分自驾游</title>
-<meta name="description" content="从福冈出发的三到四天冬季自驾：由布院、国东半岛、别府与臼杵。古寺、户外艺术与温泉。">
+<meta name="description" content="从福冈出发三到四天：由布院、国东半岛、别府与臼杵。含车程、火车、景点、12 月展览、美食、购物和预算。">
 <meta property="og:title" content="大分自驾游">
-<meta property="og:description" content="从福冈自驾由布院、国东半岛、别府与臼杵。古寺、户外艺术与温泉。">
-<link rel="alternate" hreflang="en" href="https://gseng-resource.github.io/wanderlust/japan/oita-road-trip.html">
+<meta property="og:description" content="从福冈出发三到四天：由布院、国东半岛、别府与臼杵。含车程、火车、景点、12 月展览、美食、购物和预算。">
 <meta property="og:url" content="https://gseng-resource.github.io/wanderlust/japan/oita-road-trip.zh.html">
+<link rel="alternate" hreflang="en" href="https://gseng-resource.github.io/wanderlust/japan/oita-road-trip.html">
 <style>
-  :root {
-    --bg: #f6f4ef; --card: #ffffff; --text: #1d1d1f; --muted: #6b6b70;
-    --line: #e4e1d9; --accent: #c2410c; --warn: #fff4e5; --warn-line: #f3d2a6;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #141416; --card: #1f1f22; --text: #f2f2f3; --muted: #a1a1a8;
-      --line: #2e2e33; --accent: #fb923c; --warn: #2a2118; --warn-line: #5a4126;
-    }
-  }
-  * { box-sizing: border-box; }
-  body { margin: 0; background: var(--bg); color: var(--text);
-         font: 16px/1.7 -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Segoe UI", Roboto, sans-serif; }
-  main { max-width: 760px; margin: 0 auto; padding: 24px 16px 56px; }
-  a { color: var(--accent); }
-  .top { display: flex; justify-content: space-between; align-items: center; }
-  .back { font-size: .9rem; text-decoration: none; }
-  .lang { font-size: .9rem; color: var(--muted); }
-  .lang a { text-decoration: none; }
-  .lang b { color: var(--text); }
-  h1 { font-size: 2rem; margin: 12px 0 4px; letter-spacing: -0.02em; }
-  .lede { color: var(--muted); margin: 0 0 8px; }
-  .stamp { color: var(--muted); font-size: .85rem; margin: 0 0 28px; }
-  h2 { font-size: 1.25rem; margin: 36px 0 12px; letter-spacing: -0.01em; }
-  h3 { font-size: 1rem; margin: 20px 0 8px; }
-  .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px; margin: 0 0 12px; }
-  .card h3 { margin-top: 0; }
-  .card p { margin: 6px 0; }
-  .muted { color: var(--muted); font-size: .92rem; }
-  ul { padding-left: 20px; margin: 6px 0; }
-  li { margin: 3px 0; }
-  .tabs { display: flex; gap: 8px; margin: 0 0 12px; }
-  .tabs button { font: inherit; padding: 6px 14px; border-radius: 999px; border: 1px solid var(--line);
-                 background: var(--card); color: var(--text); cursor: pointer; }
-  .tabs button[aria-selected="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
-  .day { display: grid; grid-template-columns: 64px 1fr; gap: 12px; }
-  .day b.d { color: var(--accent); }
-  .night { color: var(--muted); font-size: .88rem; margin-top: 4px; }
-  .note { background: var(--warn); border: 1px solid var(--warn-line); border-radius: 12px; padding: 12px 14px; margin: 12px 0; }
-  .hotel-head { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; flex-wrap: wrap; }
-  .score { font-weight: 600; }
-  .local { color: var(--muted); font-size: .9rem; }
-  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  @media (max-width: 560px) { .cols { grid-template-columns: 1fr; } .day { grid-template-columns: 1fr; gap: 2px; } }
-  footer { margin-top: 40px; color: var(--muted); font-size: .85rem; }
+  :root { --bg:#f6f4ef; --card:#fff; --text:#1d1d1f; --muted:#6b6b70; --line:#e4e1d9; --accent:#c2410c; --warn:#fff4e5; --warn-line:#f3d2a6; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#141416; --card:#1f1f22; --text:#f2f2f3; --muted:#a1a1a8; --line:#2e2e33; --accent:#fb923c; --warn:#2a2118; --warn-line:#5a4126; } }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font:16px/1.6 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Segoe UI",Roboto,sans-serif; }
+  main { max-width:760px; margin:0 auto; padding:24px 16px 56px; }
+  a { color:var(--accent); }
+  .top { display:flex; justify-content:space-between; align-items:center; }
+  .back { font-size:.9rem; text-decoration:none; }
+  .lang { font-size:.9rem; color:var(--muted); } .lang a { text-decoration:none; } .lang b { color:var(--text); }
+  h1 { font-size:2rem; margin:12px 0 4px; letter-spacing:-.02em; }
+  .lede { color:var(--muted); margin:0 0 8px; }
+  .stamp { color:var(--muted); font-size:.85rem; margin:0 0 16px; }
+  nav.toc { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+  nav.toc a { font-size:.85rem; text-decoration:none; border:1px solid var(--line); background:var(--card); border-radius:999px; padding:3px 10px; color:var(--text); }
+  h2 { font-size:1.25rem; margin:36px 0 12px; letter-spacing:-.01em; scroll-margin-top:12px; }
+  h3 { font-size:1rem; margin:0 0 8px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:16px; margin:0 0 12px; }
+  .card p { margin:6px 0; }
+  .muted { color:var(--muted); font-size:.92rem; }
+  ul { padding-left:20px; margin:6px 0; } li { margin:4px 0; }
+  .tabs { display:flex; gap:8px; margin:0 0 12px; }
+  .tabs button { font:inherit; padding:6px 14px; border-radius:999px; border:1px solid var(--line); background:var(--card); color:var(--text); cursor:pointer; }
+  .tabs button[aria-selected="true"] { background:var(--accent); border-color:var(--accent); color:#fff; }
+  .d { color:var(--accent); font-weight:700; display:block; margin-bottom:4px; }
+  .drive { display:inline-block; font-size:.85rem; color:var(--muted); border-left:3px solid var(--accent); padding-left:8px; margin:2px 0; }
+  .night { color:var(--muted); font-size:.88rem; margin-top:6px; }
+  .note { background:var(--warn); border:1px solid var(--warn-line); border-radius:12px; padding:12px 14px; margin:12px 0; }
+  .hotel-head { display:flex; justify-content:space-between; gap:12px; align-items:baseline; flex-wrap:wrap; }
+  .score { font-weight:600; } .local { color:var(--muted); font-size:.9rem; }
+  table { width:100%; border-collapse:collapse; font-size:.9rem; }
+  th, td { text-align:left; padding:6px 8px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { color:var(--muted); font-weight:600; }
+  .scroll { overflow-x:auto; }
+  footer { margin-top:40px; color:var(--muted); font-size:.85rem; }
 </style>
 </head>
 <body>
 <main>
-  <div class="top"><a class="back" href="../index.zh.html">← Wanderlust</a><span class="lang"><a href="oita-road-trip.html" lang="en" hreflang="en">EN</a> | <b>中文</b></span></div>
-  <h1>大分自驾游</h1>
-  <p class="lede">从福冈出发，三到四天的自驾路线：由布院泡温泉，国东半岛看山崖古寺与户外艺术，别府的地狱温泉，再到臼杵的石佛。</p>
-  <p class="stamp">2026 年 11 月为 12 月的一个周末所做的调研。开放时间和价格会变动，出发前请再确认。</p>
+<div class="top"><a class="back" href="../index.zh.html">← Wanderlust</a><span class="lang"><a href="oita-road-trip.html" lang="en" hreflang="en">EN</a> | <b>中文</b></span></div>
+<h1>大分自驾游</h1>
+<p class="lede">从福冈出发三到四天：由布院泡温泉，国东半岛看山崖古寺与户外艺术，别府的地狱温泉，再到臼杵石佛。可以自驾，也可以坐火车，国东半岛则搭观光巴士。</p>
+<p class="stamp">2026 年 11 月为 12 月行程所做的调研。开放时间和价格会变动，出发前请再确认。车程和距离为估算，请以 Google 地图为准。</p>
+<nav class="toc"><a href="#plan">行程</a><a href="#train">坐火车</a><a href="#sights">必去景点</a><a href="#shows">12 月展览</a><a href="#museums">博物馆</a><a href="#eat">吃什么</a><a href="#shop">购物</a><a href="#stay">住宿</a><a href="#budget">预算</a><a href="#drive">自驾须知</a></nav>
 
-  <h2>为什么选大分</h2>
-  <div class="card">
-    <p>如果你喜欢直岛和濑户内海的岛屿，这是九州最接近的选择：融入自然风景的当代艺术、日本最古老的一批佛教遗迹，每天最后再泡个温泉收尾。开车也轻松：从福冈机场到第一站约两小时，之后各站之间大多一小时出头。</p>
-  </div>
+<h2 id="why">为什么选大分</h2>
+<div class="card"><p>如果你喜欢直岛和濑户内海的岛屿，这是九州最接近的选择：融入风景的当代艺术、日本最古老的一批佛教遗迹，每天最后泡个温泉收尾。</p></div>
 
-  <h2>行程</h2>
-  <div class="tabs" role="tablist">
-    <button role="tab" aria-selected="true" data-t="four">四天三晚</button>
-    <button role="tab" aria-selected="false" data-t="three">三天两晚</button>
-  </div>
+<h2 id="plan">行程</h2>
+<div class="tabs" role="tablist"><button role="tab" aria-selected="true" data-t="four">四天三晚</button><button role="tab" aria-selected="false" data-t="three">三天两晚</button></div>
+<div id="four">
+  <div class="card"><span class="d">第 1 天 · 福冈 → 由布院</span>
+    上午飞抵福冈，取车。<br><span class="drive">🚗 福冈机场 → 由布院 · 115 km · 约 1 小时 30–45 分</span><br>
+    <b>COMICO 美术馆</b>（隈研吾设计，需预约时段）、<b>金鳞湖</b>、汤之坪街道、湖畔的夏加尔美术馆。晚上在旅馆泡汤、吃晚餐。<div class="night">住：由布院温泉旅馆</div></div>
+  <div class="card"><span class="d">第 2 天 · 国东半岛 → 别府</span>
+    <span class="drive">🚗 由布院 → 富贵寺 · 70 km · 约 1 小时 10 分</span><br>
+    <b>富贵寺</b>（九州最古老的木造建筑）<span class="drive">🚗 → 熊野磨崖佛 · 10 km · 20 分钟</span>（15:30 前到）<span class="drive">🚗 → 两子寺 · 15 km · 25 分钟</span> <span class="drive">🚗 → 五辻不动尊的 Gormley 雕塑 · 15 km · 约 30 分钟</span>，或长崎鼻的小野洋子作品。午餐在昭和之町或富贵寺旁。<br>
+    <span class="drive">🚗 国东 → 别府铁轮 · 55 km · 约 1 小时</span><br>晚上在铁轮：地狱蒸料理、砂浴。<div class="night">住：别府</div></div>
+  <div class="card"><span class="d">第 3 天 · 别府 → 大分 → 臼杵</span>
+    8:00 起逛别府<b>“地狱”</b>。<span class="drive">🚗 别府 → OPAM · 15 km · 25 分钟</span><br>
+    <b>OPAM</b>（雷诺阿展和出光名品展）。<span class="drive">🚗 OPAM → 臼杵石佛 · 40 km · 45 分钟</span><br>
+    <b>臼杵石佛</b>（国宝，16:30 停止入场）、武家老街和稻叶家下屋敷。<span class="drive">🚗 臼杵 → 别府 · 50 km · 50 分钟</span><div class="night">住：别府</div></div>
+  <div class="card"><span class="d">第 4 天 · 别府 → 宇佐 → 福冈</span>
+    明矾汤之里的汤之花小屋（竹细工会馆周一休馆）。<span class="drive">🚗 别府 → 宇佐神宫 · 45 km · 45 分钟</span><br>
+    <b>宇佐神宫</b>，全日本八幡宫的总本宫；道之驿院内买当地农产品。<span class="drive">🚗 宇佐 → 福冈机场 · 130 km · 约 1 小时 50 分</span><br>搭傍晚的航班。</div>
+</div>
+<div id="three" hidden>
+  <div class="card"><span class="d">第 1 天 · 福冈 → 由布院</span><span class="drive">🚗 福冈机场 → 由布院 · 115 km · 约 1 小时 30–45 分</span><br>COMICO 美术馆、金鳞湖、汤之坪街道、温泉。<div class="night">住：由布院温泉旅馆</div></div>
+  <div class="card"><span class="d">第 2 天 · 国东 → 别府</span><span class="drive">🚗 由布院 → 富贵寺 · 70 km · 约 1 小时 10 分</span><br>富贵寺 → 熊野磨崖佛 → 两子寺 → Gormley 雕塑或长崎鼻。<span class="drive">🚗 国东 → 别府 · 55 km · 约 1 小时</span><br>晚上逛铁轮。<div class="night">住：别府</div></div>
+  <div class="card"><span class="d">第 3 天 · 别府 → 大分 → 福冈</span>8:00 逛别府“地狱”<span class="drive">🚗 → OPAM · 15 km · 25 分钟</span> 10:00 进 OPAM，在大分站吃午餐。约 13:30 出发。<span class="drive">🚗 大分 → 福冈机场 · 150 km · 约 1 小时 55 分</span><br>搭傍晚的航班。不去臼杵和宇佐。</div>
+</div>
+<p class="muted">想少换酒店？全程住别府，由布院当一日游（别府 → 由布院 25 公里，约 35 分钟），但就少了住温泉旅馆的那一晚。</p>
 
-  <div id="four">
-    <div class="card day"><b class="d">周五</b><div>上午飞抵福冈，取车，开约 1 小时 45 分到<b>由布院</b>。COMICO 美术馆（隈研吾设计，需预约入场时段）、金鳞湖、汤之坪街道。晚上在旅馆泡汤、吃晚餐。<div class="night">住：由布院温泉旅馆</div></div></div>
-    <div class="card day"><b class="d">周六</b><div><b>国东半岛</b>（约 1 小时 15 分）：富贵寺（据称是九州最古老的木造建筑）→ 熊野磨崖佛 → 两子寺 → 五辻不动尊下方的 Antony Gormley 雕塑，或长崎鼻的小野洋子作品。约 17:00 到<b>别府</b>，晚上逛铁轮：地狱蒸料理晚餐、砂浴。<div class="night">住：别府</div></div></div>
-    <div class="card day"><b class="d">周日</b><div>8:00 起逛别府<b>“地狱”</b> → <b>OPAM</b> 大分县立美术馆（坂茂设计）→ <b>臼杵石佛</b>（国宝，16:30 停止入场）和臼杵老街 → 回别府。<div class="night">住：别府</div></div></div>
-    <div class="card day"><b class="d">周一</b><div>上午去明矾汤之里的汤之花小屋，或别府竹细工传统产业会馆 → 北上途中参拜<b>宇佐神宫</b> → 约 2 小时回福冈机场，搭傍晚的航班。</div></div>
-  </div>
+<h2 id="train">坐火车（不开车）</h2>
+<div class="card"><p>大分没有新干线，靠 JR 特急列车连接福冈。不开车的话，国东半岛最麻烦。</p><ul>
+  <li><b>博多 → 由布院：</b><a href="https://www.jrkyushu.co.jp/trains/yufuinnomori/">由布院之森号</a>，约 2 小时 10 分，6,130 日元（网购更便宜），全车对号座，每天往返各三班，提前一个月开售。12 月有些日子改由普通特急“由布号”运行。或从福冈机场搭高速巴士，约 1 小时 50 分，3,250 日元。</li>
+  <li><b>博多 → 别府 / 大分：</b>特急“音速号”（Sonic），到大分约 2 小时，对号座约 6,900 日元，约每 30 分钟一班。</li>
+  <li><b>由布院 → 别府：</b>直达巴士约 1 小时，或坐 JR 经大分转车。</li>
+  <li><b>别府 → 大分：</b>JR 10–15 分钟。<b>大分 → 臼杵：</b>JR 日丰本线约 45 分钟。</li>
+  <li><b>宇佐神宫：</b>JR 到宇佐站，再搭巴士 7–10 分钟（约 240 日元）或打车。</li>
+  <li><b>国东半岛：</b>大分交通的<a href="https://teppan-oita.jp/tour/teikan_kunisaki2/">国东半岛史迹巡游观光巴士</a>（约 9 小时：宇佐神宫、富贵寺、真木大堂、熊野磨崖佛、两子寺），大分站 8:50 或别府站 9:15 出发，约 4,000–6,000 日元，午餐自理。12 月可能只在周日运行；预约电话 097-534-7455。包出租车 5–6 小时约 28,000–34,000 日元。</li>
+  <li><b>铁路通票：</b><a href="https://www.jrkyushu.co.jp/english/railpass/railpass.html">JR 九州北九州通票</a> 3 天 15,000 日元、5 天 17,000 日元。单是博多 → 由布院加大分 → 博多就约 13,000 日元，所以 3 天券只有在同期还去臼杵或宇佐时才划算。</li>
+</ul></div>
 
-  <div id="three" hidden>
-    <div class="card day"><b class="d">周五</b><div>飞抵福冈 → <b>由布院</b>：COMICO 美术馆、金鳞湖、温泉。<div class="night">住：由布院温泉旅馆</div></div></div>
-    <div class="card day"><b class="d">周六</b><div><b>国东半岛</b>的古寺与户外艺术 → <b>别府</b>，晚上逛铁轮。<div class="night">住：别府</div></div></div>
-    <div class="card day"><b class="d">周日</b><div>8:00 逛别府“地狱” → 10:00 OPAM → 约 13:30 出发回福冈机场，搭傍晚的航班。</div></div>
-  </div>
+<h2 id="sights">必去景点</h2>
+<div class="card"><ul>
+  <li><b>国东半岛古寺：</b>富贵寺（8:30–16:30，500 日元；下雨天大堂内部不开放）、熊野磨崖佛（约 300 米陡峭石阶）、两子寺（8:30–16:30）。</li>
+  <li><b>国东半岛户外艺术：</b>五辻不动尊下方 Antony Gormley 的《Another Time XX》、长崎鼻的小野洋子作品。免费、露天。</li>
+  <li><b>臼杵石佛：</b>9:00–17:00，16:30 停止入场，550 日元。之后逛二王座武家老街和稻叶家下屋敷（9:00–17:00）。</li>
+  <li><b>别府地狱巡游：</b>七处只能看不能泡的温泉，每天 8:00–17:00；两日通票约 2,200 日元。</li>
+  <li><b>铁轮与竹瓦温泉：</b>街头蒸汽升腾；竹瓦温泉是 1938 年的木造浴场，有砂浴（泡汤 300 日元，砂浴 1,500 日元）。</li>
+  <li><b>金鳞湖（由布院）：</b>泉水湖，冬季清晨的雾气最有名。免费。</li>
+  <li><b>宇佐神宫：</b>境内 6:00–18:00；宝物馆周一或周二可能闭馆。</li>
+  <li><b>丰后高田昭和之町：</b>保留 1950–60 年代风貌的商店街，以及昭和浪漫藏玩具博物馆（900 日元）。</li>
+  <li><b>别府鹤见岳缆车：</b>登上 1,300 米；冬季上山末班 16:30，往返 1,800 日元；天气差时停运。</li>
+  <li><b>高崎山：</b>别府与大分之间的野生猕猴，9:00–17:00，约 520 日元。</li>
+  <li><b>原尻瀑布：</b>宽 120 米的瀑布，在臼杵内陆约 40 公里。免费。</li>
+</ul></div>
 
-  <h2>吃什么</h2>
-  <p class="muted">选的都是顺路的店，并核对过 12 月周末的休息日。不少店不定休，出发前一周请电话确认。</p>
-  <div class="card"><h3>周五</h3><ul>
-    <li><b>午餐：</b>福冈机场国内线 3 楼的“拉面跑道”（Ramen Runway），九州拉面，1,000–1,500 日元。或由布院站旁的 <a href="https://tabelog.com/oita/A4402/A440201/44005142/">由布まぶし 心</a>，丰后牛饭，2,000–3,200 日元（11:00–16:00，常要排队）。</li>
-    <li><b>晚餐和早餐：</b>在旅馆吃。订房时确认方案：由布院有些房价不含餐。若不含，傍晚 17:00 前在汤之坪街道解决。</li></ul></div>
-  <div class="card"><h3>周六</h3><ul>
-    <li><b>午餐：</b>富贵寺旁的 <a href="https://www.mapple.net/spot/44011492/">旅庵 蕗薹</a>，丰后高田手打荞麦面，1,000–2,000 日元。或昭和之町的 <a href="https://tabelog.com/oita/A4403/A440301/44000230/">旬彩 南蔵</a>，定食，1,000–2,000 日元，每天营业。</li>
-    <li><b>晚餐：</b><a href="https://jigokumushi.com/">地狱蒸工房 铁轮</a>，用温泉蒸汽自己蒸海鲜蔬菜，1,500–3,000 日元。18:00 最后点餐，不接受预约；每月第三个周三休息。备选：<a href="https://tabelog.com/oita/A4402/A440202/44000199/">とよ常</a>吃鸡肉天妇罗（周二、周三休）。</li></ul></div>
-  <div class="card"><h3>周日</h3><ul>
-    <li><b>早餐：</b>酒店自助（西铁，约 1,800 日元，6:30 起）。</li>
-    <li><b>午餐：</b>臼杵的 <a href="https://tabelog.com/oita/A4401/A440104/44006108/">やを傳</a>，臼杵豆腐怀石，3,000–4,000 日元，需预约（周二休）。或港边的臼杵港市场吃海鲜盖饭，1,500–2,500 日元。</li>
-    <li><b>晚餐：</b><a href="https://tabelog.com/oita/A4402/A440202/44000199/">とよ常</a>，鸡肉天妇罗和关鲭鱼，2,000–4,000 日元（要排队）。或 <a href="https://tabelog.com/oita/A4402/A440202/44000594/">胡月</a>，别府冷面的老店，约 900 日元（周末营业到 19:00，只收现金）。</li></ul></div>
-  <div class="card"><h3>周一</h3><ul>
-    <li><b>早餐：</b>酒店自助，或 <a href="https://tabelog.com/oita/A4402/A440202/44000059/">友永面包店</a>的老式红豆面包（周日休）。</li>
-    <li><b>午餐：</b>宇佐神宫参道上的かくまさ，团子汁和鸡肉天妇罗套餐，约 1,000 日元。宇佐有名的炸鸡店太阁和すずや周一都休息，想吃炸鸡请在周六顺路买。</li></ul></div>
+<h2 id="shows">2026 年 12 月的展览</h2>
+<div class="card"><ul>
+  <li><b>OPAM 大分县立美术馆：</b>《我们的雷诺阿》（11 月 23 日–1 月 17 日，1,600 日元）和出光美术馆名品展（11 月 13 日–1 月 11 日，1,500 日元；凭雷诺阿展票根 1,000 日元）。展期中换展：长谷川等伯的《竹虎图》屏风 12 月 15 日起展出。12 月每天开放，周五、周六至 20:00。</li>
+  <li><b>大分市历史资料馆：</b><a href="https://www.city.oita.oita.jp/o205/r8tenji/oitarashisa.html">《大分特色——历史的记忆》</a>，至 12 月 13 日，310 日元。</li>
+  <li><b>尚未公布：</b>查询时大分市美术馆、宇佐的县立历史博物馆（Riman）和由布院各美术馆都还没公布 2026 年 12 月的展览。别府的艺术博览会在 1 月下旬。</li>
+</ul></div>
 
-  <h2>预算</h2>
-  <div class="card">
-    <p>每人费用，按两人同住一间、合租一辆车计算，<b>不含机票</b>。2026 年 11 月估算，1 日元 ≈ 0.047 元人民币。</p>
-    <ul>
-      <li><b>四天三晚：</b>约 3,900–4,450 元（住宿 1,300 · 租车、高速周游券和油费 1,100–1,500 · 餐饮 1,000–1,200 · 门票 460）</li>
-      <li><b>三天两晚：</b>约 2,950–3,350 元</li>
-    </ul>
-    <p class="muted">如果旅馆房价不含餐、需要在外面吃晚餐，预算要再加一些。</p>
-  </div>
+<h2 id="museums">博物馆</h2>
+<div class="card scroll"><table><tr><th>博物馆</th><th>开放时间</th><th>休馆</th><th>门票</th></tr>
+<tr><td><a href="https://www.opam.jp/">OPAM</a> 大分县立美术馆</td><td>10:00–19:00</td><td>每天开放</td><td>依展览</td></tr>
+<tr><td><a href="https://camy.oita.jp/en">COMICO 美术馆</a>（由布院）</td><td>9:30–17:00，16:00 停止入场</td><td>隔周周三</td><td>1,700 日元，分时段入场</td></tr>
+<tr><td>金鳞湖夏加尔美术馆</td><td>9:00–17:00</td><td>不定休</td><td>约 600 日元</td></tr>
+<tr><td><a href="https://www.city.oita.oita.jp/bunkasports/bunka/bijutsukan/index.html">大分市美术馆</a></td><td>10:00–18:00</td><td>周一；12 月 28 日–1 月 4 日</td><td>440 日元</td></tr>
+<tr><td><a href="https://www.pref.oita.jp/site/rekishihakubutsukan/">县立历史博物馆 Riman</a>（宇佐）</td><td>9:00–17:00</td><td>周一</td><td>约 310 日元</td></tr>
+<tr><td>别府竹细工传统产业会馆</td><td>8:30–17:00</td><td>周一</td><td>约 300 日元</td></tr>
+</table><p class="muted">不少博物馆周一休馆，周五至周一的行程请别把它们排在最后一天。</p></div>
 
-  <h2>住宿</h2>
-  <p class="muted">价格为 2026 年 11 月下旬在 Booking.com 上查到的 12 月某个周末、两人入住最便宜房型的含税价。餐食未核实：温泉旅馆的价格往往取决于是否含晚餐。</p>
+<h2 id="eat">吃什么</h2>
+<p class="muted">选的都是顺路的店，并核对过 12 月周末的休息日。不少店不定休，出发前一周请电话确认。</p>
+<div class="card"><h3>第 1 天</h3><ul>
+  <li><b>午餐：</b>福冈机场国内线 3 楼的“拉面跑道”，1,000–1,500 日元。或由布院站旁的 <a href="https://tabelog.com/oita/A4402/A440201/44005142/">由布まぶし 心</a>，丰后牛饭，2,000–3,200 日元（11:00–16:00）。</li>
+  <li><b>晚餐和早餐：</b>在旅馆吃；请确认方案，由布院有些房价不含餐。若不含，17:00 前在汤之坪街道解决。</li></ul></div>
+<div class="card"><h3>第 2 天</h3><ul>
+  <li><b>午餐：</b>富贵寺旁的 <a href="https://www.mapple.net/spot/44011492/">旅庵 蕗薹</a>，手打荞麦面，1,000–2,000 日元。或昭和之町的 <a href="https://tabelog.com/oita/A4403/A440301/44000230/">旬彩 南蔵</a>，每天营业。</li>
+  <li><b>晚餐：</b><a href="https://jigokumushi.com/">地狱蒸工房 铁轮</a>，自己蒸海鲜，1,500–3,000 日元；18:00 最后点餐，不接受预约。备选：<a href="https://tabelog.com/oita/A4402/A440202/44000199/">とよ常</a> 吃鸡肉天妇罗（周二、周三休）。</li></ul></div>
+<div class="card"><h3>第 3 天</h3><ul>
+  <li><b>早餐：</b>酒店自助（西铁约 1,800 日元）。</li>
+  <li><b>午餐：</b>臼杵的 <a href="https://tabelog.com/oita/A4401/A440104/44006108/">やを傳</a>，豆腐怀石，3,000–4,000 日元，需预约（周二休）。或臼杵港市场吃海鲜盖饭。三天两晚的话：大分站的 AMU Plaza。</li>
+  <li><b>晚餐：</b><a href="https://tabelog.com/oita/A4402/A440202/44000199/">とよ常</a>，鸡肉天妇罗和关鲭鱼，2,000–4,000 日元。或 <a href="https://tabelog.com/oita/A4402/A440202/44000594/">胡月</a>，别府冷面老店，约 900 日元（只收现金，周末营业到 19:00）。</li></ul></div>
+<div class="card"><h3>第 4 天</h3><ul>
+  <li><b>早餐：</b>酒店，或 <a href="https://tabelog.com/oita/A4402/A440202/44000059/">友永面包店</a>的红豆面包（周日休）。</li>
+  <li><b>午餐：</b>宇佐神宫参道上的かくまさ，团子汁和鸡肉天妇罗，约 1,000 日元。宇佐有名的炸鸡店太阁和すずや周一休息。</li></ul></div>
 
-  <div class="card">
-    <div class="hotel-head"><h3>由布院温泉 8A1 八英智</h3><span class="score">9.6</span></div>
-    <div class="local">Yufuin Onsen 8A1 Yaeichi · 由布院 · 温泉旅馆</div>
-    <p>每晚约 1,200 元人民币。</p>
-    <div class="cols">
-      <ul><li>温泉旅馆，住由布院就是为了这个</li><li>查过的两个 12 月周五价格相同</li></ul>
-      <ul><li>傍晚公共浴场人多</li><li>餐食方案尚未确认</li></ul>
-    </div>
-    <p><a href="https://www.booking.com/hotel/jp/yufuin-onsen-8a1-yaeichi.html">Booking.com</a></p>
-  </div>
+<h2 id="shop">购物</h2>
+<div class="card"><ul>
+  <li><b>由布院汤之坪街道：</b>工艺品、甜点、当地小吃；约 9:30–17:30。由布院花卉村适合快速逛逛，比较商业化。</li>
+  <li><b>别府站前商店街</b>（やよい天狗、竹瓦）：竹编工艺、温泉用品、外带鸡肉天妇罗。</li>
+  <li><b>大分站 AMU Plaza：</b>车站大型商场，10:00–20:30（周五至周日到 21:00）。</li>
+  <li><b>大分 Tokiwa 百货：</b>地下食品街买臭橙（kabosu）、干香菇等大分特产。</li>
+  <li><b>丰后高田昭和之町：</b>怀旧零食和杂货。</li>
+  <li><b>道之驿院内</b>（宇佐）：农产品、香菇、臭橙，每天 8:00–17:00。</li>
+  <li><b>福冈机场国内线 2 楼：</b>小鸡馒头等福冈伴手礼。</li>
+</ul></div>
 
-  <div class="card">
-    <div class="hotel-head"><h3>山荘 しゃらの木</h3><span class="score">9.7</span></div>
-    <div class="local">Sansou Syaranoki · 由布院（川北一侧）· 温泉旅馆</div>
-    <p>每晚约 1,100 元人民币。</p>
-    <div class="cols">
-      <ul><li>入选名单中评分最高</li><li>位于由布院较安静的一侧</li></ul>
-      <ul><li>去汤之坪街道和金鳞湖要多走一段或开车</li><li>并非 12 月每个周末都能订到</li></ul>
-    </div>
-    <p><a href="https://www.booking.com/hotel/jp/sansou-syaranoki.html">Booking.com</a></p>
-  </div>
+<h2 id="stay">住宿</h2>
+<p class="muted">价格为 2026 年 11 月下旬在 Booking.com 上查到的 12 月某个周末、两人最便宜房型的含税价。温泉旅馆价格往往取决于是否含晚餐。</p>
+<div class="card"><div class="hotel-head"><h3>由布院温泉 8A1 八英智</h3><span class="score">9.6</span></div><div class="local">Yufuin Onsen 8A1 Yaeichi · 由布院 · 温泉旅馆</div><p>每晚约 1,200 元人民币。餐食方案未确认。</p><p><a href="https://www.booking.com/hotel/jp/yufuin-onsen-8a1-yaeichi.html">Booking.com</a></p></div>
+<div class="card"><div class="hotel-head"><h3>山荘 しゃらの木</h3><span class="score">9.7</span></div><div class="local">Sansou Syaranoki · 由布院（川北一侧）· 温泉旅馆</div><p>每晚约 1,100 元人民币；据称含早晚餐。位于较安静的一侧。</p><p><a href="https://www.booking.com/hotel/jp/sansou-syaranoki.html">Booking.com</a></p></div>
+<div class="card"><div class="hotel-head"><h3>西鉄リゾートイン別府</h3><span class="score">8.0</span></div><div class="local">Nishitetsu Resort Inn Beppu · 别府市中心 · 酒店</div><p>每晚约 700 元人民币。屋顶露天温泉；自助早餐约 1,800 日元。</p><p><a href="https://www.booking.com/hotel/jp/nishitetsu-resort-inn-beppu.html">Booking.com</a></p></div>
 
-  <div class="card">
-    <div class="hotel-head"><h3>西鉄リゾートイン別府</h3><span class="score">8.0</span></div>
-    <div class="local">Nishitetsu Resort Inn Beppu · 别府市中心 · 酒店</div>
-    <p>两晚约 1,400 元人民币。</p>
-    <div class="cols">
-      <ul><li>屋顶露天温泉</li><li>步行可到车站和竹瓦温泉</li></ul>
-      <ul><li>商务酒店，没有怀石晚餐</li><li>屋顶浴池不大，高峰时段要排队</li></ul>
-    </div>
-    <p><a href="https://www.booking.com/hotel/jp/nishitetsu-resort-inn-beppu.html">Booking.com</a></p>
-  </div>
+<h2 id="budget">预算</h2>
+<div class="card"><p>每人费用，按两人同住一间、合租一辆车计算，<b>不含机票</b>。2026 年 11 月估算，1 日元 ≈ 0.047 元人民币。</p><ul>
+  <li><b>四天三晚：</b>约 3,900–4,450 元（住宿 1,300 · 租车、高速周游券和油费 1,100–1,500 · 餐饮 1,000–1,200 · 门票 460）</li>
+  <li><b>三天两晚：</b>约 2,950–3,350 元</li>
+  <li><b>改坐火车：</b>每人铁路约 13,000–15,000 日元，另加国东观光巴士 4,000–6,000 日元。</li></ul>
+<p class="muted">未包含：机票、旅馆不含餐时的晚餐、购物、旅游保险。</p></div>
 
-  <h2>自驾须知</h2>
-  <div class="card">
-    <ul>
-      <li>外国驾照需持 1949 年日内瓦公约格式的国际驾照，并同时携带驾照原件。中国大陆驾照在日本不能使用（中国不是 1949 年日内瓦公约缔约国，无法签发此类国际驾照），需持其他缔约国签发的驾照和国际驾照。</li>
-      <li><b>九州高速公路周游券（Kyushu Expressway Pass）：</b>3 天 8,400 日元，4 天 10,600 日元，与租车一起预订。查询时 Toyota、Budget、ORIX 和 Nippon Rent-A-Car 不提供此券，请选择其他合作租车公司。</li>
-      <li>租车时要求雪地胎或防滑链：由布院高地和国东半岛山路清晨可能结冰。</li>
-      <li>大致车程：福冈机场 → 由布院 1 小时 40 分至 2 小时 · 由布院 → 富贵寺 1 小时 15 分 · 两子寺 → 别府约 1 小时 · 别府 → 臼杵 45 分钟 · 臼杵 → 福冈机场约 2 小时 45 分。</li>
-    </ul>
-  </div>
+<h2 id="drive">自驾须知</h2>
+<div class="card"><ul>
+  <li>外国驾照需持 1949 年日内瓦公约格式的国际驾照，并同时携带驾照原件。中国大陆驾照在日本不能使用（中国不是该公约缔约国）。</li>
+  <li><b>九州高速公路周游券：</b>3 天 8,400 日元，4 天 10,600 日元，与租车一起预订。查询时 Toyota、Budget、ORIX 和 Nippon Rent-A-Car 不提供此券。</li>
+  <li>租车时要求雪地胎或防滑链：由布院高地和国东山路清晨可能结冰。</li>
+  <li>总车程：四天约 550 公里，三天约 450 公里。</li></ul></div>
 
-  <h2>景点一览</h2>
-  <div class="card">
-    <ul>
-      <li><b>COMICO 美术馆（由布院）：</b>9:30–17:00，16:00 停止入场，1,700 日元。分时段入场，可提前一个月预约。隔周周三休馆。馆内无停车场。</li>
-      <li><b>OPAM 大分县立美术馆：</b>10:00–19:00（周五、周六至 20:00）。2026 年 12 月每天开放，有雷诺阿特展和出光美术馆名品展；出光展厅月中会闭展一天换展。</li>
-      <li><b>富贵寺：</b>8:30–16:30，500 日元。下雨天大堂内部不开放（为保护壁画），尽量挑晴天去。</li>
-      <li><b>熊野磨崖佛：</b>约 300 米陡峭、不平整的石阶，单程 15–20 分钟。15:30 前到达，穿防滑的鞋。</li>
-      <li><b>两子寺：</b>8:30–16:30。</li>
-      <li><b>国东半岛户外艺术：</b>免费、露天。Antony Gormley 的《Another Time XX》从停车场步行不远即到，但上山的路比较颠簸；小野洋子的作品在长崎鼻。</li>
-      <li><b>别府地狱巡游：</b>每天 8:00–17:00。七大地狱通票约 2,200 日元，两天内有效。</li>
-      <li><b>臼杵石佛：</b>9:00–17:00，16:30 停止入场，550 日元。</li>
-      <li><b>宇佐神宫：</b>境内 6:00–18:00。宝物馆周一或周二可能闭馆。</li>
-    </ul>
-  </div>
-
-  <h2>别府：地狱之外</h2>
-  <div class="card">
-    <ul>
-      <li><b>铁轮：</b>街道上蒸汽升腾；在“地狱蒸工房铁轮”用温泉蒸汽自己蒸海鲜蔬菜；在铁轮蒸汤体验草药蒸汽浴。</li>
-      <li><b>竹瓦温泉</b>（1879 年）：木造公共浴场，有热砂浴。</li>
-      <li><b>明矾汤之里：</b>茅草小屋里仍以江户时代的方法制作“汤之花”温泉结晶。</li>
-      <li><b>别府竹细工传统产业会馆：</b>别府竹编工艺，新旧作品都有。</li>
-      <li><b>美食：</b>鸡肉天妇罗（とり天）、别府冷面、关竹荚鱼和关鲭鱼、丰后牛、团子汁。</li>
-    </ul>
-  </div>
-
-  <div class="note"><b>天气。</b>12 月的大分白天约 13°C，夜间约 5°C。由布院更冷，夜间零度以下，有霜和晨雾。</div>
-
-  <footer>Wanderlust 的一部分。仅为行程研究，不构成建议；无任何赞助。</footer>
+<div class="note"><b>天气。</b>12 月的大分白天约 13°C，夜间约 5°C。由布院更冷，夜间零度以下，有霜和晨雾。</div>
+<footer>Wanderlust 的一部分。仅为行程研究，不构成建议；无任何赞助。</footer>
 </main>
 <script>
-  document.querySelectorAll('.tabs button').forEach(b => b.addEventListener('click', () => {
-    document.querySelectorAll('.tabs button').forEach(x => {
-      const on = x === b;
-      x.setAttribute('aria-selected', on);
-      document.getElementById(x.dataset.t).hidden = !on;
-    });
-  }));
+document.querySelectorAll('.tabs').forEach(t => t.querySelectorAll('button').forEach(b => b.addEventListener('click', () => {
+  t.querySelectorAll('button').forEach(x => { const on = x === b; x.setAttribute('aria-selected', on); document.getElementById(x.dataset.t).hidden = !on; });
+})));
 </script>
 </body>
 </html>
