@@ -4,20 +4,39 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Wanderlust</title>
-<meta name="robots" content="noindex">
+<meta property="og:title" content="Wanderlust">
+<meta property="og:description" content="Travel guides and trip research.">
+<meta property="og:url" content="https://gseng-resource.github.io/wanderlust/">
 <style>
-  :root { --bg: #f6f4ef; --text: #1d1d1f; --muted: #6b6b70; }
-  @media (prefers-color-scheme: dark) { :root { --bg: #141416; --text: #f2f2f3; --muted: #a1a1a8; } }
-  body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: var(--bg); color: var(--text);
-         font: 16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; padding: 16px; box-sizing: border-box; }
-  h1 { font-size: 2rem; margin: 0 0 4px; letter-spacing: -0.02em; text-align: center; }
-  p { color: var(--muted); margin: 0; text-align: center; }
+  :root { --bg: #f6f4ef; --card: #ffffff; --text: #1d1d1f; --muted: #6b6b70; --line: #e4e1d9; --accent: #c2410c; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #141416; --card: #1f1f22; --text: #f2f2f3; --muted: #a1a1a8; --line: #2e2e33; --accent: #fb923c; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 640px; margin: 0 auto; padding: 32px 16px 48px; }
+  h1 { font-size: 2rem; margin: 0 0 4px; letter-spacing: -0.02em; }
+  .lede { color: var(--muted); margin: 0 0 32px; }
+  h2 { font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 28px 0 10px; }
+  a.card { display: flex; justify-content: space-between; align-items: center; gap: 12px; text-decoration: none; color: inherit;
+           background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px; margin-bottom: 10px; }
+  a.card:hover { border-color: var(--accent); }
+  .t { font-weight: 600; }
+  .s { color: var(--muted); font-size: .92rem; }
+  .chev { color: var(--muted); font-size: 1.4rem; }
 </style>
 </head>
 <body>
 <main>
   <h1>Wanderlust</h1>
-  <p>Coming soon.</p>
+  <p class="lede">Travel guides and trip research.</p>
+
+  <h2>Japan</h2>
+  <a class="card" href="japan/oita-road-trip.html">
+    <div><div class="t">Oita Road Trip</div><div class="s">Yufuin, Kunisaki, Beppu and Usuki by car from Fukuoka</div></div>
+    <span class="chev">›</span>
+  </a>
 </main>
 </body>
 </html>
