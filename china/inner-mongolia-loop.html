@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<script>try{var t=localStorage.getItem("wl-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Shanghai to Inner Mongolia Road Trip</title>
 <meta name="description" content="Three weeks by car in a full loop from Shanghai: the ancient capitals of Nanjing, Kaifeng, Luoyang and Xi’an, north across the Loess Plateau to the deserts and grasslands of Inner ">
@@ -12,7 +13,8 @@
 <link rel="alternate" hreflang="zh-Hans" href="https://gseng-resource.github.io/wanderlust/china/inner-mongolia-loop.zh.html">
 <style>
   :root { --bg:#f6f4ef; --card:#fff; --text:#1d1d1f; --muted:#6b6b70; --line:#e4e1d9; --accent:#c2410c; --warn:#fff4e5; --warn-line:#f3d2a6; }
-  @media (prefers-color-scheme: dark) { :root { --bg:#141416; --card:#1f1f22; --text:#f2f2f3; --muted:#a1a1a8; --line:#2e2e33; --accent:#fb923c; --warn:#2a2118; --warn-line:#5a4126; } }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg:#141416; --card:#1f1f22; --text:#f2f2f3; --muted:#a1a1a8; --line:#2e2e33; --accent:#fb923c; --warn:#2a2118; --warn-line:#5a4126; } }
+  :root[data-theme="dark"] { --bg:#141416; --card:#1f1f22; --text:#f2f2f3; --muted:#a1a1a8; --line:#2e2e33; --accent:#fb923c; --warn:#2a2118; --warn-line:#5a4126; }
   * { box-sizing:border-box; }
   body { margin:0; background:var(--bg); color:var(--text); font:16px/1.6 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Segoe UI",Roboto,sans-serif; }
   main { max-width:760px; margin:0 auto; padding:24px 16px 56px; }
@@ -54,10 +56,11 @@
   .charge { color:var(--accent); font-size:.9rem; margin:6px 0 0; }
   footer { margin-top:40px; color:var(--muted); font-size:.85rem; }
 </style>
+<style id="wl-theme-css">:root{color-scheme:light dark}:root[data-theme="light"]{color-scheme:light}:root[data-theme="dark"]{color-scheme:dark}.themebtn{font:inherit;line-height:1;border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:999px;width:2em;height:2em;padding:0;cursor:pointer;vertical-align:middle;margin-right:.5em}.themebtn:hover{border-color:var(--accent)}.top>.themebtn{margin-left:auto;margin-right:.75em}</style>
 </head>
 <body>
 <main>
-<div class="top"><a class="back" href="../">← Wanderlust</a><span class="lang"><b>EN</b> | <a href="inner-mongolia-loop.zh.html" lang="zh-Hans" hreflang="zh-Hans">中文</a></span></div>
+<div class="top"><a class="back" href="../">← Wanderlust</a><button type="button" class="themebtn" data-l="Switch to light mode" data-d="Switch to dark mode" aria-label="Switch to dark mode">☾</button><span class="lang"><b>EN</b> | <a href="inner-mongolia-loop.zh.html" lang="zh-Hans" hreflang="zh-Hans">中文</a></span></div>
 <h1>Shanghai to Inner Mongolia Road Trip</h1><p class="lede">Three weeks by car in a full loop from Shanghai: the ancient capitals of Nanjing, Kaifeng, Luoyang and Xi’an, north across the Loess Plateau to the deserts and grasslands of Inner Mongolia, and home through the Buddhist grottoes of Shanxi, Mount Tai and Confucius’s hometown.</p><p class="stamp">Researched November 2026 for late May to mid June 2027. Hours, prices and booking rules change, so check before you go. Drive distances and times are estimates; confirm in Amap.</p>
 <figure class="hero"><img src="../assets/photos/cn-im-hanging-temple.jpg" alt="The Hanging Temple, clinging to a cliff near Datong" loading="lazy" width="1000"><figcaption>The Hanging Temple, clinging to a cliff near Datong · <span class="credit"><a href="https://commons.wikimedia.org/wiki/File:Xuankongsi.jpg">Photo</a>: BRUNNER Emmanuel (Manu25), public domain</span></figcaption></figure>
 <nav class="toc"><a href="#why">Why go</a><a href="#picks">Value or experience</a><a href="#map">Route map</a><a href="#plan">Itinerary</a><a href="#drive">Driving & charging</a><a href="#sights">Top sights</a><a href="#shows">Exhibitions</a><a href="#museums">Museums</a><a href="#eat">Where to eat</a><a href="#shop">Shopping</a><a href="#stay">Where to stay</a><a href="#budget">Budget</a><a href="#season">Season</a><a href="#sources">Sources</a></nav>
@@ -459,5 +462,6 @@ document.querySelectorAll('.tabs').forEach(t => t.querySelectorAll('button').for
   t.querySelectorAll('button').forEach(x => { const on = x === b; x.setAttribute('aria-selected', on); document.getElementById(x.dataset.t).hidden = !on; });
 })));
 </script>
+<script>(function(){var r=document.documentElement,mq=window.matchMedia("(prefers-color-scheme: dark)");function dark(){var t=r.getAttribute("data-theme");return t?t==="dark":mq.matches}var bs=document.querySelectorAll(".themebtn");function paint(){var d=dark();bs.forEach(function(b){b.textContent=d?"\u2600\uFE0E":"\u263E";b.setAttribute("aria-label",d?b.dataset.l:b.dataset.d);b.title=b.getAttribute("aria-label");})}bs.forEach(function(b){b.addEventListener("click",function(){var t=dark()?"light":"dark";r.setAttribute("data-theme",t);try{localStorage.setItem("wl-theme",t)}catch(e){}paint();})});if(mq.addEventListener)mq.addEventListener("change",paint);paint();})();</script>
 </body>
 </html>

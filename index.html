@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<script>try{var t=localStorage.getItem("wl-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Wanderlust</title>
 <meta property="og:title" content="Wanderlust">
@@ -12,16 +13,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&display=swap" rel="stylesheet">
 <style>
   :root { --bg:#f6f4ef; --card:#fff; --text:#1d1d1f; --muted:#6b6b70; --line:#e4e1d9; --accent:#c2410c; --chip:#f3ede3; --shadow:0 1px 2px rgba(0,0,0,.04),0 4px 14px rgba(0,0,0,.05); }
-  @media (prefers-color-scheme: dark) {
-    :root { --bg:#141416; --card:#1f1f22; --text:#f2f2f3; --muted:#a1a1a8; --line:#2e2e33; --accent:#fb923c; --chip:#2a2826; --shadow:none; }
-  }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg:#141416; --card:#1f1f22; --text:#f2f2f3; --muted:#a1a1a8; --line:#2e2e33; --accent:#fb923c; --chip:#2a2826; --shadow:none; } }
+  :root[data-theme="dark"] { --bg:#141416; --card:#1f1f22; --text:#f2f2f3; --muted:#a1a1a8; --line:#2e2e33; --accent:#fb923c; --chip:#2a2826; --shadow:none; }
   * { box-sizing:border-box; }
   body { margin:0; background:var(--bg); color:var(--text); font:16px/1.5 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Segoe UI",Roboto,sans-serif; }
   main { max-width:960px; margin:0 auto; padding:40px 16px 56px; }
   header { position:relative; margin-bottom:28px; }
   h1 { font-family:"Fraunces",Georgia,serif; font-weight:600; font-size:clamp(2.4rem,7vw,3.4rem); line-height:1; letter-spacing:-.02em; margin:0 0 10px; }
   .lede { color:var(--muted); margin:0; font-size:1.1rem; letter-spacing:.06em; white-space:nowrap; }
-  .lang { position:absolute; top:0; right:0; display:inline-flex; border:1px solid var(--line); border-radius:999px; padding:3px; background:var(--card); font-size:.85rem; margin-top:6px; }
+  .hdr-r { position:absolute; top:0; right:0; display:flex; align-items:center; margin-top:6px; }
+  .hdr-r .themebtn { height:2.1em; width:2.1em; }
+  @media (max-width:520px) { header { display:flex; flex-direction:column-reverse; gap:18px; } .hdr-r { position:static; align-self:flex-end; margin:0; } }
+  .lang { display:inline-flex; border:1px solid var(--line); border-radius:999px; padding:3px; background:var(--card); font-size:.85rem; }
   .lang a, .lang b { padding:4px 12px; border-radius:999px; text-decoration:none; }
   .lang b { background:var(--text); color:var(--bg); font-weight:600; }
   .lang a { color:var(--muted); }
@@ -58,7 +61,8 @@
   .mapcard { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:10px; box-shadow:var(--shadow); }
   #omap { height:300px; border-radius:10px; overflow:hidden; background:var(--line); z-index:0; }
   @media (min-width:720px) { #omap { height:460px; } }
-  @media (prefers-color-scheme: dark) { #omap .leaflet-tile-pane { filter:brightness(.8) contrast(1.05); } }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) #omap .leaflet-tile-pane { filter:brightness(.8) contrast(1.05); } }
+  :root[data-theme="dark"] #omap .leaflet-tile-pane { filter:brightness(.8) contrast(1.05); }
   .olegend { display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
   .olegend button { font:inherit; font-size:.8rem; display:inline-flex; align-items:center; gap:6px; border:1px solid var(--line); background:transparent; color:var(--text); border-radius:999px; padding:3px 10px; cursor:pointer; }
   .olegend button i { width:10px; height:10px; border-radius:50%; display:inline-block; }
@@ -73,12 +77,13 @@
   a.about .chev { margin-left:auto; color:var(--muted); font-size:1.4rem; }
   .updated { color:var(--muted); font-size:.82rem; text-align:center; margin:20px 0 0; }
 </style>
+<style id="wl-theme-css">:root{color-scheme:light dark}:root[data-theme="light"]{color-scheme:light}:root[data-theme="dark"]{color-scheme:dark}.themebtn{font:inherit;line-height:1;border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:999px;width:2em;height:2em;padding:0;cursor:pointer;vertical-align:middle;margin-right:.5em}.themebtn:hover{border-color:var(--accent)}.top>.themebtn{margin-left:auto;margin-right:.75em}</style>
 </head>
 <body>
 <main>
   <header>
     <div><h1>Wanderlust</h1><p class="lede">Wander · Discover · Savour</p></div>
-    <nav class="lang"><b>EN</b><a href="index.zh.html" lang="zh-Hans">中文</a></nav>
+    <div class="hdr-r"><button type="button" class="themebtn" data-l="Switch to light mode" data-d="Switch to dark mode" aria-label="Switch to dark mode">☾</button><nav class="lang"><b>EN</b><a href="index.zh.html" lang="zh-Hans">中文</a></nav></div>
   </header>
   <h2>All routes</h2>
   <div class="mapcard"><div id="omap"></div><div id="olegend" class="olegend"></div><p class="mnote">Tap a route or a name below, then open its guide.</p></div>
@@ -155,5 +160,6 @@
   btns.forEach(function(x){ x.addEventListener('click', function(){ set(x.dataset.v); try { localStorage.setItem(K, x.dataset.v); } catch(e){} }); });
 })();
 </script>
+<script>(function(){var r=document.documentElement,mq=window.matchMedia("(prefers-color-scheme: dark)");function dark(){var t=r.getAttribute("data-theme");return t?t==="dark":mq.matches}var bs=document.querySelectorAll(".themebtn");function paint(){var d=dark();bs.forEach(function(b){b.textContent=d?"\u2600\uFE0E":"\u263E";b.setAttribute("aria-label",d?b.dataset.l:b.dataset.d);b.title=b.getAttribute("aria-label");})}bs.forEach(function(b){b.addEventListener("click",function(){var t=dark()?"light":"dark";r.setAttribute("data-theme",t);try{localStorage.setItem("wl-theme",t)}catch(e){}paint();})});if(mq.addEventListener)mq.addEventListener("change",paint);paint();})();</script>
 </body>
 </html>
