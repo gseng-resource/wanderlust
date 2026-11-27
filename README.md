@@ -10,6 +10,7 @@ Published with GitHub Pages at **https://gseng-resource.github.io/wanderlust/**
 - `japan/fukuoka-art-base.html` / `.zh.html`: Fukuoka as a base, with train day trips to Nagasaki and Kumamoto
 - `china/inner-mongolia-loop.html` / `.zh.html`: 21-day Shanghai ⇄ Inner Mongolia road trip
 - `china/dongbei-border-loop.html` / `.zh.html`: 21-day Northeast China border road trip
+- `china/shanghai-guangzhou-coast.html` / `.zh.html`: 21-day one-way coastal road trip, Shanghai → Guangzhou
 
 Every trip is published in both languages; each page has an EN | 中文 switch.
 
