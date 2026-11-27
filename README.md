@@ -6,6 +6,8 @@ Published with GitHub Pages at **https://gseng-resource.github.io/wanderlust/**
 - `about.html` / `about.zh.html`: how the research is done: sources, reliability, ratings, budget method, check dates
 - `japan/oita-road-trip.html` / `.zh.html`: Oita road trip (Yufuin, Kunisaki, Beppu, Usuki)
 - `japan/okinawa-winter.html` / `.zh.html`: Okinawa in winter (Onna, Motobu, Naha)
+- `japan/kyushu-ceramics-nagasaki.html` / `.zh.html`: Kyushu road trip: Dazaifu, Arita, Takeo, Nagasaki, Karatsu
+- `japan/fukuoka-art-base.html` / `.zh.html`: Fukuoka as a base, with train day trips to Nagasaki and Kumamoto
 - `china/inner-mongolia-loop.html` / `.zh.html`: 21-day Shanghai ⇄ Inner Mongolia road trip
 - `china/dongbei-border-loop.html` / `.zh.html`: 21-day Northeast China border road trip
 
