@@ -26,11 +26,15 @@
   .lang b { background:var(--text); color:var(--bg); font-weight:600; }
   .lang a { color:var(--muted); }
   .lang a:hover { color:var(--accent); }
-  h2 { font-size:.8rem; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin:36px 0 14px; }
+  h2 { display:flex; align-items:center; gap:12px; font-size:.8rem; letter-spacing:.1em; text-transform:uppercase; color:var(--text); margin:40px 0 16px; }
+  h2 .n { color:var(--muted); font-weight:500; letter-spacing:.04em; text-transform:none; }
+  h2::after { content:""; flex:1; height:1px; background:linear-gradient(90deg,var(--accent),transparent); opacity:.6; }
   .grid { display:grid; grid-template-columns:1fr; gap:16px; }
   @media (min-width:720px) { .grid { grid-template-columns:1fr 1fr; gap:20px; } }
   a.card { display:flex; flex-direction:column; text-decoration:none; color:inherit; background:var(--card); border:1px solid var(--line); border-radius:16px; overflow:hidden; box-shadow:var(--shadow); transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease; }
   a.card:hover { transform:translateY(-2px); border-color:var(--accent); box-shadow:0 8px 24px rgba(0,0,0,.08); }
+  a.card:active { transform:scale(.985); border-color:var(--accent); }
+  a.card:focus-visible { outline:2px solid var(--accent); outline-offset:3px; }
   a.card img { width:100%; height:auto; aspect-ratio:16/9; object-fit:cover; display:block; background:var(--line); }
   .body { padding:14px 16px 16px; display:flex; flex-direction:column; gap:6px; flex:1; }
   .t { font-weight:650; font-size:1.08rem; line-height:1.3; }
@@ -46,12 +50,19 @@
   body.list .grid { grid-template-columns:1fr; gap:10px; }
   body.list a.card { flex-direction:row; align-items:center; border-radius:14px; }
   body.list a.card:hover { transform:none; }
+  body.list a.card:active { transform:scale(.99); }
   body.list a.card img { width:72px; height:72px; aspect-ratio:1; border-radius:10px; margin:12px 0 12px 12px; flex:none; }
   body.list .body { padding:12px 14px; gap:3px; }
   body.list .t { font-size:1rem; }
   body.list .chips { padding-top:4px; }
-  .foot { margin-top:40px; font-size:.9rem; color:var(--muted); }
-  .foot a { color:var(--accent); }
+  .foot { margin-top:48px; }
+  a.about { display:flex; align-items:center; gap:14px; text-decoration:none; color:inherit; background:var(--card); border:1px solid var(--line); border-radius:14px; padding:16px; box-shadow:var(--shadow); transition:border-color .15s ease; }
+  a.about:hover, a.about:active { border-color:var(--accent); }
+  a.about .ico { flex:none; width:40px; height:40px; border-radius:10px; background:var(--chip); color:var(--accent); display:grid; place-items:center; font-size:1.2rem; }
+  a.about .at { font-weight:600; }
+  a.about .as { color:var(--muted); font-size:.9rem; }
+  a.about .chev { margin-left:auto; color:var(--muted); font-size:1.4rem; }
+  .updated { color:var(--muted); font-size:.82rem; text-align:center; margin:20px 0 0; }
 </style>
 </head>
 <body>
@@ -62,7 +73,7 @@
   </header>
   <div class="viewbar"><div class="seg" role="group" aria-label="视图"><button type="button" data-v="cards" aria-pressed="true">卡片</button><button type="button" data-v="list" aria-pressed="false">列表</button></div></div>
 
-  <h2>日本</h2>
+  <h2>日本 <span class="n">· 4 篇指南</span></h2>
   <div class="grid">
     <a class="card" href="japan/oita-road-trip.zh.html">
       <img src="assets/cards/oita-usuki-buddhas.jpg" alt="" loading="lazy" width="800" height="450">
@@ -70,7 +81,7 @@
         <div class="chips"><span class="chip">3–4 天</span><span class="chip">自驾</span><span class="chip best">最佳：11 月</span></div></div>
     </a>
     <a class="card" href="japan/okinawa-winter.zh.html">
-      <img src="assets/cards/oki-kouri-bridge.jpg" alt="" loading="lazy" width="800" height="450">
+      <img src="assets/cards/oki-churaumi.jpg" alt="" loading="lazy" width="800" height="450">
       <div class="body"><div class="t">冬季冲绳</div><div class="s">青之洞窟浮潜、美丽海水族馆、首里城和冲绳美食</div>
         <div class="chips"><span class="chip">3–4 天</span><span class="chip">自驾</span><span class="chip best">最佳：4–5 月、10–11 月</span></div></div>
     </a>
@@ -86,7 +97,7 @@
     </a>
   </div>
 
-  <h2>中国</h2>
+  <h2>中国 <span class="n">· 3 篇指南</span></h2>
   <div class="grid">
     <a class="card" href="china/inner-mongolia-loop.zh.html">
       <img src="assets/cards/cn-im-hanging-temple.jpg" alt="" loading="lazy" width="800" height="450">
@@ -105,7 +116,8 @@
     </a>
   </div>
 
-  <p class="foot"><a href="about.zh.html">关于这些调研</a>：信息来源、价格和预算的计算方法、查询日期。</p>
+  <div class="foot"><a class="about" href="about.zh.html"><span class="ico">✎</span><span><span class="at">关于这些调研</span><br><span class="as">信息来源、价格和预算的计算方法、查询日期</span></span><span class="chev">›</span></a>
+  <p class="updated">更新于 2026 年 11 月</p></div>
 </main>
 <script>
 (function(){
