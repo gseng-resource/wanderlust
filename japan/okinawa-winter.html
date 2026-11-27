@@ -56,14 +56,63 @@
   footer { margin-top:40px; color:var(--muted); font-size:.85rem; }
 </style>
 <style id="wl-theme-css">:root{color-scheme:light dark}:root[data-theme="light"]{color-scheme:light}:root[data-theme="dark"]{color-scheme:dark}.themebtn{font:inherit;line-height:1;border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:999px;width:2em;height:2em;padding:0;cursor:pointer;vertical-align:middle;margin-right:.5em}.themebtn:hover{border-color:var(--accent)}.top>.themebtn{margin-left:auto;margin-right:.75em}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&display=swap" rel="stylesheet">
+<style id="wl-enh-css">
+  h1, h2 { font-family:"Fraunces","Songti SC","Noto Serif SC",STSong,Georgia,serif; font-weight:600; }
+  h2 { font-size:1.45rem; scroll-margin-top:64px; }
+  /* 3. cover + facts */
+  figure.cover { margin:10px 0 14px; }
+  .cover-img { position:relative; border-radius:16px; overflow:hidden; background:var(--line); }
+  figure.cover img { aspect-ratio:16/9; border-radius:0; margin:0; }
+  @media (max-width:600px) { figure.cover img { aspect-ratio:4/3; } }
+  .cover-t { position:absolute; left:0; right:0; bottom:0; padding:56px 18px 16px; background:linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.68)); }
+  .cover h1 { color:#fff; margin:0; font-size:clamp(1.75rem,5.6vw,2.7rem); line-height:1.12; letter-spacing:-.01em; text-shadow:0 1px 10px rgba(0,0,0,.35); }
+  .facts { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin:14px 0 10px; padding:0; }
+  @media (max-width:600px) { .facts { grid-template-columns:1fr 1fr; } }
+  .facts div { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:10px 12px; }
+  .facts dt { color:var(--muted); font-size:.75rem; letter-spacing:.04em; text-transform:uppercase; margin:0 0 2px; }
+  .facts dd { margin:0; font-weight:650; font-size:.98rem; line-height:1.3; }
+  .facts div.best dd { color:var(--accent); }
+  /* 1. sticky section bar + back to top */
+  nav.toc { position:sticky; top:0; z-index:1100; flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; -webkit-overflow-scrolling:touch;
+            background:var(--bg); margin:0 -16px 8px; padding:10px 16px; border-bottom:1px solid transparent; transition:border-color .2s, box-shadow .2s; }
+  nav.toc::-webkit-scrollbar { display:none; }
+  nav.toc a { white-space:nowrap; flex:none; }
+  nav.toc.stuck { border-bottom-color:var(--line); box-shadow:0 6px 14px -10px rgba(0,0,0,.25); }
+  nav.toc a.on { background:var(--text); color:var(--bg); border-color:var(--text); }
+  .totop { position:fixed; right:16px; bottom:20px; z-index:1100; width:44px; height:44px; border-radius:50%; border:1px solid var(--line);
+           background:var(--card); color:var(--text); font-size:1.2rem; cursor:pointer; box-shadow:0 4px 14px rgba(0,0,0,.15);
+           opacity:0; transform:translateY(10px); pointer-events:none; transition:opacity .2s, transform .2s; }
+  .totop.show { opacity:1; transform:none; pointer-events:auto; }
+  .totop:hover { border-color:var(--accent); }
+  /* 2. itinerary timeline */
+  .card.day { position:relative; margin-left:40px; }
+  .card.day::before { content:""; position:absolute; left:-25px; top:-13px; bottom:-13px; width:2px; background:var(--line); }
+  .card.day:not(.day + .day)::before { top:28px; }
+  .card.day:not(:has(+ .day))::before { bottom:auto; height:0; }
+  .card.day:not(.day + .day):not(:has(+ .day))::before { display:none; }
+  .dn { position:absolute; left:-40px; top:14px; width:32px; height:32px; border-radius:50%; background:var(--accent); color:#fff;
+        font:700 .85rem/32px -apple-system,BlinkMacSystemFont,sans-serif; text-align:center; box-shadow:0 0 0 4px var(--bg); }
+  .dhead { cursor:pointer; position:relative; padding-right:28px; }
+  .dhead::after { content:"›"; position:absolute; right:2px; top:-2px; font-size:1.4rem; color:var(--muted); transform:rotate(90deg); transition:transform .2s; }
+  .day.folded .dhead::after { transform:rotate(0deg); }
+  .day.folded .dbody { display:none; }
+  .day.folded .night { margin-top:2px; }
+  .dhead:focus-visible { outline:2px solid var(--accent); outline-offset:4px; border-radius:6px; }
+  .dmap { display:inline-block; margin-top:8px; font-size:.85rem; color:var(--accent); background:none; border:0; padding:0; cursor:pointer; font-family:inherit; }
+  .dtools { display:flex; justify-content:flex-end; margin:0 0 10px; }
+  .dtools button { font:inherit; font-size:.85rem; border:1px solid var(--line); background:var(--card); color:var(--text); border-radius:999px; padding:4px 12px; cursor:pointer; }
+  @media print { nav.toc { position:static; } .day.folded .dbody { display:block; } .totop, .dtools, .dmap, .themebtn { display:none; } }
+</style>
 </head>
 <body>
 <main>
 <div class="top"><a class="back" href="../">← Wanderlust</a><button type="button" class="themebtn" data-l="Switch to light mode" data-d="Switch to dark mode" aria-label="Switch to dark mode">☾</button><span class="lang"><b>EN</b> | <a href="okinawa-winter.zh.html" lang="zh-Hans" hreflang="zh-Hans">中文</a></span></div>
-<h1>Okinawa in Winter</h1>
-<p class="lede">Three or two nights on Okinawa's main island in December: a snorkel in the Blue Cave, the Churaumi aquarium and the northern villages, Shuri Castle's newly reopened hall, and Okinawan food from Agu pork to market fish.</p>
+<figure class="hero cover"><div class="cover-img"><img src="../assets/photos/oki-kouri-bridge.jpg" alt="Kouri Bridge" fetchpriority="high" width="1000"><div class="cover-t"><h1>Okinawa in Winter</h1></div></div><figcaption>Kouri Bridge · <span class="credit"><a href="https://commons.wikimedia.org/wiki/File:Kouri_Bridge_(15130568259).jpg">Photo</a>: Takuya ASADA, <a href="https://creativecommons.org/licenses/by/2.0">CC BY 2.0</a></span></figcaption></figure>
+
+<p class="lede">Three or two nights on Okinawa's main island in December: a snorkel in the Blue Cave, the Churaumi aquarium and the northern villages, Shuri Castle's newly reopened hall, and Okinawan food from Agu pork to market fish.</p><dl class="facts"><div><dt>Length</dt><dd>3–4 days</dd></div><div><dt>Distance</dt><dd>about 220–260 km</dd></div><div class="best"><dt>Best time</dt><dd>Apr–May, Oct–Nov</dd></div><div><dt>Per person, excl. flights</dt><dd>from CNY 2,100</dd></div></dl>
 <p class="stamp">Researched November 2026 for a December trip. Hours and prices change, so check before you go. Drive distances and times are estimates; confirm in Google Maps.</p>
-<figure class="hero"><img src="../assets/photos/oki-kouri-bridge.jpg" alt="Kouri Bridge" loading="lazy" width="1000"><figcaption>Kouri Bridge · <span class="credit"><a href="https://commons.wikimedia.org/wiki/File:Kouri_Bridge_(15130568259).jpg">Photo</a>: Takuya ASADA, <a href="https://creativecommons.org/licenses/by/2.0">CC BY 2.0</a></span></figcaption></figure>
+
 <nav class="toc"><a href="#why">Why go</a><a href="#picks">Value or experience</a><a href="#map">Route map</a><a href="#plan">Itinerary</a><a href="#nocar">Without a car</a><a href="#sights">Top sights</a><a href="#shows">December shows</a><a href="#museums">Museums</a><a href="#eat">Where to eat</a><a href="#shop">Shopping</a><a href="#stay">Where to stay</a><a href="#budget">Budget</a><a href="#drive">Driving</a><a href="#sources">Sources</a></nav>
 
 
@@ -115,22 +164,22 @@ function chip(label,d){var b=document.createElement('button');b.type='button';b.
 b.style.cssText='font:inherit;font-size:.85rem;padding:3px 9px;border:1px solid var(--line);border-radius:999px;background:transparent;color:inherit;cursor:pointer';
 b.onclick=function(){show(d);};box.appendChild(b);}
 chip(D.t.all,'all');for(var i=1;i<=D.dt.length;i++)chip(String(i),i);
-show('all');})();</script>
+window.wlShowDay=show;show('all');})();</script>
 
 <h2 id="plan">Itinerary</h2>
 <div class="tabs" role="tablist"><button role="tab" aria-selected="true" data-t="four">4 days, 3 nights</button><button role="tab" aria-selected="false" data-t="three">3 days, 2 nights</button></div>
 <div id="four">
-  <div class="card"><span class="d">Day 1 · Naha → Onna</span>Land around 14:00, collect the car. <span class="drive">🚗 Naha Airport → Cape Maeda · 45 km · 55–65 min (expressway)</span><br><span class="drive">🚗 Cape Maeda → Cape Manzamo · 11 km · 20 min</span><br><b>Cape Manzamo</b> at sunset (about 17:40).<div class="night">Night: Onna</div></div>
-  <div class="card"><span class="d">Day 2 · Blue Cave and Yomitan</span>08:00 <b>Blue Cave snorkel</b> at Cape Maeda, about 2 hours, wetsuit included. Afternoon: <span class="drive">🚗 Onna → Yachimun no Sato · 20 km · about 30 min</span> pottery kilns, then <b>Zanpa Cape</b> for sunset.<div class="night">Night: Onna</div></div>
-  <div class="card"><span class="d">Day 3 · The north → Naha</span><span class="drive">🚗 Onna → Churaumi Aquarium · 45 km · 60–70 min</span><br><b>Churaumi</b> from 8:30, then a walk through the <b>Bise fukugi tree lanes</b> next door. Lunch in Motobu. <b>Nakijin Castle ruins</b> (UNESCO, 10 min) or <span class="drive">🚗 Kouri Island · 18 km · 25–30 min</span><br><span class="drive">🚗 North → Naha · 95 km · about 1h45 (expressway)</span><br>Evening: Kokusai Street and the Makishi market.<div class="night">Night: Naha</div></div>
-  <div class="card"><span class="d">Day 4 · Shuri → airport</span><b>Shuri Castle</b> at opening and <b>Tamaudun</b> royal tomb next door. <span class="drive">🚗 Shuri → Tsuboya · 4 km · 15–20 min</span><br>Tsuboya pottery street. <span class="drive">🚗 Central Naha → airport · 6 km · 15–25 min</span><br>At the airport by about 11:45.</div>
+  <div class="card day"><span class="dn" aria-hidden="true">1</span><span class="d">Day 1 · Naha → Onna</span>Land around 14:00, collect the car. <span class="drive">🚗 Naha Airport → Cape Maeda · 45 km · 55–65 min (expressway)</span><br><span class="drive">🚗 Cape Maeda → Cape Manzamo · 11 km · 20 min</span><br><b>Cape Manzamo</b> at sunset (about 17:40).<div class="night">Night: Onna</div></div>
+  <div class="card day"><span class="dn" aria-hidden="true">2</span><span class="d">Day 2 · Blue Cave and Yomitan</span>08:00 <b>Blue Cave snorkel</b> at Cape Maeda, about 2 hours, wetsuit included. Afternoon: <span class="drive">🚗 Onna → Yachimun no Sato · 20 km · about 30 min</span> pottery kilns, then <b>Zanpa Cape</b> for sunset.<div class="night">Night: Onna</div></div>
+  <div class="card day"><span class="dn" aria-hidden="true">3</span><span class="d">Day 3 · The north → Naha</span><span class="drive">🚗 Onna → Churaumi Aquarium · 45 km · 60–70 min</span><br><b>Churaumi</b> from 8:30, then a walk through the <b>Bise fukugi tree lanes</b> next door. Lunch in Motobu. <b>Nakijin Castle ruins</b> (UNESCO, 10 min) or <span class="drive">🚗 Kouri Island · 18 km · 25–30 min</span><br><span class="drive">🚗 North → Naha · 95 km · about 1h45 (expressway)</span><br>Evening: Kokusai Street and the Makishi market.<div class="night">Night: Naha</div></div>
+  <div class="card day"><span class="dn" aria-hidden="true">4</span><span class="d">Day 4 · Shuri → airport</span><b>Shuri Castle</b> at opening and <b>Tamaudun</b> royal tomb next door. <span class="drive">🚗 Shuri → Tsuboya · 4 km · 15–20 min</span><br>Tsuboya pottery street. <span class="drive">🚗 Central Naha → airport · 6 km · 15–25 min</span><br>At the airport by about 11:45.</div>
   <p class="muted">If the north wind cancels the boat on day 2, swap it with day 3's aquarium.</p>
 </div>
 <div id="three" hidden>
   <p class="muted">One base for both nights, in Onna, with no hotel move.</p>
-  <div class="card"><span class="d">Day 1 · Naha → Onna</span><span class="drive">🚗 Naha Airport → Cape Maeda · 45 km · 55–65 min</span><br>Cape Manzamo at sunset.<div class="night">Night: Onna</div></div>
-  <div class="card"><span class="d">Day 2 · Blue Cave → the north</span>08:00 Blue Cave snorkel. <span class="drive">🚗 Onna → Churaumi · 45 km · 60–70 min</span><br>Churaumi (late morning), lunch in Motobu, Bise fukugi lanes, Kouri Island bridge. <span class="drive">🚗 Back to Onna · 50 km · about 1h</span><div class="night">Night: Onna</div></div>
-  <div class="card"><span class="d">Day 3 · Shuri → airport</span><span class="drive">🚗 Onna → Shuri Castle · 45 km · 55–65 min (expressway)</span><br>Shuri Castle and Tamaudun, then Tsuboya or the Makishi market. <span class="drive">🚗 → Naha Airport · 6 km · 15–25 min</span><br>At the airport by about 11:45.</div>
+  <div class="card day"><span class="dn" aria-hidden="true">1</span><span class="d">Day 1 · Naha → Onna</span><span class="drive">🚗 Naha Airport → Cape Maeda · 45 km · 55–65 min</span><br>Cape Manzamo at sunset.<div class="night">Night: Onna</div></div>
+  <div class="card day"><span class="dn" aria-hidden="true">2</span><span class="d">Day 2 · Blue Cave → the north</span>08:00 Blue Cave snorkel. <span class="drive">🚗 Onna → Churaumi · 45 km · 60–70 min</span><br>Churaumi (late morning), lunch in Motobu, Bise fukugi lanes, Kouri Island bridge. <span class="drive">🚗 Back to Onna · 50 km · about 1h</span><div class="night">Night: Onna</div></div>
+  <div class="card day"><span class="dn" aria-hidden="true">3</span><span class="d">Day 3 · Shuri → airport</span><span class="drive">🚗 Onna → Shuri Castle · 45 km · 55–65 min (expressway)</span><br>Shuri Castle and Tamaudun, then Tsuboya or the Makishi market. <span class="drive">🚗 → Naha Airport · 6 km · 15–25 min</span><br>At the airport by about 11:45.</div>
 </div>
 
 <h2 id="nocar">Without a car</h2>
@@ -235,5 +284,51 @@ document.querySelectorAll('.tabs').forEach(t => t.querySelectorAll('button').for
 })));
 </script>
 <script>(function(){var r=document.documentElement,mq=window.matchMedia("(prefers-color-scheme: dark)");function dark(){var t=r.getAttribute("data-theme");return t?t==="dark":mq.matches}var bs=document.querySelectorAll(".themebtn");function paint(){var d=dark();bs.forEach(function(b){b.textContent=d?"\u2600\uFE0E":"\u263E";b.setAttribute("aria-label",d?b.dataset.l:b.dataset.d);b.title=b.getAttribute("aria-label");})}bs.forEach(function(b){b.addEventListener("click",function(){var t=dark()?"light":"dark";r.setAttribute("data-theme",t);try{localStorage.setItem("wl-theme",t)}catch(e){}paint();})});if(mq.addEventListener)mq.addEventListener("change",paint);paint();})();</script>
+<script id="wl-enh-js">(function(){
+var zh=/^zh/.test(document.documentElement.lang||'');
+var T=zh?{top:'回到顶部',exp:'全部展开',col:'全部收起',map:'在地图上查看 ›'}:{top:'Back to top',exp:'Expand all',col:'Collapse all',map:'Show on map ›'};
+/* 1. sticky toc + scrollspy + back to top */
+var toc=document.querySelector('nav.toc'),links=toc?[].slice.call(toc.querySelectorAll('a[href^="#"]')):[];
+var heads=links.map(function(a){return document.getElementById(a.getAttribute('href').slice(1));});
+var top=document.createElement('button');top.type='button';top.className='totop';top.textContent='↑';top.setAttribute('aria-label',T.top);top.title=T.top;
+top.onclick=function(){window.scrollTo({top:0,behavior:'smooth'});};document.body.appendChild(top);
+var cur=-1,tick=false;
+function spy(){tick=false;var y=window.scrollY;top.classList.toggle('show',y>900);
+  if(!toc)return;toc.classList.toggle('stuck',toc.getBoundingClientRect().top<=0&&y>0);
+  var i=-1;heads.forEach(function(h,j){if(h&&h.getBoundingClientRect().top<=90)i=j;});
+  if(i!==cur){if(cur>=0)links[cur].classList.remove('on');cur=i;
+    if(i>=0){var a=links[i];a.classList.add('on');var l=a.offsetLeft-toc.clientWidth/2+a.offsetWidth/2;toc.scrollTo?toc.scrollTo({left:l,behavior:'smooth'}):(toc.scrollLeft=l);}}}
+window.addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(spy);}},{passive:true});spy();
+/* 2. day timeline: fold, expand all, show on map */
+var days=[].slice.call(document.querySelectorAll('.card.day'));if(!days.length)return;
+var tabIds=[].slice.call(document.querySelectorAll('.tabs [data-t]')).map(function(b){return b.dataset.t;}).slice(1);
+var nMap=document.querySelectorAll('#rdays button').length-1;
+function setFold(c,f){c.classList.toggle('folded',f);var h=c.querySelector('.dhead');if(h)h.setAttribute('aria-expanded',String(!f));}
+days.forEach(function(c){
+  var d=c.querySelector(':scope > .d');if(!d)return;
+  var head=document.createElement('div');head.className='dhead';head.setAttribute('role','button');head.tabIndex=0;
+  var body=document.createElement('div');body.className='dbody';
+  c.insertBefore(head,d);head.appendChild(d);
+  var nx=head.nextSibling;while(nx&&nx.nodeType===3&&!nx.textContent.trim())nx=nx.nextSibling;
+  if(nx&&nx.nodeType===1&&nx.tagName==='SPAN'&&nx.classList.contains('muted'))head.appendChild(nx);
+  var night=c.querySelector(':scope > .night');
+  while(head.nextSibling){var n=head.nextSibling;if(n===night){c.removeChild(n);continue;}body.appendChild(n);}
+  c.appendChild(body);if(night)c.appendChild(night);
+  var num=parseInt((c.querySelector('.dn')||{}).textContent,10);
+  var inAlt=tabIds.some(function(id){var p=document.getElementById(id);return p&&p.contains(c);});
+  if(window.wlShowDay&&num&&num<=nMap&&!inAlt){var b=document.createElement('button');b.type='button';b.className='dmap';b.textContent=T.map;
+    b.onclick=function(){var m=document.getElementById('map');if(m)m.scrollIntoView({behavior:'smooth'});window.wlShowDay(num);};body.appendChild(b);}
+  function tog(){setFold(c,!c.classList.contains('folded'));}
+  head.onclick=tog;head.onkeydown=function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();tog();}};
+});
+var fold=days.length>7;days.forEach(function(c){setFold(c,fold);});
+var tools=document.createElement('div');tools.className='dtools';var eb=document.createElement('button');eb.type='button';
+function label(){eb.textContent=days.some(function(c){return c.classList.contains('folded');})?T.exp:T.col;}
+eb.onclick=function(){var any=days.some(function(c){return c.classList.contains('folded');});days.forEach(function(c){setFold(c,!any);});label();};
+document.addEventListener('click',function(e){if(e.target.closest&&e.target.closest('.dhead'))setTimeout(label,0);});
+label();tools.appendChild(eb);
+var first=days[0],anchor=first;var tabs=document.querySelector('.tabs');if(tabs&&tabs.compareDocumentPosition(first)&Node.DOCUMENT_POSITION_FOLLOWING)anchor=tabs;
+anchor.parentNode.insertBefore(tools,anchor);
+})();</script>
 </body>
 </html>

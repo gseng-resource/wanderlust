@@ -56,14 +56,63 @@
   footer { margin-top:40px; color:var(--muted); font-size:.85rem; }
 </style>
 <style id="wl-theme-css">:root{color-scheme:light dark}:root[data-theme="light"]{color-scheme:light}:root[data-theme="dark"]{color-scheme:dark}.themebtn{font:inherit;line-height:1;border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:999px;width:2em;height:2em;padding:0;cursor:pointer;vertical-align:middle;margin-right:.5em}.themebtn:hover{border-color:var(--accent)}.top>.themebtn{margin-left:auto;margin-right:.75em}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&display=swap" rel="stylesheet">
+<style id="wl-enh-css">
+  h1, h2 { font-family:"Fraunces","Songti SC","Noto Serif SC",STSong,Georgia,serif; font-weight:600; }
+  h2 { font-size:1.45rem; scroll-margin-top:64px; }
+  /* 3. cover + facts */
+  figure.cover { margin:10px 0 14px; }
+  .cover-img { position:relative; border-radius:16px; overflow:hidden; background:var(--line); }
+  figure.cover img { aspect-ratio:16/9; border-radius:0; margin:0; }
+  @media (max-width:600px) { figure.cover img { aspect-ratio:4/3; } }
+  .cover-t { position:absolute; left:0; right:0; bottom:0; padding:56px 18px 16px; background:linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.68)); }
+  .cover h1 { color:#fff; margin:0; font-size:clamp(1.75rem,5.6vw,2.7rem); line-height:1.12; letter-spacing:-.01em; text-shadow:0 1px 10px rgba(0,0,0,.35); }
+  .facts { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin:14px 0 10px; padding:0; }
+  @media (max-width:600px) { .facts { grid-template-columns:1fr 1fr; } }
+  .facts div { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:10px 12px; }
+  .facts dt { color:var(--muted); font-size:.75rem; letter-spacing:.04em; text-transform:uppercase; margin:0 0 2px; }
+  .facts dd { margin:0; font-weight:650; font-size:.98rem; line-height:1.3; }
+  .facts div.best dd { color:var(--accent); }
+  /* 1. sticky section bar + back to top */
+  nav.toc { position:sticky; top:0; z-index:1100; flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; -webkit-overflow-scrolling:touch;
+            background:var(--bg); margin:0 -16px 8px; padding:10px 16px; border-bottom:1px solid transparent; transition:border-color .2s, box-shadow .2s; }
+  nav.toc::-webkit-scrollbar { display:none; }
+  nav.toc a { white-space:nowrap; flex:none; }
+  nav.toc.stuck { border-bottom-color:var(--line); box-shadow:0 6px 14px -10px rgba(0,0,0,.25); }
+  nav.toc a.on { background:var(--text); color:var(--bg); border-color:var(--text); }
+  .totop { position:fixed; right:16px; bottom:20px; z-index:1100; width:44px; height:44px; border-radius:50%; border:1px solid var(--line);
+           background:var(--card); color:var(--text); font-size:1.2rem; cursor:pointer; box-shadow:0 4px 14px rgba(0,0,0,.15);
+           opacity:0; transform:translateY(10px); pointer-events:none; transition:opacity .2s, transform .2s; }
+  .totop.show { opacity:1; transform:none; pointer-events:auto; }
+  .totop:hover { border-color:var(--accent); }
+  /* 2. itinerary timeline */
+  .card.day { position:relative; margin-left:40px; }
+  .card.day::before { content:""; position:absolute; left:-25px; top:-13px; bottom:-13px; width:2px; background:var(--line); }
+  .card.day:not(.day + .day)::before { top:28px; }
+  .card.day:not(:has(+ .day))::before { bottom:auto; height:0; }
+  .card.day:not(.day + .day):not(:has(+ .day))::before { display:none; }
+  .dn { position:absolute; left:-40px; top:14px; width:32px; height:32px; border-radius:50%; background:var(--accent); color:#fff;
+        font:700 .85rem/32px -apple-system,BlinkMacSystemFont,sans-serif; text-align:center; box-shadow:0 0 0 4px var(--bg); }
+  .dhead { cursor:pointer; position:relative; padding-right:28px; }
+  .dhead::after { content:"›"; position:absolute; right:2px; top:-2px; font-size:1.4rem; color:var(--muted); transform:rotate(90deg); transition:transform .2s; }
+  .day.folded .dhead::after { transform:rotate(0deg); }
+  .day.folded .dbody { display:none; }
+  .day.folded .night { margin-top:2px; }
+  .dhead:focus-visible { outline:2px solid var(--accent); outline-offset:4px; border-radius:6px; }
+  .dmap { display:inline-block; margin-top:8px; font-size:.85rem; color:var(--accent); background:none; border:0; padding:0; cursor:pointer; font-family:inherit; }
+  .dtools { display:flex; justify-content:flex-end; margin:0 0 10px; }
+  .dtools button { font:inherit; font-size:.85rem; border:1px solid var(--line); background:var(--card); color:var(--text); border-radius:999px; padding:4px 12px; cursor:pointer; }
+  @media print { nav.toc { position:static; } .day.folded .dbody { display:block; } .totop, .dtools, .dmap, .themebtn { display:none; } }
+</style>
 </head>
 <body>
 <main>
 <div class="top"><a class="back" href="../index.zh.html">← Wanderlust</a><button type="button" class="themebtn" data-l="切换到浅色" data-d="切换到深色" aria-label="切换到深色">☾</button><span class="lang"><a href="okinawa-winter.html" lang="en" hreflang="en">EN</a> | <b>中文</b></span></div>
-<h1>冬季冲绳</h1>
-<p class="lede">12 月在冲绳本岛住三晚或两晚：青之洞窟浮潜、美丽海水族馆和北部村落、刚重新开放的首里城正殿，还有从阿古猪到市场鲜鱼的冲绳美食。</p>
+<figure class="hero cover"><div class="cover-img"><img src="../assets/photos/oki-kouri-bridge.jpg" alt="古宇利大桥" fetchpriority="high" width="1000"><div class="cover-t"><h1>冬季冲绳</h1></div></div><figcaption>古宇利大桥 · <span class="credit"><a href="https://commons.wikimedia.org/wiki/File:Kouri_Bridge_(15130568259).jpg">照片</a>: Takuya ASADA, <a href="https://creativecommons.org/licenses/by/2.0">CC BY 2.0</a></span></figcaption></figure>
+
+<p class="lede">12 月在冲绳本岛住三晚或两晚：青之洞窟浮潜、美丽海水族馆和北部村落、刚重新开放的首里城正殿，还有从阿古猪到市场鲜鱼的冲绳美食。</p><dl class="facts"><div><dt>天数</dt><dd>3–4 天</dd></div><div><dt>里程</dt><dd>约 220–260 公里</dd></div><div class="best"><dt>最佳季节</dt><dd>4–5 月、10–11 月</dd></div><div><dt>每人（不含机票）</dt><dd>约 CNY 2,100 起</dd></div></dl>
 <p class="stamp">2026 年 11 月为 12 月行程所做的调研。开放时间和价格会变动，出发前请再确认。车程和距离为估算，请以 Google 地图为准。</p>
-<figure class="hero"><img src="../assets/photos/oki-kouri-bridge.jpg" alt="古宇利大桥" loading="lazy" width="1000"><figcaption>古宇利大桥 · <span class="credit"><a href="https://commons.wikimedia.org/wiki/File:Kouri_Bridge_(15130568259).jpg">照片</a>: Takuya ASADA, <a href="https://creativecommons.org/licenses/by/2.0">CC BY 2.0</a></span></figcaption></figure>
+
 <nav class="toc"><a href="#why">为什么去</a><a href="#picks">两种玩法</a><a href="#map">路线地图</a><a href="#plan">行程</a><a href="#nocar">不开车</a><a href="#sights">必去景点</a><a href="#shows">12 月展览</a><a href="#museums">博物馆</a><a href="#eat">吃什么</a><a href="#shop">购物</a><a href="#stay">住宿</a><a href="#budget">预算</a><a href="#drive">自驾须知</a><a href="#sources">信息来源</a></nav>
 
 
@@ -115,22 +164,22 @@ function chip(label,d){var b=document.createElement('button');b.type='button';b.
 b.style.cssText='font:inherit;font-size:.85rem;padding:3px 9px;border:1px solid var(--line);border-radius:999px;background:transparent;color:inherit;cursor:pointer';
 b.onclick=function(){show(d);};box.appendChild(b);}
 chip(D.t.all,'all');for(var i=1;i<=D.dt.length;i++)chip(String(i),i);
-show('all');})();</script>
+window.wlShowDay=show;show('all');})();</script>
 
 <h2 id="plan">行程</h2>
 <div class="tabs" role="tablist"><button role="tab" aria-selected="true" data-t="four">四天三晚</button><button role="tab" aria-selected="false" data-t="three">三天两晚</button></div>
 <div id="four">
-  <div class="card"><span class="d">第 1 天 · 那霸 → 恩纳</span>约 14:00 落地，取车。<span class="drive">🚗 那霸机场 → 真荣田岬 · 45 km · 55–65 分钟（高速）</span><br><span class="drive">🚗 真荣田岬 → 万座毛 · 11 km · 20 分钟</span><br>傍晚在<b>万座毛</b>看日落（约 17:40）。<div class="night">住：恩纳</div></div>
-  <div class="card"><span class="d">第 2 天 · 青之洞窟与读谷</span>08:00 在真荣田岬<b>青之洞窟浮潜</b>，约 2 小时，含潜水衣。下午：<span class="drive">🚗 恩纳 → 读谷陶器之里 · 20 km · 约 30 分钟</span> 看窑场，再到<b>残波岬</b>看日落。<div class="night">住：恩纳</div></div>
-  <div class="card"><span class="d">第 3 天 · 北部 → 那霸</span><span class="drive">🚗 恩纳 → 美丽海水族馆 · 45 km · 60–70 分钟</span><br>8:30 进<b>美丽海水族馆</b>，然后到隔壁的<b>备濑福木林道</b>散步。在本部吃午餐。<b>今归仁城迹</b>（世界遗产，10 分钟）或<span class="drive">🚗 古宇利岛 · 18 km · 25–30 分钟</span><br><span class="drive">🚗 北部 → 那霸 · 95 km · 约 1 小时 45 分（高速）</span><br>晚上逛国际通和牧志市场。<div class="night">住：那霸</div></div>
-  <div class="card"><span class="d">第 4 天 · 首里 → 机场</span>开门即进<b>首里城</b>，再看旁边的王陵<b>玉陵</b>。<span class="drive">🚗 首里 → 壶屋 · 4 km · 15–20 分钟</span><br>壶屋陶器街。<span class="drive">🚗 那霸市区 → 机场 · 6 km · 15–25 分钟</span><br>约 11:45 到机场。</div>
+  <div class="card day"><span class="dn" aria-hidden="true">1</span><span class="d">第 1 天 · 那霸 → 恩纳</span>约 14:00 落地，取车。<span class="drive">🚗 那霸机场 → 真荣田岬 · 45 km · 55–65 分钟（高速）</span><br><span class="drive">🚗 真荣田岬 → 万座毛 · 11 km · 20 分钟</span><br>傍晚在<b>万座毛</b>看日落（约 17:40）。<div class="night">住：恩纳</div></div>
+  <div class="card day"><span class="dn" aria-hidden="true">2</span><span class="d">第 2 天 · 青之洞窟与读谷</span>08:00 在真荣田岬<b>青之洞窟浮潜</b>，约 2 小时，含潜水衣。下午：<span class="drive">🚗 恩纳 → 读谷陶器之里 · 20 km · 约 30 分钟</span> 看窑场，再到<b>残波岬</b>看日落。<div class="night">住：恩纳</div></div>
+  <div class="card day"><span class="dn" aria-hidden="true">3</span><span class="d">第 3 天 · 北部 → 那霸</span><span class="drive">🚗 恩纳 → 美丽海水族馆 · 45 km · 60–70 分钟</span><br>8:30 进<b>美丽海水族馆</b>，然后到隔壁的<b>备濑福木林道</b>散步。在本部吃午餐。<b>今归仁城迹</b>（世界遗产，10 分钟）或<span class="drive">🚗 古宇利岛 · 18 km · 25–30 分钟</span><br><span class="drive">🚗 北部 → 那霸 · 95 km · 约 1 小时 45 分（高速）</span><br>晚上逛国际通和牧志市场。<div class="night">住：那霸</div></div>
+  <div class="card day"><span class="dn" aria-hidden="true">4</span><span class="d">第 4 天 · 首里 → 机场</span>开门即进<b>首里城</b>，再看旁边的王陵<b>玉陵</b>。<span class="drive">🚗 首里 → 壶屋 · 4 km · 15–20 分钟</span><br>壶屋陶器街。<span class="drive">🚗 那霸市区 → 机场 · 6 km · 15–25 分钟</span><br>约 11:45 到机场。</div>
   <p class="muted">如果第 2 天北风导致停船，就和第 3 天的水族馆对调。</p>
 </div>
 <div id="three" hidden>
   <p class="muted">两晚都住恩纳，不换酒店。</p>
-  <div class="card"><span class="d">第 1 天 · 那霸 → 恩纳</span><span class="drive">🚗 那霸机场 → 真荣田岬 · 45 km · 55–65 分钟</span><br>万座毛看日落。<div class="night">住：恩纳</div></div>
-  <div class="card"><span class="d">第 2 天 · 青之洞窟 → 北部</span>08:00 青之洞窟浮潜。<span class="drive">🚗 恩纳 → 美丽海 · 45 km · 60–70 分钟</span><br>上午晚些时候进美丽海水族馆，本部吃午餐，备濑福木林道、古宇利大桥。<span class="drive">🚗 回恩纳 · 50 km · 约 1 小时</span><div class="night">住：恩纳</div></div>
-  <div class="card"><span class="d">第 3 天 · 首里 → 机场</span><span class="drive">🚗 恩纳 → 首里城 · 45 km · 55–65 分钟（高速）</span><br>首里城和玉陵，再去壶屋或牧志市场。<span class="drive">🚗 → 那霸机场 · 6 km · 15–25 分钟</span><br>约 11:45 到机场。</div>
+  <div class="card day"><span class="dn" aria-hidden="true">1</span><span class="d">第 1 天 · 那霸 → 恩纳</span><span class="drive">🚗 那霸机场 → 真荣田岬 · 45 km · 55–65 分钟</span><br>万座毛看日落。<div class="night">住：恩纳</div></div>
+  <div class="card day"><span class="dn" aria-hidden="true">2</span><span class="d">第 2 天 · 青之洞窟 → 北部</span>08:00 青之洞窟浮潜。<span class="drive">🚗 恩纳 → 美丽海 · 45 km · 60–70 分钟</span><br>上午晚些时候进美丽海水族馆，本部吃午餐，备濑福木林道、古宇利大桥。<span class="drive">🚗 回恩纳 · 50 km · 约 1 小时</span><div class="night">住：恩纳</div></div>
+  <div class="card day"><span class="dn" aria-hidden="true">3</span><span class="d">第 3 天 · 首里 → 机场</span><span class="drive">🚗 恩纳 → 首里城 · 45 km · 55–65 分钟（高速）</span><br>首里城和玉陵，再去壶屋或牧志市场。<span class="drive">🚗 → 那霸机场 · 6 km · 15–25 分钟</span><br>约 11:45 到机场。</div>
 </div>
 
 <h2 id="nocar">不开车</h2>
@@ -235,5 +284,51 @@ document.querySelectorAll('.tabs').forEach(t => t.querySelectorAll('button').for
 })));
 </script>
 <script>(function(){var r=document.documentElement,mq=window.matchMedia("(prefers-color-scheme: dark)");function dark(){var t=r.getAttribute("data-theme");return t?t==="dark":mq.matches}var bs=document.querySelectorAll(".themebtn");function paint(){var d=dark();bs.forEach(function(b){b.textContent=d?"\u2600\uFE0E":"\u263E";b.setAttribute("aria-label",d?b.dataset.l:b.dataset.d);b.title=b.getAttribute("aria-label");})}bs.forEach(function(b){b.addEventListener("click",function(){var t=dark()?"light":"dark";r.setAttribute("data-theme",t);try{localStorage.setItem("wl-theme",t)}catch(e){}paint();})});if(mq.addEventListener)mq.addEventListener("change",paint);paint();})();</script>
+<script id="wl-enh-js">(function(){
+var zh=/^zh/.test(document.documentElement.lang||'');
+var T=zh?{top:'回到顶部',exp:'全部展开',col:'全部收起',map:'在地图上查看 ›'}:{top:'Back to top',exp:'Expand all',col:'Collapse all',map:'Show on map ›'};
+/* 1. sticky toc + scrollspy + back to top */
+var toc=document.querySelector('nav.toc'),links=toc?[].slice.call(toc.querySelectorAll('a[href^="#"]')):[];
+var heads=links.map(function(a){return document.getElementById(a.getAttribute('href').slice(1));});
+var top=document.createElement('button');top.type='button';top.className='totop';top.textContent='↑';top.setAttribute('aria-label',T.top);top.title=T.top;
+top.onclick=function(){window.scrollTo({top:0,behavior:'smooth'});};document.body.appendChild(top);
+var cur=-1,tick=false;
+function spy(){tick=false;var y=window.scrollY;top.classList.toggle('show',y>900);
+  if(!toc)return;toc.classList.toggle('stuck',toc.getBoundingClientRect().top<=0&&y>0);
+  var i=-1;heads.forEach(function(h,j){if(h&&h.getBoundingClientRect().top<=90)i=j;});
+  if(i!==cur){if(cur>=0)links[cur].classList.remove('on');cur=i;
+    if(i>=0){var a=links[i];a.classList.add('on');var l=a.offsetLeft-toc.clientWidth/2+a.offsetWidth/2;toc.scrollTo?toc.scrollTo({left:l,behavior:'smooth'}):(toc.scrollLeft=l);}}}
+window.addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(spy);}},{passive:true});spy();
+/* 2. day timeline: fold, expand all, show on map */
+var days=[].slice.call(document.querySelectorAll('.card.day'));if(!days.length)return;
+var tabIds=[].slice.call(document.querySelectorAll('.tabs [data-t]')).map(function(b){return b.dataset.t;}).slice(1);
+var nMap=document.querySelectorAll('#rdays button').length-1;
+function setFold(c,f){c.classList.toggle('folded',f);var h=c.querySelector('.dhead');if(h)h.setAttribute('aria-expanded',String(!f));}
+days.forEach(function(c){
+  var d=c.querySelector(':scope > .d');if(!d)return;
+  var head=document.createElement('div');head.className='dhead';head.setAttribute('role','button');head.tabIndex=0;
+  var body=document.createElement('div');body.className='dbody';
+  c.insertBefore(head,d);head.appendChild(d);
+  var nx=head.nextSibling;while(nx&&nx.nodeType===3&&!nx.textContent.trim())nx=nx.nextSibling;
+  if(nx&&nx.nodeType===1&&nx.tagName==='SPAN'&&nx.classList.contains('muted'))head.appendChild(nx);
+  var night=c.querySelector(':scope > .night');
+  while(head.nextSibling){var n=head.nextSibling;if(n===night){c.removeChild(n);continue;}body.appendChild(n);}
+  c.appendChild(body);if(night)c.appendChild(night);
+  var num=parseInt((c.querySelector('.dn')||{}).textContent,10);
+  var inAlt=tabIds.some(function(id){var p=document.getElementById(id);return p&&p.contains(c);});
+  if(window.wlShowDay&&num&&num<=nMap&&!inAlt){var b=document.createElement('button');b.type='button';b.className='dmap';b.textContent=T.map;
+    b.onclick=function(){var m=document.getElementById('map');if(m)m.scrollIntoView({behavior:'smooth'});window.wlShowDay(num);};body.appendChild(b);}
+  function tog(){setFold(c,!c.classList.contains('folded'));}
+  head.onclick=tog;head.onkeydown=function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();tog();}};
+});
+var fold=days.length>7;days.forEach(function(c){setFold(c,fold);});
+var tools=document.createElement('div');tools.className='dtools';var eb=document.createElement('button');eb.type='button';
+function label(){eb.textContent=days.some(function(c){return c.classList.contains('folded');})?T.exp:T.col;}
+eb.onclick=function(){var any=days.some(function(c){return c.classList.contains('folded');});days.forEach(function(c){setFold(c,!any);});label();};
+document.addEventListener('click',function(e){if(e.target.closest&&e.target.closest('.dhead'))setTimeout(label,0);});
+label();tools.appendChild(eb);
+var first=days[0],anchor=first;var tabs=document.querySelector('.tabs');if(tabs&&tabs.compareDocumentPosition(first)&Node.DOCUMENT_POSITION_FOLLOWING)anchor=tabs;
+anchor.parentNode.insertBefore(tools,anchor);
+})();</script>
 </body>
 </html>

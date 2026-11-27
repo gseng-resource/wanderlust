@@ -56,14 +56,63 @@
   footer { margin-top:40px; color:var(--muted); font-size:.85rem; }
 </style>
 <style id="wl-theme-css">:root{color-scheme:light dark}:root[data-theme="light"]{color-scheme:light}:root[data-theme="dark"]{color-scheme:dark}.themebtn{font:inherit;line-height:1;border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:999px;width:2em;height:2em;padding:0;cursor:pointer;vertical-align:middle;margin-right:.5em}.themebtn:hover{border-color:var(--accent)}.top>.themebtn{margin-left:auto;margin-right:.75em}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&display=swap" rel="stylesheet">
+<style id="wl-enh-css">
+  h1, h2 { font-family:"Fraunces","Songti SC","Noto Serif SC",STSong,Georgia,serif; font-weight:600; }
+  h2 { font-size:1.45rem; scroll-margin-top:64px; }
+  /* 3. cover + facts */
+  figure.cover { margin:10px 0 14px; }
+  .cover-img { position:relative; border-radius:16px; overflow:hidden; background:var(--line); }
+  figure.cover img { aspect-ratio:16/9; border-radius:0; margin:0; }
+  @media (max-width:600px) { figure.cover img { aspect-ratio:4/3; } }
+  .cover-t { position:absolute; left:0; right:0; bottom:0; padding:56px 18px 16px; background:linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.68)); }
+  .cover h1 { color:#fff; margin:0; font-size:clamp(1.75rem,5.6vw,2.7rem); line-height:1.12; letter-spacing:-.01em; text-shadow:0 1px 10px rgba(0,0,0,.35); }
+  .facts { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin:14px 0 10px; padding:0; }
+  @media (max-width:600px) { .facts { grid-template-columns:1fr 1fr; } }
+  .facts div { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:10px 12px; }
+  .facts dt { color:var(--muted); font-size:.75rem; letter-spacing:.04em; text-transform:uppercase; margin:0 0 2px; }
+  .facts dd { margin:0; font-weight:650; font-size:.98rem; line-height:1.3; }
+  .facts div.best dd { color:var(--accent); }
+  /* 1. sticky section bar + back to top */
+  nav.toc { position:sticky; top:0; z-index:1100; flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; -webkit-overflow-scrolling:touch;
+            background:var(--bg); margin:0 -16px 8px; padding:10px 16px; border-bottom:1px solid transparent; transition:border-color .2s, box-shadow .2s; }
+  nav.toc::-webkit-scrollbar { display:none; }
+  nav.toc a { white-space:nowrap; flex:none; }
+  nav.toc.stuck { border-bottom-color:var(--line); box-shadow:0 6px 14px -10px rgba(0,0,0,.25); }
+  nav.toc a.on { background:var(--text); color:var(--bg); border-color:var(--text); }
+  .totop { position:fixed; right:16px; bottom:20px; z-index:1100; width:44px; height:44px; border-radius:50%; border:1px solid var(--line);
+           background:var(--card); color:var(--text); font-size:1.2rem; cursor:pointer; box-shadow:0 4px 14px rgba(0,0,0,.15);
+           opacity:0; transform:translateY(10px); pointer-events:none; transition:opacity .2s, transform .2s; }
+  .totop.show { opacity:1; transform:none; pointer-events:auto; }
+  .totop:hover { border-color:var(--accent); }
+  /* 2. itinerary timeline */
+  .card.day { position:relative; margin-left:40px; }
+  .card.day::before { content:""; position:absolute; left:-25px; top:-13px; bottom:-13px; width:2px; background:var(--line); }
+  .card.day:not(.day + .day)::before { top:28px; }
+  .card.day:not(:has(+ .day))::before { bottom:auto; height:0; }
+  .card.day:not(.day + .day):not(:has(+ .day))::before { display:none; }
+  .dn { position:absolute; left:-40px; top:14px; width:32px; height:32px; border-radius:50%; background:var(--accent); color:#fff;
+        font:700 .85rem/32px -apple-system,BlinkMacSystemFont,sans-serif; text-align:center; box-shadow:0 0 0 4px var(--bg); }
+  .dhead { cursor:pointer; position:relative; padding-right:28px; }
+  .dhead::after { content:"›"; position:absolute; right:2px; top:-2px; font-size:1.4rem; color:var(--muted); transform:rotate(90deg); transition:transform .2s; }
+  .day.folded .dhead::after { transform:rotate(0deg); }
+  .day.folded .dbody { display:none; }
+  .day.folded .night { margin-top:2px; }
+  .dhead:focus-visible { outline:2px solid var(--accent); outline-offset:4px; border-radius:6px; }
+  .dmap { display:inline-block; margin-top:8px; font-size:.85rem; color:var(--accent); background:none; border:0; padding:0; cursor:pointer; font-family:inherit; }
+  .dtools { display:flex; justify-content:flex-end; margin:0 0 10px; }
+  .dtools button { font:inherit; font-size:.85rem; border:1px solid var(--line); background:var(--card); color:var(--text); border-radius:999px; padding:4px 12px; cursor:pointer; }
+  @media print { nav.toc { position:static; } .day.folded .dbody { display:block; } .totop, .dtools, .dmap, .themebtn { display:none; } }
+</style>
 </head>
 <body>
 <main>
 <div class="top"><a class="back" href="../index.zh.html">← Wanderlust</a><button type="button" class="themebtn" data-l="切换到浅色" data-d="切换到深色" aria-label="切换到深色">☾</button><span class="lang"><a href="oita-road-trip.html" lang="en" hreflang="en">EN</a> | <b>中文</b></span></div>
-<h1>大分自驾游</h1>
-<p class="lede">从福冈出发三到四天：由布院泡温泉，国东半岛看山崖古寺与户外艺术，别府的地狱温泉，再到臼杵石佛。可以自驾，也可以坐火车，国东半岛则搭观光巴士。</p>
+<figure class="hero cover"><div class="cover-img"><img src="../assets/photos/oita-usuki-buddhas.jpg" alt="臼杵石佛" fetchpriority="high" width="1000"><div class="cover-t"><h1>大分自驾游</h1></div></div><figcaption>臼杵石佛 · <span class="credit"><a href="https://commons.wikimedia.org/wiki/File:The_superb_Magaibutsu,_or_stone_Buddhas_of_Usuki_2009-09-13.jpg">照片</a>: Maarten Heerlien, <a href="https://creativecommons.org/licenses/by/2.0">CC BY 2.0</a></span></figcaption></figure>
+
+<p class="lede">从福冈出发三到四天：由布院泡温泉，国东半岛看山崖古寺与户外艺术，别府的地狱温泉，再到臼杵石佛。可以自驾，也可以坐火车，国东半岛则搭观光巴士。</p><dl class="facts"><div><dt>天数</dt><dd>3–4 天</dd></div><div><dt>里程</dt><dd>约 450–560 公里</dd></div><div class="best"><dt>最佳季节</dt><dd>11 月</dd></div><div><dt>每人（不含机票）</dt><dd>约 CNY 2,700 起</dd></div></dl>
 <p class="stamp">2026 年 11 月为 12 月行程所做的调研。开放时间和价格会变动，出发前请再确认。车程和距离为估算，请以 Google 地图为准。</p>
-<figure class="hero"><img src="../assets/photos/oita-usuki-buddhas.jpg" alt="臼杵石佛" loading="lazy" width="1000"><figcaption>臼杵石佛 · <span class="credit"><a href="https://commons.wikimedia.org/wiki/File:The_superb_Magaibutsu,_or_stone_Buddhas_of_Usuki_2009-09-13.jpg">照片</a>: Maarten Heerlien, <a href="https://creativecommons.org/licenses/by/2.0">CC BY 2.0</a></span></figcaption></figure>
+
 <nav class="toc"><a href="#why">为什么去</a><a href="#picks">两种玩法</a><a href="#map">路线地图</a><a href="#plan">行程</a><a href="#train">坐火车</a><a href="#sights">必去景点</a><a href="#shows">12 月展览</a><a href="#museums">博物馆</a><a href="#eat">吃什么</a><a href="#shop">购物</a><a href="#stay">住宿</a><a href="#budget">预算</a><a href="#drive">自驾须知</a><a href="#sources">信息来源</a></nav>
 
 
@@ -115,30 +164,30 @@ function chip(label,d){var b=document.createElement('button');b.type='button';b.
 b.style.cssText='font:inherit;font-size:.85rem;padding:3px 9px;border:1px solid var(--line);border-radius:999px;background:transparent;color:inherit;cursor:pointer';
 b.onclick=function(){show(d);};box.appendChild(b);}
 chip(D.t.all,'all');for(var i=1;i<=D.dt.length;i++)chip(String(i),i);
-show('all');})();</script>
+window.wlShowDay=show;show('all');})();</script>
 
 <h2 id="plan">行程</h2>
 <div class="tabs" role="tablist"><button role="tab" aria-selected="true" data-t="four">四天三晚</button><button role="tab" aria-selected="false" data-t="three">三天两晚</button></div>
 <div id="four">
-  <div class="card"><span class="d">第 1 天 · 福冈 → 由布院</span>
+  <div class="card day"><span class="dn" aria-hidden="true">1</span><span class="d">第 1 天 · 福冈 → 由布院</span>
     上午飞抵福冈，取车。<br><span class="drive">🚗 福冈机场 → 由布院 · 115 km · 约 1 小时 30–45 分</span><br>
     <b>COMICO 美术馆</b>（隈研吾设计，需预约时段）、<b>金鳞湖</b>、汤之坪街道、湖畔的夏加尔美术馆。晚上在旅馆泡汤、吃晚餐。<div class="night">住：由布院温泉旅馆</div></div>
-  <div class="card"><span class="d">第 2 天 · 国东半岛 → 别府</span>
+  <div class="card day"><span class="dn" aria-hidden="true">2</span><span class="d">第 2 天 · 国东半岛 → 别府</span>
     <span class="drive">🚗 由布院 → 富贵寺 · 70 km · 约 1 小时 10 分</span><br>
     <b>富贵寺</b>（九州最古老的木造建筑）<span class="drive">🚗 → 熊野磨崖佛 · 10 km · 20 分钟</span>（15:30 前到）<span class="drive">🚗 → 两子寺 · 15 km · 25 分钟</span> <span class="drive">🚗 → 五辻不动尊的 Gormley 雕塑 · 15 km · 约 30 分钟</span>，或长崎鼻的小野洋子作品。午餐在昭和之町。<br>
     <span class="drive">🚗 国东 → 别府铁轮 · 55 km · 约 1 小时</span><br>晚上在铁轮：地狱蒸料理、砂浴。<div class="night">住：别府</div></div>
-  <div class="card"><span class="d">第 3 天 · 别府 → 大分 → 臼杵</span>
+  <div class="card day"><span class="dn" aria-hidden="true">3</span><span class="d">第 3 天 · 别府 → 大分 → 臼杵</span>
     8:00 起逛别府<b>“地狱”</b>。<span class="drive">🚗 别府 → OPAM · 15 km · 25 分钟</span><br>
     <b>OPAM</b>（雷诺阿展和出光名品展）。<span class="drive">🚗 OPAM → 臼杵石佛 · 40 km · 45 分钟</span><br>
     <b>臼杵石佛</b>（国宝，16:30 停止入场）、武家老街和稻叶家下屋敷。<span class="drive">🚗 臼杵 → 别府 · 50 km · 50 分钟</span><div class="night">住：别府</div></div>
-  <div class="card"><span class="d">第 4 天 · 别府 → 宇佐 → 福冈</span>
+  <div class="card day"><span class="dn" aria-hidden="true">4</span><span class="d">第 4 天 · 别府 → 宇佐 → 福冈</span>
     明矾汤之里的汤之花小屋（竹细工会馆周一休馆）。<span class="drive">🚗 别府 → 宇佐神宫 · 45 km · 45 分钟</span><br>
     <b>宇佐神宫</b>，全日本八幡宫的总本宫；道之驿院内买当地农产品。<span class="drive">🚗 宇佐 → 福冈机场 · 130 km · 约 1 小时 50 分</span><br>搭傍晚的航班。</div>
 </div>
 <div id="three" hidden>
-  <div class="card"><span class="d">第 1 天 · 福冈 → 由布院</span><span class="drive">🚗 福冈机场 → 由布院 · 115 km · 约 1 小时 30–45 分</span><br>COMICO 美术馆、金鳞湖、汤之坪街道、温泉。<div class="night">住：由布院温泉旅馆</div></div>
-  <div class="card"><span class="d">第 2 天 · 国东 → 别府</span><span class="drive">🚗 由布院 → 富贵寺 · 70 km · 约 1 小时 10 分</span><br>富贵寺 → 熊野磨崖佛 → 两子寺 → Gormley 雕塑或长崎鼻。<span class="drive">🚗 国东 → 别府 · 55 km · 约 1 小时</span><br>晚上逛铁轮。<div class="night">住：别府</div></div>
-  <div class="card"><span class="d">第 3 天 · 别府 → 大分 → 福冈</span>8:00 逛别府“地狱”<span class="drive">🚗 → OPAM · 15 km · 25 分钟</span> 10:00 进 OPAM，在大分站吃午餐。约 13:30 出发。<span class="drive">🚗 大分 → 福冈机场 · 150 km · 约 1 小时 55 分</span><br>搭傍晚的航班。不去臼杵和宇佐。</div>
+  <div class="card day"><span class="dn" aria-hidden="true">1</span><span class="d">第 1 天 · 福冈 → 由布院</span><span class="drive">🚗 福冈机场 → 由布院 · 115 km · 约 1 小时 30–45 分</span><br>COMICO 美术馆、金鳞湖、汤之坪街道、温泉。<div class="night">住：由布院温泉旅馆</div></div>
+  <div class="card day"><span class="dn" aria-hidden="true">2</span><span class="d">第 2 天 · 国东 → 别府</span><span class="drive">🚗 由布院 → 富贵寺 · 70 km · 约 1 小时 10 分</span><br>富贵寺 → 熊野磨崖佛 → 两子寺 → Gormley 雕塑或长崎鼻。<span class="drive">🚗 国东 → 别府 · 55 km · 约 1 小时</span><br>晚上逛铁轮。<div class="night">住：别府</div></div>
+  <div class="card day"><span class="dn" aria-hidden="true">3</span><span class="d">第 3 天 · 别府 → 大分 → 福冈</span>8:00 逛别府“地狱”<span class="drive">🚗 → OPAM · 15 km · 25 分钟</span> 10:00 进 OPAM，在大分站吃午餐。约 13:30 出发。<span class="drive">🚗 大分 → 福冈机场 · 150 km · 约 1 小时 55 分</span><br>搭傍晚的航班。不去臼杵和宇佐。</div>
 </div>
 <p class="muted">想少换酒店？全程住别府，由布院当一日游（别府 → 由布院 25 公里，约 35 分钟），但就少了住温泉旅馆的那一晚。</p>
 
@@ -247,5 +296,51 @@ document.querySelectorAll('.tabs').forEach(t => t.querySelectorAll('button').for
 })));
 </script>
 <script>(function(){var r=document.documentElement,mq=window.matchMedia("(prefers-color-scheme: dark)");function dark(){var t=r.getAttribute("data-theme");return t?t==="dark":mq.matches}var bs=document.querySelectorAll(".themebtn");function paint(){var d=dark();bs.forEach(function(b){b.textContent=d?"\u2600\uFE0E":"\u263E";b.setAttribute("aria-label",d?b.dataset.l:b.dataset.d);b.title=b.getAttribute("aria-label");})}bs.forEach(function(b){b.addEventListener("click",function(){var t=dark()?"light":"dark";r.setAttribute("data-theme",t);try{localStorage.setItem("wl-theme",t)}catch(e){}paint();})});if(mq.addEventListener)mq.addEventListener("change",paint);paint();})();</script>
+<script id="wl-enh-js">(function(){
+var zh=/^zh/.test(document.documentElement.lang||'');
+var T=zh?{top:'回到顶部',exp:'全部展开',col:'全部收起',map:'在地图上查看 ›'}:{top:'Back to top',exp:'Expand all',col:'Collapse all',map:'Show on map ›'};
+/* 1. sticky toc + scrollspy + back to top */
+var toc=document.querySelector('nav.toc'),links=toc?[].slice.call(toc.querySelectorAll('a[href^="#"]')):[];
+var heads=links.map(function(a){return document.getElementById(a.getAttribute('href').slice(1));});
+var top=document.createElement('button');top.type='button';top.className='totop';top.textContent='↑';top.setAttribute('aria-label',T.top);top.title=T.top;
+top.onclick=function(){window.scrollTo({top:0,behavior:'smooth'});};document.body.appendChild(top);
+var cur=-1,tick=false;
+function spy(){tick=false;var y=window.scrollY;top.classList.toggle('show',y>900);
+  if(!toc)return;toc.classList.toggle('stuck',toc.getBoundingClientRect().top<=0&&y>0);
+  var i=-1;heads.forEach(function(h,j){if(h&&h.getBoundingClientRect().top<=90)i=j;});
+  if(i!==cur){if(cur>=0)links[cur].classList.remove('on');cur=i;
+    if(i>=0){var a=links[i];a.classList.add('on');var l=a.offsetLeft-toc.clientWidth/2+a.offsetWidth/2;toc.scrollTo?toc.scrollTo({left:l,behavior:'smooth'}):(toc.scrollLeft=l);}}}
+window.addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(spy);}},{passive:true});spy();
+/* 2. day timeline: fold, expand all, show on map */
+var days=[].slice.call(document.querySelectorAll('.card.day'));if(!days.length)return;
+var tabIds=[].slice.call(document.querySelectorAll('.tabs [data-t]')).map(function(b){return b.dataset.t;}).slice(1);
+var nMap=document.querySelectorAll('#rdays button').length-1;
+function setFold(c,f){c.classList.toggle('folded',f);var h=c.querySelector('.dhead');if(h)h.setAttribute('aria-expanded',String(!f));}
+days.forEach(function(c){
+  var d=c.querySelector(':scope > .d');if(!d)return;
+  var head=document.createElement('div');head.className='dhead';head.setAttribute('role','button');head.tabIndex=0;
+  var body=document.createElement('div');body.className='dbody';
+  c.insertBefore(head,d);head.appendChild(d);
+  var nx=head.nextSibling;while(nx&&nx.nodeType===3&&!nx.textContent.trim())nx=nx.nextSibling;
+  if(nx&&nx.nodeType===1&&nx.tagName==='SPAN'&&nx.classList.contains('muted'))head.appendChild(nx);
+  var night=c.querySelector(':scope > .night');
+  while(head.nextSibling){var n=head.nextSibling;if(n===night){c.removeChild(n);continue;}body.appendChild(n);}
+  c.appendChild(body);if(night)c.appendChild(night);
+  var num=parseInt((c.querySelector('.dn')||{}).textContent,10);
+  var inAlt=tabIds.some(function(id){var p=document.getElementById(id);return p&&p.contains(c);});
+  if(window.wlShowDay&&num&&num<=nMap&&!inAlt){var b=document.createElement('button');b.type='button';b.className='dmap';b.textContent=T.map;
+    b.onclick=function(){var m=document.getElementById('map');if(m)m.scrollIntoView({behavior:'smooth'});window.wlShowDay(num);};body.appendChild(b);}
+  function tog(){setFold(c,!c.classList.contains('folded'));}
+  head.onclick=tog;head.onkeydown=function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();tog();}};
+});
+var fold=days.length>7;days.forEach(function(c){setFold(c,fold);});
+var tools=document.createElement('div');tools.className='dtools';var eb=document.createElement('button');eb.type='button';
+function label(){eb.textContent=days.some(function(c){return c.classList.contains('folded');})?T.exp:T.col;}
+eb.onclick=function(){var any=days.some(function(c){return c.classList.contains('folded');});days.forEach(function(c){setFold(c,!any);});label();};
+document.addEventListener('click',function(e){if(e.target.closest&&e.target.closest('.dhead'))setTimeout(label,0);});
+label();tools.appendChild(eb);
+var first=days[0],anchor=first;var tabs=document.querySelector('.tabs');if(tabs&&tabs.compareDocumentPosition(first)&Node.DOCUMENT_POSITION_FOLLOWING)anchor=tabs;
+anchor.parentNode.insertBefore(tools,anchor);
+})();</script>
 </body>
 </html>

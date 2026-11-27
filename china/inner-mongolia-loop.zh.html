@@ -57,12 +57,61 @@
   footer { margin-top:40px; color:var(--muted); font-size:.85rem; }
 </style>
 <style id="wl-theme-css">:root{color-scheme:light dark}:root[data-theme="light"]{color-scheme:light}:root[data-theme="dark"]{color-scheme:dark}.themebtn{font:inherit;line-height:1;border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:999px;width:2em;height:2em;padding:0;cursor:pointer;vertical-align:middle;margin-right:.5em}.themebtn:hover{border-color:var(--accent)}.top>.themebtn{margin-left:auto;margin-right:.75em}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&display=swap" rel="stylesheet">
+<style id="wl-enh-css">
+  h1, h2 { font-family:"Fraunces","Songti SC","Noto Serif SC",STSong,Georgia,serif; font-weight:600; }
+  h2 { font-size:1.45rem; scroll-margin-top:64px; }
+  /* 3. cover + facts */
+  figure.cover { margin:10px 0 14px; }
+  .cover-img { position:relative; border-radius:16px; overflow:hidden; background:var(--line); }
+  figure.cover img { aspect-ratio:16/9; border-radius:0; margin:0; }
+  @media (max-width:600px) { figure.cover img { aspect-ratio:4/3; } }
+  .cover-t { position:absolute; left:0; right:0; bottom:0; padding:56px 18px 16px; background:linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.68)); }
+  .cover h1 { color:#fff; margin:0; font-size:clamp(1.75rem,5.6vw,2.7rem); line-height:1.12; letter-spacing:-.01em; text-shadow:0 1px 10px rgba(0,0,0,.35); }
+  .facts { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin:14px 0 10px; padding:0; }
+  @media (max-width:600px) { .facts { grid-template-columns:1fr 1fr; } }
+  .facts div { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:10px 12px; }
+  .facts dt { color:var(--muted); font-size:.75rem; letter-spacing:.04em; text-transform:uppercase; margin:0 0 2px; }
+  .facts dd { margin:0; font-weight:650; font-size:.98rem; line-height:1.3; }
+  .facts div.best dd { color:var(--accent); }
+  /* 1. sticky section bar + back to top */
+  nav.toc { position:sticky; top:0; z-index:1100; flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; -webkit-overflow-scrolling:touch;
+            background:var(--bg); margin:0 -16px 8px; padding:10px 16px; border-bottom:1px solid transparent; transition:border-color .2s, box-shadow .2s; }
+  nav.toc::-webkit-scrollbar { display:none; }
+  nav.toc a { white-space:nowrap; flex:none; }
+  nav.toc.stuck { border-bottom-color:var(--line); box-shadow:0 6px 14px -10px rgba(0,0,0,.25); }
+  nav.toc a.on { background:var(--text); color:var(--bg); border-color:var(--text); }
+  .totop { position:fixed; right:16px; bottom:20px; z-index:1100; width:44px; height:44px; border-radius:50%; border:1px solid var(--line);
+           background:var(--card); color:var(--text); font-size:1.2rem; cursor:pointer; box-shadow:0 4px 14px rgba(0,0,0,.15);
+           opacity:0; transform:translateY(10px); pointer-events:none; transition:opacity .2s, transform .2s; }
+  .totop.show { opacity:1; transform:none; pointer-events:auto; }
+  .totop:hover { border-color:var(--accent); }
+  /* 2. itinerary timeline */
+  .card.day { position:relative; margin-left:40px; }
+  .card.day::before { content:""; position:absolute; left:-25px; top:-13px; bottom:-13px; width:2px; background:var(--line); }
+  .card.day:not(.day + .day)::before { top:28px; }
+  .card.day:not(:has(+ .day))::before { bottom:auto; height:0; }
+  .card.day:not(.day + .day):not(:has(+ .day))::before { display:none; }
+  .dn { position:absolute; left:-40px; top:14px; width:32px; height:32px; border-radius:50%; background:var(--accent); color:#fff;
+        font:700 .85rem/32px -apple-system,BlinkMacSystemFont,sans-serif; text-align:center; box-shadow:0 0 0 4px var(--bg); }
+  .dhead { cursor:pointer; position:relative; padding-right:28px; }
+  .dhead::after { content:"›"; position:absolute; right:2px; top:-2px; font-size:1.4rem; color:var(--muted); transform:rotate(90deg); transition:transform .2s; }
+  .day.folded .dhead::after { transform:rotate(0deg); }
+  .day.folded .dbody { display:none; }
+  .day.folded .night { margin-top:2px; }
+  .dhead:focus-visible { outline:2px solid var(--accent); outline-offset:4px; border-radius:6px; }
+  .dmap { display:inline-block; margin-top:8px; font-size:.85rem; color:var(--accent); background:none; border:0; padding:0; cursor:pointer; font-family:inherit; }
+  .dtools { display:flex; justify-content:flex-end; margin:0 0 10px; }
+  .dtools button { font:inherit; font-size:.85rem; border:1px solid var(--line); background:var(--card); color:var(--text); border-radius:999px; padding:4px 12px; cursor:pointer; }
+  @media print { nav.toc { position:static; } .day.folded .dbody { display:block; } .totop, .dtools, .dmap, .themebtn { display:none; } }
+</style>
 </head>
 <body>
 <main>
 <div class="top"><a class="back" href="../index.zh.html">← Wanderlust</a><button type="button" class="themebtn" data-l="切换到浅色" data-d="切换到深色" aria-label="切换到深色">☾</button><span class="lang"><a href="inner-mongolia-loop.html" lang="en" hreflang="en">EN</a> | <b>中文</b></span></div>
-<h1>上海—内蒙古环线自驾</h1><p class="lede">从上海出发三周的环线自驾：经南京、开封、洛阳、西安等古都，向北穿过黄土高原到内蒙古的沙漠与草原，再经山西石窟、泰山和孔子故里回到上海。</p><p class="stamp">2026 年 11 月为 2027 年 5 月下旬至 6 月中旬的行程所做的调研。开放时间、价格和预约规则会变，出发前请再确认。车程和距离为估算，请以高德地图为准。</p>
-<figure class="hero"><img src="../assets/photos/cn-im-hanging-temple.jpg" alt="大同附近悬在峭壁上的悬空寺" loading="lazy" width="1000"><figcaption>大同附近悬在峭壁上的悬空寺 · <span class="credit"><a href="https://commons.wikimedia.org/wiki/File:Xuankongsi.jpg">照片</a>: BRUNNER Emmanuel (Manu25), 公有领域</span></figcaption></figure>
+<figure class="hero cover"><div class="cover-img"><img src="../assets/photos/cn-im-hanging-temple.jpg" alt="大同附近悬在峭壁上的悬空寺" fetchpriority="high" width="1000"><div class="cover-t"><h1>上海—内蒙古环线自驾</h1></div></div><figcaption>大同附近悬在峭壁上的悬空寺 · <span class="credit"><a href="https://commons.wikimedia.org/wiki/File:Xuankongsi.jpg">照片</a>: BRUNNER Emmanuel (Manu25), 公有领域</span></figcaption></figure>
+<p class="lede">从上海出发三周的环线自驾：经南京、开封、洛阳、西安等古都，向北穿过黄土高原到内蒙古的沙漠与草原，再经山西石窟、泰山和孔子故里回到上海。</p><dl class="facts"><div><dt>天数</dt><dd>21 天</dd></div><div><dt>里程</dt><dd>约 4,500 公里</dd></div><div class="best"><dt>最佳季节</dt><dd>9 月</dd></div><div><dt>每人预算</dt><dd>约 CNY 11,670 起</dd></div></dl><p class="stamp">2026 年 11 月为 2027 年 5 月下旬至 6 月中旬的行程所做的调研。开放时间、价格和预约规则会变，出发前请再确认。车程和距离为估算，请以高德地图为准。</p>
+
 <nav class="toc"><a href="#why">为什么去</a><a href="#picks">两种玩法</a><a href="#map">路线地图</a><a href="#plan">行程</a><a href="#drive">自驾与充电</a><a href="#sights">必去景点</a><a href="#shows">展览</a><a href="#museums">博物馆</a><a href="#eat">吃什么</a><a href="#shop">购物</a><a href="#stay">住宿</a><a href="#budget">预算</a><a href="#season">季节</a><a href="#sources">信息来源</a></nav>
 <h2 id="why">为什么选这条环线</h2>
 <div class="card why"><p class="pitch">一趟车就走过两千年的中国历史，而且一条路都不重复：兵马俑、龙门和云冈石窟、少林寺、悬空寺、泰山和曲阜，中间还有库布其沙漠和内蒙古草原，几乎每天都换一种地方菜。</p><p><b>5 月下旬至 6 月中旬：</b> 中原炎热（河南、西安 30–35°C，热浪时局地可达 40°C），内蒙古白天 25–30°C、夜间凉爽，五台山夜里冷。草原一般在 6 月逐渐转绿（视降水而定）。2027 年端午节 6 月 9 日（周三）只放一天；若与高考（约 6 月 7–8 日，各省不同）重叠，考点附近有交通管制。</p><p><b>最佳季节：</b> 9 月上中旬最好：全线白天约 20–27°C，沙尘少，草原由绿转金，蒙古包营地仍在营业。5 月下旬至 6 月上旬其次，但要在 6 月中旬前离开河南和西安，之后 35°C 以上的天数明显增多。4 月中旬南半程很好（春花和洛阳牡丹），但 4 月是北方沙尘最多的月份，夜里接近 0°C，蒙古包营地大多未开，五台山还可能下雪。避开 7–8 月（平原 35–40°C，人最多）和 10 月初国庆黄金周。</p><p><b>路线：</b> 上海 → 南京 → 徐州 → 开封 → 洛阳 → 西安 → 延安 → 榆林 → 鄂尔多斯 → 呼和浩特 → 大同 → 五台山 → 正定 → 泰安 → 曲阜 → 淮安 → 扬州 → 上海。21 天，路线约 4,500 公里（含景点往返约 5,250 公里），每段车程最长约 3 个半小时，大城市住两晚。</p><p><b>亮点</b></p><ul><li>兵马俑和西安城墙</li><li>龙门与云冈，中国三大石窟中的两处</li><li>成吉思汗陵、库布其沙漠和一天草原</li><li>悬在峭壁上的悬空寺和五台山的寺院</li><li>泰山，以及曲阜孔庙、孔府、孔林</li><li>美食之旅：南京鸭、开封夜市、西安面食、内蒙古羊肉、山西面食、淮扬菜和扬州早茶</li></ul><p><b>须知</b></p><ul><li>安排出发日时避免周一落在博物馆日：不要在周日或周三出发（南京、洛阳和内蒙古的博物馆周一闭馆）。</li><li>国内景点的老年人优惠通常只限中国公民，预算按全价计。注意部分旅游保险的投保年龄上限为 70–80 岁。</li><li>车程超过 3 小时的日子，每 1.5–2 小时在服务区休息一次。</li><li>多个景点步行多、台阶多（兵马俑景区、龙门、悬空寺、泰山）：放慢节奏，能坐摆渡车和索道就坐，可在游客中心询问轮椅借用。</li><li>大部分重要景点都要用护照实名预约，各有不同窗口：云冈提前 1–7 天且不能约当天，陕历博提前 5 天 17:00 放票，五台山门票和车辆分开预约，悬空寺登临票分时段限量。带好护照原件；线上系统不一定支持护照，请预留人工窗口时间。</li><li>至少每 350 公里补一次电，到站保留 20–30%：内蒙古的服务区间距较大。</li><li>许多国家的护照现在可免签入境中国最多 30 天，请查询自己护照的规定。酒店入住时会为外国客人登记。</li><li>河南和西安的景点尽量早上去，避开高温。</li></ul></div>
@@ -103,31 +152,31 @@ function chip(label,d){var b=document.createElement('button');b.type='button';b.
 b.style.cssText='font:inherit;font-size:.85rem;padding:3px 9px;border:1px solid var(--line);border-radius:999px;background:transparent;color:inherit;cursor:pointer';
 b.onclick=function(){show(d);};box.appendChild(b);}
 chip(D.t.all,'all');for(var i=1;i<=D.dt.length;i++)chip(String(i),i);
-show('all');})();</script>
+window.wlShowDay=show;show('all');})();</script>
 
 <h2 id="plan">行程：21 天 20 晚</h2>
 <p class="muted">每个开车日要么只开一段（早出发，赶到目的地吃迟午餐，下午只看景点），要么分上午、下午两段，中间停下吃午餐。去景点的短途不计。</p>
-<div class="card"><span class="d">第 1 天 · 上海 → 南京</span><span class="muted">300 km · 单段</span><p><b>上午</b><br><span class="drive">🚗 上海 → 南京 · 300 km · 3 小时 30</span><br>约 9:00 出发。</p><p><b>午餐</b><br>南京吃迟午餐：盐水鸭、鸭血粉丝汤。</p><p><b>下午</b><br>夫子庙，傍晚沿秦淮河散步。</p><div class="night">住： 南京</div></div>
-<div class="card"><span class="d">第 2 天 · 南京</span><span class="muted">0 km · 无长途</span><p><b>上午</b><br>紫金山上平缓的明孝陵神道，再到中山陵（392 级台阶到祭堂，可量力而行；下方广场也能看到全景）。</p><p><b>午餐</b><br>紫金山附近或市区午餐。</p><p><b>下午</b><br>南京博物院和一段明城墙。</p><p class="charge">⚡ <b>充电</b> 今晚在酒店 （距上次充电约 320 km）</p><div class="night">住： 南京</div></div>
-<div class="card"><span class="d">第 3 天 · 南京 → 徐州</span><span class="muted">340 km · 单段</span><p><b>上午</b><br><span class="drive">🚗 南京 → 徐州 · 340 km · 3 小时 45</span><br>约 8:30 出发；中途在服务区休息一次。</p><p><b>午餐</b><br>徐州吃迟午餐：饣它汤、烧羊肉。</p><p><b>下午</b><br>汉兵马俑和楚王陵崖墓。</p><p class="charge">⚡ <b>充电</b> 前一晚在酒店或出发前 （距上次充电约 40 km）</p><p class="charge">⚡ <b>充电</b> 今晚在酒店 （距上次充电约 340 km）</p><div class="night">住： 徐州</div></div>
-<div class="card"><span class="d">第 4 天 · 徐州 → 开封</span><span class="muted">290 km · 单段</span><p><b>上午</b><br><span class="drive">🚗 徐州 → 开封 · 290 km · 3 小时 15</span><br>约 9:00 出发。</p><p><b>午餐</b><br>开封吃迟午餐：灌汤包。</p><p><b>下午</b><br>铁塔和大相国寺；晚上逛夜市。</p><div class="night">住： 开封</div></div>
-<div class="card"><span class="d">第 5 天 · 开封 → 少林寺 → 洛阳</span><span class="muted">220 km · 两段</span><p><b>上午</b><br><span class="drive">🚗 开封 → 少林寺（登封） · 160 km · 2 小时</span><br>约 8:30 出发。</p><p><b>午餐</b><br>在登封午餐，然后游少林寺和塔林；从大门可坐景区电瓶车。</p><p><b>下午</b><br><span class="drive">🚗 少林寺 → 洛阳 · 60 km · 55 分钟</span><br>晚上逛洛阳老城。</p><p class="charge">⚡ <b>充电</b> 前一晚在酒店或出发前 （距上次充电约 350 km）</p><div class="night">住： 洛阳</div></div>
-<div class="card"><span class="d">第 6 天 · 洛阳</span><span class="muted">0 km · 无长途</span><p><b>上午</b><br>开门即游龙门石窟（世界遗产）：西山沿河步道平缓，可直达卢舍那大佛；东山台阶多，可不去或坐船过河。</p><p><b>午餐</b><br>洛阳午餐：牛肉汤或水席。</p><p><b>下午</b><br>中午回酒店避暑休息，下午再去白马寺或洛阳博物馆（周一闭馆）。</p><div class="night">住： 洛阳</div></div>
-<div class="card"><span class="d">第 7 天 · 洛阳 → 华山 → 西安</span><span class="muted">380 km · 两段</span><p><b>上午</b><br><span class="drive">🚗 洛阳 → 华阴（华山） · 250 km · 2 小时 45</span><br>约 8:30 出发。</p><p><b>午餐</b><br>在华阴午餐，顺路看华山脚下的西岳庙。</p><p><b>下午</b><br><span class="drive">🚗 华阴 → 西安 · 130 km · 1 小时 30</span><br>黄昏上城墙；晚上在回民街吃饭。</p><p class="charge">⚡ <b>充电</b> 前一晚在酒店或出发前 （距上次充电约 280 km）</p><p class="charge">⚡ <b>充电</b> 在午餐地点 （距上次充电约 250 km）</p><div class="night">住： 西安</div></div>
-<div class="card"><span class="d">第 8 天 · 西安：秦始皇帝陵</span><span class="muted">0 km · 无长途</span><p><b>上午</b><br>在秦始皇帝陵博物院从容游览一整天（一张票含两部分，需用护照提前预约）。约 8:00 出发去临潼（约 1 小时）。开门先看一号坑，再看三号坑、二号坑和陈列厅里的两乘铜车马。约需 3 小时，建议请持证讲解员或租用语音导览。</p><p><b>午餐</b><br>在临潼坐下来午餐，好好休息。</p><p><b>下午</b><br>乘园区摆渡车到西边约 1.5 公里的丽山园，即秦始皇陵本身。封土从未发掘，可看到绿树覆盖的封土堆，以及周边的石铠甲坑、百戏俑坑和文官俑坑。约需 1.5 小时，约 16:30 回西安休息（适合当晚洗衣）。体力允许可顺路去旁边的华清宫；陕西历史博物馆仅在抢到票时前往。</p><div class="night">住： 西安</div></div>
-<div class="card"><span class="d">第 9 天 · 西安 → 黄帝陵 → 延安</span><span class="muted">310 km · 两段</span><p><b>上午</b><br><span class="drive">🚗 西安 → 黄帝陵 · 170 km · 2 小时</span><br>约 8:30 出发。</p><p><b>午餐</b><br>在黄陵午餐，然后参观黄帝陵。</p><p><b>下午</b><br><span class="drive">🚗 黄陵 → 延安 · 140 km · 1 小时 40</span><br>傍晚到延安；革命旧址明早再去（约 17:30 停止参观）。</p><p class="charge">⚡ <b>充电</b> 前一晚在酒店或出发前 （距上次充电约 240 km）</p><div class="night">住： 延安</div></div>
-<div class="card"><span class="d">第 10 天 · 延安 → 榆林</span><span class="muted">270 km · 单段</span><p><b>上午</b><br><span class="drive">🚗 延安 → 榆林 · 270 km · 3 小时 10</span><br>8:00 参观杨家岭或枣园，约 10:30 出发穿越黄土高原。</p><p><b>午餐</b><br>榆林吃迟午餐：陕北羊肉、荞面饸饹。</p><p><b>下午</b><br>镇北台和榆林古城。</p><p class="charge">⚡ <b>充电</b> 前一晚在酒店或出发前 （距上次充电约 330 km）</p><div class="night">住： 榆林</div></div>
-<div class="card"><span class="d">第 11 天 · 榆林 → 成吉思汗陵 → 鄂尔多斯</span><span class="muted">170 km · 两段</span><p><b>上午</b><br><span class="drive">🚗 榆林 → 成吉思汗陵 · 135 km · 1 小时 40</span><br>约 9:00 出发，进入内蒙古。</p><p><b>午餐</b><br>在伊金霍洛午餐：手把肉、奶茶；然后参观成吉思汗陵。</p><p><b>下午</b><br><span class="drive">🚗 伊金霍洛 → 鄂尔多斯 · 35 km · 35 分钟</span><br>晚上在鄂尔多斯（康巴什）。</p><p class="charge">⚡ <b>充电</b> 前一晚在酒店或出发前 （距上次充电约 300 km）</p><div class="night">住： 鄂尔多斯</div></div>
-<div class="card"><span class="d">第 12 天 · 鄂尔多斯 → 响沙湾 → 呼和浩特</span><span class="muted">325 km · 两段</span><p><b>上午</b><br><span class="drive">🚗 鄂尔多斯 → 响沙湾 · 90 km · 1 小时 10</span><br>约 8:30 出发。</p><p><b>午餐</b><br>库布其沙漠响沙湾，在景区午餐。</p><p><b>下午</b><br><span class="drive">🚗 响沙湾 → 呼和浩特 · 235 km · 2 小时 45</span><br>傍晚到呼和浩特。</p><p class="charge">⚡ <b>充电</b> 在午餐地点 （距上次充电约 280 km）</p><div class="night">住： 呼和浩特</div></div>
-<div class="card"><span class="d">第 13 天 · 呼和浩特 → 希拉穆仁草原（住蒙古包）</span><span class="muted">85 km · 单段</span><p><b>上午</b><br>上午游内蒙古博物院（周一闭馆）和大召寺。</p><p><b>午餐</b><br>呼和浩特午餐：烧麦。</p><p><b>下午</b><br><span class="drive">🚗 呼和浩特 → 希拉穆仁 · 85 km · 1 小时 15</span><br>下午在草原：坐马车或驼车代替骑马，到牧民家喝奶茶，看摔跤、射箭、赛马等那达慕表演。晚餐手把肉，然后篝火和星空。住带独立卫浴、有暖气的蒙古包；夜间约 10°C。</p><p class="charge">⚡ <b>充电</b> 今晚在酒店 （距上次充电约 340 km）</p><div class="night">住： 希拉穆仁（蒙古包）</div></div>
-<div class="card"><span class="d">第 14 天 · 希拉穆仁 → 呼和浩特 → 大同</span><span class="muted">295 km · 两段</span><p><b>上午</b><br><span class="drive">🚗 希拉穆仁 → 呼和浩特 · 85 km · 1 小时 15</span><br>草原看日出，早餐后约 9:30 出发。</p><p><b>午餐</b><br>在呼和浩特午餐并休息。</p><p><b>下午</b><br><span class="drive">🚗 呼和浩特 → 大同 · 210 km · 2 小时 35</span><br>傍晚到大同；体力允许再去城墙看日落。</p><p class="charge">⚡ <b>充电</b> 在午餐地点 （距上次充电约 285 km）</p><div class="night">住： 大同</div></div>
-<div class="card"><span class="d">第 15 天 · 大同</span><span class="muted">0 km · 无长途</span><p><b>上午</b><br>开门即游云冈石窟（世界遗产）。</p><p><b>午餐</b><br>大同午餐：铜火锅或面食。</p><p><b>下午</b><br>下午休息（可在此洗衣）。华严寺和九龙壁离酒店近，可选。</p><div class="night">住： 大同</div></div>
-<div class="card"><span class="d">第 16 天 · 大同 → 悬空寺 → 五台山</span><span class="muted">235 km · 两段</span><p><b>上午</b><br><span class="drive">🚗 大同 → 悬空寺 · 85 km · 1 小时 25</span><br>约 7:30 出发。提前预约登临票；所有游客在恒山游客中心统一乘摆渡车。</p><p><b>午餐</b><br>游悬空寺，然后在浑源午餐。年长或腿脚不便者可买地面参观票，在下方观看，不必登临栈道。</p><p><b>下午</b><br><span class="drive">🚗 浑源 → 五台山 · 150 km · 2 小时 30</span><br>翻山而过；晚上在台怀镇。</p><p class="charge">⚡ <b>充电</b> 前一晚在酒店或出发前 （距上次充电约 270 km）</p><div class="night">住： 五台山</div></div>
-<div class="card"><span class="d">第 17 天 · 五台山 → 正定</span><span class="muted">210 km · 单段</span><p><b>上午</b><br><span class="drive">🚗 五台山 → 正定 · 210 km · 2 小时 45</span><br>早上先看显通寺和塔院寺（地势平坦）；菩萨顶 108 级台阶可不登。约 10:00 出发。</p><p><b>午餐</b><br>正定吃迟午餐。</p><p><b>下午</b><br>隆兴寺和正定古城。</p><p class="charge">⚡ <b>充电</b> 前一晚在酒店或出发前 （距上次充电约 255 km）</p><div class="night">住： 正定</div></div>
-<div class="card"><span class="d">第 18 天 · 正定 → 济南 → 泰安</span><span class="muted">370 km · 两段</span><p><b>上午</b><br><span class="drive">🚗 正定 → 济南 · 300 km · 3 小时 15</span><br>约 8:30 出发。</p><p><b>午餐</b><br>在济南午餐，顺路看趵突泉。</p><p><b>下午</b><br><span class="drive">🚗 济南 → 泰安 · 70 km · 1 小时</span><br>泰山脚下的岱庙。</p><p class="charge">⚡ <b>充电</b> 前一晚在酒店或出发前 （距上次充电约 230 km）</p><p class="charge">⚡ <b>充电</b> 在午餐地点 （距上次充电约 300 km）</p><div class="night">住： 泰安</div></div>
-<div class="card"><span class="d">第 19 天 · 泰山 → 曲阜</span><span class="muted">75 km · 单段</span><p><b>上午</b><br>开门上泰山：坐景区巴士到中天门，再坐索道到南天门；年长者可在天街一带游览，不必再走到山顶。</p><p><b>午餐</b><br>泰安午餐：泰山豆腐宴。</p><p><b>下午</b><br><span class="drive">🚗 泰安 → 曲阜 · 75 km · 1 小时</span><br>傍晚参观孔庙（孔府、孔林明早）。</p><div class="night">住： 曲阜</div></div>
-<div class="card"><span class="d">第 20 天 · 曲阜 → 宿迁 → 淮安</span><span class="muted">360 km · 两段</span><p><b>上午</b><br><span class="drive">🚗 曲阜 → 宿迁 · 260 km · 2 小时 55</span><br>8:00 参观孔府，再坐观光车游孔林；约 10:30 出发。</p><p><b>午餐</b><br>在宿迁（项羽故里）午餐。</p><p><b>下午</b><br><span class="drive">🚗 宿迁 → 淮安 · 100 km · 1 小时 15</span><br>晚上吃淮扬菜，逛大运河。</p><p class="charge">⚡ <b>充电</b> 前一晚在酒店或出发前 （距上次充电约 195 km）</p><p class="charge">⚡ <b>充电</b> 在午餐地点 （距上次充电约 260 km）</p><div class="night">住： 淮安</div></div>
-<div class="card"><span class="d">第 21 天 · 淮安 → 扬州 → 上海</span><span class="muted">430 km · 两段</span><p><b>上午</b><br><span class="drive">🚗 淮安 → 扬州 · 170 km · 2 小时</span><br>约 8:30 出发。（中国大运河博物馆需在扬州多住一晚。）</p><p><b>午餐</b><br>扬州：瘦西湖，早点吃扬州点心和炒饭。</p><p><b>下午</b><br><span class="drive">🚗 扬州 → 上海 · 260 km · 3 小时</span><br>傍晚到家。</p><p class="charge">⚡ <b>充电</b> 在午餐地点 （距上次充电约 290 km）</p></div>
+<div class="card day"><span class="dn" aria-hidden="true">1</span><span class="d">第 1 天 · 上海 → 南京</span><span class="muted">300 km · 单段</span><p><b>上午</b><br><span class="drive">🚗 上海 → 南京 · 300 km · 3 小时 30</span><br>约 9:00 出发。</p><p><b>午餐</b><br>南京吃迟午餐：盐水鸭、鸭血粉丝汤。</p><p><b>下午</b><br>夫子庙，傍晚沿秦淮河散步。</p><div class="night">住： 南京</div></div>
+<div class="card day"><span class="dn" aria-hidden="true">2</span><span class="d">第 2 天 · 南京</span><span class="muted">0 km · 无长途</span><p><b>上午</b><br>紫金山上平缓的明孝陵神道，再到中山陵（392 级台阶到祭堂，可量力而行；下方广场也能看到全景）。</p><p><b>午餐</b><br>紫金山附近或市区午餐。</p><p><b>下午</b><br>南京博物院和一段明城墙。</p><p class="charge">⚡ <b>充电</b> 今晚在酒店 （距上次充电约 320 km）</p><div class="night">住： 南京</div></div>
+<div class="card day"><span class="dn" aria-hidden="true">3</span><span class="d">第 3 天 · 南京 → 徐州</span><span class="muted">340 km · 单段</span><p><b>上午</b><br><span class="drive">🚗 南京 → 徐州 · 340 km · 3 小时 45</span><br>约 8:30 出发；中途在服务区休息一次。</p><p><b>午餐</b><br>徐州吃迟午餐：饣它汤、烧羊肉。</p><p><b>下午</b><br>汉兵马俑和楚王陵崖墓。</p><p class="charge">⚡ <b>充电</b> 前一晚在酒店或出发前 （距上次充电约 40 km）</p><p class="charge">⚡ <b>充电</b> 今晚在酒店 （距上次充电约 340 km）</p><div class="night">住： 徐州</div></div>
+<div class="card day"><span class="dn" aria-hidden="true">4</span><span class="d">第 4 天 · 徐州 → 开封</span><span class="muted">290 km · 单段</span><p><b>上午</b><br><span class="drive">🚗 徐州 → 开封 · 290 km · 3 小时 15</span><br>约 9:00 出发。</p><p><b>午餐</b><br>开封吃迟午餐：灌汤包。</p><p><b>下午</b><br>铁塔和大相国寺；晚上逛夜市。</p><div class="night">住： 开封</div></div>
+<div class="card day"><span class="dn" aria-hidden="true">5</span><span class="d">第 5 天 · 开封 → 少林寺 → 洛阳</span><span class="muted">220 km · 两段</span><p><b>上午</b><br><span class="drive">🚗 开封 → 少林寺（登封） · 160 km · 2 小时</span><br>约 8:30 出发。</p><p><b>午餐</b><br>在登封午餐，然后游少林寺和塔林；从大门可坐景区电瓶车。</p><p><b>下午</b><br><span class="drive">🚗 少林寺 → 洛阳 · 60 km · 55 分钟</span><br>晚上逛洛阳老城。</p><p class="charge">⚡ <b>充电</b> 前一晚在酒店或出发前 （距上次充电约 350 km）</p><div class="night">住： 洛阳</div></div>
+<div class="card day"><span class="dn" aria-hidden="true">6</span><span class="d">第 6 天 · 洛阳</span><span class="muted">0 km · 无长途</span><p><b>上午</b><br>开门即游龙门石窟（世界遗产）：西山沿河步道平缓，可直达卢舍那大佛；东山台阶多，可不去或坐船过河。</p><p><b>午餐</b><br>洛阳午餐：牛肉汤或水席。</p><p><b>下午</b><br>中午回酒店避暑休息，下午再去白马寺或洛阳博物馆（周一闭馆）。</p><div class="night">住： 洛阳</div></div>
+<div class="card day"><span class="dn" aria-hidden="true">7</span><span class="d">第 7 天 · 洛阳 → 华山 → 西安</span><span class="muted">380 km · 两段</span><p><b>上午</b><br><span class="drive">🚗 洛阳 → 华阴（华山） · 250 km · 2 小时 45</span><br>约 8:30 出发。</p><p><b>午餐</b><br>在华阴午餐，顺路看华山脚下的西岳庙。</p><p><b>下午</b><br><span class="drive">🚗 华阴 → 西安 · 130 km · 1 小时 30</span><br>黄昏上城墙；晚上在回民街吃饭。</p><p class="charge">⚡ <b>充电</b> 前一晚在酒店或出发前 （距上次充电约 280 km）</p><p class="charge">⚡ <b>充电</b> 在午餐地点 （距上次充电约 250 km）</p><div class="night">住： 西安</div></div>
+<div class="card day"><span class="dn" aria-hidden="true">8</span><span class="d">第 8 天 · 西安：秦始皇帝陵</span><span class="muted">0 km · 无长途</span><p><b>上午</b><br>在秦始皇帝陵博物院从容游览一整天（一张票含两部分，需用护照提前预约）。约 8:00 出发去临潼（约 1 小时）。开门先看一号坑，再看三号坑、二号坑和陈列厅里的两乘铜车马。约需 3 小时，建议请持证讲解员或租用语音导览。</p><p><b>午餐</b><br>在临潼坐下来午餐，好好休息。</p><p><b>下午</b><br>乘园区摆渡车到西边约 1.5 公里的丽山园，即秦始皇陵本身。封土从未发掘，可看到绿树覆盖的封土堆，以及周边的石铠甲坑、百戏俑坑和文官俑坑。约需 1.5 小时，约 16:30 回西安休息（适合当晚洗衣）。体力允许可顺路去旁边的华清宫；陕西历史博物馆仅在抢到票时前往。</p><div class="night">住： 西安</div></div>
+<div class="card day"><span class="dn" aria-hidden="true">9</span><span class="d">第 9 天 · 西安 → 黄帝陵 → 延安</span><span class="muted">310 km · 两段</span><p><b>上午</b><br><span class="drive">🚗 西安 → 黄帝陵 · 170 km · 2 小时</span><br>约 8:30 出发。</p><p><b>午餐</b><br>在黄陵午餐，然后参观黄帝陵。</p><p><b>下午</b><br><span class="drive">🚗 黄陵 → 延安 · 140 km · 1 小时 40</span><br>傍晚到延安；革命旧址明早再去（约 17:30 停止参观）。</p><p class="charge">⚡ <b>充电</b> 前一晚在酒店或出发前 （距上次充电约 240 km）</p><div class="night">住： 延安</div></div>
+<div class="card day"><span class="dn" aria-hidden="true">10</span><span class="d">第 10 天 · 延安 → 榆林</span><span class="muted">270 km · 单段</span><p><b>上午</b><br><span class="drive">🚗 延安 → 榆林 · 270 km · 3 小时 10</span><br>8:00 参观杨家岭或枣园，约 10:30 出发穿越黄土高原。</p><p><b>午餐</b><br>榆林吃迟午餐：陕北羊肉、荞面饸饹。</p><p><b>下午</b><br>镇北台和榆林古城。</p><p class="charge">⚡ <b>充电</b> 前一晚在酒店或出发前 （距上次充电约 330 km）</p><div class="night">住： 榆林</div></div>
+<div class="card day"><span class="dn" aria-hidden="true">11</span><span class="d">第 11 天 · 榆林 → 成吉思汗陵 → 鄂尔多斯</span><span class="muted">170 km · 两段</span><p><b>上午</b><br><span class="drive">🚗 榆林 → 成吉思汗陵 · 135 km · 1 小时 40</span><br>约 9:00 出发，进入内蒙古。</p><p><b>午餐</b><br>在伊金霍洛午餐：手把肉、奶茶；然后参观成吉思汗陵。</p><p><b>下午</b><br><span class="drive">🚗 伊金霍洛 → 鄂尔多斯 · 35 km · 35 分钟</span><br>晚上在鄂尔多斯（康巴什）。</p><p class="charge">⚡ <b>充电</b> 前一晚在酒店或出发前 （距上次充电约 300 km）</p><div class="night">住： 鄂尔多斯</div></div>
+<div class="card day"><span class="dn" aria-hidden="true">12</span><span class="d">第 12 天 · 鄂尔多斯 → 响沙湾 → 呼和浩特</span><span class="muted">325 km · 两段</span><p><b>上午</b><br><span class="drive">🚗 鄂尔多斯 → 响沙湾 · 90 km · 1 小时 10</span><br>约 8:30 出发。</p><p><b>午餐</b><br>库布其沙漠响沙湾，在景区午餐。</p><p><b>下午</b><br><span class="drive">🚗 响沙湾 → 呼和浩特 · 235 km · 2 小时 45</span><br>傍晚到呼和浩特。</p><p class="charge">⚡ <b>充电</b> 在午餐地点 （距上次充电约 280 km）</p><div class="night">住： 呼和浩特</div></div>
+<div class="card day"><span class="dn" aria-hidden="true">13</span><span class="d">第 13 天 · 呼和浩特 → 希拉穆仁草原（住蒙古包）</span><span class="muted">85 km · 单段</span><p><b>上午</b><br>上午游内蒙古博物院（周一闭馆）和大召寺。</p><p><b>午餐</b><br>呼和浩特午餐：烧麦。</p><p><b>下午</b><br><span class="drive">🚗 呼和浩特 → 希拉穆仁 · 85 km · 1 小时 15</span><br>下午在草原：坐马车或驼车代替骑马，到牧民家喝奶茶，看摔跤、射箭、赛马等那达慕表演。晚餐手把肉，然后篝火和星空。住带独立卫浴、有暖气的蒙古包；夜间约 10°C。</p><p class="charge">⚡ <b>充电</b> 今晚在酒店 （距上次充电约 340 km）</p><div class="night">住： 希拉穆仁（蒙古包）</div></div>
+<div class="card day"><span class="dn" aria-hidden="true">14</span><span class="d">第 14 天 · 希拉穆仁 → 呼和浩特 → 大同</span><span class="muted">295 km · 两段</span><p><b>上午</b><br><span class="drive">🚗 希拉穆仁 → 呼和浩特 · 85 km · 1 小时 15</span><br>草原看日出，早餐后约 9:30 出发。</p><p><b>午餐</b><br>在呼和浩特午餐并休息。</p><p><b>下午</b><br><span class="drive">🚗 呼和浩特 → 大同 · 210 km · 2 小时 35</span><br>傍晚到大同；体力允许再去城墙看日落。</p><p class="charge">⚡ <b>充电</b> 在午餐地点 （距上次充电约 285 km）</p><div class="night">住： 大同</div></div>
+<div class="card day"><span class="dn" aria-hidden="true">15</span><span class="d">第 15 天 · 大同</span><span class="muted">0 km · 无长途</span><p><b>上午</b><br>开门即游云冈石窟（世界遗产）。</p><p><b>午餐</b><br>大同午餐：铜火锅或面食。</p><p><b>下午</b><br>下午休息（可在此洗衣）。华严寺和九龙壁离酒店近，可选。</p><div class="night">住： 大同</div></div>
+<div class="card day"><span class="dn" aria-hidden="true">16</span><span class="d">第 16 天 · 大同 → 悬空寺 → 五台山</span><span class="muted">235 km · 两段</span><p><b>上午</b><br><span class="drive">🚗 大同 → 悬空寺 · 85 km · 1 小时 25</span><br>约 7:30 出发。提前预约登临票；所有游客在恒山游客中心统一乘摆渡车。</p><p><b>午餐</b><br>游悬空寺，然后在浑源午餐。年长或腿脚不便者可买地面参观票，在下方观看，不必登临栈道。</p><p><b>下午</b><br><span class="drive">🚗 浑源 → 五台山 · 150 km · 2 小时 30</span><br>翻山而过；晚上在台怀镇。</p><p class="charge">⚡ <b>充电</b> 前一晚在酒店或出发前 （距上次充电约 270 km）</p><div class="night">住： 五台山</div></div>
+<div class="card day"><span class="dn" aria-hidden="true">17</span><span class="d">第 17 天 · 五台山 → 正定</span><span class="muted">210 km · 单段</span><p><b>上午</b><br><span class="drive">🚗 五台山 → 正定 · 210 km · 2 小时 45</span><br>早上先看显通寺和塔院寺（地势平坦）；菩萨顶 108 级台阶可不登。约 10:00 出发。</p><p><b>午餐</b><br>正定吃迟午餐。</p><p><b>下午</b><br>隆兴寺和正定古城。</p><p class="charge">⚡ <b>充电</b> 前一晚在酒店或出发前 （距上次充电约 255 km）</p><div class="night">住： 正定</div></div>
+<div class="card day"><span class="dn" aria-hidden="true">18</span><span class="d">第 18 天 · 正定 → 济南 → 泰安</span><span class="muted">370 km · 两段</span><p><b>上午</b><br><span class="drive">🚗 正定 → 济南 · 300 km · 3 小时 15</span><br>约 8:30 出发。</p><p><b>午餐</b><br>在济南午餐，顺路看趵突泉。</p><p><b>下午</b><br><span class="drive">🚗 济南 → 泰安 · 70 km · 1 小时</span><br>泰山脚下的岱庙。</p><p class="charge">⚡ <b>充电</b> 前一晚在酒店或出发前 （距上次充电约 230 km）</p><p class="charge">⚡ <b>充电</b> 在午餐地点 （距上次充电约 300 km）</p><div class="night">住： 泰安</div></div>
+<div class="card day"><span class="dn" aria-hidden="true">19</span><span class="d">第 19 天 · 泰山 → 曲阜</span><span class="muted">75 km · 单段</span><p><b>上午</b><br>开门上泰山：坐景区巴士到中天门，再坐索道到南天门；年长者可在天街一带游览，不必再走到山顶。</p><p><b>午餐</b><br>泰安午餐：泰山豆腐宴。</p><p><b>下午</b><br><span class="drive">🚗 泰安 → 曲阜 · 75 km · 1 小时</span><br>傍晚参观孔庙（孔府、孔林明早）。</p><div class="night">住： 曲阜</div></div>
+<div class="card day"><span class="dn" aria-hidden="true">20</span><span class="d">第 20 天 · 曲阜 → 宿迁 → 淮安</span><span class="muted">360 km · 两段</span><p><b>上午</b><br><span class="drive">🚗 曲阜 → 宿迁 · 260 km · 2 小时 55</span><br>8:00 参观孔府，再坐观光车游孔林；约 10:30 出发。</p><p><b>午餐</b><br>在宿迁（项羽故里）午餐。</p><p><b>下午</b><br><span class="drive">🚗 宿迁 → 淮安 · 100 km · 1 小时 15</span><br>晚上吃淮扬菜，逛大运河。</p><p class="charge">⚡ <b>充电</b> 前一晚在酒店或出发前 （距上次充电约 195 km）</p><p class="charge">⚡ <b>充电</b> 在午餐地点 （距上次充电约 260 km）</p><div class="night">住： 淮安</div></div>
+<div class="card day"><span class="dn" aria-hidden="true">21</span><span class="d">第 21 天 · 淮安 → 扬州 → 上海</span><span class="muted">430 km · 两段</span><p><b>上午</b><br><span class="drive">🚗 淮安 → 扬州 · 170 km · 2 小时</span><br>约 8:30 出发。（中国大运河博物馆需在扬州多住一晚。）</p><p><b>午餐</b><br>扬州：瘦西湖，早点吃扬州点心和炒饭。</p><p><b>下午</b><br><span class="drive">🚗 扬州 → 上海 · 260 km · 3 小时</span><br>傍晚到家。</p><p class="charge">⚡ <b>充电</b> 在午餐地点 （距上次充电约 290 km）</p></div>
 <h2 id="drive">自驾与充电</h2><div class="card"><ul>
 <li>在中国开车需要中国驾照。外国游客可凭护照和驾照翻译件到车管所办理临时驾驶许可（最长 3 个月）；国际驾照不被认可。</li>
 <li>第二司机：长途环线最好有两位司机。每位司机都要有自己的中国驾照或临时驾驶许可（在租车公司所在城市办理，须在出发前办好），并写进租车合同，否则保险可能不赔。</li>
@@ -463,5 +512,51 @@ document.querySelectorAll('.tabs').forEach(t => t.querySelectorAll('button').for
 })));
 </script>
 <script>(function(){var r=document.documentElement,mq=window.matchMedia("(prefers-color-scheme: dark)");function dark(){var t=r.getAttribute("data-theme");return t?t==="dark":mq.matches}var bs=document.querySelectorAll(".themebtn");function paint(){var d=dark();bs.forEach(function(b){b.textContent=d?"\u2600\uFE0E":"\u263E";b.setAttribute("aria-label",d?b.dataset.l:b.dataset.d);b.title=b.getAttribute("aria-label");})}bs.forEach(function(b){b.addEventListener("click",function(){var t=dark()?"light":"dark";r.setAttribute("data-theme",t);try{localStorage.setItem("wl-theme",t)}catch(e){}paint();})});if(mq.addEventListener)mq.addEventListener("change",paint);paint();})();</script>
+<script id="wl-enh-js">(function(){
+var zh=/^zh/.test(document.documentElement.lang||'');
+var T=zh?{top:'回到顶部',exp:'全部展开',col:'全部收起',map:'在地图上查看 ›'}:{top:'Back to top',exp:'Expand all',col:'Collapse all',map:'Show on map ›'};
+/* 1. sticky toc + scrollspy + back to top */
+var toc=document.querySelector('nav.toc'),links=toc?[].slice.call(toc.querySelectorAll('a[href^="#"]')):[];
+var heads=links.map(function(a){return document.getElementById(a.getAttribute('href').slice(1));});
+var top=document.createElement('button');top.type='button';top.className='totop';top.textContent='↑';top.setAttribute('aria-label',T.top);top.title=T.top;
+top.onclick=function(){window.scrollTo({top:0,behavior:'smooth'});};document.body.appendChild(top);
+var cur=-1,tick=false;
+function spy(){tick=false;var y=window.scrollY;top.classList.toggle('show',y>900);
+  if(!toc)return;toc.classList.toggle('stuck',toc.getBoundingClientRect().top<=0&&y>0);
+  var i=-1;heads.forEach(function(h,j){if(h&&h.getBoundingClientRect().top<=90)i=j;});
+  if(i!==cur){if(cur>=0)links[cur].classList.remove('on');cur=i;
+    if(i>=0){var a=links[i];a.classList.add('on');var l=a.offsetLeft-toc.clientWidth/2+a.offsetWidth/2;toc.scrollTo?toc.scrollTo({left:l,behavior:'smooth'}):(toc.scrollLeft=l);}}}
+window.addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(spy);}},{passive:true});spy();
+/* 2. day timeline: fold, expand all, show on map */
+var days=[].slice.call(document.querySelectorAll('.card.day'));if(!days.length)return;
+var tabIds=[].slice.call(document.querySelectorAll('.tabs [data-t]')).map(function(b){return b.dataset.t;}).slice(1);
+var nMap=document.querySelectorAll('#rdays button').length-1;
+function setFold(c,f){c.classList.toggle('folded',f);var h=c.querySelector('.dhead');if(h)h.setAttribute('aria-expanded',String(!f));}
+days.forEach(function(c){
+  var d=c.querySelector(':scope > .d');if(!d)return;
+  var head=document.createElement('div');head.className='dhead';head.setAttribute('role','button');head.tabIndex=0;
+  var body=document.createElement('div');body.className='dbody';
+  c.insertBefore(head,d);head.appendChild(d);
+  var nx=head.nextSibling;while(nx&&nx.nodeType===3&&!nx.textContent.trim())nx=nx.nextSibling;
+  if(nx&&nx.nodeType===1&&nx.tagName==='SPAN'&&nx.classList.contains('muted'))head.appendChild(nx);
+  var night=c.querySelector(':scope > .night');
+  while(head.nextSibling){var n=head.nextSibling;if(n===night){c.removeChild(n);continue;}body.appendChild(n);}
+  c.appendChild(body);if(night)c.appendChild(night);
+  var num=parseInt((c.querySelector('.dn')||{}).textContent,10);
+  var inAlt=tabIds.some(function(id){var p=document.getElementById(id);return p&&p.contains(c);});
+  if(window.wlShowDay&&num&&num<=nMap&&!inAlt){var b=document.createElement('button');b.type='button';b.className='dmap';b.textContent=T.map;
+    b.onclick=function(){var m=document.getElementById('map');if(m)m.scrollIntoView({behavior:'smooth'});window.wlShowDay(num);};body.appendChild(b);}
+  function tog(){setFold(c,!c.classList.contains('folded'));}
+  head.onclick=tog;head.onkeydown=function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();tog();}};
+});
+var fold=days.length>7;days.forEach(function(c){setFold(c,fold);});
+var tools=document.createElement('div');tools.className='dtools';var eb=document.createElement('button');eb.type='button';
+function label(){eb.textContent=days.some(function(c){return c.classList.contains('folded');})?T.exp:T.col;}
+eb.onclick=function(){var any=days.some(function(c){return c.classList.contains('folded');});days.forEach(function(c){setFold(c,!any);});label();};
+document.addEventListener('click',function(e){if(e.target.closest&&e.target.closest('.dhead'))setTimeout(label,0);});
+label();tools.appendChild(eb);
+var first=days[0],anchor=first;var tabs=document.querySelector('.tabs');if(tabs&&tabs.compareDocumentPosition(first)&Node.DOCUMENT_POSITION_FOLLOWING)anchor=tabs;
+anchor.parentNode.insertBefore(tools,anchor);
+})();</script>
 </body>
 </html>
