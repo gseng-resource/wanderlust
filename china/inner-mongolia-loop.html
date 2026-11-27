@@ -104,6 +104,39 @@
   .dtools { display:flex; justify-content:flex-end; margin:0 0 10px; }
   .dtools button { font:inherit; font-size:.85rem; border:1px solid var(--line); background:var(--card); color:var(--text); border-radius:999px; padding:4px 12px; cursor:pointer; }
   @media print { nav.toc { position:static; } .day.folded .dbody { display:block; } .totop, .dtools, .dmap, .themebtn { display:none; } }
+  /* 4. folded reference sections */
+  h2.fold-h { cursor:pointer; position:relative; padding-right:30px; }
+  h2.fold-h::after { content:"›"; position:absolute; right:4px; top:0; font-family:-apple-system,sans-serif; font-weight:400; color:var(--muted); transform:rotate(90deg); transition:transform .2s; }
+  h2.fold-h.folded::after { transform:rotate(0deg); }
+  h2.fold-h:focus-visible { outline:2px solid var(--accent); outline-offset:4px; border-radius:6px; }
+  .ssum { display:none; margin:-4px 0 12px; color:var(--muted); font-size:.92rem; cursor:pointer; }
+  .ssum b { color:var(--accent); font-weight:600; white-space:nowrap; }
+  h2.fold-h.folded + .ssum { display:block; }
+  h2.fold-h.folded + .ssum + .sbody { display:none; }
+  /* 5a. two plans side by side */
+  .plans { display:grid; gap:12px; margin:0 0 12px; }
+  @media (min-width:720px) { .plans { grid-template-columns:1fr 1fr; } }
+  .plans .card { margin:0; padding:0; overflow:hidden; display:flex; flex-direction:column; }
+  .plans h3 { margin:0; padding:12px 16px; font-size:1.02rem; }
+  .plans ul { margin:0; padding:12px 16px 14px 34px; }
+  .plan.value h3 { background:#e7f2ea; color:#14532d; }
+  .plan.exp h3 { background:#fbecd9; color:#7c2d12; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .plan.value h3 { background:#1b2a20; color:#bbf7d0; } :root:not([data-theme="light"]) .plan.exp h3 { background:#2e2217; color:#fed7aa; } }
+  :root[data-theme="dark"] .plan.value h3 { background:#1b2a20; color:#bbf7d0; } :root[data-theme="dark"] .plan.exp h3 { background:#2e2217; color:#fed7aa; }
+  /* 5b. photo grid */
+  .gallery { grid-template-columns:1fr 1fr !important; gap:8px; }
+  @media (min-width:720px) { .gallery { grid-template-columns:repeat(3,1fr) !important; } }
+  .gallery figure img { aspect-ratio:4/3; border-radius:12px; }
+  .gallery figcaption { font-size:.78rem; line-height:1.35; margin-top:4px; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+  /* 5c. budget bars */
+  .bbar { display:flex; height:14px; border-radius:7px; overflow:hidden; margin:8px 0 6px; background:var(--line); }
+  .bbar span { display:block; height:100%; }
+  .bbar span + span { box-shadow:inset 2px 0 0 var(--card); }
+  .blegend { display:flex; flex-wrap:wrap; gap:4px 12px; margin:0 0 4px; padding:0; list-style:none; font-size:.82rem; color:var(--muted); }
+  .blegend li { margin:0; }
+  .blegend i { display:inline-block; width:9px; height:9px; border-radius:2px; margin-right:5px; vertical-align:0; }
+  .blegend b { color:var(--text); font-weight:600; }
+  @media print { h2.fold-h.folded + .ssum + .sbody { display:block; } .ssum { display:none !important; } }
 </style>
 </head>
 <body>
@@ -117,8 +150,7 @@
 <div class="card why"><p class="pitch">Two thousand years of Chinese history in one drive, without retracing a single road: the Terracotta Army, the Longmen and Yungang grottoes, Shaolin, the Hanging Temple, Mount Tai and Qufu, with the Kubuqi desert and the Inner Mongolian grassland in between, and a different regional cuisine almost every day.</p><p><b>Late May to mid June:</b> hot in the middle of China (30–35°C in Henan and Xi’an, locally 40°C in heatwaves), pleasant 25–30°C in Inner Mongolia with cool nights, and cold nights on Wutai Shan. The grassland usually greens through June, depending on rain. Dragon Boat Festival is a single day off on Wed 9 June 2027; if you overlap the gaokao exams (around 7–8 June, varies by province), expect traffic control near exam sites.</p><p><b>Best time to go:</b> early to mid September is best: about 20–27°C along the whole route, little dust, the grassland green turning gold and the yurt camps still open. Late May to early June is a good second, as long as you leave Henan and Xi’an before mid-June, when 35°C days become common. Mid-April suits the southern half (blossom and the Luoyang peonies), but April is the peak dust month in the north, nights there are near freezing, yurt camps are mostly closed and Wutai Shan can still have snow. Avoid July–August (35–40°C in the plains and peak crowds) and National Day week in early October.</p><p><b>The route:</b> Shanghai → Nanjing → Xuzhou → Kaifeng → Luoyang → Xi’an → Yan’an → Yulin → Ordos → Hohhot → Datong → Wutai Shan → Zhengding → Tai’an → Qufu → Huai’an → Yangzhou → Shanghai. 21 days, about 4,500 km of route (5,250 km with sightseeing), drives of up to about 3½ hours, two nights in the big cities.</p><p><b>Highlights</b></p><ul><li>The Terracotta Army and Xi’an’s city wall</li><li>Longmen and Yungang, two of China’s three great Buddhist grottoes</li><li>The Genghis Khan Mausoleum, the Kubuqi desert and a day on the grassland</li><li>The Hanging Temple clinging to a cliff, and Wutai Shan’s monasteries</li><li>Mount Tai and the Confucius Temple, Mansion and Cemetery in Qufu</li><li>A food trail: Nanjing duck, Kaifeng night market, Xi’an noodles, Inner Mongolian mutton, Shanxi noodles, Huaiyang cooking and Yangzhou morning tea</li></ul><p><b>Good to know</b></p><ul><li>Plan the start day so that no Monday falls on a museum day: avoid starting on a Sunday or a Wednesday (the Nanjing, Luoyang and Inner Mongolia museums close on Mondays).</li><li>Senior discounts at Chinese sites are usually for Chinese nationals only; budget full price. Check travel insurance age limits, which some policies set at 70–80.</li><li>On drives over 3 hours, stop at a service area every 1½–2 hours.</li><li>Long walks and steps at several sights (the Terracotta site, Longmen, the Hanging Temple, Mount Tai): pace these days, use shuttles and cable cars where offered, and ask at visitor centres about wheelchairs.</li><li>Most big sights need real-name booking with your passport, each with its own window: Yungang 1–7 days ahead and never same-day, Shaanxi History Museum 5 days ahead at 17:00, Wutai Shan tickets plus a separate vehicle booking, Hanging Temple timed climbing tickets. Bring passports; online systems do not always accept them, so allow for the counter.</li><li>Charge at least every 350 km and arrive with 20–30% left: Inner Mongolia’s service areas are far apart.</li><li>Many passports can now visit China visa-free for up to 30 days; check the rule for yours. Hotels register foreign guests at check-in.</li><li>See the Henan and Xi’an sights early in the day to beat the heat.</li></ul></div>
 
 <h2 id="picks">Two ways to do it</h2>
-<div class="card"><h3>💰 Best value</h3><ul><li><b>Stay:</b> the value pick in each city, 4-star or a platform-rated equivalent (see Where to stay).</li><li><b>Eat:</b> local specialities at well-rated everyday places.</li><li><b>About CNY 11,670–15,400 per person</b> for 21 days, including the car, excluding travel to the start.</li></ul></div>
-<div class="card"><h3>✨ Best experience</h3><ul><li><b>Stay:</b> heritage and resort picks where they exist: a courtyard hotel in an old town, the Xiangshawan desert resort instead of the Ordos night (swap the night and drive on to Hohhot next day), a temple-view stay on Wutai Shan.</li><li><b>Eat:</b> signature restaurants: a Luoyang water banquet, Nanjing and Huaiyang banquet cooking, roast whole lamb on the grassland, Yangzhou morning tea at a famous teahouse.</li><li><b>About CNY 15,750–21,290 per person</b>.</li></ul></div>
+<div class="plans"><div class="card plan value"><h3>💰 Best value</h3><ul><li><b>Stay:</b> the value pick in each city, 4-star or a platform-rated equivalent (see Where to stay).</li><li><b>Eat:</b> local specialities at well-rated everyday places.</li><li><b>About CNY 11,670–15,400 per person</b> for 21 days, including the car, excluding travel to the start.</li></ul></div><div class="card plan exp"><h3>✨ Best experience</h3><ul><li><b>Stay:</b> heritage and resort picks where they exist: a courtyard hotel in an old town, the Xiangshawan desert resort instead of the Ordos night (swap the night and drive on to Hohhot next day), a temple-view stay on Wutai Shan.</li><li><b>Eat:</b> signature restaurants: a Luoyang water banquet, Nanjing and Huaiyang banquet cooking, roast whole lamb on the grassland, Yangzhou morning tea at a famous teahouse.</li><li><b>About CNY 15,750–21,290 per person</b>.</li></ul></div></div>
 <p class="muted">Same route and days for both; only hotels and meals change.</p>
 <h2 id="map">Route map</h2>
 <div class="card"><div id="rmap" style="height:460px;border-radius:10px;overflow:hidden;background:var(--line)"></div>
@@ -300,14 +332,14 @@ window.wlShowDay=show;show('all');})();</script>
 <li><b>Ge Garden and He Garden</b>: Two merchant gardens: Ge for bamboo and four-season rockeries, He for its 1.5 km covered walkway. <span class="muted">07:15-18:00 · 45 CNY · Gate or online (each)</span></li>
 </ul></div>
 <h2 id="shows">Exhibitions</h2><div class="card"><ul>
-<li><b></b>: No exhibitions for late May-mid early June27 announced yet  Chinese museums typically announce temporary shows 2-6 weeks ahead. early June (International Museum Day) often brings new openings and extended hours; check WeChat accounts in early June27.</li>
-<li><b></b>: Tang Dynasty Murals hall (permanent, paid)  Original tomb murals from Tang princes&#x27; tombs; separate ticket ~300 CNY.</li>
-<li><b></b>: Bronze Chariots and Horses Exhibition (permanent)  Two 1:2 scale bronze chariots of the First Emperor.</li>
-<li><b></b>: Republic of China Hall and Treasures Hall (permanent)  Recreated 1930s street; jade suit and Ming porcelain.</li>
-<li><b></b>: Jade burial suit of the King of Chu (permanent)  Also on loan occasionally; verify it is on show.</li>
-<li><b></b>: Grassland civilisation and dinosaur halls (permanent)  </li>
-<li><b></b>: Grand Canal &#x27;Canal Town&#x27; immersive halls (permanent)  Popular with families; book early.</li>
-<li><b></b>: Heluo Civilisation (permanent)  </li>
+<li>No exhibitions for late May-mid June 2027 announced yet Chinese museums typically announce temporary shows 2-6 weeks ahead. mid May (International Museum Day) often brings new openings and extended hours; check WeChat accounts in May 2027.</li>
+<li><b>Shaanxi History Museum</b>: Tang Dynasty Murals hall (permanent, paid) Original tomb murals from Tang princes&#x27; tombs; separate ticket ~300 CNY.</li>
+<li><b>Terracotta Army Museum</b>: Bronze Chariots and Horses Exhibition (permanent) Two 1:2 scale bronze chariots of the First Emperor.</li>
+<li><b>Nanjing Museum</b>: Republic of China Hall and Treasures Hall (permanent) Recreated 1930s street; jade suit and Ming porcelain.</li>
+<li><b>Xuzhou Museum</b>: Jade burial suit of the King of Chu (permanent) Also on loan occasionally; verify it is on show.</li>
+<li><b>Inner Mongolia Museum</b>: Grassland civilisation and dinosaur halls (permanent)</li>
+<li><b>China Grand Canal Museum</b>: Grand Canal &#x27;Canal Town&#x27; immersive halls (permanent) Popular with families; book early.</li>
+<li><b>Luoyang Museum</b>: Heluo Civilisation (permanent)</li>
 <li class="muted">Most museums publish summer 2027 shows only a few weeks ahead. This section will be updated closer to the time.</li></ul></div>
 <h2 id="museums">Museums</h2><div class="card scroll"><table><tr><th>Museum</th><th>Hours</th><th>Closed</th><th>Entry</th></tr>
 <tr><td><a href="https://www.njmuseum.com">Nanjing Museum</a><br><span class="muted">Nanjing</span></td><td>09:00-17:00 (last entry 16:00)</td><td>Mondays (except holidays)</td><td>0<br><span class="muted">Free, real-name booking via WeChat/site, 7 days ahead; passport OK; sells out on holidays</span></td></tr>
@@ -527,6 +559,49 @@ function spy(){tick=false;var y=window.scrollY;top.classList.toggle('show',y>900
   if(i!==cur){if(cur>=0)links[cur].classList.remove('on');cur=i;
     if(i>=0){var a=links[i];a.classList.add('on');var l=a.offsetLeft-toc.clientWidth/2+a.offsetWidth/2;toc.scrollTo?toc.scrollTo({left:l,behavior:'smooth'}):(toc.scrollLeft=l);}}}
 window.addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(spy);}},{passive:true});spy();
+/* 4. fold reference sections */
+var FOLD=['drive','shows','museums','shop','sources'];
+var S=zh?{show:'展开',museums:function(n){return n+' 家博物馆：开放时间、闭馆日和门票';},shows:function(n){return n+' 条展览信息';},shop:function(n){return n+' 处购物地点';},
+  drive:function(){return '驾照、租车、充电和路况提示';},sources:function(n){return n+' 个信息来源';}}
+ :{show:'Show',museums:function(n){return n+' museums: hours, closing days and entry';},shows:function(n){return n+(n===1?' listing':' listings');},shop:function(n){return n+' places to shop';},
+  drive:function(){return 'Licence, rental, charging and road tips';},sources:function(n){return n+' sources';}};
+function openSec(h){if(h&&h.classList.contains('folded')){h.classList.remove('folded');h.setAttribute('aria-expanded','true');}}
+FOLD.forEach(function(id){var h=document.getElementById(id);if(!h||h.tagName!=='H2')return;
+  var body=document.createElement('div');body.className='sbody';
+  while(h.nextSibling&&!(h.nextSibling.nodeType===1&&h.nextSibling.tagName==='H2'))body.appendChild(h.nextSibling);
+  var n=id==='museums'?Math.max(0,body.querySelectorAll('tr').length-body.querySelectorAll('table').length):
+        id==='sources'?body.querySelectorAll('li a, p a').length:body.querySelectorAll('li').length;
+  if(id==='drive'&&!document.querySelector('.charge'))S.drive=zh?function(){return '驾照、租车和路况提示';}:function(){return 'Licence, rental and road tips';};
+  var sum=document.createElement('p');sum.className='ssum';sum.innerHTML=S[id](n)+' · <b>'+S.show+' ›</b>';
+  h.parentNode.insertBefore(sum,h.nextSibling);sum.parentNode.insertBefore(body,sum.nextSibling);
+  h.classList.add('fold-h','folded');h.tabIndex=0;h.setAttribute('role','button');h.setAttribute('aria-expanded','false');
+  function tog(){var f=h.classList.toggle('folded');h.setAttribute('aria-expanded',String(!f));}
+  h.addEventListener('click',tog);sum.addEventListener('click',tog);h.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();tog();}});});
+links.forEach(function(a){a.addEventListener('click',function(){openSec(document.getElementById(a.getAttribute('href').slice(1)));});});
+if(location.hash)openSec(document.getElementById(location.hash.slice(1)));
+/* 5c. budget bars */
+(function(){var b=document.getElementById('budget');if(!b)return;var card=b.nextElementSibling;if(!card)return;
+  var COL=['#c2410c','#2563eb','#15803d','#ca8a04','#7c3aed','#0891b2','#be123c'];
+  function num(x){return parseInt(x.replace(/,/g,''),10);}
+  var rows=[];
+  [].forEach.call(card.querySelectorAll(':scope > ul > li'),function(li){
+    var src=null,txt=null,sp=li.querySelector('span.muted');
+    if(sp&&/\+/.test(sp.textContent)){src=sp;txt=sp.textContent;}
+    else{var m=li.textContent.match(/[(（]([^()（）]*·[^()（）]*)[)）]/);if(m)txt=m[1];}
+    if(!txt)return;
+    var items=txt.split(/\s+\+\s+|\s*·\s*/).map(function(t){var m=t.trim().match(/^(.*?)\s*([\d,]+)(?:\s*[–-]\s*([\d,]+))?$/);
+      if(!m||!m[1])return null;var lo=num(m[2]),hi=m[3]?num(m[3]):lo;return {l:m[1].trim(),lo:lo,hi:hi,v:(lo+hi)/2,t:m[2]+(m[3]?'–'+m[3]:'')};}).filter(Boolean);
+    if(items.length<3)return;rows.push({li:li,src:src,txt:txt,items:items,tot:items.reduce(function(a,x){return a+x.v;},0)});});
+  var max=Math.max.apply(null,rows.map(function(r){return r.tot;}));
+  rows.forEach(function(r){var bar=document.createElement('div');bar.className='bbar';bar.style.width=Math.max(35,100*r.tot/max)+'%';bar.setAttribute('role','img');
+    bar.setAttribute('aria-label',r.items.map(function(x){return x.l+' '+x.t;}).join(', '));
+    var lg=document.createElement('ul');lg.className='blegend';
+    r.items.forEach(function(x,i){var s=document.createElement('span');s.style.width=(100*x.v/r.tot)+'%';s.style.background=COL[i%COL.length];s.title=x.l+' '+x.t;bar.appendChild(s);
+      var li=document.createElement('li');li.innerHTML='<i style="background:'+COL[i%COL.length]+'"></i>'+x.l+' <b>'+x.t+'</b>';lg.appendChild(li);});
+    if(r.src){r.src.style.display='none';r.src.parentNode.insertBefore(bar,r.src);r.src.parentNode.insertBefore(lg,r.src);}
+    else{var w=document.createTreeWalker(r.li,NodeFilter.SHOW_TEXT);var n;while((n=w.nextNode())){var i=n.nodeValue.indexOf(r.txt);
+      if(i>=0){var a=n.nodeValue.slice(0,i).replace(/\s*[(（]$/,''),z=n.nodeValue.slice(i+r.txt.length).replace(/^[)）]/,'');n.nodeValue=a+z;break;}}
+      r.li.appendChild(bar);r.li.appendChild(lg);}});})();
 /* 2. day timeline: fold, expand all, show on map */
 var days=[].slice.call(document.querySelectorAll('.card.day'));if(!days.length)return;
 var tabIds=[].slice.call(document.querySelectorAll('.tabs [data-t]')).map(function(b){return b.dataset.t;}).slice(1);

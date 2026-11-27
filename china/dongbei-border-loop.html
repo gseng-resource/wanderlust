@@ -104,6 +104,39 @@
   .dtools { display:flex; justify-content:flex-end; margin:0 0 10px; }
   .dtools button { font:inherit; font-size:.85rem; border:1px solid var(--line); background:var(--card); color:var(--text); border-radius:999px; padding:4px 12px; cursor:pointer; }
   @media print { nav.toc { position:static; } .day.folded .dbody { display:block; } .totop, .dtools, .dmap, .themebtn { display:none; } }
+  /* 4. folded reference sections */
+  h2.fold-h { cursor:pointer; position:relative; padding-right:30px; }
+  h2.fold-h::after { content:"›"; position:absolute; right:4px; top:0; font-family:-apple-system,sans-serif; font-weight:400; color:var(--muted); transform:rotate(90deg); transition:transform .2s; }
+  h2.fold-h.folded::after { transform:rotate(0deg); }
+  h2.fold-h:focus-visible { outline:2px solid var(--accent); outline-offset:4px; border-radius:6px; }
+  .ssum { display:none; margin:-4px 0 12px; color:var(--muted); font-size:.92rem; cursor:pointer; }
+  .ssum b { color:var(--accent); font-weight:600; white-space:nowrap; }
+  h2.fold-h.folded + .ssum { display:block; }
+  h2.fold-h.folded + .ssum + .sbody { display:none; }
+  /* 5a. two plans side by side */
+  .plans { display:grid; gap:12px; margin:0 0 12px; }
+  @media (min-width:720px) { .plans { grid-template-columns:1fr 1fr; } }
+  .plans .card { margin:0; padding:0; overflow:hidden; display:flex; flex-direction:column; }
+  .plans h3 { margin:0; padding:12px 16px; font-size:1.02rem; }
+  .plans ul { margin:0; padding:12px 16px 14px 34px; }
+  .plan.value h3 { background:#e7f2ea; color:#14532d; }
+  .plan.exp h3 { background:#fbecd9; color:#7c2d12; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .plan.value h3 { background:#1b2a20; color:#bbf7d0; } :root:not([data-theme="light"]) .plan.exp h3 { background:#2e2217; color:#fed7aa; } }
+  :root[data-theme="dark"] .plan.value h3 { background:#1b2a20; color:#bbf7d0; } :root[data-theme="dark"] .plan.exp h3 { background:#2e2217; color:#fed7aa; }
+  /* 5b. photo grid */
+  .gallery { grid-template-columns:1fr 1fr !important; gap:8px; }
+  @media (min-width:720px) { .gallery { grid-template-columns:repeat(3,1fr) !important; } }
+  .gallery figure img { aspect-ratio:4/3; border-radius:12px; }
+  .gallery figcaption { font-size:.78rem; line-height:1.35; margin-top:4px; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+  /* 5c. budget bars */
+  .bbar { display:flex; height:14px; border-radius:7px; overflow:hidden; margin:8px 0 6px; background:var(--line); }
+  .bbar span { display:block; height:100%; }
+  .bbar span + span { box-shadow:inset 2px 0 0 var(--card); }
+  .blegend { display:flex; flex-wrap:wrap; gap:4px 12px; margin:0 0 4px; padding:0; list-style:none; font-size:.82rem; color:var(--muted); }
+  .blegend li { margin:0; }
+  .blegend i { display:inline-block; width:9px; height:9px; border-radius:2px; margin-right:5px; vertical-align:0; }
+  .blegend b { color:var(--text); font-weight:600; }
+  @media print { h2.fold-h.folded + .ssum + .sbody { display:block; } .ssum { display:none !important; } }
 </style>
 </head>
 <body>
@@ -117,8 +150,7 @@
 <div class="card why"><p class="pitch">A road trip along the edge of China: look across the Yalu into North Korea, stand where China, Russia and North Korea meet, swim through Korean, Manchu and Russian influences, and climb to Changbai’s crater lake, with a cool early-summer climate the whole way.</p><p><b>Late May to mid June:</b> 15–28°C and long daylight, the best time of year up here. The Changbai crater lake is usually thawed and open by June (late May can still close for wind or ice). Mosquitoes, midges and ticks are active in wetlands and forests. Dragon Boat Festival is a single day off on Wed 9 June 2027.</p><p><b>Best time to go:</b> September is best: about 12–25°C, Tianchi clear of ice and most often visible, autumn colour from mid-month, ticks no longer active and fewer crowds. Mid-June to early July is a good second (green and mild, Tianchi just thawed), but it is the peak tick season, so wear long sleeves, use repellent and check for ticks each evening. In late May the crater lake usually still has ice. Avoid July–August, when Changbai gets more than twice June’s visitors, and mid-October onwards, when the lake starts to freeze.</p><p><b>The route:</b> Shenyang → Dandong → Huanren → Ji’an → Changbai Mountain → Tumen → Yanji → Fangchuan → Hunchun → Mudanjiang (Suifenhe day trip) → Harbin → Wudalianchi → Heihe → Nenjiang → Qiqihar → Daqing → Chagan Lake → Changchun → Shenyang. 21 days, about 4,000 km plus day trips, drives of up to about 3½ hours each.</p><p><b>Highlights</b></p><ul><li>The Yalu River Broken Bridge and Hushan Great Wall, facing North Korea</li><li>Goguryeo capitals and tombs at Huanren and Ji’an (UNESCO)</li><li>Changbai Mountain’s Tianchi crater lake and waterfall</li><li>Fangchuan: China, Russia and North Korea in one view</li><li>Harbin’s Russian architecture, Heihe on the Amur, and the Aihui museum</li><li>Wudalianchi volcanic lakes (some sites closed in 2026), Zhalong cranes, and Changchun’s Puppet Emperor’s Palace</li></ul><p><b>Good to know</b></p><ul><li>Senior discounts at Chinese sites are usually for Chinese nationals only; budget full price. Check travel insurance age limits. Several sights involve long stairs; easier options are on the day cards.</li><li>Many passports are visa-free for up to 30 days (check yours). Carry passports every day: border areas have ID checkpoints, and at Fangchuan foreigners may be stopped before the Russian border line.</li><li>Charge at least every 350 km and fill up in Heihe, Nenjiang and Erdaobaihe: charging is thin on the remote stretches.</li><li>Changbai Mountain needs real-name booking; keep the second day as a spare in case of weather.</li><li>Bring long sleeves and DEET for Zhalong, Wudalianchi and the forests (ticks).</li></ul></div>
 
 <h2 id="picks">Two ways to do it</h2>
-<div class="card"><h3>💰 Best value</h3><ul><li><b>Stay:</b> the value pick in each city, 4-star or a platform-rated equivalent (see Where to stay).</li><li><b>Eat:</b> local specialities at well-rated everyday places.</li><li><b>About CNY 12,190–15,740 per person</b> for 21 days, including the car, excluding travel to the start.</li></ul></div>
-<div class="card"><h3>✨ Best experience</h3><ul><li><b>Stay:</b> a Changbai hot-spring resort, a historic hotel on Harbin’s Central Street, an Amur-view room in Heihe, a lakeside resort at Chagan Lake.</li><li><b>Eat:</b> Korean barbecue in Yanji, Russian restaurants in Harbin and Heihe, a Chagan Lake fish feast, Dandong seafood.</li><li><b>About CNY 14,490–19,590 per person</b>.</li></ul></div>
+<div class="plans"><div class="card plan value"><h3>💰 Best value</h3><ul><li><b>Stay:</b> the value pick in each city, 4-star or a platform-rated equivalent (see Where to stay).</li><li><b>Eat:</b> local specialities at well-rated everyday places.</li><li><b>About CNY 12,190–15,740 per person</b> for 21 days, including the car, excluding travel to the start.</li></ul></div><div class="card plan exp"><h3>✨ Best experience</h3><ul><li><b>Stay:</b> a Changbai hot-spring resort, a historic hotel on Harbin’s Central Street, an Amur-view room in Heihe, a lakeside resort at Chagan Lake.</li><li><b>Eat:</b> Korean barbecue in Yanji, Russian restaurants in Harbin and Heihe, a Chagan Lake fish feast, Dandong seafood.</li><li><b>About CNY 14,490–19,590 per person</b>.</li></ul></div></div>
 <p class="muted">Same route and days for both; only hotels and meals change.</p>
 <h2 id="map">Route map</h2>
 <div class="card"><div id="rmap" style="height:460px;border-radius:10px;overflow:hidden;background:var(--line)"></div>
@@ -234,7 +266,7 @@ window.wlShowDay=show;show('all');})();</script>
 <li><b><a href="https://whc.unesco.org/en/list/1135">Wandu Mountain City and Cemetery</a></b>: Goguryeo mountain capital with a valley of thousands of stone tombs. <span class="muted">08:30–16:30 (from Oct 2026; check summer hours) · 30 (3-site combo ~70) CNY · Real-name booking via the site&#x27;s WeChat mini program or Ctrip/Trip.com; most systems now accept a foreign passport, otherwise buy at the window with the passport (verify).</span></li>
 </ul></div>
 <div class="card"><h3>Erdaobaihe</h3><ul>
-<li><b><a href="https://www.changbaishan.gov.cn">Changbai Mountain North Slope: Tianchi (Heaven Lake)</a></b>: Volcanic crater lake on the China-North Korea border, reached by shuttle then 4x4. <span class="muted">Visitor-centre check-in 07:00–14:30; summit-bus check-in 07:00–15:30 · closed None (summit closes in bad weather) · 105 gate + 85 shuttle bus + 80 summit 4x4 (2025 official FAQ) CNY · Real-name booking; 105 entry + 85 eco-bus + 80 summit 4x4. Any sight can close at short notice for weather (Tianchi closed by snow on early June 2024)</span></li>
+<li><b><a href="https://www.changbaishan.gov.cn">Changbai Mountain North Slope: Tianchi (Heaven Lake)</a></b>: Volcanic crater lake on the China-North Korea border, reached by shuttle then 4x4. <span class="muted">Visitor-centre check-in 07:00–14:30; summit-bus check-in 07:00–15:30 · closed None (summit closes in bad weather) · 105 gate + 85 shuttle bus + 80 summit 4x4 (2025 official FAQ) CNY · Real-name booking; 105 entry + 85 eco-bus + 80 summit 4x4. Any sight can close at short notice for weather (Tianchi closed by snow on 5 May 2024)</span></li>
 <li><b><a href="https://www.changbaishan.gov.cn">Changbai Waterfall and Hot Spring Belt</a></b>: 68 m waterfall below Tianchi; steaming springs and onsen eggs on the path. <span class="muted">Same as north slope · closed Same as north slope · Included in gate + shuttle CNY · Covered by the north slope ticket.</span></li>
 <li><b><a href="https://www.changbaishan.gov.cn">Green Abyss Pool and Grand Canyon (north slope)</a></b>: Emerald pool under a cascade; lower-altitude stops that work in fog. <span class="muted">Same as north slope · closed Same as north slope · Included in gate + shuttle CNY · Covered by the north slope ticket.</span></li>
 </ul></div>
@@ -287,13 +319,13 @@ window.wlShowDay=show;show('all');})();</script>
 <li><b>Changchun Film Studio Museum</b>: New China&#x27;s first film studio, on the old Manchukuo Film Association lot. <span class="muted">~09:00-17:00 · closed Mondays (verify) · ~80 (verify) CNY · Real-name booking via the site&#x27;s WeChat mini program or Ctrip/Trip.com; most systems now accept a foreign passport, otherwise buy at the window with the passport (verify).</span></li>
 </ul></div>
 <h2 id="shows">Exhibitions</h2><div class="card"><ul>
-<li><b></b>:   No temporary exhibitions for late May-mid early June27 have been announced (checked Nov 2026). Museums usually announce 1-3 months ahead on WeChat; re-check in April 2027.</li>
-<li><b>Liaoning Provincial Museum</b>:   </li>
-<li><b>Unit 731 Exhibition Hall</b>:   </li>
-<li><b>Memorial Hall of the War to Aid Korea (Dandong)</b>:   </li>
-<li><b>Museum of the Imperial Palace of Manchukuo</b>:   </li>
-<li><b>Heilongjiang Provincial Museum</b>:   </li>
-<li><b>Ji&#x27;an Museum</b>:   </li>
+<li>No temporary exhibitions for late May-mid June 2027 have been announced (checked Nov 2026). Museums usually announce 1-3 months ahead on WeChat; re-check in April 2027.</li>
+<li><b>Liaoning Provincial Museum</b>: Liao dynasty gallery and ancient painting/calligraphy halls (permanent)</li>
+<li><b>Unit 731 Exhibition Hall</b>: Permanent exhibition on Unit 731 and original ruins (boiler room, special prison site)</li>
+<li><b>Memorial Hall of the War to Aid Korea (Dandong)</b>: Permanent Korean War exhibition and outdoor aircraft/weapons display</li>
+<li><b>Museum of the Imperial Palace of Manchukuo</b>: &#x27;Northeast China under Japanese Occupation 1931-45&#x27; (permanent)</li>
+<li><b>Heilongjiang Provincial Museum</b>: Jin dynasty relics and Heilongjiang natural history (permanent)</li>
+<li><b>Ji&#x27;an Museum</b>: Goguryeo culture permanent exhibition</li>
 <li class="muted">Most museums publish summer 2027 shows only a few weeks ahead. This section will be updated closer to the time.</li></ul></div>
 <h2 id="museums">Museums</h2><div class="card scroll"><table><tr><th>Museum</th><th>Hours</th><th>Closed</th><th>Entry</th></tr>
 <tr><td><a href="https://www.lnmuseum.com.cn">Liaoning Provincial Museum</a><br><span class="muted">Shenyang</span></td><td>09:00-17:00, last entry 16:30</td><td>Mondays (except public holidays)</td><td>Free<br><span class="muted">No reservation needed (2024-26); passport holders use the dedicated lane</span></td></tr>
@@ -494,6 +526,49 @@ function spy(){tick=false;var y=window.scrollY;top.classList.toggle('show',y>900
   if(i!==cur){if(cur>=0)links[cur].classList.remove('on');cur=i;
     if(i>=0){var a=links[i];a.classList.add('on');var l=a.offsetLeft-toc.clientWidth/2+a.offsetWidth/2;toc.scrollTo?toc.scrollTo({left:l,behavior:'smooth'}):(toc.scrollLeft=l);}}}
 window.addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(spy);}},{passive:true});spy();
+/* 4. fold reference sections */
+var FOLD=['drive','shows','museums','shop','sources'];
+var S=zh?{show:'展开',museums:function(n){return n+' 家博物馆：开放时间、闭馆日和门票';},shows:function(n){return n+' 条展览信息';},shop:function(n){return n+' 处购物地点';},
+  drive:function(){return '驾照、租车、充电和路况提示';},sources:function(n){return n+' 个信息来源';}}
+ :{show:'Show',museums:function(n){return n+' museums: hours, closing days and entry';},shows:function(n){return n+(n===1?' listing':' listings');},shop:function(n){return n+' places to shop';},
+  drive:function(){return 'Licence, rental, charging and road tips';},sources:function(n){return n+' sources';}};
+function openSec(h){if(h&&h.classList.contains('folded')){h.classList.remove('folded');h.setAttribute('aria-expanded','true');}}
+FOLD.forEach(function(id){var h=document.getElementById(id);if(!h||h.tagName!=='H2')return;
+  var body=document.createElement('div');body.className='sbody';
+  while(h.nextSibling&&!(h.nextSibling.nodeType===1&&h.nextSibling.tagName==='H2'))body.appendChild(h.nextSibling);
+  var n=id==='museums'?Math.max(0,body.querySelectorAll('tr').length-body.querySelectorAll('table').length):
+        id==='sources'?body.querySelectorAll('li a, p a').length:body.querySelectorAll('li').length;
+  if(id==='drive'&&!document.querySelector('.charge'))S.drive=zh?function(){return '驾照、租车和路况提示';}:function(){return 'Licence, rental and road tips';};
+  var sum=document.createElement('p');sum.className='ssum';sum.innerHTML=S[id](n)+' · <b>'+S.show+' ›</b>';
+  h.parentNode.insertBefore(sum,h.nextSibling);sum.parentNode.insertBefore(body,sum.nextSibling);
+  h.classList.add('fold-h','folded');h.tabIndex=0;h.setAttribute('role','button');h.setAttribute('aria-expanded','false');
+  function tog(){var f=h.classList.toggle('folded');h.setAttribute('aria-expanded',String(!f));}
+  h.addEventListener('click',tog);sum.addEventListener('click',tog);h.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();tog();}});});
+links.forEach(function(a){a.addEventListener('click',function(){openSec(document.getElementById(a.getAttribute('href').slice(1)));});});
+if(location.hash)openSec(document.getElementById(location.hash.slice(1)));
+/* 5c. budget bars */
+(function(){var b=document.getElementById('budget');if(!b)return;var card=b.nextElementSibling;if(!card)return;
+  var COL=['#c2410c','#2563eb','#15803d','#ca8a04','#7c3aed','#0891b2','#be123c'];
+  function num(x){return parseInt(x.replace(/,/g,''),10);}
+  var rows=[];
+  [].forEach.call(card.querySelectorAll(':scope > ul > li'),function(li){
+    var src=null,txt=null,sp=li.querySelector('span.muted');
+    if(sp&&/\+/.test(sp.textContent)){src=sp;txt=sp.textContent;}
+    else{var m=li.textContent.match(/[(（]([^()（）]*·[^()（）]*)[)）]/);if(m)txt=m[1];}
+    if(!txt)return;
+    var items=txt.split(/\s+\+\s+|\s*·\s*/).map(function(t){var m=t.trim().match(/^(.*?)\s*([\d,]+)(?:\s*[–-]\s*([\d,]+))?$/);
+      if(!m||!m[1])return null;var lo=num(m[2]),hi=m[3]?num(m[3]):lo;return {l:m[1].trim(),lo:lo,hi:hi,v:(lo+hi)/2,t:m[2]+(m[3]?'–'+m[3]:'')};}).filter(Boolean);
+    if(items.length<3)return;rows.push({li:li,src:src,txt:txt,items:items,tot:items.reduce(function(a,x){return a+x.v;},0)});});
+  var max=Math.max.apply(null,rows.map(function(r){return r.tot;}));
+  rows.forEach(function(r){var bar=document.createElement('div');bar.className='bbar';bar.style.width=Math.max(35,100*r.tot/max)+'%';bar.setAttribute('role','img');
+    bar.setAttribute('aria-label',r.items.map(function(x){return x.l+' '+x.t;}).join(', '));
+    var lg=document.createElement('ul');lg.className='blegend';
+    r.items.forEach(function(x,i){var s=document.createElement('span');s.style.width=(100*x.v/r.tot)+'%';s.style.background=COL[i%COL.length];s.title=x.l+' '+x.t;bar.appendChild(s);
+      var li=document.createElement('li');li.innerHTML='<i style="background:'+COL[i%COL.length]+'"></i>'+x.l+' <b>'+x.t+'</b>';lg.appendChild(li);});
+    if(r.src){r.src.style.display='none';r.src.parentNode.insertBefore(bar,r.src);r.src.parentNode.insertBefore(lg,r.src);}
+    else{var w=document.createTreeWalker(r.li,NodeFilter.SHOW_TEXT);var n;while((n=w.nextNode())){var i=n.nodeValue.indexOf(r.txt);
+      if(i>=0){var a=n.nodeValue.slice(0,i).replace(/\s*[(（]$/,''),z=n.nodeValue.slice(i+r.txt.length).replace(/^[)）]/,'');n.nodeValue=a+z;break;}}
+      r.li.appendChild(bar);r.li.appendChild(lg);}});})();
 /* 2. day timeline: fold, expand all, show on map */
 var days=[].slice.call(document.querySelectorAll('.card.day'));if(!days.length)return;
 var tabIds=[].slice.call(document.querySelectorAll('.tabs [data-t]')).map(function(b){return b.dataset.t;}).slice(1);

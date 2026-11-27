@@ -103,6 +103,39 @@
   .dtools { display:flex; justify-content:flex-end; margin:0 0 10px; }
   .dtools button { font:inherit; font-size:.85rem; border:1px solid var(--line); background:var(--card); color:var(--text); border-radius:999px; padding:4px 12px; cursor:pointer; }
   @media print { nav.toc { position:static; } .day.folded .dbody { display:block; } .totop, .dtools, .dmap, .themebtn { display:none; } }
+  /* 4. folded reference sections */
+  h2.fold-h { cursor:pointer; position:relative; padding-right:30px; }
+  h2.fold-h::after { content:"›"; position:absolute; right:4px; top:0; font-family:-apple-system,sans-serif; font-weight:400; color:var(--muted); transform:rotate(90deg); transition:transform .2s; }
+  h2.fold-h.folded::after { transform:rotate(0deg); }
+  h2.fold-h:focus-visible { outline:2px solid var(--accent); outline-offset:4px; border-radius:6px; }
+  .ssum { display:none; margin:-4px 0 12px; color:var(--muted); font-size:.92rem; cursor:pointer; }
+  .ssum b { color:var(--accent); font-weight:600; white-space:nowrap; }
+  h2.fold-h.folded + .ssum { display:block; }
+  h2.fold-h.folded + .ssum + .sbody { display:none; }
+  /* 5a. two plans side by side */
+  .plans { display:grid; gap:12px; margin:0 0 12px; }
+  @media (min-width:720px) { .plans { grid-template-columns:1fr 1fr; } }
+  .plans .card { margin:0; padding:0; overflow:hidden; display:flex; flex-direction:column; }
+  .plans h3 { margin:0; padding:12px 16px; font-size:1.02rem; }
+  .plans ul { margin:0; padding:12px 16px 14px 34px; }
+  .plan.value h3 { background:#e7f2ea; color:#14532d; }
+  .plan.exp h3 { background:#fbecd9; color:#7c2d12; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .plan.value h3 { background:#1b2a20; color:#bbf7d0; } :root:not([data-theme="light"]) .plan.exp h3 { background:#2e2217; color:#fed7aa; } }
+  :root[data-theme="dark"] .plan.value h3 { background:#1b2a20; color:#bbf7d0; } :root[data-theme="dark"] .plan.exp h3 { background:#2e2217; color:#fed7aa; }
+  /* 5b. photo grid */
+  .gallery { grid-template-columns:1fr 1fr !important; gap:8px; }
+  @media (min-width:720px) { .gallery { grid-template-columns:repeat(3,1fr) !important; } }
+  .gallery figure img { aspect-ratio:4/3; border-radius:12px; }
+  .gallery figcaption { font-size:.78rem; line-height:1.35; margin-top:4px; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+  /* 5c. budget bars */
+  .bbar { display:flex; height:14px; border-radius:7px; overflow:hidden; margin:8px 0 6px; background:var(--line); }
+  .bbar span { display:block; height:100%; }
+  .bbar span + span { box-shadow:inset 2px 0 0 var(--card); }
+  .blegend { display:flex; flex-wrap:wrap; gap:4px 12px; margin:0 0 4px; padding:0; list-style:none; font-size:.82rem; color:var(--muted); }
+  .blegend li { margin:0; }
+  .blegend i { display:inline-block; width:9px; height:9px; border-radius:2px; margin-right:5px; vertical-align:0; }
+  .blegend b { color:var(--text); font-weight:600; }
+  @media print { h2.fold-h.folded + .ssum + .sbody { display:block; } .ssum { display:none !important; } }
 </style>
 </head>
 <body>
@@ -120,16 +153,15 @@
 <div class="card why"><p class="pitch">如果你喜欢直岛和濑户内海的岛屿，这是九州最接近的选择：融入风景的当代艺术、日本最古老的一批佛教遗迹，每天最后再泡个温泉收尾。</p><p><b>12 月：</b> 凉爽少雨，约 5–13°C，由布院有霜和晨雾，正是泡温泉的季节。年末高峰前属淡季（避开 12 月 28 日至 1 月 4 日）。OPAM 的雷诺阿展和出光名品展整月开放。</p><p><b>最佳季节：</b> 11 月最好，由布院、国东和耶马溪正值红叶；3 月下旬至 4 月上旬有樱花。12 月是不错的淡季：天气清冷适合泡温泉，游客少。避开 6 月上旬至 7 月中旬梅雨、8–9 月台风，以及黄金周、盂兰盆节和年末假期。</p><p><b>路线：</b> 福冈机场 → 由布院 → 国东半岛 → 别府 → 大分与臼杵 → 宇佐 → 福冈。自驾四天约 560 公里（三天约 450 公里），也可坐火车加国东观光巴士。</p><p><b>亮点</b></p><ul><li>COMICO 美术馆和晨雾中的金鳞湖</li><li>国东半岛：山崖磨崖佛、九州最古老的木造建筑、山脊上的 Gormley 雕塑</li><li>别府：地狱巡游、铁轮蒸汽和地狱蒸晚餐</li><li>国宝臼杵石佛</li><li>OPAM：雷诺阿展，以及 12 月 15 日起展出的长谷川等伯《竹虎图》</li></ul><p><b>须知</b></p><ul><li>不少博物馆周一休馆，别排在最后一天。</li><li>富贵寺大堂下雨不开放，国东要挑晴天去。</li><li>租车要雪地胎：山路清晨可能结冰。</li></ul></div>
 
 <h2 id="picks">两种玩法</h2>
-<div class="card"><h3>💰 最划算：三天两晚自驾</h3><ul>
+<div class="plans"><div class="card plan value"><h3>💰 最划算：三天两晚自驾</h3><ul>
   <li><b>住：</b>由布院山荘 しゃらの木（约 1,100 元，很可能只住不含餐，晚餐在镇上吃），再住别府西铁度假酒店（约 700 元，屋顶温泉）。</li>
   <li><b>玩：</b>COMICO 美术馆和金鳞湖 → 国东古寺和 Gormley 雕塑 → 别府地狱和 OPAM。</li>
   <li><b>吃：</b>昭和之町ゑつ的荞麦面、铁轮地狱蒸、とよ常的鸡肉天妇罗。</li>
-  <li><b>每人约 2,700–3,100 元</b>（不含机票）。不去臼杵和宇佐。</li></ul></div>
-<div class="card"><h3>✨ 最佳体验：四天三晚自驾</h3><ul>
+  <li><b>每人约 2,700–3,100 元</b>（不含机票）。不去臼杵和宇佐。</li></ul></div><div class="card plan exp"><h3>✨ 最佳体验：四天三晚自驾</h3><ul>
   <li><b>住：</b><a href="https://www.booking.com/hotel/jp/ryokan-yamanami.html">由布院旅馆山并</a>（9.1，每晚约 1,850–2,050 元）或 <a href="https://www.booking.com/hotel/jp/you-bu-yuan-wen-quan-shu-nojian.html">束の間</a>（9.3，露天浴池），含怀石晚餐。之后两晚住 <a href="https://www.booking.com/hotel/jp/bie-fu-ba-tang-yu-su-ye-nai-bie-fu.html">别府八汤御宿 Nono</a>（9.0，每晚约 1,600 元）。</li>
   <li><b>玩：</b>完整四天行程，加上鹤见岳缆车、昭和之町和 OPAM 两个展。12 月 15 日以后去，可以看到长谷川等伯的《竹虎图》屏风。</li>
   <li><b>吃：</b>旅馆怀石、臼杵割烹 みつご的河豚午餐、地狱蒸和关鲭鱼。</li>
-  <li><b>每人约 5,000–5,750 元</b>（不含机票）。</li></ul></div>
+  <li><b>每人约 5,000–5,750 元</b>（不含机票）。</li></ul></div></div>
 <p class="muted">下面的每日行程两种玩法都适用，只是住宿和餐厅不同。</p>
 
 <h2 id="map">路线地图</h2>
@@ -311,6 +343,49 @@ function spy(){tick=false;var y=window.scrollY;top.classList.toggle('show',y>900
   if(i!==cur){if(cur>=0)links[cur].classList.remove('on');cur=i;
     if(i>=0){var a=links[i];a.classList.add('on');var l=a.offsetLeft-toc.clientWidth/2+a.offsetWidth/2;toc.scrollTo?toc.scrollTo({left:l,behavior:'smooth'}):(toc.scrollLeft=l);}}}
 window.addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(spy);}},{passive:true});spy();
+/* 4. fold reference sections */
+var FOLD=['drive','shows','museums','shop','sources'];
+var S=zh?{show:'展开',museums:function(n){return n+' 家博物馆：开放时间、闭馆日和门票';},shows:function(n){return n+' 条展览信息';},shop:function(n){return n+' 处购物地点';},
+  drive:function(){return '驾照、租车、充电和路况提示';},sources:function(n){return n+' 个信息来源';}}
+ :{show:'Show',museums:function(n){return n+' museums: hours, closing days and entry';},shows:function(n){return n+(n===1?' listing':' listings');},shop:function(n){return n+' places to shop';},
+  drive:function(){return 'Licence, rental, charging and road tips';},sources:function(n){return n+' sources';}};
+function openSec(h){if(h&&h.classList.contains('folded')){h.classList.remove('folded');h.setAttribute('aria-expanded','true');}}
+FOLD.forEach(function(id){var h=document.getElementById(id);if(!h||h.tagName!=='H2')return;
+  var body=document.createElement('div');body.className='sbody';
+  while(h.nextSibling&&!(h.nextSibling.nodeType===1&&h.nextSibling.tagName==='H2'))body.appendChild(h.nextSibling);
+  var n=id==='museums'?Math.max(0,body.querySelectorAll('tr').length-body.querySelectorAll('table').length):
+        id==='sources'?body.querySelectorAll('li a, p a').length:body.querySelectorAll('li').length;
+  if(id==='drive'&&!document.querySelector('.charge'))S.drive=zh?function(){return '驾照、租车和路况提示';}:function(){return 'Licence, rental and road tips';};
+  var sum=document.createElement('p');sum.className='ssum';sum.innerHTML=S[id](n)+' · <b>'+S.show+' ›</b>';
+  h.parentNode.insertBefore(sum,h.nextSibling);sum.parentNode.insertBefore(body,sum.nextSibling);
+  h.classList.add('fold-h','folded');h.tabIndex=0;h.setAttribute('role','button');h.setAttribute('aria-expanded','false');
+  function tog(){var f=h.classList.toggle('folded');h.setAttribute('aria-expanded',String(!f));}
+  h.addEventListener('click',tog);sum.addEventListener('click',tog);h.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();tog();}});});
+links.forEach(function(a){a.addEventListener('click',function(){openSec(document.getElementById(a.getAttribute('href').slice(1)));});});
+if(location.hash)openSec(document.getElementById(location.hash.slice(1)));
+/* 5c. budget bars */
+(function(){var b=document.getElementById('budget');if(!b)return;var card=b.nextElementSibling;if(!card)return;
+  var COL=['#c2410c','#2563eb','#15803d','#ca8a04','#7c3aed','#0891b2','#be123c'];
+  function num(x){return parseInt(x.replace(/,/g,''),10);}
+  var rows=[];
+  [].forEach.call(card.querySelectorAll(':scope > ul > li'),function(li){
+    var src=null,txt=null,sp=li.querySelector('span.muted');
+    if(sp&&/\+/.test(sp.textContent)){src=sp;txt=sp.textContent;}
+    else{var m=li.textContent.match(/[(（]([^()（）]*·[^()（）]*)[)）]/);if(m)txt=m[1];}
+    if(!txt)return;
+    var items=txt.split(/\s+\+\s+|\s*·\s*/).map(function(t){var m=t.trim().match(/^(.*?)\s*([\d,]+)(?:\s*[–-]\s*([\d,]+))?$/);
+      if(!m||!m[1])return null;var lo=num(m[2]),hi=m[3]?num(m[3]):lo;return {l:m[1].trim(),lo:lo,hi:hi,v:(lo+hi)/2,t:m[2]+(m[3]?'–'+m[3]:'')};}).filter(Boolean);
+    if(items.length<3)return;rows.push({li:li,src:src,txt:txt,items:items,tot:items.reduce(function(a,x){return a+x.v;},0)});});
+  var max=Math.max.apply(null,rows.map(function(r){return r.tot;}));
+  rows.forEach(function(r){var bar=document.createElement('div');bar.className='bbar';bar.style.width=Math.max(35,100*r.tot/max)+'%';bar.setAttribute('role','img');
+    bar.setAttribute('aria-label',r.items.map(function(x){return x.l+' '+x.t;}).join(', '));
+    var lg=document.createElement('ul');lg.className='blegend';
+    r.items.forEach(function(x,i){var s=document.createElement('span');s.style.width=(100*x.v/r.tot)+'%';s.style.background=COL[i%COL.length];s.title=x.l+' '+x.t;bar.appendChild(s);
+      var li=document.createElement('li');li.innerHTML='<i style="background:'+COL[i%COL.length]+'"></i>'+x.l+' <b>'+x.t+'</b>';lg.appendChild(li);});
+    if(r.src){r.src.style.display='none';r.src.parentNode.insertBefore(bar,r.src);r.src.parentNode.insertBefore(lg,r.src);}
+    else{var w=document.createTreeWalker(r.li,NodeFilter.SHOW_TEXT);var n;while((n=w.nextNode())){var i=n.nodeValue.indexOf(r.txt);
+      if(i>=0){var a=n.nodeValue.slice(0,i).replace(/\s*[(（]$/,''),z=n.nodeValue.slice(i+r.txt.length).replace(/^[)）]/,'');n.nodeValue=a+z;break;}}
+      r.li.appendChild(bar);r.li.appendChild(lg);}});})();
 /* 2. day timeline: fold, expand all, show on map */
 var days=[].slice.call(document.querySelectorAll('.card.day'));if(!days.length)return;
 var tabIds=[].slice.call(document.querySelectorAll('.tabs [data-t]')).map(function(b){return b.dataset.t;}).slice(1);

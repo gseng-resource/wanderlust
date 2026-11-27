@@ -103,6 +103,39 @@
   .dtools { display:flex; justify-content:flex-end; margin:0 0 10px; }
   .dtools button { font:inherit; font-size:.85rem; border:1px solid var(--line); background:var(--card); color:var(--text); border-radius:999px; padding:4px 12px; cursor:pointer; }
   @media print { nav.toc { position:static; } .day.folded .dbody { display:block; } .totop, .dtools, .dmap, .themebtn { display:none; } }
+  /* 4. folded reference sections */
+  h2.fold-h { cursor:pointer; position:relative; padding-right:30px; }
+  h2.fold-h::after { content:"›"; position:absolute; right:4px; top:0; font-family:-apple-system,sans-serif; font-weight:400; color:var(--muted); transform:rotate(90deg); transition:transform .2s; }
+  h2.fold-h.folded::after { transform:rotate(0deg); }
+  h2.fold-h:focus-visible { outline:2px solid var(--accent); outline-offset:4px; border-radius:6px; }
+  .ssum { display:none; margin:-4px 0 12px; color:var(--muted); font-size:.92rem; cursor:pointer; }
+  .ssum b { color:var(--accent); font-weight:600; white-space:nowrap; }
+  h2.fold-h.folded + .ssum { display:block; }
+  h2.fold-h.folded + .ssum + .sbody { display:none; }
+  /* 5a. two plans side by side */
+  .plans { display:grid; gap:12px; margin:0 0 12px; }
+  @media (min-width:720px) { .plans { grid-template-columns:1fr 1fr; } }
+  .plans .card { margin:0; padding:0; overflow:hidden; display:flex; flex-direction:column; }
+  .plans h3 { margin:0; padding:12px 16px; font-size:1.02rem; }
+  .plans ul { margin:0; padding:12px 16px 14px 34px; }
+  .plan.value h3 { background:#e7f2ea; color:#14532d; }
+  .plan.exp h3 { background:#fbecd9; color:#7c2d12; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .plan.value h3 { background:#1b2a20; color:#bbf7d0; } :root:not([data-theme="light"]) .plan.exp h3 { background:#2e2217; color:#fed7aa; } }
+  :root[data-theme="dark"] .plan.value h3 { background:#1b2a20; color:#bbf7d0; } :root[data-theme="dark"] .plan.exp h3 { background:#2e2217; color:#fed7aa; }
+  /* 5b. photo grid */
+  .gallery { grid-template-columns:1fr 1fr !important; gap:8px; }
+  @media (min-width:720px) { .gallery { grid-template-columns:repeat(3,1fr) !important; } }
+  .gallery figure img { aspect-ratio:4/3; border-radius:12px; }
+  .gallery figcaption { font-size:.78rem; line-height:1.35; margin-top:4px; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+  /* 5c. budget bars */
+  .bbar { display:flex; height:14px; border-radius:7px; overflow:hidden; margin:8px 0 6px; background:var(--line); }
+  .bbar span { display:block; height:100%; }
+  .bbar span + span { box-shadow:inset 2px 0 0 var(--card); }
+  .blegend { display:flex; flex-wrap:wrap; gap:4px 12px; margin:0 0 4px; padding:0; list-style:none; font-size:.82rem; color:var(--muted); }
+  .blegend li { margin:0; }
+  .blegend i { display:inline-block; width:9px; height:9px; border-radius:2px; margin-right:5px; vertical-align:0; }
+  .blegend b { color:var(--text); font-weight:600; }
+  @media print { h2.fold-h.folded + .ssum + .sbody { display:block; } .ssum { display:none !important; } }
 </style>
 </head>
 <body>
@@ -119,14 +152,13 @@
 <div class="card why"><p class="pitch">看北九州博物馆、又不想开车的玩法：在福冈只收拾一次行李，坐快车去长崎和熊本。晚上留给博多美食：水炊锅、牛杂锅和豚骨拉面。</p><p><b>12 月：</b> 凉爽，约 6–13°C，大多干燥。福冈市美术馆的《印花布》展到 12 月 20 日，九州国立博物馆的《卑弥呼》展到 1 月 11 日，teamLab 晚上点亮福冈城迹。熊本的美术馆本月正处于换展期。12 月周末酒店紧张，请尽早预订。</p><p><b>最佳季节：</b> 10–11 月和 3–4 月最好，气候温和，适合步行往返各个博物馆；福冈樱花 3 月下旬开放。5 月初有博多咚打鼓港祭，7 月上半月有山笠祭，都很拥挤。12 月清静，适合以室内艺术为主的行程。避开 6 月上旬至 7 月中旬梅雨和 8 月酷暑。</p><p><b>路线：</b> 福冈一家酒店住 3 晚。一日游：坐巴士去太宰府（约 40 分钟），坐火车去长崎（约 1 小时 20 分），坐新干线去熊本（约 35 分钟）。北九州 JR Pass 3 日券可覆盖两趟长途。</p><p><b>亮点</b></p><ul><li>九州国立博物馆的《卑弥呼与她的铜镜》，以及太宰府天满宫</li><li>福冈市美术馆（前川国男设计，位于大濠公园）和福冈亚洲美术馆</li><li>福冈城迹的 teamLab《光之祭》</li><li>一天玩长崎：出岛、大浦天主堂、哥拉巴园和隈研吾设计的美术馆</li><li>熊本城，以及名建筑师设计的 Artpolis 建筑</li></ul><p><b>须知</b></p><ul><li>大多数博物馆周一休馆。本行程按周五至周一安排，把周一留给熊本，那里没有重要场馆周一休息。</li><li>JR 九州铁路通票仅限以“短期滞在”身份入境的游客，请确认自己符合条件。</li><li>teamLab 周末需提前购买分时段门票。</li><li>长崎一日行程很满：坐火车约 2 小时 40 分，在市内停留 5–6 小时。</li></ul></div>
 
 <h2 id="picks">两种玩法</h2>
-<div class="card"><h3>💰 最划算</h3><ul>
+<div class="plans"><div class="card plan value"><h3>💰 最划算</h3><ul>
   <li><b>住：</b>里士满酒店博多站前，离博多站 5 分钟（每晚 18,800–33,000 日元（约 CNY 790–1,380），视日期和预订网站而定）。</li>
   <li><b>吃：</b>水たき長野的水炊锅、もつ鍋 一慶的牛杂锅、博多一双的博多拉面。</li>
-  <li><b>每人约 3,180–4,570 元</b>（不含机票）。</li></ul></div>
-<div class="card"><h3>✨ 最佳体验</h3><ul>
+  <li><b>每人约 3,180–4,570 元</b>（不含机票）。</li></ul></div><div class="card plan exp"><h3>✨ 最佳体验</h3><ul>
   <li><b>住：</b>伊尔·帕拉佐酒店，阿尔多·罗西 1989 年设计的地标建筑，位于那珂川畔（每晚约 80,500 日元（约 CNY 3,360））。</li>
   <li><b>吃：</b>とり田的水炊锅、吉塚うなぎ屋的鳗鱼、博多もつ鍋 やま中的牛杂锅、勝烈亭的炸猪排。</li>
-  <li><b>每人约 7,630–8,780 元</b>（不含机票）。</li></ul></div>
+  <li><b>每人约 7,630–8,780 元</b>（不含机票）。</li></ul></div></div>
 <p class="muted">两种玩法行程相同，只是住宿和餐厅不同。</p>
 
 <h2 id="map">路线地图</h2>
@@ -282,6 +314,49 @@ function spy(){tick=false;var y=window.scrollY;top.classList.toggle('show',y>900
   if(i!==cur){if(cur>=0)links[cur].classList.remove('on');cur=i;
     if(i>=0){var a=links[i];a.classList.add('on');var l=a.offsetLeft-toc.clientWidth/2+a.offsetWidth/2;toc.scrollTo?toc.scrollTo({left:l,behavior:'smooth'}):(toc.scrollLeft=l);}}}
 window.addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(spy);}},{passive:true});spy();
+/* 4. fold reference sections */
+var FOLD=['drive','shows','museums','shop','sources'];
+var S=zh?{show:'展开',museums:function(n){return n+' 家博物馆：开放时间、闭馆日和门票';},shows:function(n){return n+' 条展览信息';},shop:function(n){return n+' 处购物地点';},
+  drive:function(){return '驾照、租车、充电和路况提示';},sources:function(n){return n+' 个信息来源';}}
+ :{show:'Show',museums:function(n){return n+' museums: hours, closing days and entry';},shows:function(n){return n+(n===1?' listing':' listings');},shop:function(n){return n+' places to shop';},
+  drive:function(){return 'Licence, rental, charging and road tips';},sources:function(n){return n+' sources';}};
+function openSec(h){if(h&&h.classList.contains('folded')){h.classList.remove('folded');h.setAttribute('aria-expanded','true');}}
+FOLD.forEach(function(id){var h=document.getElementById(id);if(!h||h.tagName!=='H2')return;
+  var body=document.createElement('div');body.className='sbody';
+  while(h.nextSibling&&!(h.nextSibling.nodeType===1&&h.nextSibling.tagName==='H2'))body.appendChild(h.nextSibling);
+  var n=id==='museums'?Math.max(0,body.querySelectorAll('tr').length-body.querySelectorAll('table').length):
+        id==='sources'?body.querySelectorAll('li a, p a').length:body.querySelectorAll('li').length;
+  if(id==='drive'&&!document.querySelector('.charge'))S.drive=zh?function(){return '驾照、租车和路况提示';}:function(){return 'Licence, rental and road tips';};
+  var sum=document.createElement('p');sum.className='ssum';sum.innerHTML=S[id](n)+' · <b>'+S.show+' ›</b>';
+  h.parentNode.insertBefore(sum,h.nextSibling);sum.parentNode.insertBefore(body,sum.nextSibling);
+  h.classList.add('fold-h','folded');h.tabIndex=0;h.setAttribute('role','button');h.setAttribute('aria-expanded','false');
+  function tog(){var f=h.classList.toggle('folded');h.setAttribute('aria-expanded',String(!f));}
+  h.addEventListener('click',tog);sum.addEventListener('click',tog);h.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();tog();}});});
+links.forEach(function(a){a.addEventListener('click',function(){openSec(document.getElementById(a.getAttribute('href').slice(1)));});});
+if(location.hash)openSec(document.getElementById(location.hash.slice(1)));
+/* 5c. budget bars */
+(function(){var b=document.getElementById('budget');if(!b)return;var card=b.nextElementSibling;if(!card)return;
+  var COL=['#c2410c','#2563eb','#15803d','#ca8a04','#7c3aed','#0891b2','#be123c'];
+  function num(x){return parseInt(x.replace(/,/g,''),10);}
+  var rows=[];
+  [].forEach.call(card.querySelectorAll(':scope > ul > li'),function(li){
+    var src=null,txt=null,sp=li.querySelector('span.muted');
+    if(sp&&/\+/.test(sp.textContent)){src=sp;txt=sp.textContent;}
+    else{var m=li.textContent.match(/[(（]([^()（）]*·[^()（）]*)[)）]/);if(m)txt=m[1];}
+    if(!txt)return;
+    var items=txt.split(/\s+\+\s+|\s*·\s*/).map(function(t){var m=t.trim().match(/^(.*?)\s*([\d,]+)(?:\s*[–-]\s*([\d,]+))?$/);
+      if(!m||!m[1])return null;var lo=num(m[2]),hi=m[3]?num(m[3]):lo;return {l:m[1].trim(),lo:lo,hi:hi,v:(lo+hi)/2,t:m[2]+(m[3]?'–'+m[3]:'')};}).filter(Boolean);
+    if(items.length<3)return;rows.push({li:li,src:src,txt:txt,items:items,tot:items.reduce(function(a,x){return a+x.v;},0)});});
+  var max=Math.max.apply(null,rows.map(function(r){return r.tot;}));
+  rows.forEach(function(r){var bar=document.createElement('div');bar.className='bbar';bar.style.width=Math.max(35,100*r.tot/max)+'%';bar.setAttribute('role','img');
+    bar.setAttribute('aria-label',r.items.map(function(x){return x.l+' '+x.t;}).join(', '));
+    var lg=document.createElement('ul');lg.className='blegend';
+    r.items.forEach(function(x,i){var s=document.createElement('span');s.style.width=(100*x.v/r.tot)+'%';s.style.background=COL[i%COL.length];s.title=x.l+' '+x.t;bar.appendChild(s);
+      var li=document.createElement('li');li.innerHTML='<i style="background:'+COL[i%COL.length]+'"></i>'+x.l+' <b>'+x.t+'</b>';lg.appendChild(li);});
+    if(r.src){r.src.style.display='none';r.src.parentNode.insertBefore(bar,r.src);r.src.parentNode.insertBefore(lg,r.src);}
+    else{var w=document.createTreeWalker(r.li,NodeFilter.SHOW_TEXT);var n;while((n=w.nextNode())){var i=n.nodeValue.indexOf(r.txt);
+      if(i>=0){var a=n.nodeValue.slice(0,i).replace(/\s*[(（]$/,''),z=n.nodeValue.slice(i+r.txt.length).replace(/^[)）]/,'');n.nodeValue=a+z;break;}}
+      r.li.appendChild(bar);r.li.appendChild(lg);}});})();
 /* 2. day timeline: fold, expand all, show on map */
 var days=[].slice.call(document.querySelectorAll('.card.day'));if(!days.length)return;
 var tabIds=[].slice.call(document.querySelectorAll('.tabs [data-t]')).map(function(b){return b.dataset.t;}).slice(1);
