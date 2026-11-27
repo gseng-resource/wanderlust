@@ -7,77 +7,114 @@
 <meta property="og:title" content="Wanderlust">
 <meta property="og:description" content="旅行指南与行程研究。">
 <meta property="og:url" content="https://gseng-resource.github.io/wanderlust/index.zh.html">
+<meta property="og:image" content="https://gseng-resource.github.io/wanderlust/assets/cards/cn-im-hanging-temple.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&display=swap" rel="stylesheet">
 <style>
-  :root { --bg: #f6f4ef; --card: #ffffff; --text: #1d1d1f; --muted: #6b6b70; --line: #e4e1d9; --accent: #c2410c; }
+  :root { --bg:#f6f4ef; --card:#fff; --text:#1d1d1f; --muted:#6b6b70; --line:#e4e1d9; --accent:#c2410c; --chip:#f3ede3; --shadow:0 1px 2px rgba(0,0,0,.04),0 4px 14px rgba(0,0,0,.05); }
   @media (prefers-color-scheme: dark) {
-    :root { --bg: #141416; --card: #1f1f22; --text: #f2f2f3; --muted: #a1a1a8; --line: #2e2e33; --accent: #fb923c; }
+    :root { --bg:#141416; --card:#1f1f22; --text:#f2f2f3; --muted:#a1a1a8; --line:#2e2e33; --accent:#fb923c; --chip:#2a2826; --shadow:none; }
   }
-  * { box-sizing: border-box; }
-  body { margin: 0; background: var(--bg); color: var(--text);
-         font: 16px/1.6 -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Segoe UI", Roboto, sans-serif; }
-  main { max-width: 640px; margin: 0 auto; padding: 32px 16px 48px; }
-  h1 { font-size: 2rem; margin: 0 0 4px; letter-spacing: -0.02em; }
-  .lede { color: var(--muted); margin: 0 0 32px; }
-  h2 { font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 28px 0 10px; }
-  a.card { display: flex; justify-content: space-between; align-items: center; gap: 12px; text-decoration: none; color: inherit;
-           background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px; margin-bottom: 10px; }
-  a.card:hover { border-color: var(--accent); }
-  .t { font-weight: 600; }
-  .s { color: var(--muted); font-size: .92rem; }
-  .lang { float: right; font-size: .9rem; color: var(--muted); margin-top: 10px; }
-  .lang a { color: var(--accent); text-decoration: none; }
-  .lang b { color: var(--text); }
-  a.card .ic { width:56px; height:56px; flex:none; border-radius:10px; object-fit:cover; background:var(--line); }
-  a.card > div { flex:1; }
-  main a:not(.card) { color: var(--accent); }
-  .chev { color: var(--muted); font-size: 1.4rem; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font:16px/1.5 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Segoe UI",Roboto,sans-serif; }
+  main { max-width:960px; margin:0 auto; padding:40px 16px 56px; }
+  header { position:relative; margin-bottom:28px; }
+  h1 { font-family:"Fraunces",Georgia,serif; font-weight:600; font-size:clamp(2.4rem,7vw,3.4rem); line-height:1; letter-spacing:-.02em; margin:0 0 10px; }
+  .lede { color:var(--muted); margin:0; font-size:1.1rem; letter-spacing:.06em; white-space:nowrap; }
+  .lang { position:absolute; top:0; right:0; display:inline-flex; border:1px solid var(--line); border-radius:999px; padding:3px; background:var(--card); font-size:.85rem; margin-top:6px; }
+  .lang a, .lang b { padding:4px 12px; border-radius:999px; text-decoration:none; }
+  .lang b { background:var(--text); color:var(--bg); font-weight:600; }
+  .lang a { color:var(--muted); }
+  .lang a:hover { color:var(--accent); }
+  h2 { font-size:.8rem; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin:36px 0 14px; }
+  .grid { display:grid; grid-template-columns:1fr; gap:16px; }
+  @media (min-width:720px) { .grid { grid-template-columns:1fr 1fr; gap:20px; } }
+  a.card { display:flex; flex-direction:column; text-decoration:none; color:inherit; background:var(--card); border:1px solid var(--line); border-radius:16px; overflow:hidden; box-shadow:var(--shadow); transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease; }
+  a.card:hover { transform:translateY(-2px); border-color:var(--accent); box-shadow:0 8px 24px rgba(0,0,0,.08); }
+  a.card img { width:100%; height:auto; aspect-ratio:16/9; object-fit:cover; display:block; background:var(--line); }
+  .body { padding:14px 16px 16px; display:flex; flex-direction:column; gap:6px; flex:1; }
+  .t { font-weight:650; font-size:1.08rem; line-height:1.3; }
+  .s { color:var(--muted); font-size:.93rem; }
+  .chips { display:flex; flex-wrap:wrap; gap:6px; margin-top:auto; padding-top:6px; }
+  .chip { font-size:.78rem; background:var(--chip); color:var(--text); padding:3px 9px; border-radius:999px; white-space:nowrap; }
+  .chip.best { color:var(--accent); }
+  .viewbar { display:flex; justify-content:flex-end; margin:-8px 0 -20px; }
+  .seg { display:inline-flex; border:1px solid var(--line); border-radius:999px; padding:3px; background:var(--card); font-size:.82rem; }
+  .seg button { font:inherit; border:0; background:none; color:var(--muted); padding:4px 12px; border-radius:999px; cursor:pointer; }
+  .seg button[aria-pressed="true"] { background:var(--text); color:var(--bg); font-weight:600; }
+  body.list main { max-width:680px; }
+  body.list .grid { grid-template-columns:1fr; gap:10px; }
+  body.list a.card { flex-direction:row; align-items:center; border-radius:14px; }
+  body.list a.card:hover { transform:none; }
+  body.list a.card img { width:72px; height:72px; aspect-ratio:1; border-radius:10px; margin:12px 0 12px 12px; flex:none; }
+  body.list .body { padding:12px 14px; gap:3px; }
+  body.list .t { font-size:1rem; }
+  body.list .chips { padding-top:4px; }
+  .foot { margin-top:40px; font-size:.9rem; color:var(--muted); }
+  .foot a { color:var(--accent); }
 </style>
 </head>
 <body>
 <main>
-  <span class="lang"><a href="./" lang="en">EN</a> | <b>中文</b></span>
-  <h1>Wanderlust</h1>
-  <p class="lede">旅行指南与行程研究。</p>
+  <header>
+    <div><h1>Wanderlust</h1><p class="lede">漫游 · 发现 · 细品</p></div>
+    <nav class="lang"><a href="./" lang="en">EN</a><b>中文</b></nav>
+  </header>
+  <div class="viewbar"><div class="seg" role="group" aria-label="视图"><button type="button" data-v="cards" aria-pressed="true">卡片</button><button type="button" data-v="list" aria-pressed="false">列表</button></div></div>
 
   <h2>日本</h2>
-  <a class="card" href="japan/oita-road-trip.zh.html">
-    <img class="ic" src="assets/thumbs/oita-usuki-buddhas.jpg" alt="">
-    <div><div class="t">大分自驾游</div><div class="s">从福冈出发，自驾由布院、国东半岛、别府与臼杵</div></div>
-    <span class="chev">›</span>
-  </a>
-  <a class="card" href="japan/okinawa-winter.zh.html">
-    <img class="ic" src="assets/thumbs/oki-kouri-bridge.jpg" alt="">
-    <div><div class="t">冬季冲绳</div><div class="s">青之洞窟浮潜、美丽海水族馆、首里城和冲绳美食</div></div>
-    <span class="chev">›</span>
-  </a>
-  <a class="card" href="japan/kyushu-ceramics-nagasaki.zh.html">
-    <img class="ic" src="assets/thumbs/kyu-oura.jpg" alt="">
-    <div><div class="t">九州陶瓷与长崎自驾</div><div class="s">从福冈出发：太宰府、有田瓷器、武雄、长崎和唐津</div></div>
-    <span class="chev">›</span>
-  </a>
-  <a class="card" href="japan/fukuoka-art-base.zh.html">
-    <img class="ic" src="assets/thumbs/kyu-knm.jpg" alt="">
-    <div><div class="t">福冈艺术之旅与一日游</div><div class="s">只住一家酒店：美术馆和 teamLab，坐火车去长崎和熊本一日游</div></div>
-    <span class="chev">›</span>
-  </a>
-  <h2>中国</h2>
-  <a class="card" href="china/inner-mongolia-loop.zh.html">
-    <img class="ic" src="assets/thumbs/cn-im-hanging-temple.jpg" alt="">
-    <div><div class="t">上海—内蒙古环线自驾</div><div class="s">21 天环线：古都、石窟、沙漠与草原</div></div>
-    <span class="chev">›</span>
-  </a>
-  <a class="card" href="china/dongbei-border-loop.zh.html">
-    <img class="ic" src="assets/thumbs/cn-db-tianchi.jpg" alt="">
-    <div><div class="t">东北边境环线自驾</div><div class="s">21 天沿中朝、中俄边境环线</div></div>
-    <span class="chev">›</span>
-  </a>
-  <a class="card" href="china/shanghai-guangzhou-coast.zh.html">
-    <img class="ic" src="assets/thumbs/cn-co-tulou2.jpg" alt="">
-    <div><div class="t">上海—广州沿海自驾</div><div class="s">21 天沿海南下：宁波、温州、福州、厦门、土楼、潮汕和广州</div></div>
-    <span class="chev">›</span>
-  </a>
+  <div class="grid">
+    <a class="card" href="japan/oita-road-trip.zh.html">
+      <img src="assets/cards/oita-usuki-buddhas.jpg" alt="" loading="lazy" width="800" height="450">
+      <div class="body"><div class="t">大分自驾游</div><div class="s">从福冈出发，自驾由布院、国东半岛、别府与臼杵</div>
+        <div class="chips"><span class="chip">3–4 天</span><span class="chip">自驾</span><span class="chip best">最佳：11 月</span></div></div>
+    </a>
+    <a class="card" href="japan/okinawa-winter.zh.html">
+      <img src="assets/cards/oki-kouri-bridge.jpg" alt="" loading="lazy" width="800" height="450">
+      <div class="body"><div class="t">冬季冲绳</div><div class="s">青之洞窟浮潜、美丽海水族馆、首里城和冲绳美食</div>
+        <div class="chips"><span class="chip">3–4 天</span><span class="chip">自驾</span><span class="chip best">最佳：4–5 月、10–11 月</span></div></div>
+    </a>
+    <a class="card" href="japan/kyushu-ceramics-nagasaki.zh.html">
+      <img src="assets/cards/kyu-oura.jpg" alt="" loading="lazy" width="800" height="450">
+      <div class="body"><div class="t">九州陶瓷与长崎自驾</div><div class="s">从福冈出发：太宰府、有田瓷器、武雄、长崎和唐津</div>
+        <div class="chips"><span class="chip">4 天</span><span class="chip">自驾</span><span class="chip best">最佳：10–11 月</span></div></div>
+    </a>
+    <a class="card" href="japan/fukuoka-art-base.zh.html">
+      <img src="assets/cards/kyu-knm.jpg" alt="" loading="lazy" width="800" height="450">
+      <div class="body"><div class="t">福冈艺术之旅与一日游</div><div class="s">只住一家酒店：美术馆和 teamLab，坐火车去长崎和熊本一日游</div>
+        <div class="chips"><span class="chip">4 天</span><span class="chip">城市据点、火车</span><span class="chip best">最佳：10–11 月、3–4 月</span></div></div>
+    </a>
+  </div>
 
-  <p class="muted" style="margin-top:32px;font-size:.9rem;color:var(--muted)"><a href="about.zh.html">关于这些调研</a>：信息来源、价格和预算的计算方法、查询日期。</p>
+  <h2>中国</h2>
+  <div class="grid">
+    <a class="card" href="china/inner-mongolia-loop.zh.html">
+      <img src="assets/cards/cn-im-hanging-temple.jpg" alt="" loading="lazy" width="800" height="450">
+      <div class="body"><div class="t">上海—内蒙古环线自驾</div><div class="s">环线：古都、石窟、沙漠与草原</div>
+        <div class="chips"><span class="chip">21 天</span><span class="chip">自驾</span><span class="chip best">最佳：9 月</span></div></div>
+    </a>
+    <a class="card" href="china/dongbei-border-loop.zh.html">
+      <img src="assets/cards/cn-db-tianchi.jpg" alt="" loading="lazy" width="800" height="450">
+      <div class="body"><div class="t">东北边境环线自驾</div><div class="s">沿中朝、中俄边境环线</div>
+        <div class="chips"><span class="chip">21 天</span><span class="chip">自驾</span><span class="chip best">最佳：9 月</span></div></div>
+    </a>
+    <a class="card" href="china/shanghai-guangzhou-coast.zh.html">
+      <img src="assets/cards/cn-co-tulou2.jpg" alt="" loading="lazy" width="800" height="450">
+      <div class="body"><div class="t">上海—广州沿海自驾</div><div class="s">沿海南下：宁波、温州、福州、厦门、土楼、潮汕和广州</div>
+        <div class="chips"><span class="chip">21 天</span><span class="chip">自驾</span><span class="chip best">最佳：10 月下旬–11 月中旬</span></div></div>
+    </a>
+  </div>
+
+  <p class="foot"><a href="about.zh.html">关于这些调研</a>：信息来源、价格和预算的计算方法、查询日期。</p>
 </main>
+<script>
+(function(){
+  var K='wl-view', b=document.body, btns=document.querySelectorAll('.seg button');
+  function set(v){ b.classList.toggle('list', v==='list'); btns.forEach(function(x){ x.setAttribute('aria-pressed', x.dataset.v===v); }); }
+  var v='cards'; try { v=localStorage.getItem(K)||'cards'; } catch(e){}
+  set(v);
+  btns.forEach(function(x){ x.addEventListener('click', function(){ set(x.dataset.v); try { localStorage.setItem(K, x.dataset.v); } catch(e){} }); });
+})();
+</script>
 </body>
 </html>
