@@ -137,6 +137,7 @@
   .blegend b { color:var(--text); font-weight:600; }
   @media print { h2.fold-h.folded + .ssum + .sbody { display:block; } .ssum { display:none !important; } }
 </style>
+<style id="wl-placesync-css">.pl-when{color:var(--accent);font-weight:600;font-size:.88rem;margin:0 0 6px}.pl-add{opacity:.8}.pl-add .pl-when{color:var(--muted)}.pl-summary{font-size:.9rem}</style>
 </head>
 <body>
 <main>
@@ -272,66 +273,56 @@ window.wlShowDay=function(d){show(d);};})();</script>
 
 <h2 id="shows">2026 年 12 月的展览</h2>
 <div class="card"><ul>
-  <li><b>OPAM 大分县立美术馆：</b>《我们的雷诺阿》（11 月 23 日–1 月 17 日，1,600 日元（约 CNY 65））和出光美术馆名品展（11 月 13 日–1 月 11 日，1,500 日元（约 CNY 65）；凭雷诺阿展票根 1,000 日元（约 CNY 40））。展期中换展：长谷川等伯的《竹虎图》屏风 12 月 15 日起展出。12 月每天开放，周五、周六至 20:00。</li>
-  <li><b>大分市历史资料馆：</b><a href="https://www.city.oita.oita.jp/o205/r8tenji/oitarashisa.html">《大分特色——历史的记忆》</a>，至 12 月 13 日，310 日元（约 CNY 15）。</li>
+  <li data-place="oit"><b>OPAM 大分县立美术馆：</b>《我们的雷诺阿》（11 月 23 日–1 月 17 日，1,600 日元（约 CNY 65））和出光美术馆名品展（11 月 13 日–1 月 11 日，1,500 日元（约 CNY 65）；凭雷诺阿展票根 1,000 日元（约 CNY 40））。展期中换展：长谷川等伯的《竹虎图》屏风 12 月 15 日起展出。美术馆 12 月每天开放，周五、周六至 20:00；出光展厅 12 月 14 日关闭。</li>
+  <li data-place="oit"><b>大分市历史资料馆：</b><a href="https://www.city.oita.oita.jp/o205/r8tenji/oitarashisa.html">《大分特色——历史的记忆》</a>，至 12 月 13 日，310 日元（约 CNY 15）。</li>
   <li><b>尚未公布：</b>查询时大分市美术馆、宇佐的县立历史博物馆（Riman）和由布院各美术馆都还没公布 2026 年 12 月的展览。别府的艺术博览会在 1 月下旬。</li>
 </ul></div>
-
 <h2 id="museums">博物馆</h2>
-<div class="card scroll"><table><tr><th>博物馆</th><th>开放时间</th><th>休馆</th><th>门票</th></tr>
-<tr><td><a href="https://www.opam.jp/">OPAM</a> 大分县立美术馆</td><td>10:00–19:00</td><td>每天开放</td><td>依展览</td></tr>
-<tr><td><a href="https://camy.oita.jp/en">COMICO 美术馆</a>（由布院）</td><td>9:30–17:00，16:00 停止入场</td><td>隔周周三</td><td>1,700 日元（约 CNY 70），分时段入场</td></tr>
-<tr><td>金鳞湖夏加尔美术馆</td><td>9:00–17:00</td><td>不定休</td><td>约 600 日元（约 CNY 25）</td></tr>
-<tr><td><a href="https://www.city.oita.oita.jp/bunkasports/bunka/bijutsukan/index.html">大分市美术馆</a></td><td>10:00–18:00</td><td>周一；12 月 28 日–1 月 4 日</td><td>440 日元（约 CNY 20）</td></tr>
-<tr><td><a href="https://www.pref.oita.jp/site/rekishihakubutsukan/">县立历史博物馆 Riman</a>（宇佐）</td><td>9:00–17:00</td><td>周一</td><td>约 310 日元（约 CNY 15）</td></tr>
-<tr><td>别府竹细工传统产业会馆</td><td>8:30–17:00</td><td>周一</td><td>约 300 日元（约 CNY 15）</td></tr>
-</table><p class="muted">不少博物馆周一休馆，周五至周一的行程请别把它们排在最后一天。</p></div>
-
+<div class="card scroll"><p class="muted pl-summary" data-kind="places"></p><table><tr><th>博物馆</th><th>开放时间</th><th>休馆</th><th>门票</th></tr>
+<tr data-place="oit"><td><a href="https://www.opam.jp/">OPAM</a> 大分县立美术馆</td><td>10:00–19:00</td><td>每天开放</td><td>依展览</td></tr>
+<tr data-place="yuf"><td><a href="https://camy.oita.jp/en">COMICO 美术馆</a>（由布院）</td><td>9:30–17:00，16:00 停止入场</td><td>隔周周三</td><td>1,700 日元（约 CNY 70），分时段入场</td></tr>
+<tr data-place="yuf"><td>金鳞湖夏加尔美术馆</td><td>9:00–17:00</td><td>不定休</td><td>约 600 日元（约 CNY 25）</td></tr>
+<tr data-place="oit"><td><a href="https://www.city.oita.oita.jp/bunkasports/bunka/bijutsukan/index.html">大分市美术馆</a></td><td>10:00–18:00</td><td>周一；12 月 28 日–1 月 4 日</td><td>440 日元（约 CNY 20）</td></tr>
+<tr data-place="usa"><td><a href="https://www.pref.oita.jp/site/rekishihakubutsukan/">县立历史博物馆 Riman</a>（宇佐）</td><td>9:00–17:00</td><td>周一</td><td>约 310 日元（约 CNY 15）</td></tr>
+<tr data-place="bep"><td>别府竹细工传统产业会馆</td><td>8:30–17:00</td><td>周一；12 月 29 日–1 月 3 日</td><td>约 390 日元（约 CNY 15）</td></tr>
+</table><p class="muted">不少博物馆周一休馆，别把它们排在周一。</p></div>
 <h2 id="eat">吃什么</h2>
-<p class="muted"><span class="tb">食べログ 3.49 · 920 条</span> 标签为食べログ评分：3.0 为一般，3.5 以上很好，3.6 以上出色。评论很少的分数只代表数据不足，不代表难吃。2026 年 11 月 26 日从食べログ搜索结果读取。</p>
-<p class="muted">选的都是顺路的店，并核对过 12 月周末的休息日。不少店不定休，出发前一周请电话确认。</p>
-<div class="card"><h3>第 1 天</h3><ul>
-  <li><b>午餐：</b>福冈机场国内线 3 楼的“拉面跑道”，1,000–1,500 日元（约 CNY 40–65）。或由布院站旁的 <a href="https://tabelog.com/oita/A4402/A440201/44005142/">由布まぶし 心</a> <span class="tb">食べログ 3.50 · 425 条</span>，丰后牛饭，2,000–3,200 日元（约 CNY 85–130）（11:00–16:00）。</li>
-  <li><b>晚餐和早餐：</b>在旅馆吃；请确认方案，由布院有些房价不含餐。若不含，17:00 前在汤之坪街道解决。</li></ul></div>
-<div class="card"><h3>第 2 天</h3><ul>
-  <li><b>午餐：</b>昭和之町的 <a href="https://tabelog.com/oita/A4403/A440301/44005321/">十割蕎麦 ゑつ</a> <span class="tb">食べログ 3.55 · 113 条</span>，用丰后高田荞麦粉的十割荞麦面，1,000–2,000 日元（约 CNY 40–85）（离富贵寺约 20 分钟；周二休；只有 26 个座位，11:00 左右到或先打 0978-25-4617）。</li>
-  <li><b>晚餐：</b><a href="https://jigokumushi.com/">地狱蒸工房 铁轮</a> <span class="tb">食べログ 3.49 · 636 条</span>，自己蒸海鲜，1,500–3,000 日元（约 CNY 65–130）；18:00 最后点餐，不接受预约。备选：<a href="https://tabelog.com/oita/A4402/A440202/44000199/">とよ常</a> <span class="tb">食べログ 3.49 · 920 条</span> 吃鸡肉天妇罗（周二、周三休）。</li></ul></div>
-<div class="card"><h3>第 3 天</h3><ul>
-  <li><b>早餐：</b>酒店自助（西铁 1,500 日元（约 CNY 65），6:30–9:30）。</li>
-  <li><b>午餐：</b><a href="https://tabelog.com/oita/A4401/A440104/44005395/">割烹 みつご</a> <span class="tb">食べログ 3.58 · 51 条</span>，臼杵河豚午餐套餐，约 5,000 日元（约 CNY 210）起，请预约 0972-62-5107（不定休；午市 11:00–14:00，请先打电话）。便宜些：<a href="https://tabelog.com/oita/A4401/A440104/44001176/">敦煌</a> <span class="tb">食べログ 3.62 · 65 条</span>，中华套餐 1,000–2,000 日元（约 CNY 40–85）（周三休；有时包场，请先打 0972-62-8662）。三天两晚的话：大分站的 AMU Plaza。</li>
-  <li><b>晚餐：</b><a href="https://tabelog.com/oita/A4402/A440202/44000199/">とよ常</a> <span class="tb">食べログ 3.49 · 920 条</span>，鸡肉天妇罗和关鲭鱼，2,000–4,000 日元（约 CNY 85–170）。或 <a href="https://tabelog.com/oita/A4402/A440202/44000594/">胡月</a> <span class="tb">食べログ 3.49 · 900 条</span>，别府冷面老店，约 900 日元（约 CNY 40）（只收现金，周末营业到 19:00）。</li></ul></div>
-<div class="card"><h3>第 4 天</h3><ul>
-  <li><b>早餐：</b>酒店，或 <a href="https://tabelog.com/oita/A4402/A440202/44000059/">友永面包店</a> <span class="tb">食べログ 3.60 · 663 条</span>的红豆面包（周日及节假日休）。</li>
-  <li><b>午餐：</b>宇佐神宫参道上的かくまさ <span class="tb">食べログ 3.3–3.5 · 90 条</span>，团子汁和鸡肉天妇罗，约 1,000 日元（约 CNY 40）。宇佐有名的炸鸡店太阁和すずや周一休息。</li>
-  <li><b>晚餐：</b>晚班机前在福冈机场吃：国际线航站楼的餐厅，或国内线航站楼 3 楼的“拉面跑道”（1,000–1,500 日元（约 CNY 40–65）；两航站楼之间靠接驳巴士，请预留时间）。</li></ul></div>
-
+<p class="muted pl-summary" data-kind="meals"></p>
+<p class="muted"><span class="tb">食べログ 3.49 · 920 条</span> 标签为食べログ评分：3.0 为一般，3.5 以上很好，3.6 以上出色。2026 年 11 月 26 日读取。不少店不定休，出发前一周请电话确认。</p>
+<div class="card place" data-place="fuk"><h3>福冈机场</h3><p class="pl-when"></p><ul><li><b>到达时：</b>国内线 3 楼“拉面跑道”，1,000–1,500 日元（约 CNY 40–65）。</li><li><b>晚班机前：</b>国际线航站楼的餐厅，或“拉面跑道”（两航站楼之间靠接驳巴士，请预留时间）。</li></ul></div>
+<div class="card place" data-place="hit"><h3>日田</h3><p class="pl-when"></p><ul><li><b>午餐：</b>日田站前的想夫恋本店 <span class="tb">食べログ 3.70 · 644 条</span>，日田炒面；11:00 开门就去，避开排队。</li></ul></div>
+<div class="card place" data-place="yuf"><h3>由布院</h3><p class="pl-when"></p><ul><li><b>午餐：</b>由布院站旁的 <a href="https://tabelog.com/oita/A4402/A440201/44005142/">由布まぶし 心</a> <span class="tb">食べログ 3.50 · 425 条</span>，丰后牛饭，2,000–3,200 日元（约 CNY 85–130）（11:00–16:00）。</li><li><b>晚餐和早餐：</b>在旅馆吃。请确认方案：由布院有些房价不含餐，那就 17:00 前在汤之坪街道解决。</li></ul></div>
+<div class="card place" data-place="kun"><h3>国东与昭和之町</h3><p class="pl-when"></p><ul><li><b>午餐：</b>昭和之町的 <a href="https://tabelog.com/oita/A4403/A440301/44005321/">十割蕎麦 ゑつ</a> <span class="tb">食べログ 3.55 · 113 条</span>，丰后高田荞麦粉的十割荞麦面，1,000–2,000 日元（约 CNY 40–85）（周二休；只有 26 个座位，12:00 左右到或先打 0978-25-4617）。</li></ul></div>
+<div class="card place" data-place="bep"><h3>别府</h3><p class="pl-when"></p><ul><li><b>午餐或晚餐：</b><a href="https://jigokumushi.com/">地狱蒸工房 铁轮</a> <span class="tb">食べログ 3.49 · 636 条</span>，自己蒸海鲜，1,500–3,000 日元（约 CNY 65–130）；18:00 最后点餐，不接受预约；每月第三个周三休。</li><li><b>晚餐：</b><a href="https://tabelog.com/oita/A4402/A440202/44000199/">とよ常</a> <span class="tb">食べログ 3.49 · 920 条</span>，鸡肉天妇罗和关鲭鱼，2,000–4,000 日元（约 CNY 85–170）（周二、周三休）。或 <a href="https://tabelog.com/oita/A4402/A440202/44000594/">胡月</a> <span class="tb">食べログ 3.49 · 900 条</span>，别府冷面老店，约 900 日元（约 CNY 40）（只收现金）。</li><li><b>早餐：</b>酒店，或 <a href="https://tabelog.com/oita/A4402/A440202/44000059/">友永面包店</a> <span class="tb">食べログ 3.60 · 663 条</span>的红豆面包（周日及节假日休）。</li></ul></div>
+<div class="card place" data-place="oit"><h3>大分市</h3><p class="pl-when"></p><ul><li><b>看完 OPAM 的午餐：</b>大分站的 AMU Plaza，车站大型商场，餐厅很多（10:00–20:30，周五至周日到 21:00）。</li></ul></div>
+<div class="card place" data-place="usk"><h3>臼杵</h3><p class="pl-when"></p><ul><li><b>午餐：</b><a href="https://tabelog.com/oita/A4401/A440104/44005395/">割烹 みつご</a> <span class="tb">食べログ 3.58 · 51 条</span>，臼杵河豚午餐套餐，约 5,000 日元（约 CNY 210）起，请预约 0972-62-5107。便宜些：<a href="https://tabelog.com/oita/A4401/A440104/44001176/">敦煌</a> <span class="tb">食べログ 3.62 · 65 条</span>，中华套餐 1,000–2,000 日元（约 CNY 40–85）（周三休；请先打 0972-62-8662）。</li></ul></div>
+<div class="card place" data-place="usa"><h3>宇佐</h3><p class="pl-when"></p><ul><li><b>午餐：</b>宇佐神宫参道上的かくまさ <span class="tb">食べログ 3.3–3.5 · 90 条</span>，团子汁和鸡肉天妇罗，约 1,000 日元（约 CNY 40）。宇佐有名的炸鸡店太阁和すずや周一休息。</li></ul></div>
 <h2 id="shop">购物</h2>
-<div class="card"><ul>
-  <li><b>由布院汤之坪街道：</b>工艺品、甜点、当地小吃；约 9:30–17:30。由布院花卉村适合快速逛逛，比较商业化。</li>
-  <li><b>别府站前商店街</b>（やよい天狗、竹瓦）：竹编工艺、温泉用品、外带鸡肉天妇罗。</li>
-  <li><b>大分站 AMU Plaza：</b>车站大型商场，10:00–20:30（周五至周日到 21:00）。</li>
-  <li><b>大分 Tokiwa 百货：</b>地下食品街买臭橙（kabosu）、干香菇等大分特产。</li>
-  <li><b>丰后高田昭和之町：</b>怀旧零食和杂货。</li>
-  <li><b>道之驿院内</b>（宇佐）：农产品、香菇、臭橙，每天 8:00–17:00。</li>
-  <li><b>福冈机场国内线 2 楼：</b>小鸡馒头等福冈伴手礼。</li>
+<div class="card"><p class="muted pl-summary" data-kind="places"></p><ul>
+  <li data-place="yuf"><b>由布院汤之坪街道：</b>工艺品、甜点、当地小吃；约 9:30–17:30。由布院花卉村适合快速逛逛，比较商业化。</li>
+  <li data-place="kun"><b>丰后高田昭和之町：</b>怀旧零食和杂货。</li>
+  <li data-place="bep"><b>别府站前商店街</b>（やよい天狗、竹瓦）：竹编工艺、温泉用品、外带鸡肉天妇罗。</li>
+  <li data-place="oit"><b>大分站 AMU Plaza：</b>车站大型商场，10:00–20:30（周五至周日到 21:00）。<b>Tokiwa 百货：</b>地下食品街买臭橙（kabosu）、干香菇等大分特产。</li>
+  <li data-place="usa"><b>道之驿院内</b>（宇佐）：农产品、香菇、臭橙，每天 8:00–17:00。</li>
+  <li data-place="fuk"><b>福冈机场国内线 2 楼：</b>小鸡馒头等福冈伴手礼。</li>
 </ul></div>
-
 <h2 id="stay">住宿</h2>
+<p class="muted pl-summary" data-kind="nights"></p>
 <p class="muted">价格为 2026 年 11 月下旬在 Booking.com 上查到的 12 月某个周末、两人最便宜房型的含税价。温泉旅馆价格往往取决于是否含晚餐。</p>
-<div class="card"><div class="hotel-head"><h3>由布院温泉 8A1 八英智</h3><span class="score">9.6</span></div><div class="local">Yufuin Onsen 8A1 Yaeichi · 由布院 · 温泉旅馆</div><p>每晚约 1,200 元人民币。方案多为只住不含餐（免费晚餐便当是开业优惠）；请看清所订方案含什么。</p><p><a href="https://www.booking.com/hotel/jp/yufuin-onsen-8a1-yaeichi.html">Booking.com</a></p></div>
-<div class="card"><div class="hotel-head"><h3>山荘 しゃらの木</h3><span class="score">9.7</span></div><div class="local">Sansou Syaranoki · 由布院（川北一侧）· 温泉旅馆</div><p>每晚约 1,100 元人民币。馆内无餐厅，按只住不含餐计划，晚餐在镇上预订；16:00 起入住。预订时确认仍在营业。位于较安静的一侧。</p><p><a href="https://www.booking.com/hotel/jp/sansou-syaranoki.html">Booking.com</a></p></div>
-<div class="card"><div class="hotel-head"><h3>西鉄リゾートイン別府</h3><span class="score">8.0</span></div><div class="local">Nishitetsu Resort Inn Beppu · 别府市中心 · 酒店</div><p>每晚约 700 元人民币。屋顶露天温泉；自助早餐约 1,800 日元（约 CNY 75）。</p><p><a href="https://www.booking.com/hotel/jp/nishitetsu-resort-inn-beppu.html">Booking.com</a></p></div>
+<div class="card" data-place="yuf"><div class="hotel-head"><h3>由布院温泉 8A1 八英智</h3><span class="score">9.6</span></div><div class="local">Yufuin Onsen 8A1 Yaeichi · 由布院 · 温泉旅馆</div><p>每晚约 1,200 元人民币。方案多为只住不含餐（免费晚餐便当是开业优惠）；请看清所订方案含什么。</p><p><a href="https://www.booking.com/hotel/jp/yufuin-onsen-8a1-yaeichi.html">Booking.com</a></p></div>
+<div class="card" data-place="yuf"><div class="hotel-head"><h3>山荘 しゃらの木</h3><span class="score">9.7</span></div><div class="local">Sansou Syaranoki · 由布院（川北一侧）· 温泉旅馆</div><p>每晚约 1,100 元人民币。馆内无餐厅，按只住不含餐计划，晚餐在镇上预订；16:00 起入住。预订时确认仍在营业。位于较安静的一侧。</p><p><a href="https://www.booking.com/hotel/jp/sansou-syaranoki.html">Booking.com</a></p></div>
+<div class="card" data-place="bep"><div class="hotel-head"><h3>西鉄リゾートイン別府</h3><span class="score">8.0</span></div><div class="local">Nishitetsu Resort Inn Beppu · 别府市中心 · 酒店</div><p>每晚约 700 元人民币。屋顶露天温泉；自助早餐约 1,800 日元（约 CNY 75）。</p><p><a href="https://www.booking.com/hotel/jp/nishitetsu-resort-inn-beppu.html">Booking.com</a></p></div>
 
 <h3 id="private-baths">私人温泉：可以一起泡的住宿</h3>
 <p class="muted">升级选项。日本的公共浴场男女分开，以下住宿有客房内温泉，或可以一起用的免费私人浴池。价格来自 Booking.com，2026 年 11 月 28 日，2 位成人，12 月中旬。</p>
-<div class="card"><div class="hotel-head"><h3>由布院 别邸 树</h3><span class="score">9.1</span></div><div class="local">由布院 別邸 樹 · 由布院 · 温泉旅馆</div><p>每间客房都有半露天温泉。含早晚餐每晚约 3,690 元（只住约 2,830 元）。</p></div>
-<div class="card"><div class="hotel-head"><h3>YUNOA 由布院</h3><span class="score">9.5</span></div><div class="local">由布院 · 旅宿</div><p>每间客房配私人温泉。只住每晚约 1,490 元，晚餐在汤之坪街道吃。</p></div>
-<div class="card"><div class="hotel-head"><h3>草庵秋桜</h3></div><div class="local">由布院温泉 草庵秋桜 · 由布院 · 温泉旅馆</div><p>两处私人浴池，各有室内和露天浴池，住客免费、不限次数。含早晚餐每晚约 3,040 元，只住约 1,700 元。11:00 退房。</p></div>
-<div class="card"><div class="hotel-head"><h3>汤布院 Lamp no Yado</h3><span class="score">8.7</span></div><div class="local">湯布院 ランプの宿 · 由布院 · 温泉旅馆</div><p>有几处私人浴池。含早晚餐每晚约 1,670 元。</p></div>
-<div class="card"><div class="hotel-head"><h3>别府 八汤 御宿 野乃</h3><span class="score">9.0</span></div><div class="local">御宿 野乃 · 别府市中心 · 酒店</div><p>七处免费私人浴池，先到先用。含早餐每晚约 1,670 元。</p><p><a href="https://www.booking.com/hotel/jp/bie-fu-ba-tang-yu-su-ye-nai-bie-fu.html">Booking.com</a></p></div>
-<div class="card"><div class="hotel-head"><h3>旅亭 松叶屋</h3></div><div class="local">旅亭 松葉屋 · 别府观海寺温泉 · 温泉旅馆</div><p>新馆客房有可眺望别府湾的露天浴池，另有四处免费私人浴池。两人每晚约 2,020 元起，价格随方案变化，订前确认含什么。</p></div>
-<div class="card"><div class="hotel-head"><h3>国东庄</h3><span class="score">8.9</span></div><div class="local">国東荘 · 别府铁轮 · 温泉旅馆</div><p>两处免费私人浴池，就在温泉蒸汽旁。含早晚餐每晚约 2,090 元。</p></div>
-<div class="card"><div class="hotel-head"><h3>别府 ANA 洲际酒店</h3></div><div class="local">别府山上 · 度假酒店</div><p>奢华选择：Club 客房阳台有露天浴池，含早餐每晚约 7,850 元。</p></div>
+<div class="card" data-place="yuf"><div class="hotel-head"><h3>由布院 别邸 树</h3><span class="score">9.1</span></div><div class="local">由布院 別邸 樹 · 由布院 · 温泉旅馆</div><p>每间客房都有半露天温泉。含早晚餐每晚约 3,690 元（只住约 2,830 元）。</p></div>
+<div class="card" data-place="yuf"><div class="hotel-head"><h3>YUNOA 由布院</h3><span class="score">9.5</span></div><div class="local">由布院 · 旅宿</div><p>每间客房配私人温泉。只住每晚约 1,490 元，晚餐在汤之坪街道吃。</p></div>
+<div class="card" data-place="yuf"><div class="hotel-head"><h3>草庵秋桜</h3></div><div class="local">由布院温泉 草庵秋桜 · 由布院 · 温泉旅馆</div><p>两处私人浴池，各有室内和露天浴池，住客免费、不限次数。含早晚餐每晚约 3,040 元，只住约 1,700 元。11:00 退房。</p></div>
+<div class="card" data-place="yuf"><div class="hotel-head"><h3>汤布院 Lamp no Yado</h3><span class="score">8.7</span></div><div class="local">湯布院 ランプの宿 · 由布院 · 温泉旅馆</div><p>有几处私人浴池。含早晚餐每晚约 1,670 元。</p></div>
+<div class="card" data-place="bep"><div class="hotel-head"><h3>别府 八汤 御宿 野乃</h3><span class="score">9.0</span></div><div class="local">御宿 野乃 · 别府市中心 · 酒店</div><p>七处免费私人浴池，先到先用。含早餐每晚约 1,670 元。</p><p><a href="https://www.booking.com/hotel/jp/bie-fu-ba-tang-yu-su-ye-nai-bie-fu.html">Booking.com</a></p></div>
+<div class="card" data-place="bep"><div class="hotel-head"><h3>旅亭 松叶屋</h3></div><div class="local">旅亭 松葉屋 · 别府观海寺温泉 · 温泉旅馆</div><p>新馆客房有可眺望别府湾的露天浴池，另有四处免费私人浴池。两人每晚约 2,020 元起，价格随方案变化，订前确认含什么。</p></div>
+<div class="card" data-place="bep"><div class="hotel-head"><h3>国东庄</h3><span class="score">8.9</span></div><div class="local">国東荘 · 别府铁轮 · 温泉旅馆</div><p>两处免费私人浴池，就在温泉蒸汽旁。含早晚餐每晚约 2,090 元。</p></div>
+<div class="card" data-place="bep"><div class="hotel-head"><h3>别府 ANA 洲际酒店</h3></div><div class="local">别府山上 · 度假酒店</div><p>奢华选择：Club 客房阳台有露天浴池，含早餐每晚约 7,850 元。</p></div>
 
 <h2 id="budget">预算</h2>
 <div class="card"><p>每人费用，按两人同住一间、合租一辆车计算，<b>不含机票</b>。2026 年 11 月估算，1 日元 ≈ 0.042 元人民币（2026 年 11 月 26 日汇率）。</p><ul>
@@ -353,6 +344,18 @@ window.wlShowDay=function(d){show(d);};})();</script>
 <div class="note"><b>天气。</b>12 月的大分白天约 13°C，夜间约 5°C。由布院更冷，夜间零度以下，有霜和晨雾。</div>
 <h2 id="sources">信息来源</h2>
 <div class="card"><p class="muted">查询日期：2026 年 11 月 26 日。尽量采用官方网站。部分营业时间和价格只来自点评或旅游信息网站（食べログ、るるぶ、Mapple、NAVITIME、Retty），可能已过时，出发前请确认休息日。车程和距离是路线规划工具的估算。酒店评分为 Booking.com 住客评分（满分 10 分）。所有内容均以我们自己的话整理。<a href="../about.zh.html">调研方法 →</a></p><ul><li><b>博物馆与展览:</b> <a href="https://www.opam.jp/">OPAM（开馆日历和展览）</a> · <a href="https://camy.oita.jp/en">COMICO 美术馆</a> · <a href="https://www.city.oita.oita.jp/o205/r8tenji/oitarashisa.html">大分市历史资料馆</a> · <a href="https://www.city.oita.oita.jp/bunkasports/bunka/bijutsukan/index.html">大分市美术馆</a> · <a href="https://www.pref.oita.jp/site/rekishihakubutsukan/">宇佐 Riman</a></li><li><b>景点:</b> <a href="https://www.sekibutsu.com/">臼杵石佛</a> · <a href="https://www.usuki-kanko.com/sightseeing">臼杵观光</a> · <a href="https://www.beppu-jigoku.com/">别府地狱巡游</a> · <a href="https://www.tokyoartbeat.com/">Tokyo Art Beat（国东艺术）</a> · <a href="https://www.qsr.mlit.go.jp/n-michi/michi_no_eki/kobetu/harajiri/harajiri.html">国土交通省 道之驿</a></li><li><b>火车、道路与自驾:</b> <a href="https://www.jrkyushu.co.jp/trains/yufuinnomori/">JR 九州 由布院之森</a> · <a href="https://www.jrkyushu.co.jp/english/railpass/railpass.html">JR 九州铁路通票</a> · <a href="https://teppan-oita.jp/tour/teikan_kunisaki2/">大分交通 国东观光巴士</a> · <a href="https://www.w-nexco.co.jp/global/en/kep">NEXCO 西日本 九州高速周游券</a> · <a href="https://english.jaf.or.jp/">JAF（国际驾照）</a></li><li><b>美食:</b> <a href="https://tabelog.com/">Tabelog 食べログ（营业时间、休息日、价格）</a> · <a href="https://jigokumushi.com/">地狱蒸工房</a> · <a href="https://www.mapple.net/">Mapple</a> · <a href="https://retty.me/">Retty</a></li><li><b>住宿:</b> <a href="https://www.booking.com/">Booking.com（价格和住客评分，2026 年 11 月 26 日）</a> · <a href="https://www.jalan.net/">Jalan（餐食方案）</a></li><li><b>天气:</b> <a href="https://www.data.jma.go.jp/">日本气象厅</a></li><li><b>照片（Wikimedia Commons，自由授权）:</b> 臼杵石佛 (<a href="https://commons.wikimedia.org/wiki/File:The_superb_Magaibutsu,_or_stone_Buddhas_of_Usuki_2009-09-13.jpg">照片</a>: Maarten Heerlien, <a href="https://creativecommons.org/licenses/by/2.0">CC BY 2.0</a>) · 由布院 晨雾中的金鳞湖 (<a href="https://commons.wikimedia.org/wiki/File:Lake_Kinrin_with_Morning_fog.jpg">照片</a>: Tzu-hsun, Hsu, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>) · 富贵寺大堂，九州最古老的木造建筑 (<a href="https://commons.wikimedia.org/wiki/File:Fukiji.jpg">照片</a>: STA3816, <a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>) · 熊野磨崖佛 (<a href="https://commons.wikimedia.org/wiki/File:Kumano_Magaibutsu_(48461032857).jpg">照片</a>: Hajime NAKANO from Tokyo, Japan, <a href="https://creativecommons.org/licenses/by/2.0">CC BY 2.0</a>) · 别府 海地狱 (<a href="https://commons.wikimedia.org/wiki/File:Beppu_Umi-jigoku04n4272.jpg">照片</a>: 663highland, <a href="https://creativecommons.org/licenses/by/2.5">CC BY 2.5</a>) · OPAM 大分县立美术馆（坂茂设计） (<a href="https://commons.wikimedia.org/wiki/File:Oita_Prefectural_Art_Museum_20221023.jpg">照片</a>: Suicasmo, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>)</li></ul></div>
+<script id="wl-placesync">(function(){var P={"tabs":{"three":{"label":"三天行程","base":{"fuk":["第 1 天 午餐","第 3 天 晚餐"],"yuf":["第 1 天 晚餐","第 2 天 午餐"],"bep":["第 2 天 晚餐"],"oit":["第 3 天 午餐"]},"add":{"kun":["第 2 天"]},"meals":[["fuk","yuf"],["yuf","bep"],["oit","fuk"]],"nights":[["yuf",1],["bep",1]]},"four":{"label":"四天行程","base":{"fuk":["第 1 天 午餐","第 4 天 晚餐"],"yuf":["第 1 天 晚餐","第 2 天 午餐","第 2 天 晚餐"],"kun":["第 3 天 午餐"],"bep":["第 3 天 晚餐"],"oit":["第 4 天 午餐"]},"add":{"usa":["第 4 天"]},"meals":[["fuk","yuf"],["yuf","yuf"],["kun","bep"],["oit","fuk"]],"nights":[["yuf",2],["bep",1]]},"five":{"label":"五天行程","base":{"fuk":["第 1 天 午餐","第 5 天 晚餐"],"yuf":["第 1 天 晚餐","第 2 天 午餐","第 2 天 晚餐"],"kun":["第 3 天 午餐"],"bep":["第 3 天 晚餐","第 4 天 午餐","第 4 天 晚餐"],"oit":["第 5 天 午餐"]},"add":{"usa":["第 5 天"]},"meals":[["fuk","yuf"],["yuf","yuf"],["kun","bep"],["bep","bep"],["oit","fuk"]],"nights":[["yuf",2],["bep",2]]},"six":{"label":"六天行程","base":{"fuk":["第 1 天 午餐","第 6 天 晚餐"],"yuf":["第 1 天 晚餐","第 2 天 午餐","第 2 天 晚餐"],"kun":["第 3 天 午餐"],"bep":["第 3 天 晚餐","第 4 天 午餐","第 4 天 晚餐","第 5 天 晚餐"],"oit":["第 5 天 午餐"],"usa":["第 6 天 午餐"]},"add":{"hit":["第 1 天"],"usk":["第 5 天"]},"meals":[["fuk","yuf"],["yuf","yuf"],["kun","bep"],["bep","bep"],["oit","bep"],["usa","fuk"]],"nights":[["yuf",2],["bep",3]]}},"names":{"fuk":"福冈机场","yuf":"由布院","kun":"国东与昭和之町","bep":"别府","oit":"大分市","usk":"臼杵","usa":"宇佐","hit":"日田"},"t":{"day":"第","suf":" 天","lunch":"午餐","dinner":"晚餐","ifadd":"如果加上：","on":"按","nights":"晚","night":"晚","change":"（在“行程”里切换天数，这里会跟着变。）"}};
+function apply(id){var T=P.tabs[id];if(!T)return;
+document.querySelectorAll('[data-place]').forEach(function(el){var k=el.dataset.place;var b=T.base[k],a=T.add[k];
+ el.hidden=!(b||a);el.classList.toggle('pl-add',!b&&!!a);
+ var w=el.querySelector('.pl-when');if(w){w.textContent=b?b.join(' · '):(a?P.t.ifadd+' '+a.join(' · '):'');}});
+document.querySelectorAll('.pl-summary').forEach(function(el){var kind=el.dataset.kind;var out=P.t.on+' '+T.label+': ';
+ if(kind==='nights'){out+=T.nights.map(function(n){return P.names[n[0]]+' '+n[1]+' '+(n[1]>1?P.t.nights:P.t.night);}).join(', ')+'.';}
+ else if(kind==='meals'){out+=T.meals.map(function(m,i){return P.t.day+' '+(i+1)+P.t.suf+': '+P.t.lunch+' '+P.names[m[0]]+', '+P.t.dinner+' '+P.names[m[1]];}).join(' · ')+'.';}
+ else {var ks=Object.keys(T.base);out+=ks.map(function(k){return P.names[k];}).join(', ')+'.';}
+ el.textContent=out+' '+P.t.change;});}
+document.addEventListener('click',function(e){var t=e.target.closest&&e.target.closest('.tabs [data-t]');if(t)apply(t.dataset.t);});
+var s=document.querySelector('.tabs [aria-selected="true"]');apply(s?s.dataset.t:Object.keys(P.tabs)[0]);})();</script>
 <footer>Wanderlust 的一部分。仅为行程研究，不构成建议；无任何赞助。</footer>
 </main>
 <script>
