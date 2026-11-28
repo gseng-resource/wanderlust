@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="UTF-8">
+<script>try{var t=localStorage.getItem("wl-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>冬季札幌与函馆</title>
+<meta name="description" content="12 月坐火车玩六天：札幌的明治建筑和圣诞灯饰、北海道开拓村、小樽运河与彩色玻璃、白老 Upopoy 国立阿伊努民族博物馆，以及函馆的五棱郭、元町教堂和夜景。">
+<meta property="og:title" content="冬季札幌与函馆">
+<meta property="og:description" content="12 月坐火车玩六天：札幌的明治建筑和圣诞灯饰、北海道开拓村、小樽运河与彩色玻璃、白老 Upopoy 国立阿伊努民族博物馆，以及函馆的五棱郭、元町教堂和夜景。">
+<meta property="og:url" content="https://gseng-resource.github.io/wanderlust/japan/hokkaido-sapporo-hakodate.zh.html">
+<link rel="alternate" hreflang="en" href="https://gseng-resource.github.io/wanderlust/japan/hokkaido-sapporo-hakodate.html">
+<style>
+  :root { --bg:#f6f4ef; --card:#fff; --text:#1d1d1f; --muted:#6b6b70; --line:#e4e1d9; --accent:#c2410c; --warn:#fff4e5; --warn-line:#f3d2a6; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg:#141416; --card:#1f1f22; --text:#f2f2f3; --muted:#a1a1a8; --line:#2e2e33; --accent:#fb923c; --warn:#2a2118; --warn-line:#5a4126; } }
+  :root[data-theme="dark"] { --bg:#141416; --card:#1f1f22; --text:#f2f2f3; --muted:#a1a1a8; --line:#2e2e33; --accent:#fb923c; --warn:#2a2118; --warn-line:#5a4126; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font:16px/1.6 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Segoe UI",Roboto,sans-serif; }
+  main { max-width:760px; margin:0 auto; padding:24px 16px 56px; }
+  a { color:var(--accent); }
+  .top { display:flex; justify-content:space-between; align-items:center; }
+  .back { font-size:.9rem; text-decoration:none; }
+  .lang { font-size:.9rem; color:var(--muted); } .lang a { text-decoration:none; } .lang b { color:var(--text); }
+  h1 { font-size:2rem; margin:12px 0 4px; letter-spacing:-.02em; }
+  .lede { color:var(--muted); margin:0 0 8px; }
+  .stamp { color:var(--muted); font-size:.85rem; margin:0 0 16px; }
+  nav.toc { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+  nav.toc a { font-size:.85rem; text-decoration:none; border:1px solid var(--line); background:var(--card); border-radius:999px; padding:3px 10px; color:var(--text); }
+  h2 { font-size:1.25rem; margin:36px 0 12px; letter-spacing:-.01em; scroll-margin-top:12px; }
+  h3 { font-size:1rem; margin:0 0 8px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:16px; margin:0 0 12px; }
+  .card p { margin:6px 0; }
+  .muted { color:var(--muted); font-size:.92rem; }
+  ul { padding-left:20px; margin:6px 0; } li { margin:4px 0; }
+  .tabs { display:flex; gap:8px; margin:0 0 12px; }
+  .tabs button { font:inherit; padding:6px 14px; border-radius:999px; border:1px solid var(--line); background:var(--card); color:var(--text); cursor:pointer; }
+  .tabs button[aria-selected="true"] { background:var(--accent); border-color:var(--accent); color:#fff; }
+  .d { color:var(--accent); font-weight:700; display:block; margin-bottom:4px; }
+  .drive { display:inline-block; font-size:.85rem; color:var(--muted); border-left:3px solid var(--accent); padding-left:8px; margin:2px 0; }
+  .night { color:var(--muted); font-size:.88rem; margin-top:6px; }
+  .note { background:var(--warn); border:1px solid var(--warn-line); border-radius:12px; padding:12px 14px; margin:12px 0; }
+  .hotel-head { display:flex; justify-content:space-between; gap:12px; align-items:baseline; flex-wrap:wrap; }
+  .score { font-weight:600; } .local { color:var(--muted); font-size:.9rem; }
+  table { width:100%; border-collapse:collapse; font-size:.9rem; }
+  th, td { text-align:left; padding:6px 8px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { color:var(--muted); font-weight:600; }
+  .scroll { overflow-x:auto; }
+  figure { margin:0 0 12px; } figure img { width:100%; height:auto; display:block; border-radius:14px; aspect-ratio:3/2; object-fit:cover; background:var(--line); }
+  figure.hero img { aspect-ratio:16/9; }
+  figcaption { font-size:.82rem; color:var(--muted); margin-top:4px; } .credit a { color:var(--muted); }
+  .gallery { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:0 0 12px; } .gallery figure { margin:0; }
+  @media (max-width:560px) { .gallery { grid-template-columns:1fr; } }
+  .tb { display:inline-block; font-size:.78rem; font-weight:600; color:var(--text); background:var(--bg); border:1px solid var(--line); border-radius:6px; padding:0 6px; margin-left:4px; white-space:nowrap; }
+  .why .pitch { font-size:1.05rem; } .why p { margin:8px 0; }
+  .charge { color:var(--accent); font-size:.9rem; margin:6px 0 0; }
+  footer { margin-top:40px; color:var(--muted); font-size:.85rem; }
+</style>
+<style id="wl-theme-css">:root{color-scheme:light dark}:root[data-theme="light"]{color-scheme:light}:root[data-theme="dark"]{color-scheme:dark}.themebtn{font:inherit;line-height:1;border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:999px;width:2em;height:2em;padding:0;cursor:pointer;vertical-align:middle;margin-right:.5em}.themebtn:hover{border-color:var(--accent)}.top>.themebtn{margin-left:auto;margin-right:.75em}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&display=swap" rel="stylesheet">
+<style id="wl-enh-css">
+  h1, h2 { font-family:"Fraunces","Songti SC","Noto Serif SC",STSong,Georgia,serif; font-weight:600; }
+  h2 { font-size:1.45rem; scroll-margin-top:64px; }
+  /* 3. cover + facts */
+  figure.cover { margin:10px 0 14px; }
+  .cover-img { position:relative; border-radius:16px; overflow:hidden; background:var(--line); }
+  figure.cover img { aspect-ratio:16/9; border-radius:0; margin:0; }
+  @media (max-width:600px) { figure.cover img { aspect-ratio:4/3; } }
+  .cover-t { position:absolute; left:0; right:0; bottom:0; padding:56px 18px 16px; background:linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.68)); }
+  .cover h1 { color:#fff; margin:0; font-size:clamp(1.75rem,5.6vw,2.7rem); line-height:1.12; letter-spacing:-.01em; text-shadow:0 1px 10px rgba(0,0,0,.35); }
+  .facts { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin:14px 0 10px; padding:0; }
+  @media (max-width:600px) { .facts { grid-template-columns:1fr 1fr; } }
+  .facts div { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:10px 12px; }
+  .facts dt { color:var(--muted); font-size:.75rem; letter-spacing:.04em; text-transform:uppercase; margin:0 0 2px; }
+  .facts dd { margin:0; font-weight:650; font-size:.98rem; line-height:1.3; }
+  .facts div.best dd { color:var(--accent); }
+  /* 1. sticky section bar + back to top */
+  nav.toc { position:sticky; top:0; z-index:1100; flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; -webkit-overflow-scrolling:touch;
+            background:var(--bg); margin:0 -16px 8px; padding:10px 16px; border-bottom:1px solid transparent; transition:border-color .2s, box-shadow .2s; }
+  nav.toc::-webkit-scrollbar { display:none; }
+  nav.toc a { white-space:nowrap; flex:none; }
+  nav.toc.stuck { border-bottom-color:var(--line); box-shadow:0 6px 14px -10px rgba(0,0,0,.25); }
+  nav.toc a.on { background:var(--text); color:var(--bg); border-color:var(--text); }
+  .totop { position:fixed; right:16px; bottom:20px; z-index:1100; width:44px; height:44px; border-radius:50%; border:1px solid var(--line);
+           background:var(--card); color:var(--text); font-size:1.2rem; cursor:pointer; box-shadow:0 4px 14px rgba(0,0,0,.15);
+           opacity:0; transform:translateY(10px); pointer-events:none; transition:opacity .2s, transform .2s; }
+  .totop.show { opacity:1; transform:none; pointer-events:auto; }
+  .totop:hover { border-color:var(--accent); }
+  /* 2. itinerary timeline */
+  .card.day { position:relative; margin-left:40px; }
+  .card.day::before { content:""; position:absolute; left:-25px; top:-13px; bottom:-13px; width:2px; background:var(--line); }
+  .card.day:not(.day + .day)::before { top:28px; }
+  .card.day:not(:has(+ .day))::before { bottom:auto; height:0; }
+  .card.day:not(.day + .day):not(:has(+ .day))::before { display:none; }
+  .dn { position:absolute; left:-40px; top:14px; width:32px; height:32px; border-radius:50%; background:var(--accent); color:#fff;
+        font:700 .85rem/32px -apple-system,BlinkMacSystemFont,sans-serif; text-align:center; box-shadow:0 0 0 4px var(--bg); }
+  .dhead { cursor:pointer; position:relative; padding-right:28px; }
+  .dhead::after { content:"›"; position:absolute; right:2px; top:-2px; font-size:1.4rem; color:var(--muted); transform:rotate(90deg); transition:transform .2s; }
+  .day.folded .dhead::after { transform:rotate(0deg); }
+  .day.folded .dbody { display:none; }
+  .day.folded .night { margin-top:2px; }
+  .dhead:focus-visible { outline:2px solid var(--accent); outline-offset:4px; border-radius:6px; }
+  .dmap { display:inline-block; margin-top:8px; font-size:.85rem; color:var(--accent); background:none; border:0; padding:0; cursor:pointer; font-family:inherit; }
+  .dtools { display:flex; justify-content:flex-end; margin:0 0 10px; }
+  .dtools button { font:inherit; font-size:.85rem; border:1px solid var(--line); background:var(--card); color:var(--text); border-radius:999px; padding:4px 12px; cursor:pointer; }
+  @media print { nav.toc { position:static; } .day.folded .dbody { display:block; } .totop, .dtools, .dmap, .themebtn { display:none; } }
+  /* 4. folded reference sections */
+  h2.fold-h { cursor:pointer; position:relative; padding-right:30px; }
+  h2.fold-h::after { content:"›"; position:absolute; right:4px; top:0; font-family:-apple-system,sans-serif; font-weight:400; color:var(--muted); transform:rotate(90deg); transition:transform .2s; }
+  h2.fold-h.folded::after { transform:rotate(0deg); }
+  h2.fold-h:focus-visible { outline:2px solid var(--accent); outline-offset:4px; border-radius:6px; }
+  .ssum { display:none; margin:-4px 0 12px; color:var(--muted); font-size:.92rem; cursor:pointer; }
+  .ssum b { color:var(--accent); font-weight:600; white-space:nowrap; }
+  h2.fold-h.folded + .ssum { display:block; }
+  h2.fold-h.folded + .ssum + .sbody { display:none; }
+  /* 5a. two plans side by side */
+  .plans { display:grid; gap:12px; margin:0 0 12px; }
+  @media (min-width:720px) { .plans { grid-template-columns:1fr 1fr; } }
+  .plans .card { margin:0; padding:0; overflow:hidden; display:flex; flex-direction:column; }
+  .plans h3 { margin:0; padding:12px 16px; font-size:1.02rem; }
+  .plans ul { margin:0; padding:12px 16px 14px 34px; }
+  .plan.value h3 { background:#e7f2ea; color:#14532d; }
+  .plan.exp h3 { background:#fbecd9; color:#7c2d12; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .plan.value h3 { background:#1b2a20; color:#bbf7d0; } :root:not([data-theme="light"]) .plan.exp h3 { background:#2e2217; color:#fed7aa; } }
+  :root[data-theme="dark"] .plan.value h3 { background:#1b2a20; color:#bbf7d0; } :root[data-theme="dark"] .plan.exp h3 { background:#2e2217; color:#fed7aa; }
+  /* 5b. photo grid */
+  .gallery { grid-template-columns:1fr 1fr !important; gap:8px; }
+  @media (min-width:720px) { .gallery { grid-template-columns:repeat(3,1fr) !important; } }
+  .gallery figure img { aspect-ratio:4/3; border-radius:12px; }
+  .gallery figcaption { font-size:.78rem; line-height:1.35; margin-top:4px; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+  /* 5c. budget bars */
+  .bbar { display:flex; height:14px; border-radius:7px; overflow:hidden; margin:8px 0 6px; background:var(--line); }
+  .bbar span { display:block; height:100%; }
+  .bbar span + span { box-shadow:inset 2px 0 0 var(--card); }
+  .blegend { display:flex; flex-wrap:wrap; gap:4px 12px; margin:0 0 4px; padding:0; list-style:none; font-size:.82rem; color:var(--muted); }
+  .blegend li { margin:0; }
+  .blegend i { display:inline-block; width:9px; height:9px; border-radius:2px; margin-right:5px; vertical-align:0; }
+  .blegend b { color:var(--text); font-weight:600; }
+  @media print { h2.fold-h.folded + .ssum + .sbody { display:block; } .ssum { display:none !important; } }
+</style>
+<style id="wl-placesync-css">.pl-when{color:var(--accent);font-weight:600;font-size:.88rem;margin:0 0 6px}.pl-add{opacity:.8}.pl-add .pl-when{color:var(--muted)}.pl-summary{font-size:.9rem}</style>
+</head>
+<body>
+<main>
+<div class="top"><a class="back" href="../index.zh.html">← Wanderlust</a><button type="button" class="themebtn" data-l="切换到浅色" data-d="切换到深色" aria-label="切换到深色">☾</button><span class="lang"><a href="hokkaido-sapporo-hakodate.html" lang="en" hreflang="en">EN</a> | <b>中文</b></span></div>
+<figure class="hero cover"><div class="cover-img"><img src="../assets/photos/hok-hakodate-night.jpg" alt="黄昏时从函馆山看函馆" fetchpriority="high" width="1000"><div class="cover-t"><h1>冬季札幌与函馆</h1></div></div><figcaption>黄昏时从函馆山看函馆 · <span class="credit"><a href="https://commons.wikimedia.org/wiki/File:Hokkaido_Hakodate_night_view_xl.jpg">照片</a>: 洞内定晴, <a href="https://creativecommons.org/licenses/by/4.0">CC BY 4.0</a></span></figcaption></figure>
+
+<p class="lede">12 月坐火车玩六天：札幌的明治建筑和圣诞灯饰、北海道开拓村、小樽运河与彩色玻璃、白老 Upopoy 国立阿伊努民族博物馆，以及函馆的五棱郭、元町教堂和夜景。</p><dl class="facts"><div><dt>天数</dt><dd>6 天</dd></div><div><dt>里程</dt><dd>火车约 370 公里</dd></div><div class="best"><dt>最佳季节</dt><dd>12 月（灯饰）/ 2 月（冰雪节）</dd></div><div><dt>每人（不含机票）</dt><dd>约 CNY 5,630 起</dd></div></dl>
+<p class="stamp">2026 年 11 月为 12 月的行程调研，并用另一个研究工具交叉核对。开放时间和价格会变，出发前请再确认。 汇率按 1 日元 ≈ 0.0417 元人民币（2026 年 11 月 27 日）。</p>
+
+<nav class="toc"><a href="#why">为什么去</a><a href="#picks">两种玩法</a><a href="#map">路线地图</a><a href="#plan">行程</a><a href="#sights">主要景点</a><a href="#shows">12 月活动</a><a href="#museums">博物馆</a><a href="#eat">吃什么</a><a href="#shop">购物</a><a href="#stay">住哪里</a><a href="#budget">预算</a><a href="#train">火车与行李</a><a href="#sources">信息来源</a></nav>
+
+<h2 id="why">为什么选札幌与函馆</h2>
+<div class="card why"><p class="pitch">适合想看历史和冬日风景、又不想开车的人：明治时代的札幌、开拓者建筑的露天博物馆、小樽运河与彩色玻璃、国立阿伊努民族博物馆，还有函馆的星形要塞和港边教堂，一路坐特急“北斗”串起来。全程只住两家酒店，行李用快递提前寄走。</p><p><b>12 月：</b> 寒冷，常下雪。札幌白天约 0–2°C，夜里 −4 至 −6°C；函馆稍暖但风大。下午 4 点左右天黑，所以晚上看灯：两座城市的圣诞灯饰和市集都开到 12 月 25 日，小樽运河有蓝色冬季灯光，五棱郭护城河傍晚也会点灯。人和价格都远低于 2 月冰雪节高峰。</p><p><b>最佳季节：</b> 12 月中旬到圣诞节前最适合这条路线：札幌和函馆的圣诞灯饰与市集开到 12 月 25 日，开拓村和小樽通常已有积雪，人比 2 月少得多，价格也低。12 月上旬更清静，但雪少一些。2 月上旬是另一个高峰：札幌冰雪节和小樽雪灯之路，雪最深，价格也最高。避开新年那一周（闭馆多、票价最高）；2 月下旬至 3 月开始融雪，天色灰，价格便宜。</p><p><b>路线：</b> 新千岁机场 → 札幌（住 3 晚，开拓村和小樽当天往返）→ 白老看 Upopoy → 函馆（住 2 晚）→ 函馆机场。6 天，火车约 370 公里，不用租车。</p><p><b>亮点</b></p><ul><li>札幌的明治地标：钟楼和红砖北海道厅旧本厅舍，加上大通公园的白色灯树节和圣诞市集</li><li>北海道开拓村：50 多栋开拓时期的老建筑，冬天覆盖着雪</li><li>小樽：黄昏的运河、似鸟美术馆的蒂芙尼彩窗、辰野金吾设计的日本银行旧小樽支店</li><li>南下途中的 Upopoy 国立阿伊努民族博物馆与公园</li><li>函馆：从五棱郭塔俯瞰星形要塞、元町的教堂、圣诞梦幻节烟花和函馆山夜景</li><li>北海道美食：成吉思汗烤羊肉、味噌拉面、小樽寿司、函馆乌贼和朝市</li></ul><p><b>须知</b></p><ul><li>Upopoy 和大多数博物馆周一休馆，所以第 2 天和第 4 天不要排在周一。小樽的似鸟美术馆和日本银行金融资料馆周三休馆，所以第 3 天不要排在周三。</li><li>第 2 天晚上把行李箱从札幌酒店快递到函馆酒店，第 3、4 天轻装出行（见<a href="#train">火车与行李</a>）。</li><li>提前预订：小樽伊势鮨、鮨西光、鮨处木はら，以及北斗号座位（全车指定席）。</li><li>大雪可能让北斗号晚点，大风会让函馆山缆车停运，所以在函馆留一个备用晚上。</li></ul></div>
+<h2 id="picks">两种玩法</h2>
+<div class="plans"><div class="card plan value"><h3>💰 最划算</h3><ul>
+  <li><b>住：</b> 札幌 Cross Hotel（两人一晚含早约 26,300 日元（约 CNY 1,100）；顶楼大浴场），然后函馆国际酒店（含早一晚约 36,000 日元（约 CNY 1,500）；带露天风吕的温泉）。</li>
+  <li><b>吃：</b> 札幌吃达摩成吉思汗烤肉、味噌拉面和汤咖喱，小樽吃伊势鮨，函馆吃いか清的乌贼和あじさい的盐味拉面。</li>
+  <li><b>每人约 CNY 5,630–6,090</b> （不含机票）。</li></ul></div><div class="card plan exp"><h3>✨ 最佳体验</h3><ul>
+  <li><b>住：</b> 札幌格兰大酒店（1934 年开业；含早一晚约 28,800 日元（约 CNY 1,200）），然后函馆湾 La Vista（屋顶温泉俯瞰港湾；不含早一晚约 65,000–70,000 日元（约 CNY 2,710–2,920））。</li>
+  <li><b>加上：</b> 鮨西光的主厨套餐、汤之川木はら的寿司午餐、红砖厅舍八角塔观景和札幌啤酒博物馆。</li>
+  <li><b>每人约 CNY 8,370–9,250</b> （不含机票）。</li></ul></div></div>
+<p class="muted">两种玩法路线和火车相同，只是酒店、几顿饭和附加项目不同。</p>
+
+<h2 id="map">路线地图</h2>
+<div class="card"><div id="rmap" style="height:460px;border-radius:10px;overflow:hidden;background:var(--line)"></div>
+<div id="rdays" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px"></div><p id="rdt" style="margin:8px 0 0;font-weight:600;min-height:1.5em"></p>
+<p class="muted" style="margin:8px 0 0"><b>●</b> 带序号：按顺序的住宿城市 &nbsp; <span style="color:#c2410c">●</span> 移动日途经的地点 &nbsp; <span style="color:#15803d">●</span> 从住地出发的一日游（虚线）。点击地点可看是第几天。 ✈️ 机场。 全程坐火车：线条只是各站之间的直线示意，不是铁路线路。</p></div>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>(function(){var D={"p":[{"n":"新千岁机场","la":42.775,"lo":141.692,"k":"A","d":"1"},{"n":"札幌","la":43.068,"lo":141.351,"k":"N","d":"1–4"},{"n":"北海道开拓村与北海道博物馆（新札幌）","la":43.047,"lo":141.496,"k":"X","d":"2"},{"n":"小樽","la":43.198,"lo":141.0,"k":"X","d":"3"},{"n":"白老（Upopoy）","la":42.558,"lo":141.357,"k":"L","d":"4"},{"n":"函馆","la":41.774,"lo":140.727,"k":"N","d":"4–6"},{"n":"函馆机场","la":41.77,"lo":140.822,"k":"A","d":"6"}],"legs":[[[42.775,141.692],[43.068,141.351]],[[43.068,141.351],[42.558,141.357]],[[42.558,141.357],[41.774,140.727]],[[41.774,140.727],[41.77,140.822]]],"ld":[1,4,4,6],"dt":["新千岁 → 札幌","北海道开拓村和北海道博物馆","小樽一日游","札幌 → Upopoy → 函馆","函馆","函馆，然后回程"],"trips":[[[43.068,141.351],[43.047,141.496]],[[43.068,141.351],[43.198,141.0]]],"t":{"day":"第","days":"第","suf":" 天","all":"全程","N":"住宿","A":"机场","L":"午餐或途经景点","X":"一日游"}};
+if(!window.L)return;var m=L.map('rmap',{scrollWheelZoom:false});
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(m);
+var BASE={color:'#c2410c',weight:4,opacity:.85},HI={color:'#1d4ed8',weight:7,opacity:1};
+var legs=D.legs.map(function(c,i){return L.polyline(c,BASE).addTo(m);});var line=L.featureGroup(legs);
+D.trips.forEach(function(t){L.polyline(t,{color:'#15803d',weight:3,dashArray:'6 6'}).addTo(m);});
+function inDays(str,d){return str.split(',').some(function(r){var a=r.trim().split('–').map(Number);return a.length>1?(d>=a[0]&&d<=a[1]):d===a[0];});}
+var mks=[];var n=0;D.p.forEach(function(s){var lab=(s.d.indexOf('–')>0||s.d.indexOf(',')>0?D.t.days:D.t.day)+' '+s.d+D.t.suf;
+var mk;if(s.k==='N'){n++;mk=L.marker([s.la,s.lo],{icon:L.divIcon({className:'',html:'<div style="background:#1d1d1f;color:#fff;border:2px solid #fff;border-radius:50%;width:24px;height:24px;line-height:20px;text-align:center;font:600 12px/20px -apple-system,sans-serif;box-shadow:0 1px 3px rgba(0,0,0,.4)">'+n+'</div>',iconSize:[24,24],iconAnchor:[12,12]})});}
+else if(s.k==='A'){mk=L.marker([s.la,s.lo],{icon:L.divIcon({className:'',html:'<div style="font-size:20px;line-height:20px">✈️</div>',iconSize:[20,20],iconAnchor:[10,10]})});}
+else{mk=L.circleMarker([s.la,s.lo],{radius:6,color:'#fff',weight:2,fillColor:s.k==='X'?'#15803d':'#c2410c',fillOpacity:1});}
+mk.addTo(m).bindPopup('<b>'+s.n+'</b><br>'+lab+' · '+D.t[s.k]);
+mk.bindTooltip(s.n,{direction:'top',offset:[0,-8]});mks.push([s,mk]);});
+var box=document.getElementById('rdays'),cur=null;
+function show(d){legs.forEach(function(p){p.setStyle(BASE);});cur=d;
+[].forEach.call(box.children,function(b){var on=String(b.dataset.d)===String(d);b.style.background=on?'#1d4ed8':'transparent';b.style.color=on?'#fff':'';});
+if(d==='all'){m.fitBounds(L.featureGroup(legs.concat(mks.map(function(e){return e[1];}))).getBounds(),{padding:[16,16]});document.getElementById('rdt').textContent='';return;}
+var b=L.latLngBounds([]);D.ld.forEach(function(x,i){if(x===d){legs[i].setStyle(HI).bringToFront();b.extend(legs[i].getBounds());}});
+var first=null;mks.forEach(function(e){var s=e[0];if(s.k==='N'?(inDays(s.d,d)&&!b.isValid()):inDays(s.d,d)&&s.k!=='N'){b.extend(e[1].getLatLng());if(!first)first=e[1];}});
+if(!b.isValid())mks.forEach(function(e){if(inDays(e[0].d,d)){b.extend(e[1].getLatLng());if(!first)first=e[1];}});
+mks.forEach(function(e){if(e[1].bringToFront)e[1].bringToFront();});if(b.isValid())m.fitBounds(b.pad(.25),{maxZoom:10});
+document.getElementById('rdt').textContent=D.t.day+' '+d+D.t.suf+' · '+(D.dt[d-1]||'');}
+function chip(label,d){var b=document.createElement('button');b.type='button';b.textContent=label;b.dataset.d=d;
+b.style.cssText='font:inherit;font-size:.85rem;padding:3px 9px;border:1px solid var(--line);border-radius:999px;background:transparent;color:inherit;cursor:pointer';
+b.onclick=function(){show(d);};box.appendChild(b);}
+chip(D.t.all,'all');for(var i=1;i<=D.dt.length;i++)chip(String(i),i);
+window.wlShowDay=show;show('all');})();</script>
+
+<h2 id="plan">行程</h2>
+<p class="muted">每天大约 10:00 出门，每半天只排一个主要景点。想多看的话，每天都有“有兴趣可以加上”的选项。</p>
+<div id="six">
+  <div class="card day"><span class="dn" aria-hidden="true">1</span><span class="d">第 1 天 · 新千岁 → 札幌</span>飞抵新千岁，在机场吃午饭。<span class="drive">🚆 新千岁机场 → 札幌 · 47 km · 约 40 分钟</span> 快速“机场号”约每 12 分钟一班，1,230 日元（约 CNY 50）。先把行李放到酒店。<br><b>下午：</b><b>钟楼</b>（350 日元（约 CNY 15），开到 17:10），然后<b>红砖</b>北海道厅旧本厅舍（300 日元（约 CNY 15），开到 21:00）。<br><b>傍晚：</b>大通公园的<b>白色灯树节</b>（16:30 起）和<b>慕尼黑圣诞市集</b>（开到 21:00；都到 12 月 25 日）。<br><b>晚餐：</b>达摩本店的成吉思汗烤羊肉（不接受预约；17:00–17:30 到可避开排队）。<br><i>有兴趣可以加上：</i>红砖厅舍八角塔观景（1,200 日元（约 CNY 50），每场 7 人，30 天前起网上预约）。<div class="night">住：札幌</div></div>
+  <div class="card day"><span class="dn" aria-hidden="true">2</span><span class="d">第 2 天 · 北海道开拓村和北海道博物馆</span>大约 10:00 出门。<span class="drive">🚆 札幌 → 新札幌 · 11 km · 约 10 分钟</span> 然后换乘 JR 北海道巴士“新22”（约 15 分钟）。<br><b>上午：</b><b>北海道开拓村</b>（1,000 日元（约 CNY 40）；留 2–2.5 小时；马拉雪橇 12 月中旬起只在周末和节假日运行）。<br><b>午餐：</b>坐巴士回新札幌，在 Sun Piazza 的醤油屋本店吃酱油拉面。<br><b>下午：</b>开拓村旁边的<b>北海道博物馆</b>（800 日元（约 CNY 35）；16:00 停止入馆）。它 2026 年整修后重开，但我们查询时还没公布 12 月的开放细节，出发前一周再看一下。如果闭馆，改去札幌市中心的北海道立近代美术馆（510 日元（约 CNY 20））。<br><b>晚上：</b>把行李箱交给酒店前台，快递到函馆酒店，第 4 天送达（见<a href="#train">火车与行李</a>）。<br><i>有兴趣可以加上：</i>回程顺路去<b>札幌啤酒博物馆</b>（1,000 日元（约 CNY 40）；17:30 停止入馆）。<div class="night">住：札幌</div></div>
+  <div class="card day"><span class="dn" aria-hidden="true">3</span><span class="d">第 3 天 · 小樽一日游</span>大约 10:00 出门，行李已经寄走。<span class="drive">🚆 札幌 → 南小樽 · 32 km · 约 40 分钟</span><br><b>上午：</b>从南小樽一路下坡走：<b>小樽音乐盒堂</b>（免费），然后是堺町通和<b>北一硝子</b>。<br><b>午餐：</b>伊势鮨吃寿司（订 12:00–13:00 的位子）。<br><b>下午：</b>运河、<b>似鸟美术馆</b>（蒂芙尼和英国教堂彩色玻璃，1,200 日元（约 CNY 50））和<b>日本银行旧小樽支店金融资料馆</b>（免费）。两处都是周三休馆。黄昏留下来看运河灯光（约 16:00 日落）。<br><span class="drive">🚆 小樽 → 札幌 · 34 km · 约 35 分钟</span> 约 17:00 回程。<b>晚餐：</b>薄野的けやき味噌拉面。<br><i>有兴趣可以加上：</i>小樽再往前 25 分钟的 <b>Nikka 余市蒸馏所</b>（需预约；12 月 23 日至 1 月 7 日闭馆），但只适合放弃小樽博物馆的情况。<div class="night">住：札幌</div></div>
+  <div class="card day"><span class="dn" aria-hidden="true">4</span><span class="d">第 4 天 · 札幌 → Upopoy → 函馆</span>约 10:30 退房。<span class="drive">🚆 札幌 → 白老 · 93 km · 约 1 小时</span> 特急北斗，例如札幌 10:56 → 白老 11:57。<br><b>中午和下午：</b><b>Upopoy</b> 国立阿伊努民族博物馆与公园，约 12:10–15:30（1,200 日元（约 CNY 50），网上购票 1,000 日元（约 CNY 40））。演出时间当天公布，进门先拍下入口的时刻表。在园内咖啡厅吃午饭。<br><span class="drive">🚆 白老 → 函馆 · 226 km · 约 2 小时 45 分</span> 例如白老 15:47 → 函馆 18:30。<br><b>晚餐：</b>函馆站旁いか清的乌贼料理。<br><i>有兴趣可以加上：</i>改坐早一班北斗（白老 14:29 → 函馆 17:13），当晚就能赶上 18:00 的圣诞梦幻节烟花；Upopoy 只剩两小时。<div class="night">住：函馆</div></div>
+  <div class="card day"><span class="dn" aria-hidden="true">5</span><span class="d">第 5 天 · 函馆</span>大约 10:00 出门，在车站坐五棱郭塔接驳巴士（300 日元（约 CNY 15），每小时一班，末班 14:15）或坐电车。<br><b>上午：</b><b>五棱郭塔</b>（1,200 日元（约 CNY 50））俯瞰星形要塞，然后参观要塞里的<b>箱馆奉行所</b>（500 日元（约 CNY 20））。<br><b>午餐：</b>汤之川的鮨处木はら（订 12:00；电车约 15 分钟），或五棱郭塔旁あじさい的盐味拉面。<br><b>下午：</b>坐电车去<b>元町</b>，约 14:00–16:00：东正教堂和天主教堂、<b>旧函馆区公会堂</b>和旧英国领事馆，以及<b>北方民族资料馆</b>。<br><b>晚上：</b>18:00 红砖仓库前的<b>圣诞梦幻节</b>烟花，然后坐<b>函馆山</b>缆车看夜景（往返 1,800 日元（约 CNY 75）；最后上山 20:30）。晚餐在车站附近吃。<br><i>有兴趣可以加上：</i>傍晚如果在五棱郭附近，可以看护城河灯饰“五稜星之梦”（日落至 19:00，免费）。市电一日券（800 日元（约 CNY 35））坐 3 次以上就划算。<div class="night">住：函馆</div></div>
+  <div class="card day"><span class="dn" aria-hidden="true">6</span><span class="d">第 6 天 · 函馆，然后回程</span>大约 10:00 出门。<b>早午餐：</b>车站旁的<b>函馆朝市</b>：きくよ食堂的海鲜盖饭，或在うにむらかみ排队。<br>从车站坐机场巴士约 20 分钟（700 日元（约 CNY 30））。从函馆经东京羽田回程：同一张联程票行李可直挂；分开出票的话，在羽田要提行李再值机，留 2.5–3 小时。<br><i>有兴趣可以加上：</i>坐巴士前再逛一下金森红砖仓库（商店 9:30 开门）。</div>
+</div>
+<p class="muted">天气不好时：如果第 4 天大雪让北斗停运，就坐晚一点的车并放弃 Upopoy。如果第 5 天大风让缆车停运，可以换到第 4 天晚上再试，或以五棱郭塔的景色代替。</p>
+
+<h2 id="sights">主要景点</h2>
+<div class="gallery"><figure class="photo"><img src="../assets/photos/hok-goryokaku.jpg" alt="从五棱郭塔俯瞰冬季的五棱郭" loading="lazy" width="1000"><figcaption>从五棱郭塔俯瞰冬季的五棱郭 · <span class="credit"><a href="https://commons.wikimedia.org/wiki/File:Hokkaido-Goryokaku_Fort_in_winter-xl.jpg">照片</a>: Goryokaku-Tower, <a href="https://creativecommons.org/licenses/by/4.0">CC BY 4.0</a></span></figcaption></figure><figure class="photo"><img src="../assets/photos/hok-otaru-canal.jpg" alt="冬夜的小樽运河" loading="lazy" width="1000"><figcaption>冬夜的小樽运河 · <span class="credit"><a href="https://commons.wikimedia.org/wiki/File:Otaru_Canal_Night.jpg">照片</a>: Haha169, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a></span></figcaption></figure><figure class="photo"><img src="../assets/photos/hok-upopoy.jpg" alt="白老 Upopoy 国立阿伊努民族博物馆" loading="lazy" width="1000"><figcaption>白老 Upopoy 国立阿伊努民族博物馆 · <span class="credit"><a href="https://commons.wikimedia.org/wiki/File:Shiraoi-upopoy_38.jpg">照片</a>: Higa4, <a href="http://creativecommons.org/publicdomain/zero/1.0/deed.en">CC0</a></span></figcaption></figure><figure class="photo"><img src="../assets/photos/hok-red-brick.jpg" alt="冬季灯饰中的札幌红砖厅舍" loading="lazy" width="1000"><figcaption>冬季灯饰中的札幌红砖厅舍 · <span class="credit"><a href="https://commons.wikimedia.org/wiki/File:Former_Hokkaido_Government_Office_Building_(Red_Brick_Office).jpg">照片</a>: MIKI Yoshihito, <a href="https://creativecommons.org/licenses/by/4.0">CC BY 4.0</a></span></figcaption></figure><figure class="photo"><img src="../assets/photos/hok-kaitaku.jpg" alt="北海道开拓村" loading="lazy" width="1000"><figcaption>北海道开拓村 · <span class="credit"><a href="https://commons.wikimedia.org/wiki/File:%E5%8C%97%E6%B5%B7%E9%81%93%E9%96%8B%E6%8B%93%E3%81%AE%E6%9D%91(Historical_Village_of_Hokkaido)_-_panoramio_(4).jpg">照片</a>: t-konno, <a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a></span></figcaption></figure></div>
+<div class="card"><ul>
+  <li><b>札幌钟楼：</b>1878 年札幌农学校的演武场，明治札幌的象征；350 日元（约 CNY 15）。</li>
+  <li><b>红砖厅舍（北海道厅旧本厅舍）：</b>1888 年的新巴洛克风格红砖建筑，2025 年整修后全面重开，展示开拓使、阿伊努和北方领土的历史；300 日元（约 CNY 15），八角塔 1,200 日元（约 CNY 50）。</li>
+  <li><b>北海道开拓村：</b>占地 54 公顷的露天博物馆，迁建了 50 多栋明治到昭和初期的建筑；1,000 日元（约 CNY 40）。</li>
+  <li><b>北海道博物馆：</b>北海道的历史，从史前、阿伊努文化到开拓者的生活；800 日元（约 CNY 35）。</li>
+  <li><b>小樽：</b>1923 年的运河和石造仓库、用油灯照明的 1891 年鲱鱼仓库里的北一硝子、由四座旧银行和仓库组成的似鸟美术馆，以及东京站设计者辰野金吾设计的日本银行旧小樽支店（免费）。</li>
+  <li><b>白老 Upopoy：</b>日本国立的阿伊努文化中心（2020 年）：博物馆、传统村落、歌舞和手工艺；1,200 日元（约 CNY 50）。</li>
+  <li><b>五棱郭：</b>1864 年的星形要塞，1869 年虾夷共和国最后的据点；五棱郭塔（1,200 日元（约 CNY 50））和复原的箱馆奉行所（500 日元（约 CNY 20））。</li>
+  <li><b>函馆元町：</b>1916 年的东正教堂、天主教堂、1910 年的旧函馆区公会堂和旧英国领事馆；两馆通票 500 日元（约 CNY 20）。</li>
+  <li><b>函馆山：</b>经典夜景，冬季只能坐缆车上山（道路封闭）；往返 1,800 日元（约 CNY 75）。日落后一两个小时山顶人最多。</li>
+</ul></div>
+
+<h2 id="shows">2026 年 12 月的活动和展览</h2>
+<div class="card"><ul>
+  <li data-place="sapporo"><b>札幌白色灯树节</b>，大通公园：16:30–22:00，到 12 月 25 日（站前大道的灯饰持续到 2 月）。免费。</li>
+  <li data-place="sapporo"><b>慕尼黑圣诞市集</b>，大通公园：11:00–21:00，到 12 月 25 日。免费入场；摊位只收电子支付。</li>
+  <li data-place="sapporo"><b>北海道立近代美术馆：</b>馆藏展《我的创作方式》（510 日元（约 CNY 20））到 12 月 20 日；新道展 70 周年展（600 日元（约 CNY 25））12 月 10 日开幕；12 月 21 日至 28 日换展闭馆。</li>
+  <li data-place="otaru"><b>小樽运河：</b>11 月至 1 月有蓝色冬季 LED 灯光，日落后煤气灯点亮。雪灯之路在 2 月，不在 12 月。</li>
+  <li data-place="otaru"><b>似鸟美术馆浮世绘馆：</b>斋藤清版画展 12 月 12 日开幕（1,400 日元（约 CNY 60））。</li>
+  <li data-place="nopporo"><b>北海道开拓村：</b>12 月有冬季体验活动；马拉雪橇 12 月中旬起在周末和节假日运行，要看积雪。</li>
+  <li data-place="hakodate"><b>函馆圣诞梦幻节</b>，金森红砖仓库：海上的巨型圣诞树，每天 16:30 起点灯，到 12 月 25 日，18:00 放烟花（天气不好取消）。免费。</li>
+  <li data-place="hakodate"><b>五稜星之梦：</b>五棱郭护城河灯饰，日落至 19:00，12 月至 2 月底。免费。</li>
+  <li data-place="hakodate"><b>北海道立函馆美术馆：</b>12 月中旬换展闭馆（12 月 14 日至 21 日）；下一档展览 12 月 22 日开幕。</li>
+  <li data-place="shiraoi"><b>Upopoy：</b>整个冬季每天有传统舞蹈和叙事诗表演（时间当天公布）。2026/27 冬季还没公布灯饰活动。</li>
+</ul></div>
+
+<h2 id="museums">博物馆</h2>
+<div class="card scroll"><p class="muted pl-summary" data-kind="places"></p><table><tr><th>博物馆</th><th>开放时间</th><th>休馆</th><th>门票</th></tr>
+<tr data-place="sapporo"><td><a href="https://sapporoshi-tokeidai.jp/">札幌钟楼</a></td><td>8:45–17:10</td><td>1 月 1 日至 3 日（新年）</td><td>350 日元（约 CNY 15）</td></tr>
+<tr data-place="sapporo"><td><a href="https://www.hokkaido-redbrick.jp/">红砖厅舍</a></td><td>8:45–21:00，20:30 停止入馆</td><td>12 月 29 日至 1 月 3 日</td><td>300 日元（约 CNY 15）；八角塔 1,200 日元（约 CNY 50）</td></tr>
+<tr data-place="sapporo"><td><a href="https://www.sapporobeer.jp/brewery/s_museum/">札幌啤酒博物馆</a></td><td>11:00–18:00，17:30 停止入馆</td><td>12 月 31 日</td><td>1,000 日元（约 CNY 40）</td></tr>
+<tr data-place="sapporo"><td><a href="https://artmuseum.pref.hokkaido.lg.jp/knb">北海道立近代美术馆</a></td><td>9:30–17:00，16:30 停止入馆</td><td>周一；12 月 21 日至 28 日（换展）；新年</td><td>510 日元（约 CNY 20）</td></tr>
+<tr data-place="nopporo"><td><a href="https://www.kaitaku.or.jp/">北海道开拓村</a></td><td>9:00–16:30，16:00 停止入场</td><td>周一；12 月 29 日至 1 月 3 日</td><td>1,000 日元（约 CNY 40）</td></tr>
+<tr data-place="nopporo"><td><a href="https://www.hm.pref.hokkaido.lg.jp/">北海道博物馆</a></td><td>9:30–16:30，16:00 停止入馆</td><td>周一；12 月 29 日至 1 月 3 日；12 月安排请再确认</td><td>800 日元（约 CNY 35）</td></tr>
+<tr data-place="otaru"><td><a href="https://www.nitorihd.co.jp/otaru-art-base/">似鸟美术馆（小樽艺术村）</a></td><td>10:00–17:00，16:30 停止入馆</td><td>周三（11 月至 4 月）；新年</td><td>彩色玻璃馆 1,200 日元（约 CNY 50）；五馆通票 3,500 日元（约 CNY 150）</td></tr>
+<tr data-place="otaru"><td><a href="https://www3.boj.or.jp/otaru-m/">日本银行旧小樽支店金融资料馆</a></td><td>10:00–17:00，16:30 停止入馆</td><td>周三；12 月 29 日至 1 月 5 日</td><td>免费</td></tr>
+<tr data-place="otaru"><td>小樽音乐盒堂本馆</td><td>9:00–18:00</td><td>每天开放</td><td>免费</td></tr>
+<tr data-place="otaru"><td><a href="https://www.nikka.com/distilleries/yoichi/">Nikka 余市蒸馏所</a>（小樽再往前 25 分钟）</td><td>导览约 9:30–14:30，需预约</td><td>12 月 23 日至 1 月 7 日</td><td>导览免费（预约时确认）</td></tr>
+<tr data-place="shiraoi"><td><a href="https://ainu-upopoy.go.jp/en/">Upopoy</a></td><td>9:00–17:00；园区 16:00 停止入场</td><td>周一；12 月 28 日至 1 月 4 日</td><td>1,200 日元（约 CNY 50）；网上 1,000 日元（约 CNY 40）</td></tr>
+<tr data-place="hakodate"><td><a href="https://www.goryokaku-tower.co.jp/">五棱郭塔</a></td><td>9:00–18:00，17:50 停止售票</td><td>每天开放</td><td>1,200 日元（约 CNY 50）</td></tr>
+<tr data-place="hakodate"><td><a href="https://hakodate-bugyosho.jp/information/">箱馆奉行所</a></td><td>9:00–17:00，16:45 停止售票</td><td>12 月 31 日至 1 月 3 日</td><td>500 日元（约 CNY 20）</td></tr>
+<tr data-place="hakodate"><td>旧函馆区公会堂</td><td>9:00–17:00</td><td>12 月 31 日至 1 月 3 日</td><td>300 日元（约 CNY 15）</td></tr>
+<tr data-place="hakodate"><td>旧英国领事馆</td><td>9:00–17:00</td><td>12 月 31 日至 1 月 1 日</td><td>300 日元（约 CNY 15）</td></tr>
+<tr data-place="hakodate"><td>北方民族资料馆</td><td>9:00–17:00</td><td>12 月 31 日至 1 月 3 日；另有馆内整理日，先打电话</td><td>300 日元（约 CNY 15）</td></tr>
+<tr data-place="hakodate"><td><a href="https://www.orthodox-hakodate.jp/services">函馆东正教堂</a></td><td>10:00–16:00（周日 13:00 起）</td><td>12 月 25 日至 2 月底暂停参观</td><td>捐款 200 日元（约 CNY 10）</td></tr>
+<tr data-place="hakodate"><td><a href="https://334.co.jp/ropeway/price/">函馆山缆车</a></td><td>10:00–21:00，最后上山 20:30</td><td>大风停运</td><td>往返 1,800 日元（约 CNY 75）</td></tr>
+</table><p class="muted">元町通票：两馆 500 日元（约 CNY 20），三馆 720 日元（约 CNY 30），四馆 840 日元（约 CNY 35）。这里大多数博物馆周一休馆。</p></div>
+
+<h2 id="eat">吃什么</h2>
+<p class="muted pl-summary" data-kind="meals"></p>
+<p class="muted"><span class="tb">食べログ 3.68 · 2,050 条</span> 标签为食べログ评分：3.0 为一般，3.5 以上很好。2026 年 11 月下旬读取。我们的标准是 3.4 分以上、50 条以上评价，低于标准的会注明。💰 和 ✨ 标出两种玩法不同的地方。</p>
+<div class="card place" data-place="chitose"><h3>新千岁机场</h3><p class="pl-when"></p><ul>
+  <li><b>午餐：</b>国内线航站楼 3 楼的北海道拉面道场，十家拉面店并排，约 1,000–1,500 日元（约 CNY 40–65）；与国际线航站楼有通道相连。未按我们的食べログ标准核查。</li>
+</ul></div>
+<div class="card place" data-place="nopporo"><h3>开拓村与新札幌</h3><p class="pl-when"></p><ul>
+  <li><b>午餐：</b><a href="https://tabelog.com/hokkaido/A0101/A010302/1001904/">醤油屋本店 Sun Piazza 店</a> <span class="tb">食べログ 3.59–3.60</span>，北海道拉面百名店，就在地铁新札幌站 3 号出口，1,000–1,500 日元（约 CNY 40–65）；不接受预约。开拓村里只有简单餐食。</li>
+</ul></div>
+<div class="card place" data-place="sapporo"><h3>札幌</h3><p class="pl-when"></p><ul>
+  <li><b>第 1 天晚餐：</b><a href="https://tabelog.com/hokkaido/A0101/A010103/1000007/">成吉思汗だるま本店</a> <span class="tb">食べログ 3.68 · 2,050 条</span>，铁锅成吉思汗烤羊肉，3,000–5,000 日元（约 CNY 130–210）；17:00 营业到深夜，不接受预约，17:00–17:30 到最好。排队短些的：だるま 4·4 店 <span class="tb">食べログ 3.53 · 821 条</span>。</li>
+  <li><b>第 2 天晚餐：</b>✨ <a href="https://tabelog.com/hokkaido/A0101/A010103/1037874/">鮨西光</a> <span class="tb">食べログ 3.60–3.75 · 84 条</span>，10 席吧台，只用北海道鱼，主厨套餐 22,000 日元（约 CNY 920） 另加 10% 服务费；只接受预约（TableCheck），周日和节假日休。💰 GARAKU 汤咖喱 <span class="tb">食べログ 3.43 · 159 条</span>，1,500–2,500 日元（约 CNY 65–100）；或氷雪の門的螃蟹会席 <span class="tb">食べログ 3.54 · 298 条</span>，10,000–15,000 日元（约 CNY 420–630）（每月有一天不定休，先打电话）。</li>
+  <li><b>第 3 天晚餐：</b><a href="https://tabelog.com/hokkaido/A0101/A010103/1000150/">けやき 薄野本店</a> <span class="tb">食べログ 3.70 · 3,200 条</span>，蔬菜多的味噌拉面，1,100–1,500 日元（约 CNY 45–65）；不接受预约，常在室外排队。或すみれ 薄野店 <span class="tb">食べログ 3.58 · 2,100 条</span>。</li>
+</ul></div>
+<div class="card place" data-place="otaru"><h3>小樽</h3><p class="pl-when"></p><ul>
+  <li><b>午餐：</b><a href="https://tabelog.com/hokkaido/A0106/A010601/1000008/">伊势鮨</a> <span class="tb">食べログ 3.67–3.70 · 760 条</span>，吧台寿司，有积丹海胆和冬季鱼，约 5,000–10,000 日元（约 CNY 210–420）；周三和部分周二休。提前两个月起可电话预约（11:00 起），或通过 JPNEAZY 网上预约（手续费 10–15%）。或おたる政寿司本店 <span class="tb">食べログ 3.59 · 1,084 条</span>，3,000–6,000 日元（约 CNY 130–250）；不用预约的备选：小樽站内的伊势鮨站中店 <span class="tb">食べログ 3.54–3.57</span>。</li>
+</ul></div>
+<div class="card place" data-place="shiraoi"><h3>白老（Upopoy）</h3><p class="pl-when"></p><ul>
+  <li><b>午餐：</b>Upopoy 园内的餐厅，阿伊努风味套餐 <span class="tb">食べログ 3.06–3.24</span>（低于我们的标准，但不用出园）。白老牛餐厅需要打车，不适合这一天。</li>
+</ul></div>
+<div class="card place" data-place="hakodate"><h3>函馆</h3><p class="pl-when"></p><ul>
+  <li><b>第 4 天晚餐：</b>车站旁的<a href="https://tabelog.com/hokkaido/A0105/A010501/1052792/">いか清 大门店</a> <span class="tb">食べログ 3.48–3.51 · 288 条</span>，乌贼刺身（有货时是活乌贼）、乌贼面和烤乌贼，5,000–8,000 日元（约 CNY 210–330）；17:00–23:30，每天营业，可预约。或根ぼっけ <span class="tb">食べログ 3.47–3.49 · 300 条</span>，大条本地远东多线鱼，4,000–5,000 日元（约 CNY 170–210）。</li>
+  <li><b>第 5 天午餐：</b>✨ 汤之川的<a href="https://tabelog.com/hokkaido/A0105/A010501/1010279/">鮨处木はら</a> <span class="tb">食べログ 3.62–3.65 · 433 条</span>，主厨套餐有冬季函馆乌贼、海胆和昆布腌鱼，约 10,000–15,000 日元（约 CNY 420–630）（食べログ晚餐价位，午餐可能便宜些）；只接受电话预约；周三和每月两个不定期周二休。💰 五棱郭塔旁的<a href="https://tabelog.com/hokkaido/A0105/A010501/1000366/">あじさい本店</a> <span class="tb">食べログ 3.62–3.65 · 2,100 条</span>，清汤盐味拉面，1,000–1,500 日元（约 CNY 40–65）（每月第四个周三休）。</li>
+  <li><b>第 5 天晚餐：</b>うにむらかみ函馆站前店 <span class="tb">食べログ 3.61 · 192 条</span>，无添加海胆盖饭，约 4,000–7,000 日元（约 CNY 170–290）；17:30–21:30，可预约。或上面的根ぼっけ。</li>
+  <li><b>第 6 天早午餐：</b>朝市里的<a href="https://tabelog.com/hokkaido/A0105/A010501/1000258/">きくよ食堂本店</a> <span class="tb">食べログ 3.49 · 1,428 条</span>，元祖海胆、三文鱼子、扇贝三色盖饭，2,000–4,000 日元（约 CNY 85–170）；冬季 6:00–13:30，每天营业。或<a href="https://tabelog.com/hokkaido/A0105/A010501/1000136/">うにむらかみ函馆本店</a> <span class="tb">食べログ 3.58 · 1,255 条</span>，4,000–7,000 日元（约 CNY 170–290）；周末不接受预约，周三休。</li>
+</ul></div>
+
+<h2 id="shop">购物</h2>
+<div class="card"><p class="muted pl-summary" data-kind="places"></p><ul>
+  <li data-place="sapporo"><b>大通公园：</b>慕尼黑圣诞市集，有圣诞饰品、热红酒和德国小吃（到 12 月 25 日）。</li>
+  <li data-place="sapporo"><b>二条市场</b>，19 世纪 90 年代起的“札幌厨房”：螃蟹、三文鱼子和海鲜干货；约 7:00–18:00，各店不同。</li>
+  <li data-place="sapporo"><b>札幌站</b>的商场和百货店：北海道点心和伴手礼，可以寄回或带上火车。</li>
+  <li data-place="otaru"><b>小樽堺町通：</b>北一硝子等玻璃工房、音乐盒堂的商店和西点店；多数 9:00–18:00。</li>
+  <li data-place="shiraoi"><b>Upopoy 商店：</b>阿伊努刺绣、木雕和阿伊努文化书籍。</li>
+  <li data-place="hakodate"><b>金森红砖仓库：</b>1887–1909 年保税仓库里的商店和咖啡馆；9:30–19:00，全年营业。</li>
+  <li data-place="hakodate"><b>函馆朝市：</b>乌贼、螃蟹、昆布和海鲜干货；清晨至约 14:00。</li>
+  <li data-place="hkdair"><b>函馆机场：</b>登机前买北海道点心和海产伴手礼。</li>
+</ul></div>
+
+<h2 id="stay">住哪里</h2>
+<p class="muted pl-summary" data-kind="nights"></p>
+<p class="muted">两人一间、含税价，2026 年 11 月下旬在 Booking.com 查询 12 月中旬平日入住；酒店可能另收城市住宿税。请向两家酒店确认能否代寄和代收快递行李。</p>
+<div class="card" data-place="n-sapporo"><div class="hotel-head"><h3>Cross Hotel Sapporo</h3><span class="score">8.8</span></div><div class="local">クロスホテル札幌 · 车站和大通之间 · 💰</div><p>含早一晚约 26,300 日元（约 CNY 1,100）。顶楼大浴场带露天区；距 JR 札幌站和大通各约 5 分钟。</p><p><a href="https://www.booking.com/hotel/jp/cross-sapporo.html">Booking.com</a></p></div>
+<div class="card" data-place="n-sapporo"><div class="hotel-head"><h3>Sapporo Grand Hotel</h3><span class="score">8.8</span></div><div class="local">札幌グランドホテル · 大通 · ✨</div><p>含早一晚约 28,800 日元（约 CNY 1,200）。1934 年开业，北海道第一家西式酒店；没有大浴场。官网 FAQ 说不提供到机场或车站的行李配送，请确认能否代寄到下一家酒店。</p><p><a href="https://www.booking.com/hotel/jp/sapporo-grand.html">Booking.com</a></p></div>
+<div class="card" data-place="n-sapporo"><div class="hotel-head"><h3>Keio Prelia Hotel Sapporo</h3><span class="score">8.9</span></div><div class="local">京王プレリアホテル札幌 · 距 JR 札幌站 2–3 分钟 · 备选</div><p>不含早一晚约 24,000 日元（约 CNY 1,000）。免费公共浴场；提供行李寄送服务。房间较小（20 平方米）。</p><p><a href="https://www.booking.com/hotel/jp/keio-prelia-hotel-sapporo.html">Booking.com</a></p></div>
+<div class="card" data-place="n-hakodate"><div class="hotel-head"><h3>Hakodate Kokusai Hotel</h3><span class="score">8.3</span></div><div class="local">函館国際ホテル · 车站和港湾之间 · 💰</div><p>含海鲜早餐一晚约 36,000 日元（约 CNY 1,500）。顶楼天然温泉带露天风吕；距车站 8 分钟，距朝市 5 分钟。</p><p><a href="https://www.booking.com/hotel/jp/hakodate-kokusai.html">Booking.com</a></p></div>
+<div class="card" data-place="n-hakodate"><div class="hotel-head"><h3>La Vista Hakodate Bay</h3><span class="score">9.0（Trip.com）</span></div><div class="local">ラビスタ函館ベイ · 红砖仓库旁 · ✨</div><p>不含早一晚约 65,000–70,000 日元（约 CNY 2,710–2,920）（乐天上查到；Booking.com 没有）。屋顶露天温泉俯瞰港湾，早餐很有名；距电车站 3 分钟。</p><p><a href="https://www.hotespa.net/hotels/lahakodate/">官网</a></p></div>
+<div class="card" data-place="n-hakodate"><div class="hotel-head"><h3>La’gent Stay Hakodate Ekimae</h3><span class="score">8.7</span></div><div class="local">ラ・ジェント・ステイ函館駅前 · 距车站 2 分钟 · 备选</div><p>不含早一晚约 48,200 日元（约 CNY 2,010）（只剩家庭房）。屋顶温泉和桑拿；有大和运输快递服务。</p><p><a href="https://www.booking.com/hotel/jp/lagent-stay-hakodate-ekimae.html">Booking.com</a></p></div>
+
+<h2 id="budget">预算</h2>
+<div class="card"><p>每人，两人一间，<b>不含机票</b>。2026 年 11 月估算。 汇率按 1 日元 ≈ 0.0417 元人民币（2026 年 11 月 27 日）。</p><ul>
+  <li><b>💰 最划算：</b> 约 CNY 5,630–6,090 (酒店 3,150 · 火车、巴士和行李快递 840–880 · 餐饮 1,250–1,670 · 门票 390)</li>
+  <li><b>✨ 最佳体验：</b> 约 CNY 8,370–9,250 (酒店 4,510–4,720 · 火车、巴士和行李快递 840–880 · 餐饮 2,540–3,170 · 门票和附加项目 480)</li></ul>
+<p class="muted">火车：JR 车费每人约 15,000 日元（约 CNY 630）（机场快速、小樽往返、新札幌往返和两段北斗）。酒店：两种玩法在札幌都含早餐；La Vista 不含早。不包括：机票、La Vista 的早餐、城市住宿税、购物、旅行保险，以及 10–15% 的备用金。</p></div>
+
+<h2 id="train">火车与行李</h2>
+<div class="card"><h3>火车</h3><ul>
+  <li><b>新千岁机场 → 札幌：</b>快速“机场号”，约 37 分钟，约每 12 分钟一班，1,230 日元（约 CNY 50）。</li>
+  <li><b>札幌 ⇄ 小樽：</b>快速约 32–35 分钟，普通车约 45 分钟，单程 800 日元（约 CNY 35）。余市在小樽再往前约 25 分钟。</li>
+  <li><b>开拓村：</b>坐 JR 或地铁东西线到新札幌，再从 10 号站台坐 JR 北海道巴士“新22”（约 15 分钟，约 210 日元（约 CNY 10））。</li>
+  <li><b>特急北斗</b>（札幌 → 函馆全程约 3 小时 45 分）：全车指定席。每天 11 班中有 9 班停白老，大约每小时一班。第 4 天好用的组合：札幌 10:56 → 白老 11:57，然后白老 15:47 → 函馆 18:30（早一班 14:29 → 17:13；晚一班 16:47 → 19:29）。时刻为 2026 年 11 月下旬的时刻表。</li>
+  <li><b>票价：</b>札幌 → 函馆直达指定席 9,770 日元（约 CNY 410）。在白老下车要分两段买票，估计约 3,700–4,000 日元（约 CNY 150–170） 和 8,000–8,500 日元（约 CNY 330–350）。可在 JR 东日本的 Eki-net 订票（“Tokuda-ne”折扣 14 天前开售），或在 JR 售票处购买。</li>
+  <li><b>周游券不划算。</b>这趟行程的 JR 车费每人约 15,000 日元（约 CNY 630）；5 日北海道铁路周游券要 22,000 日元（约 CNY 920）。</li>
+  <li><b>雪和运行：</b>北斗所走的线路 2026 年夏末曾被冲毁，现已恢复，部分路段限速。冬季大雪可能导致晚点或停运：第 4 天早上查看 JR 北海道的运行信息。</li>
+  <li><b>函馆：</b>市电可到车站、五棱郭、汤之川、元町和缆车站；一日券 800 日元（约 CNY 35）。五棱郭塔接驳巴士 300 日元（约 CNY 15），机场巴士 700 日元（约 CNY 30）（约 20 分钟）。</li>
+  <li><b>不需要租车。</b>如果哪天真需要，可在札幌或函馆站租还。外国驾照需要 1949 年日内瓦公约国际驾照，部分国家需要 JAF 官方翻译件。</li>
+</ul></div>
+<div class="card"><h3>提前寄行李（宅急便）</h3><p>日本的门到门快递可以在酒店之间运送行李箱，几乎所有酒店前台都能办理：大和运输（宅急便，黑猫标志）、佐川急便或日本邮政（Yu-Pack）。这趟行程把行李从札幌酒店寄到函馆酒店，第 3、4 天轻装出行。</p><ol>
+  <li><b>订房时：</b>记下函馆酒店的日文完整地址、邮编和电话。</li>
+  <li><b>第 1 或第 2 天：</b>问札幌酒店前台用哪家快递、几点前收件。</li>
+  <li><b>大约提前两天：</b>发邮件告诉函馆酒店，有行李箱会快递到店，入住日是第 4 天，请他们代为保管。</li>
+  <li><b>第 2 天晚上：</b>把行李箱交给札幌酒店前台，填写运单，指定第 4 天送达，并付款。酒店收件常在上午 10:00 左右，所以前一晚交最稳妥，下雪也可能多花一天。保留收据或单号。</li>
+  <li><b>第 3–4 天：</b>在快递公司网站上追踪。</li>
+  <li><b>第 4 天入住：</b>在函馆酒店前台领取，或直接送到房间。</li>
+</ol>
+<p><b>运单（送り状）：</b> 前台通常会帮忙填写。<b>收件人</b>（お届け先）：函馆酒店的名称、地址、邮编和电话，加上你的名字 + 様（宿泊者）和入住日期。<b>送达日期</b>（お届け予定日）：第 4 天，时间段选“午前中”（上午）。<b>寄件人</b>（ご依頼主）：你的名字、札幌酒店地址和一个电话号码。<b>物品</b>（品名）：衣類（衣物）。不要寄贵重物品、电池或充电宝、当天要用的药和护照。</p>
+<p><b>费用：</b> 按尺寸（长 + 宽 + 高）和重量计价，多数用现金付。大和运输北海道内：140 尺寸 2,090 日元（约 CNY 85），160 尺寸 2,410 日元（约 CNY 100），180 尺寸 3,030 日元（约 CNY 130）。中号行李箱约 2,000–2,500 日元（约 CNY 85–100）。以前台报价为准。</p>
+<p><b>第 3、4 天的随身包：</b> 一晚的衣服、洗漱用品、充电器、药品、护照，以及去 Upopoy 用的保暖衣物（部分在户外）。</p>
+<p><b>如果寄不了：</b> 就带着行李箱坐北斗（每节车厢两端有行李区）。Upopoy 付费区不能带行李箱：用入口的大号投币柜（500 日元（约 CNY 20），只收现金）或白老站的观光信息中心（500 日元（约 CNY 20），8:00–17:30）。回程不用寄：函馆机场坐巴士只要 20 分钟。</p></div>
+<div class="note"><b>天气。</b> 12 月的札幌：最高约 0–2°C，最低 −4 至 −6°C，经常下雪。函馆：最高 2–4°C，最低约 −3°C，雪较少但风大。下午 4 点左右日落。穿防滑靴：元町的坡道和去教堂的路会结冰。</div>
+
+<h2 id="sources">信息来源</h2>
+<div class="card"><p class="muted">2026 年 11 月 28 日查询，再用另一个研究工具交叉核对；有出入的地方以官方网站为准。餐厅评分来自食べログ，可能会有变动。火车时刻为 2026 年 11 月下旬的时刻表；白老两段票价为估算。酒店评分为 Booking.com 住客评分（满分 10；La Vista 为 Trip.com）。所有内容均以我们自己的话概括。 <a href="../about.zh.html">调研方法 →</a></p><ul>
+<li><b>札幌：</b> <a href="https://sapporoshi-tokeidai.jp/">钟楼</a> · <a href="https://www.hokkaido-redbrick.jp/">红砖厅舍</a> · <a href="https://www.hm.pref.hokkaido.lg.jp/">北海道博物馆</a> · <a href="https://www.kaitaku.or.jp/">开拓村</a> · <a href="https://www.sapporobeer.jp/brewery/s_museum/">札幌啤酒博物馆</a> · <a href="https://artmuseum.pref.hokkaido.lg.jp/knb">近代美术馆</a> · <a href="https://www.sapporo.travel/white-illumination/event/munich/">圣诞市集</a> · <a href="https://white-illumination.jp/">白色灯树节</a> · <a href="https://nijomarket.com/about">二条市场</a></li>
+<li><b>小樽：</b> <a href="https://www.nitorihd.co.jp/otaru-art-base/">似鸟美术馆</a> · <a href="https://www3.boj.or.jp/otaru-m/">日本银行金融资料馆</a> · <a href="https://kitaichiglass.co.jp/shoplist/">北一硝子</a> · <a href="https://www.otaru-orgel.co.jp/shop">音乐盒堂</a> · <a href="https://www.nikka.com/distilleries/yoichi/">Nikka Yoichi</a></li>
+<li><b>Upopoy：</b> <a href="https://ainu-upopoy.go.jp/en/guide/">开放时间</a> · <a href="https://ainu-upopoy.go.jp/en/timetable/">节目</a> · <a href="https://ainu-upopoy.go.jp/en/service/">寄存</a></li>
+<li><b>函馆：</b> <a href="https://www.goryokaku-tower.co.jp/">五棱郭塔</a> · <a href="https://hakodate-bugyosho.jp/information/">箱馆奉行所</a> · <a href="https://www.orthodox-hakodate.jp/services">东正教堂</a> · <a href="https://334.co.jp/ropeway/price/">函馆山缆车</a> · <a href="https://hakodate-kanemori.com/">金森红砖仓库</a> · <a href="https://hakodate-christmas.com/">圣诞梦幻节</a> · <a href="https://www.hakodate-asaichi.com/">朝市</a> · <a href="https://artmuseum.pref.hokkaido.lg.jp/hbj">函馆美术馆</a></li>
+<li><b>交通：</b> <a href="https://www.jrhokkaido.co.jp/">JR Hokkaido</a> · <a href="https://www.jrhokkaido.co.jp/global/chinese/ticket/railpass/">北海道铁路周游券</a> · <a href="https://www.eki-net.com/">Eki-net</a> · <a href="https://www.city.hakodate.hokkaido.jp/tram/">函馆市电</a> · <a href="https://hakobus.co.jp/">函馆巴士</a> · <a href="https://www.hokkaido-airports.com/ja/hakodate/access/bus/">函馆机场巴士</a> · <a href="https://www.kuronekoyamato.co.jp/ytc/search/estimate/">大和运输运费</a> · <a href="https://tokyo-haneda.com/flight/transit/">羽田转机</a></li>
+<li><b>餐饮和住宿：</b> 食べログ · Booking.com（价格和住客评分，2026 年 11 月下旬）· La Vista 参考乐天旅游和 Trip.com</li>
+<li><b>照片</b> （Wikimedia Commons）：见每张图片下的署名。</li></ul></div>
+<script id="wl-placesync">(function(){var P={"tabs":{"six":{"label":"六天行程","base":{"chitose":["第 1 天 午餐"],"sapporo":["第 1 天 晚餐","第 2 天 晚餐","第 3 天 晚餐"],"nopporo":["第 2 天 午餐"],"otaru":["第 3 天 午餐"],"shiraoi":["第 4 天 午餐"],"hakodate":["第 4 天 晚餐","第 5 天 午餐","第 5 天 晚餐","第 6 天 午餐"],"hkdair":["第 6 天"],"n-sapporo":[],"n-hakodate":[]},"add":{},"meals":[["chitose","sapporo"],["nopporo","sapporo"],["otaru","sapporo"],["shiraoi","hakodate"],["hakodate","hakodate"],["hakodate",null]],"nights":[["sapporo",3],["hakodate",2]]}},"names":{"chitose":"新千岁机场","sapporo":"札幌","nopporo":"开拓村与新札幌","otaru":"小樽","shiraoi":"白老（Upopoy）","hakodate":"函馆","hkdair":"函馆机场"},"t":{"c":"：","cm":"，","pd":"。","day":"第","suf":" 天","lunch":"午餐","dinner":"晚餐","ifadd":"如果加上：","on":"按","nights":"晚","night":"晚","change":"（随行程更新。）"}};
+function apply(id){var T=P.tabs[id];if(!T)return;
+document.querySelectorAll('[data-place]').forEach(function(el){var k=el.dataset.place;var b=T.base[k],a=T.add[k];
+ el.hidden=!(b||a);el.classList.toggle('pl-add',!b&&!!a);
+ var w=el.querySelector('.pl-when');if(w){w.textContent=b?b.join(' · '):(a?P.t.ifadd+' '+a.join(' · '):'');}});
+document.querySelectorAll('.pl-summary').forEach(function(el){var kind=el.dataset.kind;var C=P.t.c||': ',M=P.t.cm||', ',D=P.t.pd||'.';var out=P.t.on+' '+T.label+C;
+ if(kind==='nights'){out+=T.nights.map(function(n){return P.names[n[0]]+' '+n[1]+' '+(n[1]>1?P.t.nights:P.t.night);}).join(M)+D;}
+ else if(kind==='meals'){out+=T.meals.map(function(m,i){var x=[];if(m[0])x.push(P.t.lunch+' '+P.names[m[0]]);if(m[1])x.push(P.t.dinner+' '+P.names[m[1]]);return P.t.day+' '+(i+1)+P.t.suf+C+x.join(M);}).join(' · ')+D;}
+ else {var ks=Object.keys(T.base).filter(function(k){return k.indexOf('n-')!==0;});out+=ks.map(function(k){return P.names[k];}).join(M)+D;}
+ el.textContent=out+' '+P.t.change;});}
+document.addEventListener('click',function(e){var t=e.target.closest&&e.target.closest('.tabs [data-t]');if(t)apply(t.dataset.t);});
+var s=document.querySelector('.tabs [aria-selected="true"]');apply(s?s.dataset.t:Object.keys(P.tabs)[0]);})();</script>
+<footer>Wanderlust 的一部分。只是行程调研，不构成建议；没有任何赞助。</footer>
+</main>
+<script>
+document.querySelectorAll('.tabs').forEach(t => t.querySelectorAll('button').forEach(b => b.addEventListener('click', () => {
+  t.querySelectorAll('button').forEach(x => { const on = x === b; x.setAttribute('aria-selected', on); document.getElementById(x.dataset.t).hidden = !on; });
+})));
+</script>
+<script>(function(){var r=document.documentElement,mq=window.matchMedia("(prefers-color-scheme: dark)");function dark(){var t=r.getAttribute("data-theme");return t?t==="dark":mq.matches}var bs=document.querySelectorAll(".themebtn");function paint(){var d=dark();bs.forEach(function(b){b.textContent=d?"\u2600\uFE0E":"\u263E";b.setAttribute("aria-label",d?b.dataset.l:b.dataset.d);b.title=b.getAttribute("aria-label");})}bs.forEach(function(b){b.addEventListener("click",function(){var t=dark()?"light":"dark";r.setAttribute("data-theme",t);try{localStorage.setItem("wl-theme",t)}catch(e){}paint();})});if(mq.addEventListener)mq.addEventListener("change",paint);paint();})();</script>
+<script id="wl-enh-js">(function(){
+var zh=/^zh/.test(document.documentElement.lang||'');
+var T=zh?{top:'回到顶部',exp:'全部展开',col:'全部收起',map:'在地图上查看 ›'}:{top:'Back to top',exp:'Expand all',col:'Collapse all',map:'Show on map ›'};
+/* 1. sticky toc + scrollspy + back to top */
+var toc=document.querySelector('nav.toc'),links=toc?[].slice.call(toc.querySelectorAll('a[href^="#"]')):[];
+var heads=links.map(function(a){return document.getElementById(a.getAttribute('href').slice(1));});
+var top=document.createElement('button');top.type='button';top.className='totop';top.textContent='↑';top.setAttribute('aria-label',T.top);top.title=T.top;
+top.onclick=function(){window.scrollTo({top:0,behavior:'smooth'});};document.body.appendChild(top);
+var cur=-1,tick=false;
+function spy(){tick=false;var y=window.scrollY;top.classList.toggle('show',y>900);
+  if(!toc)return;toc.classList.toggle('stuck',toc.getBoundingClientRect().top<=0&&y>0);
+  var i=-1;heads.forEach(function(h,j){if(h&&h.getBoundingClientRect().top<=90)i=j;});
+  if(i!==cur){if(cur>=0)links[cur].classList.remove('on');cur=i;
+    if(i>=0){var a=links[i];a.classList.add('on');var l=a.offsetLeft-toc.clientWidth/2+a.offsetWidth/2;toc.scrollTo?toc.scrollTo({left:l,behavior:'smooth'}):(toc.scrollLeft=l);}}}
+window.addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(spy);}},{passive:true});spy();
+/* 4. fold reference sections */
+var FOLD=['drive','shows','museums','shop','sources'];
+var S=zh?{show:'展开',museums:function(n){return n+' 家博物馆：开放时间、闭馆日和门票';},shows:function(n){return n+' 条展览信息';},shop:function(n){return n+' 处购物地点';},
+  drive:function(){return '驾照、租车、充电和路况提示';},sources:function(n){return n+' 个信息来源';}}
+ :{show:'Show',museums:function(n){return n+' museums: hours, closing days and entry';},shows:function(n){return n+(n===1?' listing':' listings');},shop:function(n){return n+' places to shop';},
+  drive:function(){return 'Licence, rental, charging and road tips';},sources:function(n){return n+' sources';}};
+function openSec(h){if(h&&h.classList.contains('folded')){h.classList.remove('folded');h.setAttribute('aria-expanded','true');}}
+FOLD.forEach(function(id){var h=document.getElementById(id);if(!h||h.tagName!=='H2')return;
+  var body=document.createElement('div');body.className='sbody';
+  while(h.nextSibling&&!(h.nextSibling.nodeType===1&&h.nextSibling.tagName==='H2'))body.appendChild(h.nextSibling);
+  var n=id==='museums'?Math.max(0,body.querySelectorAll('tr').length-body.querySelectorAll('table').length):
+        id==='sources'?body.querySelectorAll('li a, p a').length:body.querySelectorAll('li').length;
+  if(id==='drive'&&!document.querySelector('.charge'))S.drive=zh?function(){return '驾照、租车和路况提示';}:function(){return 'Licence, rental and road tips';};
+  var sum=document.createElement('p');sum.className='ssum';sum.innerHTML=S[id](n)+' · <b>'+S.show+' ›</b>';
+  h.parentNode.insertBefore(sum,h.nextSibling);sum.parentNode.insertBefore(body,sum.nextSibling);
+  h.classList.add('fold-h','folded');h.tabIndex=0;h.setAttribute('role','button');h.setAttribute('aria-expanded','false');
+  function tog(){var f=h.classList.toggle('folded');h.setAttribute('aria-expanded',String(!f));}
+  h.addEventListener('click',tog);sum.addEventListener('click',tog);h.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();tog();}});});
+links.forEach(function(a){a.addEventListener('click',function(){openSec(document.getElementById(a.getAttribute('href').slice(1)));});});
+if(location.hash)openSec(document.getElementById(location.hash.slice(1)));
+/* 5c. budget bars */
+(function(){var b=document.getElementById('budget');if(!b)return;var card=b.nextElementSibling;if(!card)return;
+  var COL=['#c2410c','#2563eb','#15803d','#ca8a04','#7c3aed','#0891b2','#be123c'];
+  function num(x){return parseInt(x.replace(/,/g,''),10);}
+  var rows=[];
+  [].forEach.call(card.querySelectorAll(':scope > ul > li'),function(li){
+    var src=null,txt=null,sp=li.querySelector('span.muted');
+    if(sp&&/\+/.test(sp.textContent)){src=sp;txt=sp.textContent;}
+    else{var m=li.textContent.match(/[(（]([^()（）]*·[^()（）]*)[)）]/);if(m)txt=m[1];}
+    if(!txt)return;
+    var items=txt.split(/\s+\+\s+|\s*·\s*/).map(function(t){var m=t.trim().match(/^(.*?)\s*([\d,]+)(?:\s*[–-]\s*([\d,]+))?$/);
+      if(!m||!m[1])return null;var lo=num(m[2]),hi=m[3]?num(m[3]):lo;return {l:m[1].trim(),lo:lo,hi:hi,v:(lo+hi)/2,t:m[2]+(m[3]?'–'+m[3]:'')};}).filter(Boolean);
+    if(items.length<3)return;rows.push({li:li,src:src,txt:txt,items:items,tot:items.reduce(function(a,x){return a+x.v;},0)});});
+  var max=Math.max.apply(null,rows.map(function(r){return r.tot;}));
+  rows.forEach(function(r){var bar=document.createElement('div');bar.className='bbar';bar.style.width=Math.max(35,100*r.tot/max)+'%';bar.setAttribute('role','img');
+    bar.setAttribute('aria-label',r.items.map(function(x){return x.l+' '+x.t;}).join(', '));
+    var lg=document.createElement('ul');lg.className='blegend';
+    r.items.forEach(function(x,i){var s=document.createElement('span');s.style.width=(100*x.v/r.tot)+'%';s.style.background=COL[i%COL.length];s.title=x.l+' '+x.t;bar.appendChild(s);
+      var li=document.createElement('li');li.innerHTML='<i style="background:'+COL[i%COL.length]+'"></i>'+x.l+' <b>'+x.t+'</b>';lg.appendChild(li);});
+    if(r.src){r.src.style.display='none';r.src.parentNode.insertBefore(bar,r.src);r.src.parentNode.insertBefore(lg,r.src);}
+    else{var w=document.createTreeWalker(r.li,NodeFilter.SHOW_TEXT);var n;while((n=w.nextNode())){var i=n.nodeValue.indexOf(r.txt);
+      if(i>=0){var a=n.nodeValue.slice(0,i).replace(/\s*[(（]$/,''),z=n.nodeValue.slice(i+r.txt.length).replace(/^[)）]/,'');n.nodeValue=a+z;break;}}
+      r.li.appendChild(bar);r.li.appendChild(lg);}});})();
+/* 2. day timeline: fold, expand all, show on map */
+var days=[].slice.call(document.querySelectorAll('.card.day'));if(!days.length)return;
+var tabIds=[].slice.call(document.querySelectorAll('.tabs [data-t]')).map(function(b){return b.dataset.t;}).slice(1);
+var nMap=window.wlMultiMap||document.querySelectorAll('#rdays button').length-1;
+function setFold(c,f){c.classList.toggle('folded',f);var h=c.querySelector('.dhead');if(h)h.setAttribute('aria-expanded',String(!f));}
+days.forEach(function(c){
+  var d=c.querySelector(':scope > .d');if(!d)return;
+  var head=document.createElement('div');head.className='dhead';head.setAttribute('role','button');head.tabIndex=0;
+  var body=document.createElement('div');body.className='dbody';
+  c.insertBefore(head,d);head.appendChild(d);
+  var nx=head.nextSibling;while(nx&&nx.nodeType===3&&!nx.textContent.trim())nx=nx.nextSibling;
+  if(nx&&nx.nodeType===1&&nx.tagName==='SPAN'&&nx.classList.contains('muted'))head.appendChild(nx);
+  var night=c.querySelector(':scope > .night');
+  while(head.nextSibling){var n=head.nextSibling;if(n===night){c.removeChild(n);continue;}body.appendChild(n);}
+  c.appendChild(body);if(night)c.appendChild(night);
+  var num=parseInt((c.querySelector('.dn')||{}).textContent,10);
+  var inAlt=tabIds.some(function(id){var p=document.getElementById(id);return p&&p.contains(c);});
+  if(window.wlShowDay&&num&&num<=nMap&&(!inAlt||window.wlMultiMap)){var b=document.createElement('button');b.type='button';b.className='dmap';b.textContent=T.map;
+    b.onclick=function(){var m=document.getElementById('map');if(m)m.scrollIntoView({behavior:'smooth'});window.wlShowDay(num);};body.appendChild(b);}
+  function tog(){setFold(c,!c.classList.contains('folded'));}
+  head.onclick=tog;head.onkeydown=function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();tog();}};
+});
+var fold=days.length>7;days.forEach(function(c){setFold(c,fold);});
+var tools=document.createElement('div');tools.className='dtools';var eb=document.createElement('button');eb.type='button';
+function label(){eb.textContent=days.some(function(c){return c.classList.contains('folded');})?T.exp:T.col;}
+eb.onclick=function(){var any=days.some(function(c){return c.classList.contains('folded');});days.forEach(function(c){setFold(c,!any);});label();};
+document.addEventListener('click',function(e){if(e.target.closest&&e.target.closest('.dhead'))setTimeout(label,0);});
+label();tools.appendChild(eb);
+var first=days[0],anchor=first;var tabs=document.querySelector('.tabs');if(tabs&&tabs.compareDocumentPosition(first)&Node.DOCUMENT_POSITION_FOLLOWING)anchor=tabs;
+anchor.parentNode.insertBefore(tools,anchor);
+})();</script>
+</body>
+</html>
