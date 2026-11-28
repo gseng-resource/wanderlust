@@ -137,6 +137,7 @@
   .blegend b { color:var(--text); font-weight:600; }
   @media print { h2.fold-h.folded + .ssum + .sbody { display:block; } .ssum { display:none !important; } }
 </style>
+<style id="wl-placesync-css">.pl-when{color:var(--accent);font-weight:600;font-size:.88rem;margin:0 0 6px}.pl-add{opacity:.8}.pl-add .pl-when{color:var(--muted)}.pl-summary{font-size:.9rem}</style>
 </head>
 <body>
 <main>
@@ -221,53 +222,56 @@ window.wlShowDay=show;show('all');})();</script>
 
 <h2 id="shows">On in December 2026</h2>
 <div class="card"><ul>
-  <li><b>Kyushu National Museum:</b> <i>Himiko and Her Mirrors: The Making of a Kingdom</i>, 31 Oct–11 Jan, ¥2,000 (CNY 85).</li>
-  <li><b>Fukuoka Art Museum:</b> <i>Chintz: A Global Story</i> (the Karun Thakar Collection), 17 Oct–20 Dec, ¥1,700 (CNY 70); also Yoshida Hiroshi at 150 and Matsunaga Jian’s winter tea gatherings.</li>
-  <li><b>Fukuoka Asian Art Museum:</b> <i>Asian Art Walk: South Asia Special Edition</i>, 19 Sep–11 Jan, ¥1,000 (CNY 40).</li>
-  <li><b>teamLab, Fukuoka Castle ruins:</b> <i>Festival of Light</i>, 30 Oct–11 Jan, 18:15–22:00; weekdays ¥2,300 (CNY 95), weekends ¥2,500 (CNY 100); timed tickets.</li>
-  <li><b>Nagasaki Prefectural Art Museum:</b> <i>Hello Kitty</i>, 17 Oct–11 Jan, ¥2,000 (CNY 85), and Yuji Saiga’s Gunkanjima photographs.</li>
-  <li><b>Kumamoto:</b> the prefectural art museum has nothing on in December; the contemporary art museum has a small free show (<i>Dolly ( )</i>, Isayama Genki, to 27 Dec).</li>
+  <li data-place="daz"><b>Kyushu National Museum:</b> <i>Himiko and Her Mirrors: The Making of a Kingdom</i>, 31 Oct–11 Jan, ¥2,000 (CNY 85).</li>
+  <li data-place="hak"><b>Fukuoka Art Museum:</b> <i>Chintz: A Global Story</i> (the Karun Thakar Collection), 17 Oct–20 Dec, ¥1,700 (CNY 70); also Yoshida Hiroshi at 150 and Matsunaga Jian’s winter tea gatherings.</li>
+  <li data-place="hak"><b>Fukuoka Asian Art Museum:</b> <i>Asian Art Walk: South Asia Special Edition</i>, 19 Sep–11 Jan, ¥1,000 (CNY 40).</li>
+  <li data-place="hak"><b>teamLab, Fukuoka Castle ruins:</b> <i>Festival of Light</i>, 30 Oct–11 Jan, 18:15–22:00; weekdays ¥2,300 (CNY 95), weekends ¥2,500 (CNY 100); timed tickets.</li>
+  <li data-place="nag"><b>Nagasaki Prefectural Art Museum:</b> <i>Hello Kitty</i>, 17 Oct–11 Jan, ¥2,000 (CNY 85), and Yuji Saiga’s Gunkanjima photographs.</li>
+  <li data-place="kum"><b>Kumamoto:</b> the prefectural art museum has nothing on in December; the contemporary art museum has a small free show (<i>Dolly ( )</i>, Isayama Genki, to 27 Dec).</li>
 </ul></div>
 
 <h2 id="museums">Museums</h2>
-<div class="card scroll"><table><tr><th>Museum</th><th>Hours</th><th>Closed</th><th>Entry</th></tr>
-<tr><td><a href="https://www.kyuhaku.jp/en/">Kyushu National Museum</a></td><td>9:30–17:00 (Sat to 19:00 during <i>Himiko</i>)</td><td>Mondays</td><td>¥2,000 (CNY 85) (special)</td></tr>
-<tr><td>Dazaifu Tenmangu Treasure House</td><td>9:00–16:30</td><td>Mondays</td><td>¥500 (CNY 20)</td></tr>
-<tr><td><a href="https://www.fukuoka-art-museum.jp/en/">Fukuoka Art Museum</a></td><td>9:30–17:30</td><td>Mondays</td><td>¥200 (CNY 10); special ¥1,700 (CNY 70)</td></tr>
-<tr><td><a href="https://faam.city.fukuoka.lg.jp/en/">Fukuoka Asian Art Museum</a></td><td>9:30–18:00, Fri and Sat to 20:00</td><td>Wednesdays</td><td>¥1,000 (CNY 40)</td></tr>
-<tr><td>Hakata Traditional Craft Center</td><td>10:00–18:00</td><td>Wednesdays</td><td>Free</td></tr>
-<tr><td><a href="https://www.nagasaki-museum.jp/">Nagasaki Prefectural Art Museum</a></td><td>10:00–20:00</td><td>2nd and 4th Mondays</td><td>¥420 (CNY 20); special ¥2,000 (CNY 85)</td></tr>
-<tr><td><a href="https://www.camk.jp/english/">Contemporary Art Museum Kumamoto</a></td><td>10:00–20:00</td><td>Tuesdays</td><td>Free (this month)</td></tr>
-<tr><td><a href="https://castle.kumamoto-guide.jp/">Kumamoto Castle</a></td><td>9:00–17:00</td><td>29 Dec</td><td>¥800 (CNY 35)</td></tr>
+<div class="card scroll"><p class="muted pl-summary" data-kind="places"></p><table><tr><th>Museum</th><th>Hours</th><th>Closed</th><th>Entry</th></tr>
+<tr data-place="daz"><td><a href="https://www.kyuhaku.jp/en/">Kyushu National Museum</a></td><td>9:30–17:00 (Sat to 19:00 during <i>Himiko</i>)</td><td>Mondays</td><td>¥2,000 (CNY 85) (special)</td></tr>
+<tr data-place="daz"><td>Dazaifu Tenmangu Treasure House</td><td>9:00–16:30</td><td>Mondays</td><td>¥500 (CNY 20)</td></tr>
+<tr data-place="hak"><td><a href="https://www.fukuoka-art-museum.jp/en/">Fukuoka Art Museum</a></td><td>9:30–17:30</td><td>Mondays</td><td>¥200 (CNY 10); special ¥1,700 (CNY 70)</td></tr>
+<tr data-place="hak"><td><a href="https://faam.city.fukuoka.lg.jp/en/">Fukuoka Asian Art Museum</a></td><td>9:30–18:00, Fri and Sat to 20:00</td><td>Wednesdays</td><td>¥1,000 (CNY 40)</td></tr>
+<tr data-place="hak"><td>Hakata Traditional Craft Center</td><td>10:00–18:00</td><td>Wednesdays</td><td>Free</td></tr>
+<tr data-place="nag"><td><a href="https://www.nagasaki-museum.jp/">Nagasaki Prefectural Art Museum</a></td><td>10:00–20:00</td><td>2nd and 4th Mondays</td><td>¥420 (CNY 20); special ¥2,000 (CNY 85)</td></tr>
+<tr data-place="kum"><td><a href="https://www.camk.jp/english/">Contemporary Art Museum Kumamoto</a></td><td>10:00–20:00</td><td>Tuesdays</td><td>Free (this month)</td></tr>
+<tr data-place="kum"><td><a href="https://castle.kumamoto-guide.jp/">Kumamoto Castle</a></td><td>9:00–17:00</td><td>29 Dec</td><td>¥800 (CNY 35)</td></tr>
 </table></div>
 
 <h2 id="eat">Where to eat</h2>
+<p class="muted pl-summary" data-kind="meals"></p>
 <p class="muted"><span class="tb">Tabelog 3.72 · 5,200 reviews</span> badges are Tabelog scores: 3.0 is average, 3.5+ very good. Read from Tabelog search listings in late November 2026. Our bar is 3.4+ and 50+ reviews.</p>
-<div class="card"><h3>Day 1</h3><ul>
-  <li><b>Lunch:</b> Yasutake on the Dazaifu shrine approach <span class="tb">Tabelog 3.59 · 638 reviews</span>, hand-made soba, about ¥1,500 (CNY 65). Or Wagyu Mentai Kagura <span class="tb">Tabelog 3.48 · 188 reviews</span>, about ¥3,000 (CNY 130).</li>
-  <li><b>Dinner:</b> mizutaki (chicken hotpot) at Mizutaki Nagano <span class="tb">Tabelog 3.60 · 1,457 reviews</span>, about ¥5,000 (CNY 210) (closed Sundays; book by phone). Or Toriden <span class="tb">Tabelog 3.66 · 983 reviews</span>, ¥8,000–10,000 (CNY 330–420).</li></ul></div>
-<div class="card"><h3>Day 2</h3><ul>
-  <li><b>Lunch:</b> Shikairō, the birthplace of champon, by Ōura <span class="tb">Tabelog 3.49 · 1,702 reviews</span>, about ¥1,500 (CNY 65). Or Kōzanrō Chinatown Shinkan <span class="tb">Tabelog 3.67 · 1,851 reviews</span>, sara udon, about ¥2,000 (CNY 85).</li>
-  <li><b>Dinner:</b> back in Hakata: Hakata Issou <span class="tb">Tabelog 3.72 · 5,200 reviews</span>, tonkotsu ramen, under ¥1,000 (CNY 40). Or Yakitori Hachibei <span class="tb">Tabelog 3.41 · 256 reviews</span>, ¥5,000–6,000 (CNY 210–250).</li></ul></div>
-<div class="card"><h3>Day 3</h3><ul>
-  <li><b>Lunch:</b> Ganso Hakata Mentaiju <span class="tb">Tabelog 3.55 · 3,400 reviews</span>, mentaiko rice box, about ¥2,000 (CNY 85). Or Yoshizuka Unagiya <span class="tb">Tabelog 3.71 · 2,380 reviews</span>, unagi since the Meiji era, ¥2,000–5,000 (CNY 85–210) (closed Wednesdays).</li>
-  <li><b>Dinner:</b> motsunabe (offal hotpot) at Ikkei Haruyoshi <span class="tb">Tabelog 3.57 · 580 reviews</span>, ¥3,000–4,000 (CNY 130–170). Or Yamanaka Akasaka <span class="tb">Tabelog 3.67 · 2,027 reviews</span>, white-miso motsunabe, ¥4,000–5,000 (CNY 170–210).</li></ul></div>
-<div class="card"><h3>Day 4</h3><ul>
-  <li><b>Lunch:</b> Kumamoto Ramen Kokutei <span class="tb">Tabelog 3.68 · 2,600 reviews</span>, garlic-oil ramen near the station, about ¥1,000 (CNY 40). Or Katsuretsu-tei <span class="tb">Tabelog 3.70 · 1,756 reviews</span>, tonkatsu, about ¥2,500 (CNY 100).</li>
+<div class="card place" data-place="daz"><h3>Dazaifu</h3><p class="pl-when"></p><ul>
+  <li><b>Lunch:</b> Yasutake on the Dazaifu shrine approach <span class="tb">Tabelog 3.59 · 638 reviews</span>, hand-made soba, about ¥1,500 (CNY 65). Or Wagyu Mentai Kagura <span class="tb">Tabelog 3.48 · 188 reviews</span>, about ¥3,000 (CNY 130).</li></ul></div>
+<div class="card place" data-place="hak"><h3>Fukuoka (Hakata)</h3><p class="pl-when"></p><ul>
+  <li><b>Dinner, day 1:</b> mizutaki (chicken hotpot) at Mizutaki Nagano <span class="tb">Tabelog 3.60 · 1,457 reviews</span>, about ¥5,000 (CNY 210) (closed Sundays; book by phone). Or Toriden <span class="tb">Tabelog 3.66 · 983 reviews</span>, ¥8,000–10,000 (CNY 330–420).</li>
+  <li><b>Dinner, day 2:</b> back in Hakata: Hakata Issou <span class="tb">Tabelog 3.72 · 5,200 reviews</span>, tonkotsu ramen, under ¥1,000 (CNY 40). Or Yakitori Hachibei <span class="tb">Tabelog 3.41 · 256 reviews</span>, ¥5,000–6,000 (CNY 210–250).</li>
+  <li><b>Lunch, day 3:</b> Ganso Hakata Mentaiju <span class="tb">Tabelog 3.55 · 3,400 reviews</span>, mentaiko rice box, about ¥2,000 (CNY 85). Or Yoshizuka Unagiya <span class="tb">Tabelog 3.71 · 2,380 reviews</span>, unagi since the Meiji era, ¥2,000–5,000 (CNY 85–210) (closed Wednesdays).</li>
+  <li><b>Dinner, day 3:</b> motsunabe (offal hotpot) at Ikkei Haruyoshi <span class="tb">Tabelog 3.57 · 580 reviews</span>, ¥3,000–4,000 (CNY 130–170). Or Yamanaka Akasaka <span class="tb">Tabelog 3.67 · 2,027 reviews</span>, white-miso motsunabe, ¥4,000–5,000 (CNY 170–210).</li></ul></div>
+<div class="card place" data-place="nag"><h3>Nagasaki</h3><p class="pl-when"></p><ul>
+  <li><b>Lunch:</b> Shikairō, the birthplace of champon, by Ōura <span class="tb">Tabelog 3.49 · 1,702 reviews</span>, about ¥1,500 (CNY 65). Or Kōzanrō Chinatown Shinkan <span class="tb">Tabelog 3.67 · 1,851 reviews</span>, sara udon, about ¥2,000 (CNY 85).</li></ul></div>
+<div class="card place" data-place="kum"><h3>Kumamoto</h3><p class="pl-when"></p><ul>
+  <li><b>Lunch:</b> Kumamoto Ramen Kokutei <span class="tb">Tabelog 3.68 · 2,600 reviews</span>, garlic-oil ramen near the station, about ¥1,000 (CNY 40). Or Katsuretsu-tei <span class="tb">Tabelog 3.70 · 1,756 reviews</span>, tonkatsu, about ¥2,500 (CNY 100).</li></ul></div>
+<div class="card place" data-place="air"><h3>Fukuoka Airport</h3><p class="pl-when"></p><ul>
   <li><b>Dinner:</b> at Fukuoka Airport before the flight (the airport’s restaurants score just under our bar, so eat early in Hakata if you can).</li></ul></div>
 
 <h2 id="shop">Shopping</h2>
-<div class="card"><ul>
-  <li><b>Hakata:</b> Hakata-ori textiles and Hakata dolls at the Traditional Craft Center; mentaiko at Hakata Station.</li>
-  <li><b>Tenjin and Daimyo:</b> department stores and independent shops.</li>
-  <li><b>Dazaifu:</b> umegae-mochi on the shrine approach.</li>
-  <li><b>Nagasaki:</b> castella from Shōōken or Fukusaya.</li>
+<div class="card"><p class="muted pl-summary" data-kind="places"></p><ul>
+  <li data-place="hak"><b>Hakata:</b> Hakata-ori textiles and Hakata dolls at the Traditional Craft Center; mentaiko at Hakata Station.</li>
+  <li data-place="hak"><b>Tenjin and Daimyo:</b> department stores and independent shops.</li>
+  <li data-place="daz"><b>Dazaifu:</b> umegae-mochi on the shrine approach.</li>
+  <li data-place="nag"><b>Nagasaki:</b> castella from Shōōken or Fukusaya.</li>
 </ul></div>
 
 <h2 id="stay">Where to stay</h2>
+<p class="muted pl-summary" data-kind="nights"></p>
 <p class="muted">One hotel for all three nights. Prices for two seen in late November 2026 for a December weekend; Fukuoka is busy on December weekends.</p>
-<div class="card"><div class="hotel-head"><h3>Richmond Hotel Hakata Ekimae</h3><span class="score">8.6</span></div><div class="local">リッチモンドホテル博多駅前 · Hakata Station</div><p>About ¥18,800–33,000 (CNY 790–1,380) a night on JTB’s December calendar. Booking.com showed higher prices, then no rooms, so compare sites. Five minutes from the station for every train.</p><p><a href="https://www.booking.com/hotel/jp/richmond-hakata-ekimae.html">Booking.com</a></p></div>
-<div class="card"><div class="hotel-head"><h3>Hotel Il Palazzo</h3><span class="score">9.0</span></div><div class="local">ホテル イル・パラッツォ · Haruyoshi, by the Naka River</div><p>About ¥80,500 (CNY 3,360) a night on Booking.com; other sites list a standard double with breakfast for less, so compare. Aldo Rossi’s 1989 design hotel; walk to Nakasu, Tenjin and the Asian Art Museum.</p><p><a href="https://www.booking.com/hotel/jp/il-palazzo.html">Booking.com</a></p></div>
+<div class="card" data-place="hak"><div class="hotel-head"><h3>Richmond Hotel Hakata Ekimae</h3><span class="score">8.6</span></div><div class="local">リッチモンドホテル博多駅前 · Hakata Station</div><p>About ¥18,800–33,000 (CNY 790–1,380) a night on JTB’s December calendar. Booking.com showed higher prices, then no rooms, so compare sites. Five minutes from the station for every train.</p><p><a href="https://www.booking.com/hotel/jp/richmond-hakata-ekimae.html">Booking.com</a></p></div>
+<div class="card" data-place="hak"><div class="hotel-head"><h3>Hotel Il Palazzo</h3><span class="score">9.0</span></div><div class="local">ホテル イル・パラッツォ · Haruyoshi, by the Naka River</div><p>About ¥80,500 (CNY 3,360) a night on Booking.com; other sites list a standard double with breakfast for less, so compare. Aldo Rossi’s 1989 design hotel; walk to Nakasu, Tenjin and the Asian Art Museum.</p><p><a href="https://www.booking.com/hotel/jp/il-palazzo.html">Booking.com</a></p></div>
 
 <h2 id="budget">Budget</h2>
 <div class="card"><p>Per person, two sharing a room, <b>excluding flights</b>. Estimated November 2026. Exchange rate ¥1 ≈ CNY 0.042 (26 Nov 2026).</p><ul>
@@ -291,6 +295,18 @@ window.wlShowDay=show;show('all');})();</script>
 <li><b>Trains:</b> <a href="https://www.jrkyushu.co.jp/english/railpass/railpass.html">JR Kyushu Rail Pass</a> · <a href="https://www.jrkyushu.co.jp/railway/netyoyaku/route/kumamoto/">JR Kyushu fares</a> · <a href="https://www.nishitetsu.jp/bus/rosen/dazaihu_liner/">Dazaifu Liner bus</a></li>
 <li><b>Food and stays:</b> Tabelog search listings · Booking.com and JTB (prices and scores, late November 2026)</li>
 <li><b>Photos</b> (Wikimedia Commons): see the credit under each image.</li></ul></div>
+<script id="wl-placesync">(function(){var P={"tabs":{"four":{"label":"4-day plan","base":{"daz":["Day 1 lunch"],"hak":["Day 1 dinner","Day 2 dinner","Day 3 lunch","Day 3 dinner"],"nag":["Day 2 lunch"],"kum":["Day 4 lunch"],"air":["Day 4 dinner"]},"add":{},"meals":[["daz","hak"],["nag","hak"],["hak","hak"],["kum","air"]],"nights":[["hak",3]]}},"names":{"daz":"Dazaifu","hak":"Fukuoka (Hakata)","nag":"Nagasaki","kum":"Kumamoto","air":"Fukuoka Airport"},"t":{"day":"Day","suf":"","lunch":"lunch","dinner":"dinner","ifadd":"If you add it:","on":"On the","nights":"nights","night":"night","change":""}};
+function apply(id){var T=P.tabs[id];if(!T)return;
+document.querySelectorAll('[data-place]').forEach(function(el){var k=el.dataset.place;var b=T.base[k],a=T.add[k];
+ el.hidden=!(b||a);el.classList.toggle('pl-add',!b&&!!a);
+ var w=el.querySelector('.pl-when');if(w){w.textContent=b?b.join(' · '):(a?P.t.ifadd+' '+a.join(' · '):'');}});
+document.querySelectorAll('.pl-summary').forEach(function(el){var kind=el.dataset.kind;var out=P.t.on+' '+T.label+': ';
+ if(kind==='nights'){out+=T.nights.map(function(n){return P.names[n[0]]+' '+n[1]+' '+(n[1]>1?P.t.nights:P.t.night);}).join(', ')+'.';}
+ else if(kind==='meals'){out+=T.meals.map(function(m,i){var x=[];if(m[0])x.push(P.t.lunch+' '+P.names[m[0]]);if(m[1])x.push(P.t.dinner+' '+P.names[m[1]]);return P.t.day+' '+(i+1)+P.t.suf+': '+x.join(', ');}).join(' · ')+'.';}
+ else {var ks=Object.keys(T.base).filter(function(k){return k.indexOf('n-')!==0;});out+=ks.map(function(k){return P.names[k];}).join(', ')+'.';}
+ el.textContent=out+' '+P.t.change;});}
+document.addEventListener('click',function(e){var t=e.target.closest&&e.target.closest('.tabs [data-t]');if(t)apply(t.dataset.t);});
+var s=document.querySelector('.tabs [aria-selected="true"]');apply(s?s.dataset.t:Object.keys(P.tabs)[0]);})();</script>
 <footer>Part of Wanderlust. Trip research, not advice; nothing here is sponsored.</footer>
 </main>
 <script>

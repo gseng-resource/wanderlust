@@ -137,6 +137,7 @@
   .blegend b { color:var(--text); font-weight:600; }
   @media print { h2.fold-h.folded + .ssum + .sbody { display:block; } .ssum { display:none !important; } }
 </style>
+<style id="wl-placesync-css">.pl-when{color:var(--accent);font-weight:600;font-size:.88rem;margin:0 0 6px}.pl-add{opacity:.8}.pl-add .pl-when{color:var(--muted)}.pl-summary{font-size:.9rem}</style>
 </head>
 <body>
 <main>
@@ -240,60 +241,63 @@ window.wlShowDay=show;show('all');})();</script>
 
 <h2 id="shows">On in December 2026</h2>
 <div class="card"><ul>
-  <li><b>Kyushu National Museum:</b> <i>Himiko and Her Mirrors: The Making of a Kingdom</i>, 31 Oct–11 Jan, ¥2,000 (CNY 85). Open to 19:00 on Saturdays.</li>
-  <li><b>Nagasaki Prefectural Art Museum:</b> <i>Hello Kitty</i>, 17 Oct–11 Jan, ¥2,000 (CNY 85) including the collection; Yuji Saiga’s Gunkanjima photographs, 22 Oct–24 Jan and 28 Oct–7 Feb (collection ticket ¥420 (CNY 20)).</li>
-  <li><b>Saga Prefectural Art Museum</b> (about 35 minutes from Takeo, if you have time): a Studio Ghibli exhibition, 3 Nov–14 Feb, ¥1,900 (CNY 80); advance timed tickets only at weekends.</li>
-  <li><b>Kyushu Ceramic Museum:</b> the Kakiemon and Meissen exhibition ended 6 Dec; Galleries 3 and 4 reopen 23 Dec. Until then, only the permanent galleries.</li>
-  <li><b>Not yet announced:</b> Takeo City Library’s winter illumination (it ran from mid-December last year).</li>
+  <li data-place="daz"><b>Kyushu National Museum:</b> <i>Himiko and Her Mirrors: The Making of a Kingdom</i>, 31 Oct–11 Jan, ¥2,000 (CNY 85). Open to 19:00 on Saturdays.</li>
+  <li data-place="nag"><b>Nagasaki Prefectural Art Museum:</b> <i>Hello Kitty</i>, 17 Oct–11 Jan, ¥2,000 (CNY 85) including the collection; Yuji Saiga’s Gunkanjima photographs, 22 Oct–24 Jan and 28 Oct–7 Feb (collection ticket ¥420 (CNY 20)).</li>
+  <li data-place="sag"><b>Saga Prefectural Art Museum</b> (about 35 minutes from Takeo, if you have time): a Studio Ghibli exhibition, 3 Nov–14 Feb, ¥1,900 (CNY 80); advance timed tickets only at weekends.</li>
+  <li data-place="ari"><b>Kyushu Ceramic Museum:</b> the Kakiemon and Meissen exhibition ended 6 Dec; Galleries 3 and 4 reopen 23 Dec. Until then, only the permanent galleries.</li>
+  <li data-place="tak"><b>Not yet announced:</b> Takeo City Library’s winter illumination (it ran from mid-December last year).</li>
 </ul></div>
 
 <h2 id="museums">Museums</h2>
-<div class="card scroll"><table><tr><th>Museum</th><th>Hours</th><th>Closed</th><th>Entry</th></tr>
-<tr><td><a href="https://www.kyuhaku.jp/en/">Kyushu National Museum</a></td><td>9:30–17:00 (Sat to 19:00 during <i>Himiko</i>)</td><td>Mondays</td><td>¥2,000 (CNY 85) (special)</td></tr>
-<tr><td>Dazaifu Tenmangu Treasure House</td><td>9:00–16:30</td><td>Mondays</td><td>¥500 (CNY 20)</td></tr>
-<tr><td><a href="https://saga-museum.jp/ceramic/">Kyushu Ceramic Museum</a>, Arita</td><td>9:00–17:00, last entry 16:30</td><td>Mondays</td><td>Free</td></tr>
-<tr><td>Takeo City Library</td><td>9:00–21:00</td><td>Open daily</td><td>Free</td></tr>
-<tr><td><a href="https://www.nagasaki-museum.jp/">Nagasaki Prefectural Art Museum</a></td><td>10:00–20:00</td><td>2nd and 4th Mondays</td><td>¥420 (CNY 20); special ¥2,000 (CNY 85)</td></tr>
-<tr><td><a href="https://nabmuseum.jp/genbaku/">Nagasaki Atomic Bomb Museum</a></td><td>8:30–17:30</td><td>29–31 Dec</td><td>¥200 (CNY 10)</td></tr>
-<tr><td><a href="https://nagasakidejima.jp/">Dejima</a></td><td>8:00–21:00</td><td>Open daily</td><td>¥1,100 (CNY 45)</td></tr>
-<tr><td><a href="https://www.nmhc.jp/">Nagasaki Museum of History and Culture</a></td><td>8:30–18:00</td><td>Some Mondays (21 Dec)</td><td>¥630 (CNY 25)</td></tr>
-<tr><td><a href="https://www.oura-church.jp/">Ōura Cathedral</a></td><td>8:30–17:30</td><td>Church events</td><td>¥1,000 (CNY 40)</td></tr>
-<tr><td><a href="https://glover-garden.jp/guide">Glover Garden</a></td><td>8:00–20:00 in Nov–Dec</td><td>Open daily</td><td>¥1,300 (CNY 55)</td></tr>
-<tr><td>Karatsu Castle</td><td>9:00–17:00</td><td>29–31 Dec</td><td>¥500 (CNY 20)</td></tr>
-<tr><td>Hikiyama float hall, Karatsu</td><td>9:00–17:00</td><td>29–31 Dec</td><td>¥310 (CNY 15)</td></tr>
-<tr><td>Former Takatori Residence, Karatsu</td><td>9:30–17:00</td><td>Mondays</td><td>¥520 (CNY 20)</td></tr>
+<div class="card scroll"><p class="muted pl-summary" data-kind="places"></p><table><tr><th>Museum</th><th>Hours</th><th>Closed</th><th>Entry</th></tr>
+<tr data-place="daz"><td><a href="https://www.kyuhaku.jp/en/">Kyushu National Museum</a></td><td>9:30–17:00 (Sat to 19:00 during <i>Himiko</i>)</td><td>Mondays</td><td>¥2,000 (CNY 85) (special)</td></tr>
+<tr data-place="daz"><td>Dazaifu Tenmangu Treasure House</td><td>9:00–16:30</td><td>Mondays</td><td>¥500 (CNY 20)</td></tr>
+<tr data-place="ari"><td><a href="https://saga-museum.jp/ceramic/">Kyushu Ceramic Museum</a>, Arita</td><td>9:00–17:00, last entry 16:30</td><td>Mondays</td><td>Free</td></tr>
+<tr data-place="tak"><td>Takeo City Library</td><td>9:00–21:00</td><td>Open daily</td><td>Free</td></tr>
+<tr data-place="nag"><td><a href="https://www.nagasaki-museum.jp/">Nagasaki Prefectural Art Museum</a></td><td>10:00–20:00</td><td>2nd and 4th Mondays</td><td>¥420 (CNY 20); special ¥2,000 (CNY 85)</td></tr>
+<tr data-place="nag"><td><a href="https://nabmuseum.jp/genbaku/">Nagasaki Atomic Bomb Museum</a></td><td>8:30–17:30</td><td>29–31 Dec</td><td>¥200 (CNY 10)</td></tr>
+<tr data-place="nag"><td><a href="https://nagasakidejima.jp/">Dejima</a></td><td>8:00–21:00</td><td>Open daily</td><td>¥1,100 (CNY 45)</td></tr>
+<tr data-place="nag"><td><a href="https://www.nmhc.jp/">Nagasaki Museum of History and Culture</a></td><td>8:30–18:00</td><td>Some Mondays (21 Dec)</td><td>¥630 (CNY 25)</td></tr>
+<tr data-place="nag"><td><a href="https://www.oura-church.jp/">Ōura Cathedral</a></td><td>8:30–17:30</td><td>Church events</td><td>¥1,000 (CNY 40)</td></tr>
+<tr data-place="nag"><td><a href="https://glover-garden.jp/guide">Glover Garden</a></td><td>8:00–20:00 in Nov–Dec</td><td>Open daily</td><td>¥1,300 (CNY 55)</td></tr>
+<tr data-place="kar"><td>Karatsu Castle</td><td>9:00–17:00</td><td>29–31 Dec</td><td>¥500 (CNY 20)</td></tr>
+<tr data-place="kar"><td>Hikiyama float hall, Karatsu</td><td>9:00–17:00</td><td>29–31 Dec</td><td>¥310 (CNY 15)</td></tr>
+<tr data-place="kar"><td>Former Takatori Residence, Karatsu</td><td>9:30–17:00</td><td>Mondays</td><td>¥520 (CNY 20)</td></tr>
 </table></div>
 
 <h2 id="eat">Where to eat</h2>
+<p class="muted pl-summary" data-kind="meals"></p>
 <p class="muted"><span class="tb">Tabelog 3.65 · 845 reviews</span> badges are Tabelog scores: 3.0 is average, 3.5+ very good. Read from Tabelog search listings in late November 2026. Our bar is 3.4+ and 50+ reviews; anything below is marked.</p>
-<div class="card"><h3>Day 1</h3><ul>
-  <li><b>Lunch:</b> Kasanoya on the Dazaifu shrine approach <span class="tb">Tabelog 3.65</span>, set meals ¥1,500–2,500 (CNY 65–100), open daily. Or Sumiyaki Jidori Sanzō <span class="tb">Tabelog 3.74</span>, charcoal-grilled chicken around a hearth, about ¥2,500 (CNY 100) (closed Thursdays).</li>
-  <li><b>Dinner:</b> Takazushi, Ureshino <span class="tb">Tabelog 3.60 · 924 reviews</span>, seven-seat counter sushi, ¥5,000–6,000 (CNY 210–250) (closed Wednesdays; book). Or the ryokan’s kaiseki on the best-experience plan. Takeo itself has no dinner spot above our bar.</li></ul></div>
-<div class="card"><h3>Day 2</h3><ul>
-  <li><b>Lunch:</b> Ide Chanpon Honten <span class="tb">Tabelog 3.65 · 845 reviews</span>, Saga’s famous vegetable-heaped champon, about ¥1,000 (CNY 40) (closed Wednesdays). Or Sōan Yokochō, Ureshino <span class="tb">Tabelog 3.57</span>, onsen “melting” tofu (closed Wednesdays).</li>
-  <li><b>Dinner:</b> Uodana Asa near Nagasaki Station <span class="tb">Tabelog 3.55 · 306 reviews</span>, a fish izakaya, ¥4,000–5,000 (CNY 170–210). Or Hiikiya <span class="tb">Tabelog 3.34–3.55 · 55 reviews</span> (borderline; closed Sundays).</li></ul></div>
-<div class="card"><h3>Day 3</h3><ul>
-  <li><b>Lunch:</b> Tsuruchan <span class="tb">Tabelog 3.62 · 785 reviews</span>, Kyushu’s oldest café and home of toruko rice, ¥1,500–2,000 (CNY 65–85) (closed Wednesdays; no bookings). Or Yossō Honten <span class="tb">Tabelog 3.49 · 1,400 reviews</span>, chawanmushi and steamed sushi since 1866, about ¥2,500 (CNY 100) (closed Tuesdays).</li>
-  <li><b>Dinner:</b> shippoku, Nagasaki’s Japanese-Chinese-Dutch banquet: Nagasaki Shippoku Hamakatsu <span class="tb">Tabelog 3.48 · 320 reviews</span>, courses from ¥5,500 (CNY 230), open daily. Or Kagetsu <span class="tb">Tabelog 3.60 · 140 reviews</span>, a ryōtei founded in 1642, ¥23,760–26,400 (CNY 990–1,100) (at least two people; book).</li>
+<div class="card place" data-place="daz"><h3>Dazaifu</h3><p class="pl-when"></p><ul>
+  <li><b>Lunch:</b> Kasanoya on the Dazaifu shrine approach <span class="tb">Tabelog 3.65</span>, set meals ¥1,500–2,500 (CNY 65–100), open daily. Or Sumiyaki Jidori Sanzō <span class="tb">Tabelog 3.74</span>, charcoal-grilled chicken around a hearth, about ¥2,500 (CNY 100) (closed Thursdays).</li></ul></div>
+<div class="card place" data-place="tak"><h3>Takeo and Ureshino</h3><p class="pl-when"></p><ul>
+  <li><b>Dinner:</b> Takazushi, Ureshino <span class="tb">Tabelog 3.60 · 924 reviews</span>, seven-seat counter sushi, ¥5,000–6,000 (CNY 210–250) (closed Wednesdays; book). Or the ryokan’s kaiseki on the best-experience plan. Takeo itself has no dinner spot above our bar.</li>
+  <li><b>Lunch:</b> Ide Chanpon Honten <span class="tb">Tabelog 3.65 · 845 reviews</span>, Saga’s famous vegetable-heaped champon, about ¥1,000 (CNY 40) (closed Wednesdays). Or Sōan Yokochō, Ureshino <span class="tb">Tabelog 3.57</span>, onsen “melting” tofu (closed Wednesdays).</li></ul></div>
+<div class="card place" data-place="nag"><h3>Nagasaki</h3><p class="pl-when"></p><ul>
+  <li><b>Dinner, day 2:</b> Uodana Asa near Nagasaki Station <span class="tb">Tabelog 3.55 · 306 reviews</span>, a fish izakaya, ¥4,000–5,000 (CNY 170–210). Or Hiikiya <span class="tb">Tabelog 3.34–3.55 · 55 reviews</span> (borderline; closed Sundays).</li>
+  <li><b>Lunch, day 3:</b> Tsuruchan <span class="tb">Tabelog 3.62 · 785 reviews</span>, Kyushu’s oldest café and home of toruko rice, ¥1,500–2,000 (CNY 65–85) (closed Wednesdays; no bookings). Or Yossō Honten <span class="tb">Tabelog 3.49 · 1,400 reviews</span>, chawanmushi and steamed sushi since 1866, about ¥2,500 (CNY 100) (closed Tuesdays).</li>
+  <li><b>Dinner, day 3:</b> shippoku, Nagasaki’s Japanese-Chinese-Dutch banquet: Nagasaki Shippoku Hamakatsu <span class="tb">Tabelog 3.48 · 320 reviews</span>, courses from ¥5,500 (CNY 230), open daily. Or Kagetsu <span class="tb">Tabelog 3.60 · 140 reviews</span>, a ryōtei founded in 1642, ¥23,760–26,400 (CNY 990–1,100) (at least two people; book).</li>
   <li><b>Snacks:</b> castella at Shōōken or Fukusaya; kakuni manju at Iwasaki <span class="tb">Tabelog 3.37 · 365 reviews</span> (below our bar).</li></ul></div>
-<div class="card"><h3>Day 4</h3><ul>
-  <li><b>Lunch:</b> Kameyama by Karatsu Station <span class="tb">Tabelog 3.58</span>, seafood bowls ¥1,000–2,000 (CNY 40–85). Or Kawatarō, Yobuko <span class="tb">Tabelog 3.58 · 1,228 reviews</span>, live squid about ¥3,500 (CNY 150) (open Mondays, closed Wednesdays).</li>
+<div class="card place" data-place="kar"><h3>Karatsu</h3><p class="pl-when"></p><ul>
+  <li><b>Lunch:</b> Kameyama by Karatsu Station <span class="tb">Tabelog 3.58</span>, seafood bowls ¥1,000–2,000 (CNY 40–85). Or Kawatarō, Yobuko <span class="tb">Tabelog 3.58 · 1,228 reviews</span>, live squid about ¥3,500 (CNY 150) (open Mondays, closed Wednesdays).</li></ul></div>
+<div class="card place" data-place="fuk"><h3>Fukuoka Airport</h3><p class="pl-when"></p><ul>
   <li><b>Dinner:</b> at Fukuoka Airport before the flight: the international terminal’s restaurants, or Ramen Runway in the domestic terminal (¥1,000–1,500 (CNY 40–65); a shuttle bus links the terminals).</li></ul></div>
 
 <h2 id="shop">Shopping</h2>
-<div class="card"><ul>
-  <li><b>Arita:</b> porcelain shops along the main street, and Arita Sera, a ceramics outlet mall.</li>
-  <li><b>Ōkawachiyama:</b> kiln showrooms, and Nabeshima-yaki Kaikan for pieces from 24 kilns.</li>
-  <li><b>Karatsu:</b> the Karatsu-ware cooperative showroom (Arpino 2F, by the station; closed Thursdays) and the kiln galleries.</li>
-  <li><b>Nagasaki:</b> castella from Shōōken (since 1681) or Fukusaya (since 1624); the Hamanomachi arcade; Chinatown.</li>
+<div class="card"><p class="muted pl-summary" data-kind="places"></p><ul>
+  <li data-place="ari"><b>Arita:</b> porcelain shops along the main street, and Arita Sera, a ceramics outlet mall.</li>
+  <li data-place="oka"><b>Ōkawachiyama:</b> kiln showrooms, and Nabeshima-yaki Kaikan for pieces from 24 kilns.</li>
+  <li data-place="kar"><b>Karatsu:</b> the Karatsu-ware cooperative showroom (Arpino 2F, by the station; closed Thursdays) and the kiln galleries.</li>
+  <li data-place="nag"><b>Nagasaki:</b> castella from Shōōken (since 1681) or Fukusaya (since 1624); the Hamanomachi arcade; Chinatown.</li>
 </ul></div>
 
 <h2 id="stay">Where to stay</h2>
+<p class="muted pl-summary" data-kind="nights"></p>
 <p class="muted">Cheapest room for two, including taxes, seen on Booking.com in late November 2026 for a December weekend.</p>
-<div class="card"><div class="hotel-head"><h3>Kyotoya</h3><span class="score">8.5</span></div><div class="local">京都屋 · Takeo Onsen · ryokan</div><p>About ¥21,400 (CNY 890) a night. Room only on Booking.com, so eat out or book a half-board plan direct. Five minutes’ walk from the Romon gate.</p><p><a href="https://www.booking.com/hotel/jp/kyotoya-saga.html">Booking.com</a></p></div>
-<div class="card"><div class="hotel-head"><h3>Hotel Kasuien</h3><span class="score">8.2</span></div><div class="local">ホテル華翠苑 · Ureshino Onsen · ryokan</div><p>About ¥39,000 (CNY 1,630) a night with kaiseki dinner and breakfast, on the Ureshino river. 25 minutes from Takeo.</p><p><a href="https://www.booking.com/hotel/jp/hotel-kasuien.html">Booking.com</a></p></div>
-<div class="card"><div class="hotel-head"><h3>Hotel Belleview Nagasaki Dejima</h3><span class="score">8.1</span></div><div class="local">ホテルベルビュー長崎出島 · by Dejima</div><p>About ¥14,000 (CNY 590) a night. Car park ¥1,200 (CNY 50) a night (no tall vans); free shuttle to the Inasayama ropeway.</p><p><a href="https://www.booking.com/hotel/jp/belleview-nagasaki-dejima.html">Booking.com</a></p></div>
-<div class="card"><div class="hotel-head"><h3>Hotel Indigo Nagasaki Glover Street</h3><span class="score">9.5</span></div><div class="local">ホテルインディゴ長崎グラバーストリート · Minamiyamate</div><p>About ¥32,000 (CNY 1,340) a night. Steps from Ōura and Glover; parking about ¥2,200 (CNY 90) a night, book ahead. No Inasayama shuttle.</p><p><a href="https://www.booking.com/hotel/jp/indigo-nagasaki-glover-street-an-ihg.html">Booking.com</a></p></div>
+<div class="card" data-place="tak"><div class="hotel-head"><h3>Kyotoya</h3><span class="score">8.5</span></div><div class="local">京都屋 · Takeo Onsen · ryokan</div><p>About ¥21,400 (CNY 890) a night. Room only on Booking.com, so eat out or book a half-board plan direct. Five minutes’ walk from the Romon gate.</p><p><a href="https://www.booking.com/hotel/jp/kyotoya-saga.html">Booking.com</a></p></div>
+<div class="card" data-place="tak"><div class="hotel-head"><h3>Hotel Kasuien</h3><span class="score">8.2</span></div><div class="local">ホテル華翠苑 · Ureshino Onsen · ryokan</div><p>About ¥39,000 (CNY 1,630) a night with kaiseki dinner and breakfast, on the Ureshino river. 25 minutes from Takeo.</p><p><a href="https://www.booking.com/hotel/jp/hotel-kasuien.html">Booking.com</a></p></div>
+<div class="card" data-place="nag"><div class="hotel-head"><h3>Hotel Belleview Nagasaki Dejima</h3><span class="score">8.1</span></div><div class="local">ホテルベルビュー長崎出島 · by Dejima</div><p>About ¥14,000 (CNY 590) a night. Car park ¥1,200 (CNY 50) a night (no tall vans); free shuttle to the Inasayama ropeway.</p><p><a href="https://www.booking.com/hotel/jp/belleview-nagasaki-dejima.html">Booking.com</a></p></div>
+<div class="card" data-place="nag"><div class="hotel-head"><h3>Hotel Indigo Nagasaki Glover Street</h3><span class="score">9.5</span></div><div class="local">ホテルインディゴ長崎グラバーストリート · Minamiyamate</div><p>About ¥32,000 (CNY 1,340) a night. Steps from Ōura and Glover; parking about ¥2,200 (CNY 90) a night, book ahead. No Inasayama shuttle.</p><p><a href="https://www.booking.com/hotel/jp/indigo-nagasaki-glover-street-an-ihg.html">Booking.com</a></p></div>
 
 <h2 id="budget">Budget</h2>
 <div class="card"><p>Per person, two sharing a room and a car, <b>excluding flights</b>. Estimated November 2026. Exchange rate ¥1 ≈ CNY 0.042 (26 Nov 2026).</p><ul>
@@ -318,6 +322,18 @@ window.wlShowDay=show;show('all');})();</script>
 <li><b>Getting around:</b> <a href="https://www.w-nexco.co.jp/global/en/kep/">Kyushu Expressway Pass</a> · <a href="https://www.driveplaza.com/">NEXCO tolls</a> · <a href="https://rent.toyota.co.jp/global_eng/license-flow/geneva/">IDP rules</a> · <a href="https://www.naga-den.com/">Nagasaki trams</a> · <a href="https://www.gunkanjima-concierge.com/">Gunkanjima Concierge</a></li>
 <li><b>Food and stays:</b> Tabelog search listings · Booking.com (prices and guest scores, late November 2026)</li>
 <li><b>Photos</b> (Wikimedia Commons): see the credit under each image.</li></ul></div>
+<script id="wl-placesync">(function(){var P={"tabs":{"four":{"label":"4-day plan","base":{"daz":["Day 1 lunch"],"ari":["Day 1"],"tak":["Day 1 dinner","Day 2 lunch"],"nag":["Day 2 dinner","Day 3 lunch","Day 3 dinner"],"oka":["Day 4"],"kar":["Day 4 lunch"],"fuk":["Day 4 dinner"]},"add":{"sag":["Day 2"]},"meals":[["daz","tak"],["tak","nag"],["nag","nag"],["kar","fuk"]],"nights":[["tak",1],["nag",2]]}},"names":{"daz":"Dazaifu","ari":"Arita","tak":"Takeo and Ureshino","nag":"Nagasaki","oka":"Ōkawachiyama","kar":"Karatsu","fuk":"Fukuoka Airport","sag":"Saga"},"t":{"day":"Day","suf":"","lunch":"lunch","dinner":"dinner","ifadd":"If you add it:","on":"On the","nights":"nights","night":"night","change":""}};
+function apply(id){var T=P.tabs[id];if(!T)return;
+document.querySelectorAll('[data-place]').forEach(function(el){var k=el.dataset.place;var b=T.base[k],a=T.add[k];
+ el.hidden=!(b||a);el.classList.toggle('pl-add',!b&&!!a);
+ var w=el.querySelector('.pl-when');if(w){w.textContent=b?b.join(' · '):(a?P.t.ifadd+' '+a.join(' · '):'');}});
+document.querySelectorAll('.pl-summary').forEach(function(el){var kind=el.dataset.kind;var out=P.t.on+' '+T.label+': ';
+ if(kind==='nights'){out+=T.nights.map(function(n){return P.names[n[0]]+' '+n[1]+' '+(n[1]>1?P.t.nights:P.t.night);}).join(', ')+'.';}
+ else if(kind==='meals'){out+=T.meals.map(function(m,i){var x=[];if(m[0])x.push(P.t.lunch+' '+P.names[m[0]]);if(m[1])x.push(P.t.dinner+' '+P.names[m[1]]);return P.t.day+' '+(i+1)+P.t.suf+': '+x.join(', ');}).join(' · ')+'.';}
+ else {var ks=Object.keys(T.base).filter(function(k){return k.indexOf('n-')!==0;});out+=ks.map(function(k){return P.names[k];}).join(', ')+'.';}
+ el.textContent=out+' '+P.t.change;});}
+document.addEventListener('click',function(e){var t=e.target.closest&&e.target.closest('.tabs [data-t]');if(t)apply(t.dataset.t);});
+var s=document.querySelector('.tabs [aria-selected="true"]');apply(s?s.dataset.t:Object.keys(P.tabs)[0]);})();</script>
 <footer>Part of Wanderlust. Trip research, not advice; nothing here is sponsored.</footer>
 </main>
 <script>
